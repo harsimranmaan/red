@@ -20,7 +20,7 @@ public class BootStrap extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource(getUserInterfaceUrl("MainForm")));
+        Parent root = FXMLLoader.load(getClass().getResource(getUserInterfaceUrl("Login")));
 
         Scene scene = new Scene(root);
 

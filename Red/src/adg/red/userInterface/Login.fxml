@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.LoginController">
+  <children>
+    <MenuBar prefWidth="600.0000999999975" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Close" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane id="AnchorPane" prefHeight="127.0" AnchorPane.bottomAnchor="101.0" AnchorPane.leftAnchor="157.0" AnchorPane.rightAnchor="159.0" AnchorPane.topAnchor="172.0">
+      <children>
+        <Label layoutY="3.0" text="Username:" />
+        <Label layoutY="46.0" text="Password:" />
+        <TextField minWidth="-Infinity" prefWidth="200.0" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="0.0" />
+        <PasswordField layoutY="43.0" minWidth="-Infinity" prefWidth="200.0" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="0.0" />
+        <HBox id="HBox" alignment="CENTER" layoutX="34.0" layoutY="94.0" spacing="60.0">
+          <children>
+            <Button mnemonicParsing="false" prefHeight="32.0" text="Login" textAlignment="CENTER" />
+            <Button mnemonicParsing="false" prefHeight="32.0" text="Forgot Password" textAlignment="CENTER" />
+          </children>
+        </HBox>
+      </children>
+    </AnchorPane>
+    <Pane prefHeight="66.0" prefWidth="599.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+      <children>
+        <ImageView id="red-logo.png" fitHeight="64.2932007137278" fitWidth="571.0" layoutX="11.0" layoutY="2.0" preserveRatio="true">
+          <image>
+            <Image url="@images/red-logo.png" preserveRatio="true" smooth="true" />
+          </image>
+        </ImageView>
+      </children>
+    </Pane>
+  </children>
+  <stylesheets>
+    <URL value="@css/mainForm.css" />
+  </stylesheets>
+</AnchorPane>
