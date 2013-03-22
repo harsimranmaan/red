@@ -3,5 +3,4 @@ Red
 
 The Student Enrollment system
 
-Harsimran 
-Jaspreet
+Refer the wiki for instructions
