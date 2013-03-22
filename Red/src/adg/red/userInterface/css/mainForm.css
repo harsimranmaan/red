@@ -10,3 +10,29 @@
     -fx-cursor: crosshair;
 
 }
+.button {
+    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 10;
+    -fx-background-insets: 0;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.button:hover {
+   -fx-background-color: linear-gradient(#be1d00,#ff5400);
+   -fx-background-radius: 10;
+   -fx-background-insets: 0;
+   -fx-font-weight: bold;
+   -fx-scale-x: 1.05;
+   -fx-scale-y: 1.05;
+   -fx-text-fill: white;
+   }
+.button:active {
+   -fx-background-color: linear-gradient(rosybrown,red);
+   -fx-background-radius: 10;
+   -fx-background-insets: 0;
+   -fx-boarder-color: white;
+   -fx-boarder-radius: 5;
+   -fx-font-weight: bold;
+   -fx-text-fill: grey;
+   }
