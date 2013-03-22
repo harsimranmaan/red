@@ -1,6 +1,13 @@
 *.class
+#Exceptions
+!/Red/lib/*.jar
 
 # Package Files #
 *.jar
 *.war
 *.ear
+*~
+/Red/nbproject/private/
+/Red/dist/
+/Red/build/
+
