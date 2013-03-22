@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package test;
+package test.controllers;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -17,24 +17,22 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses(
-        {
-    test.controllers.ControllersTest.class,
-    test.models.ModelsTest.class, test.userInterface.UserInterfaceTest.class,
-    BootStrapTest.class
+{
+    MainFormControllerTest.class
 })
-public class RedTestSuite
+public class ControllersTest
 {
 
     @BeforeClass
     public static void setUpClass() throws Exception
     {
-        System.out.println("Running Tests for Adg-Red");
+        System.out.println("Running Tests for Controllers");
     }
 
     @AfterClass
     public static void tearDownClass() throws Exception
     {
-        System.out.println("Tests completed for Adg-Red");
+        System.out.println("Tests completed for Controllers");
     }
 
     @Before

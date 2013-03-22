@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package red;
+package adg.red;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +30,7 @@ public class BootStrap extends Application
 
     public String getUserInterfaceUrl(String fileName)
     {
-        return "/red/userInterface/" + fileName + ".fxml";
+        return "/adg/red/userInterface/" + fileName + ".fxml";
     }
 
     /**
