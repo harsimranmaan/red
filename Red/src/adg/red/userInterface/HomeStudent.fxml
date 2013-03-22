@@ -38,7 +38,7 @@
       <items>
         <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="150.0">
           <children>
-            <VBox id="VBox" alignment="CENTER" prefHeight="508.0" prefWidth="140.0" spacing="2.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.5" AnchorPane.rightAnchor="-0.5" AnchorPane.topAnchor="-100.0">
+            <VBox id="VBox" alignment="CENTER" prefHeight="442.0" prefWidth="150.0" spacing="2.0" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="0.5" AnchorPane.rightAnchor="-0.5" AnchorPane.topAnchor="0.0">
               <children>
                 <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Monday, March 18, 2013" />
                 <Label maxHeight="-Infinity" maxWidth="-Infinity" text="1:31PM" />
@@ -69,6 +69,11 @@
                 <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
               </children>
             </VBox>
+            <ImageView id="ADG-Logo3.jpg" fitHeight="75.0" fitWidth="150.0" layoutY="442.0" preserveRatio="true">
+              <image>
+                <Image url="@images/ADG-Logo3.jpg" preserveRatio="true" smooth="true" />
+              </image>
+            </ImageView>
           </children>
         </AnchorPane>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="308.0" prefWidth="456.9999000000025">
