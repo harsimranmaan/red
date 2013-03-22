@@ -14,7 +14,7 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" styleClass="menuitem" text="Close" fx:id="close" />
+            <MenuItem mnemonicParsing="false" onAction="handleMenuCloseAction" styleClass="menuitem" text="Close" fx:id="close" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
