@@ -38,7 +38,7 @@
       <items>
         <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="150.0">
           <children>
-            <VBox id="VBox" alignment="CENTER" layoutX="0.5" prefHeight="442.0" prefWidth="150.0" spacing="2.0" AnchorPane.topAnchor="0.0">
+            <VBox id="VBox" alignment="CENTER" prefHeight="442.0" prefWidth="150.0" spacing="2.0" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="0.5" AnchorPane.rightAnchor="-0.5" AnchorPane.topAnchor="0.0">
               <children>
                 <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Monday, March 18, 2013" />
                 <Label maxHeight="-Infinity" maxWidth="-Infinity" text="1:31PM" />
