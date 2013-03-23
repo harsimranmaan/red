@@ -1,11 +1,13 @@
+package adg.red.controllers;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-public class LoginController {
+public class LoginController2{
 	
-	public LoginController(){
+	public LoginController2(){
 		
 	}
 	
