@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import adg.red.BootStrap;
+import javafx.scene.layout.AnchorPane;
 
 /**
  *
@@ -30,7 +31,9 @@ public class LoginController implements Initializable {
     private MenuItem close; // Value injected by FXMLLoader
     @FXML //  fx:id="loginBtn"
     private Button loginBtn; // Value injected by FXMLLoader
-    
+     @FXML //  fx:id="viewArea"
+    private AnchorPane viewArea; // Value injected by FXMLLoader
+     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -47,21 +50,21 @@ public class LoginController implements Initializable {
         loginBtn.setOnAction(new EventHandler<ActionEvent>()  {
                         
             @Override
-            public void handle(ActionEvent event) {
-                Parent root = null;
+            public void handle(ActionEvent event) {                
                 try {
                     BootStrap boot = new BootStrap();
-                    root = FXMLLoader.load(getClass().getResource(boot.getUserInterfaceUrl("HomeStudent")));
+                    Node view = FXMLLoader.load(getClass().getResource(boot.getUserInterfaceUrl("HomeView")));
+                    viewArea.getChildren().setAll(view);
+                    // set anchors
+                    AnchorPane.setLeftAnchor(view, 0.0);
+                    AnchorPane.setRightAnchor(view, 0.0);
+                    AnchorPane.setTopAnchor(view, 0.0);
+                    AnchorPane.setBottomAnchor(view, 0.0);
                 }
                 catch (Exception ex){
                     //handle error??
-                }
-                Node node = (Node) event.getSource();
-                Stage stage = (Stage) node.getScene().getWindow();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
+                }    
             }
         });
-    }    
+    }   
 }

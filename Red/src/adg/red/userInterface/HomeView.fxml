@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane dividerPositions="0.19172932330827067" focusTraversable="true" prefHeight="510.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.userInterface.HomeViewController">
+  <items>
+    <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="150.0">
+      <children>
+        <VBox id="VBox" alignment="CENTER" layoutX="0.5" prefHeight="442.0" prefWidth="150.0" spacing="2.0" AnchorPane.topAnchor="0.0">
+          <children>
+            <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Monday, March 18, 2013" />
+            <Label maxHeight="-Infinity" maxWidth="-Infinity" text="1:31PM" />
+            <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
+            <VBox id="VBox" alignment="CENTER" spacing="1.0">
+              <children>
+                <Button id="" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Browse Course" />
+                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Manage Course" />
+                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="View Timetable" />
+                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="View Enrolment" />
+                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="View Degree Info" />
+              </children>
+            </VBox>
+            <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
+            <VBox id="VBox" alignment="CENTER" spacing="1.0">
+              <children>
+                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Personal Info" />
+                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Messages" />
+              </children>
+            </VBox>
+            <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
+            <VBox id="VBox" alignment="CENTER" spacing="1.0">
+              <children>
+                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Glossary" />
+                <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="FAQ" />
+              </children>
+            </VBox>
+            <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
+          </children>
+        </VBox>
+        <ImageView id="ADG-Logo3.jpg" fitHeight="75.0" fitWidth="150.0" preserveRatio="true" AnchorPane.bottomAnchor="-9.0">
+          <image>
+            <Image url="@images/ADG-Logo3.jpg" preserveRatio="true" smooth="true" />
+          </image>
+        </ImageView>
+      </children>
+    </AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="308.0" prefWidth="456.9999000000025">
+      <children>
+        <AnchorPane id="AnchorPane" prefWidth="454.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <children>
+            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="457.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <children>
+                <HBox id="HBox" alignment="CENTER" layoutY="10.0" spacing="5.0" AnchorPane.rightAnchor="6.0">
+                  <children>
+                    <Label text="Search:" HBox.hgrow="NEVER" />
+                    <TextField prefWidth="131.0" HBox.hgrow="ALWAYS" />
+                    <Button mnemonicParsing="false" text="Go" HBox.hgrow="NEVER" />
+                  </children>
+                  <padding>
+                    <Insets bottom="1.0" top="1.0" />
+                  </padding>
+                </HBox>
+                <Label layoutX="14.0" layoutY="15.0" text="Show current menu here" />
+              </children>
+            </AnchorPane>
+          </children>
+        </AnchorPane>
+        <ScrollPane fitToHeight="true" fitToWidth="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="266.0" prefWidth="454.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
+          <content>
+            <TextArea minWidth="-Infinity" prefHeight="266.0" prefWidth="454.0" style="resize:both;" wrapText="true" />
+          </content>
+        </ScrollPane>
+      </children>
+    </AnchorPane>
+  </items>
+  <stylesheets>
+    <URL value="@css/mainForm.css" />
+  </stylesheets>
+</SplitPane>
