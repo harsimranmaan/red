@@ -1,4 +1,4 @@
-package adg.red.controllers;
+package adg.red.api.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class Database 
 {
-	static String USER_ID = "root";
-	static String PASSWORD = "";
-	static String CONNECT_URL = "jdbc:mysql://localhost/db_MVB"; 
+	public static String USER_ID = "root";
+	public static String PASSWORD = "";
+	public static String CONNECT_URL = "jdbc:mysql://localhost/REDTEST"; 
 	
 	public Database() {}
 
