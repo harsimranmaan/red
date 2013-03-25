@@ -67,7 +67,7 @@
                     <Insets bottom="1.0" top="1.0" />
                   </padding>
                 </HBox>
-                <Label layoutX="14.0" layoutY="15.0" text="Show current menu here" />
+                <Label fx:id="menuLbl" layoutX="14.0" layoutY="15.0" text="Student:Home" />
               </children>
             </AnchorPane>
           </children>
