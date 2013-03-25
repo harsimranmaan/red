@@ -20,6 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -35,11 +36,18 @@ public class LoginController implements Initializable {
     private Button loginBtn; // Value injected by FXMLLoader
     @FXML //  fx:id="viewArea"
     private AnchorPane viewArea; // Value injected by FXMLLoader
+    @FXML //  fx:id="loginErrLbl"
+    private Label loginErrLbl; // Value injected by FXMLLoader
     @FXML
     private TextField usernameTxt; // created by J. Yu
     @FXML
     private PasswordField passwordTxt; // created by J. Yu
     
+    /**
+     * Initialize all the action events.
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -67,13 +75,31 @@ public class LoginController implements Initializable {
                 adg.red.api.controller.LoginController login = new adg.red.api.controller.LoginController();
                 try {
                     System.out.println("Login return: " + login.login(uid, pwd));
+                    if(login.login(uid, pwd) == 0) {
+                        loadView("HomeView");
+                    }
+                    else {
+                        loginErrLbl.setVisible(true);
+                        loginErrLbl.setText("Invalid Username/Password!");
+                        
+                    }
                 } catch (SQLException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                // load home view
+                 
+            }
+        });
+    }
+   
+    /**
+     * Load new view.
+     * @param fxmlView the fxml file name to be loaded.
+     */
+    public void loadView(String fxmlView) {
+        // load home view
                 try {
                     BootStrap boot = new BootStrap();
-                    Node view = FXMLLoader.load(getClass().getResource(boot.getUserInterfaceUrl("HomeView")));
+                    Node view = FXMLLoader.load(getClass().getResource(boot.getUserInterfaceUrl(fxmlView)));
                     viewArea.getChildren().setAll(view);
                     // set anchors
                     AnchorPane.setLeftAnchor(view, 0.0);
@@ -83,8 +109,6 @@ public class LoginController implements Initializable {
                 }
                 catch (Exception ex){
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                }    
-            }
-        });
-    }   
+                }   
+    } 
 }

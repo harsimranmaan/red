@@ -7,6 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.LoginController">
   <children>
@@ -49,6 +50,11 @@
             </HBox>
           </children>
         </AnchorPane>
+        <Label id="loginErrMsg" fx:id="loginErrLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="166.0" layoutY="142.0" prefWidth="400.0" text="label" textFill="#cc0000" visible="false">
+          <font>
+            <Font name="System Bold" size="20.0" />
+          </font>
+        </Label>
       </children>
     </AnchorPane>
   </children>
