@@ -9,7 +9,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.19172932330827067" focusTraversable="true" prefHeight="510.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.HomeViewController">
+<SplitPane dividerPositions="0.19172932330827067" focusTraversable="true" prefHeight="510.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.BrowseCourseController">
   <items>
     <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="150.0">
       <children>
@@ -20,7 +20,7 @@
             <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
             <VBox id="VBox" alignment="CENTER" spacing="1.0">
               <children>
-                <Button id="" fx:id="brwCourseBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Browse Course" />
+                <Button id="" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Browse Course" />
                 <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Manage Course" />
                 <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="View Timetable" />
                 <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="View Enrolment" />
@@ -72,11 +72,11 @@
             </AnchorPane>
           </children>
         </AnchorPane>
-        <AnchorPane fx:id="disBrwCourseArea" prefHeight="464.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
-          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="281.0" layoutY="224.0" text="Displaying area" />
-          </children>
-        </AnchorPane>
+        <ScrollPane fitToHeight="true" fitToWidth="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="266.0" prefWidth="454.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
+          <content>
+            <AnchorPane fx:id="disBrwCourseArea" prefHeight="464.0" prefWidth="640.0" />
+          </content>
+        </ScrollPane>
       </children>
     </AnchorPane>
   </items>

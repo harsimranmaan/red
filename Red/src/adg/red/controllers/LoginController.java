@@ -76,7 +76,8 @@ public class LoginController implements Initializable {
                 try {
                     System.out.println("Login return: " + login.login(uid, pwd));
                     if(login.login(uid, pwd) == 0) {
-                        loadView("HomeView");
+                        View view = new View(viewArea);
+                        view.loadView("HomeView");
                     }
                     else {
                         loginErrLbl.setVisible(true);
@@ -91,24 +92,24 @@ public class LoginController implements Initializable {
         });
     }
    
-    /**
-     * Load new view.
-     * @param fxmlView the fxml file name to be loaded.
-     */
-    public void loadView(String fxmlView) {
-        // load home view
-                try {
-                    BootStrap boot = new BootStrap();
-                    Node view = FXMLLoader.load(getClass().getResource(boot.getUserInterfaceUrl(fxmlView)));
-                    viewArea.getChildren().setAll(view);
-                    // set anchors
-                    AnchorPane.setLeftAnchor(view, 0.0);
-                    AnchorPane.setRightAnchor(view, 0.0);
-                    AnchorPane.setTopAnchor(view, 0.0);
-                    AnchorPane.setBottomAnchor(view, 0.0);
-                }
-                catch (Exception ex){
-                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                }   
-    } 
+//    /**
+//     * Load new view.
+//     * @param fxmlView the fxml file name to be loaded.
+//     */
+//    public void loadView(String fxmlView) {
+//        // load home view
+//                try {
+//                    BootStrap boot = new BootStrap();
+//                    Node view = FXMLLoader.load(getClass().getResource(boot.getUserInterfaceUrl(fxmlView)));
+//                    viewArea.getChildren().setAll(view);
+//                    // set anchors
+//                    AnchorPane.setLeftAnchor(view, 0.0);
+//                    AnchorPane.setRightAnchor(view, 0.0);
+//                    AnchorPane.setTopAnchor(view, 0.0);
+//                    AnchorPane.setBottomAnchor(view, 0.0);
+//                }
+//                catch (Exception ex){
+//                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+//                }   
+//    } 
 }
