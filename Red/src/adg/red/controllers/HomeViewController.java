@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -27,6 +28,9 @@ public class HomeViewController implements Initializable {
     
     @FXML //  fx:id="disBrwCourseArea"
     private AnchorPane disBrwCourseArea; // Value injected by FXMLLoader
+    
+    @FXML //  fx:id="menuLbl"
+    private Label menuLbl; // Value injected by FXMLLoader
 
     /**
      * Initializes the controller class.
@@ -41,7 +45,8 @@ public class HomeViewController implements Initializable {
             public void handle(ActionEvent event) {                   
                 try {                    
                     View view = new View(disBrwCourseArea);
-                    view.loadView("BrowseCourse");                   
+                    view.loadView("BrowseCourse");     
+                    menuLbl.setText("Student:Browse Courses");
                 } 
                 catch (Exception ex) {
                     Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
