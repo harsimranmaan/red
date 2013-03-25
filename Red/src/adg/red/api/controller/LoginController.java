@@ -26,6 +26,7 @@ public class LoginController{
         public int login(String uid, String pwd) throws SQLException
         {
             Account account = new Account();
+            //account.forgotPassword(uid);
             return account.executeLoginSql(uid, pwd);
         }
 }
