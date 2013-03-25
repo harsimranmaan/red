@@ -70,6 +70,7 @@ public class LoginController implements Initializable {
                 } catch (SQLException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                // load home view
                 try {
                     BootStrap boot = new BootStrap();
                     Node view = FXMLLoader.load(getClass().getResource(boot.getUserInterfaceUrl("HomeView")));
@@ -81,7 +82,7 @@ public class LoginController implements Initializable {
                     AnchorPane.setBottomAnchor(view, 0.0);
                 }
                 catch (Exception ex){
-                    //handle error??
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }    
             }
         });
