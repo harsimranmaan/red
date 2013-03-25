@@ -54,7 +54,7 @@
             </HBox>
           </children>
         </AnchorPane>
-        <Label id="loginErrMsg" fx:id="loginErrLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="166.0" layoutY="142.0" prefWidth="400.0" text="label" textFill="#cc0000" visible="false">
+        <Label id="loginErrMsg" fx:id="loginErrLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="224.0" layoutY="142.0" prefWidth="283.0" text="label" textFill="#cc0000" visible="false">
           <font>
             <Font name="System Bold" size="20.0" />
           </font>
