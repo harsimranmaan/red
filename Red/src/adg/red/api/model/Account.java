@@ -54,7 +54,7 @@ public class Account {
         // action login
         private String getLoginSql(String uid)
 	{
-		String sql = "SELECT * FROM user WHERE uid=\"";
+		String sql = "SELECT * FROM user WHERE username=\"";
 		sql += uid;
                 sql += "\"";
 		return sql;
