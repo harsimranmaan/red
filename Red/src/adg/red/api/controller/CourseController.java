@@ -5,8 +5,10 @@
 package adg.red.api.controller;
 
 import adg.red.api.model.CourseArray;
+import adg.red.api.model.Department;
 import adg.red.api.model.DepartmentArray;
 import java.util.ArrayList;
+import javafx.collections.ObservableList;
 
 
 public class CourseController {
@@ -23,7 +25,7 @@ public class CourseController {
      * input: character A/B...or All
      * output: return the departmentId(starts with "A"/"B"/...), name
      */
-    public ArrayList<String> departmentFilter(String str){
+    public ObservableList<Department> departmentFilter(String str){
         
        DepartmentArray dept = new DepartmentArray();
        return dept.filterByChar(str);

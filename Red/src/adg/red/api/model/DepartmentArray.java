@@ -4,9 +4,8 @@
  */
 package adg.red.api.model;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -14,27 +13,29 @@ import java.util.Iterator;
  */
 public class DepartmentArray {
     
-    ArrayList<String> deptArray = new ArrayList<String>();
+    //ArrayList<String> deptArray = new ArrayList<String>();
+    ObservableList<Department> deptArray = FXCollections.observableArrayList();
     
-    String [] tmpDeptArray = {
+    Department [] tmpDeptArray = {
             
-            "ADHE", "Adult and Higher Education",
-            "BAAC", "Business Administration: Accounting",
-            "CICS", "Computing Information and Cognitive Systems",
-            "DENT", "Dentistry",
-            "ECED", "Early Childhood Education",
-            "FACT", "Faculty of Arts Commuter Transition Program", 
-            "GENE", "Genetics", 
-            "HEBR", "Hebrew",
-            "IEST", "European Studies",
-            "JAPN", "Japanese",
-            "KLMN", "Korean",
-            "LARC", "Landscape Architecture",
-            "MATH", "Mathematics",
-            "CONS", "Natural Resources Conservation",
-            "NEST", "Near Eastern Studies",
-            "ZOOL", "Zoology"   };
+            new Department("ADHE", "Adult and Higher Education"),
+            new Department("BAAC", "Business Administration: Accounting"),
+            new Department("CICS", "Computing Information and Cognitive Systems"),
+            new Department("DENT", "Dentistry"),
+            new Department("ECED", "Early Childhood Education"),
+            new Department("FACT", "Faculty of Arts Commuter Transition Program"), 
+            new Department("GENE", "Genetics"), 
+            new Department("HEBR", "Hebrew"),
+            new Department("IEST", "European Studies"),
+            new Department("JAPN", "Japanese"),
+            new Department("KLMN", "Korean"),
+            new Department("LARC", "Landscape Architecture"),
+            new Department("MATH", "Mathematics"),
+            new Department("CONS", "Natural Resources Conservation"),
+            new Department("NEST", "Near Eastern Studies"),
+            new Department("ZOOL", "Zoology")};
 
+   
     public DepartmentArray()
     {
         for (int i = 0; i < tmpDeptArray.length; i++)
@@ -43,23 +44,28 @@ public class DepartmentArray {
         }
     }
             
-    public ArrayList<String> filterByChar(String str)
+    public ObservableList<Department> filterByChar(String str)
     {
-        ArrayList<String> returnArray = new ArrayList<String>();
+        //ArrayList<String> returnArray = new ArrayList<String>();
+        ObservableList<Department> returnArray = FXCollections.observableArrayList();
         if (str.equalsIgnoreCase("all"))
         {
             returnArray = deptArray;
         }
         else
         {
-            for (String tmpStr : deptArray)
+            for (Department dept : deptArray)
             {
-                if (tmpStr.startsWith(str))
+                String tmpStr = dept.getDeptId();
+                System.out.println(tmpStr);
+                if (tmpStr.startsWith(str.toUpperCase()))
                 {
-                    returnArray.add(tmpStr);
+                    returnArray.add(dept);
                 }
             }
         }
         return returnArray;
     }
+    
+
 }
