@@ -19,6 +19,8 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -50,23 +52,44 @@ public class BrowseCourseController implements Initializable {
 
     @FXML //  fx:id="deptNameColm"
     private TableColumn<Department, String> deptNameColmn; // Value injected by FXMLLoader
+    @FXML //  fx:id="disView"
+    private AnchorPane disView; // Value injected by FXMLLoader
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        populateTable("all");
+        populateDeptTable("all");
+        
+        // action when user clicked on the table
+        disTable.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                try {                 
+                    String key = disTable.getSelectionModel().getSelectedItem().getDeptId();
+                    System.out.println(key);
+                    Context.getInstance().setUserSelect(key);
+                    View view = new View(disView);
+                    view.loadView("CourseView");
+                   
+                } 
+                catch (Exception ex) {
+                    Logger.getLogger(BrowseCourseController.class.getName()).log(Level.SEVERE, null, ex);
+                } 
+            }
+        });
+        
         
         // setOnAction when all hyperlink is pressed
         allLink.setOnAction(new EventHandler<ActionEvent>()  {                        
             @Override
             public void handle(ActionEvent event) {                   
                 try {                                    
-                    populateTable("all");
+                    populateDeptTable("all");
                 } 
                 catch (Exception ex) {
-                    Logger.getLogger(HomeViewController.class.getName()).log(Level.WARNING, null, ex);
+                    Logger.getLogger(BrowseCourseController.class.getName()).log(Level.WARNING, null, ex);
                 }                 
             }
         });
@@ -76,10 +99,10 @@ public class BrowseCourseController implements Initializable {
             @Override
             public void handle(ActionEvent event) {                   
                 try {                                    
-                    populateTable("a");
+                    populateDeptTable("a");
                 } 
                 catch (Exception ex) {
-                    Logger.getLogger(HomeViewController.class.getName()).log(Level.WARNING, null, ex);
+                    Logger.getLogger(BrowseCourseController.class.getName()).log(Level.WARNING, null, ex);
                 }                 
             }
         });
@@ -89,10 +112,10 @@ public class BrowseCourseController implements Initializable {
             @Override
             public void handle(ActionEvent event) {                   
                 try {                                    
-                    populateTable("b");
+                    populateDeptTable("b");
                 } 
                 catch (Exception ex) {
-                    Logger.getLogger(HomeViewController.class.getName()).log(Level.WARNING, null, ex);
+                    Logger.getLogger(BrowseCourseController.class.getName()).log(Level.WARNING, null, ex);
                 }                 
             }
         });
@@ -102,24 +125,19 @@ public class BrowseCourseController implements Initializable {
             @Override
             public void handle(ActionEvent event) {                   
                 try {                                    
-                    populateTable("c");
+                    populateDeptTable("c");
                 } 
                 catch (Exception ex) {
-                    Logger.getLogger(HomeViewController.class.getName()).log(Level.WARNING, null, ex);
+                    Logger.getLogger(BrowseCourseController.class.getName()).log(Level.WARNING, null, ex);
                 }                 
             }
         });
     }
     
-    public void populateTable(String key) {
-        
+    public void populateDeptTable(String key) {        
         DepartmentArray deptArry = new DepartmentArray();
         deptIdColmn.setCellValueFactory(new PropertyValueFactory<Department, String>("deptId"));
         deptNameColmn.setCellValueFactory(new PropertyValueFactory<Department, String>("deptName"));
         disTable.getItems().setAll(deptArry.filterByChar(key));
-    }
-            
-    
-        
-        
+    }        
 }
