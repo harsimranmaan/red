@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="464.0" prefWidth="640.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.BrowseCourseController">
+<AnchorPane id="AnchorPane" prefHeight="464.0" prefWidth="642.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.BrowseCourseController">
   <children>
     <AnchorPane prefHeight="40.0" prefWidth="640.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
       <children>
@@ -44,11 +44,11 @@
         </HBox>
       </children>
     </AnchorPane>
-    <TableView layoutY="40.0" prefHeight="424.0" prefWidth="640.0">
+    <TableView layoutY="40.0" prefHeight="424.0" prefWidth="642.0">
       <columns>
         <TableColumn minWidth="100.0" prefWidth="100.0" text="Subject Code" />
         <TableColumn minWidth="100.0" prefWidth="340.0" text="Subject Title" />
-        <TableColumn minWidth="100.0" prefWidth="200.0" text="Faculty/School" />
+        <TableColumn minWidth="100.0" prefWidth="202.0" text="Faculty/School" />
       </columns>
     </TableView>
   </children>
