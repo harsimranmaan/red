@@ -87,7 +87,7 @@ public class Account {
                                 {
                                     if (rs.getInt("isOnline")==0)
                                     {
-                                        returnResult = rs.getInt("type");
+                                        returnResult = rs.getInt("usertypeid");
                                     }
                                     else
                                     {
