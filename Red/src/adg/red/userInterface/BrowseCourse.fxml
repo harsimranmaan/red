@@ -14,10 +14,10 @@
         <HBox id="HBox" alignment="CENTER" layoutY="9.0" prefWidth="640.0" spacing="5.0">
           <children>
             <Hyperlink fx:id="allLink" text="All" />
-            <Hyperlink text="A" />
-            <Hyperlink text="B" />
-            <Hyperlink text="C" />
-            <Hyperlink text="D" />
+            <Hyperlink fx:id="aLink" text="A" />
+            <Hyperlink fx:id="bLink" text="B" />
+            <Hyperlink fx:id="cLink" text="C" />
+            <Hyperlink fx:id="dLink" text="D" />
             <Hyperlink text="E" />
             <Hyperlink text="F" />
             <Hyperlink text="G" />
@@ -44,10 +44,10 @@
         </HBox>
       </children>
     </AnchorPane>
-    <TableView fx:id="disTable" layoutY="40.0" prefHeight="424.0" prefWidth="642.0">
+    <TableView fx:id="disTable" prefHeight="424.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
       <columns>
         <TableColumn minWidth="152.0" prefWidth="152.0" text="Department Id" fx:id="deptIdColmn" />
-        <TableColumn minWidth="490.0" prefWidth="490.0" text="Department Name" />
+        <TableColumn minWidth="490.0" prefWidth="490.0" text="Department Name" fx:id="deptNameColmn" />
       </columns>
     </TableView>
   </children>
