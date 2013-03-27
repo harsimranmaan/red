@@ -4,7 +4,8 @@
  */
 package adg.red.controllers;
 
-import adg.red.api.model.Department;
+import adg.red.api.model.Course;
+import adg.red.api.model.CourseArray;
 import adg.red.api.model.DepartmentArray;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,13 +23,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class CourseViewController implements Initializable {
 
     @FXML //  fx:id="courseIdColmn"
-    private TableColumn<Department, String> courseIdColmn; // Value injected by FXMLLoader
+    private TableColumn<Course, String> courseIdColmn; // Value injected by FXMLLoader
 
     @FXML //  fx:id="courseNameColmn"
-    private TableColumn<Department, String> courseNameColmn; // Value injected by FXMLLoader
+    private TableColumn<Course, String> courseNameColmn; // Value injected by FXMLLoader
 
     @FXML //  fx:id="disTable"
-    private TableView<Department> disTable; // Value injected by FXMLLoader
+    private TableView<Course> disTable; // Value injected by FXMLLoader
     
     /**
      * Initializes the controller class.
@@ -41,9 +42,9 @@ public class CourseViewController implements Initializable {
     
         public void populateCourseTable(String key) {
         
-        DepartmentArray deptArry = new DepartmentArray();
-        courseIdColmn.setCellValueFactory(new PropertyValueFactory<Department, String>("deptId"));
-        courseNameColmn.setCellValueFactory(new PropertyValueFactory<Department, String>("deptName"));
-        disTable.getItems().setAll(deptArry.filterByChar(key));
+        CourseArray courseArry = new CourseArray();
+        courseIdColmn.setCellValueFactory(new PropertyValueFactory<Course, String>("courseId"));
+        courseNameColmn.setCellValueFactory(new PropertyValueFactory<Course, String>("courseName"));
+        disTable.getItems().setAll(courseArry.filterByDept(key));
     }
 }
