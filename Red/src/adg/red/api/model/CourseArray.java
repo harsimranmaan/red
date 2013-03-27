@@ -5,6 +5,8 @@
 package adg.red.api.model;
 
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -12,14 +14,14 @@ import java.util.ArrayList;
  */
 public class CourseArray {
     
-    ArrayList<String> courseArray = new ArrayList<String>();
-    String [] tmpCourseArray = {
+    ObservableList<Course> courseArray = FXCollections.observableArrayList();
+    Course [] tmpCourseArray = {
             
-            "CICS 500", "Software Systems Internship",
-            "CICS 505", "Introduction to Software Systems",
-            "CICS 511", "Computational Structures",
-            "CICS 520", "Database Systems",
-            "CICS 530", "Advanced Software Engineering Project"
+            new Course("CICS 500", "Software Systems Internship"),
+            new Course("CICS 505", "Introduction to Software Systems"),
+            new Course("CICS 511", "Computational Structures"),
+            new Course("CICS 520", "Database Systems"),
+            new Course("CICS 530", "Advanced Software Engineering Project")
                };
     
     
@@ -31,29 +33,13 @@ public class CourseArray {
         }
     }
             
-    public ArrayList<String> filterByDept(String str)
+    public ObservableList<Course> filterByDept(String dept)
     {
-        ArrayList<String> returnArray = new ArrayList<String>();
-        int i = 0;
-        boolean flag = false;
-            for (String tmpStr : courseArray)
+        ObservableList<Course> returnArray = FXCollections.observableArrayList();
+            for (Course course : courseArray)
             {
-                if (i++%2 == 0)
-                {
-                    if (tmpStr.startsWith(str))
-                    {
-                        returnArray.add(tmpStr);
-                        flag = true;
-                    }
-                }
-                else
-                {
-                    if (flag)
-                    {
-                        returnArray.add(tmpStr);
-                        flag = false;
-                    }
-                }
+                if (course.getCourseId().equals(dept))
+                    returnArray.add(course);
             }
         
         return returnArray;
