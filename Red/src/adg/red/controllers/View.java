@@ -35,8 +35,8 @@ public class View {
                     BootStrap boot = new BootStrap();
                     URL location = getClass().getResource(boot.getUserInterfaceUrl(fxmlView));
                     FXMLLoader fxmlLoader = new FXMLLoader(location);                   
-                    Node view = (Node)fxmlLoader.load();
-                    viewArea.getChildren().setAll(view);              
+                    Node view = (Node)fxmlLoader.load();                    
+                    viewArea.getChildren().setAll(view);
                     // set anchors
                     AnchorPane.setLeftAnchor(view, 0.0);
                     AnchorPane.setRightAnchor(view, 0.0);
