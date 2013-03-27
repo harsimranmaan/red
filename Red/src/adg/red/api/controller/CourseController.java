@@ -4,6 +4,7 @@
  */
 package adg.red.api.controller;
 
+import adg.red.api.model.Course;
 import adg.red.api.model.CourseArray;
 import adg.red.api.model.Department;
 import adg.red.api.model.DepartmentArray;
@@ -35,7 +36,7 @@ public class CourseController {
      * input: departmentId
      * output: return the course list () belongs to this department
      */
-    public ArrayList<String> courseFilter(String dept){
+    public ObservableList<Course> courseFilter(String dept){
         
        CourseArray course = new CourseArray();
        return course.filterByDept(dept);
