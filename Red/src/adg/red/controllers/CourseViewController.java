@@ -17,31 +17,32 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
- *
+ * <p/>
  * @author Witt
  */
-public class CourseViewController implements Initializable {
+public class CourseViewController implements Initializable
+{
 
     @FXML //  fx:id="courseIdColmn"
     private TableColumn<Course, String> courseIdColmn; // Value injected by FXMLLoader
-
     @FXML //  fx:id="courseNameColmn"
     private TableColumn<Course, String> courseNameColmn; // Value injected by FXMLLoader
-
     @FXML //  fx:id="disTable"
     private TableView<Course> disTable; // Value injected by FXMLLoader
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO   
-        populateCourseTable(Context.getInstance().getUserSelect());            
-    }    
-    
-        public void populateCourseTable(String key) {
-        
+    public void initialize(URL url, ResourceBundle rb)
+    {
+        // TODO
+        populateCourseTable(Context.getInstance().getUserSelect());
+    }
+
+    public void populateCourseTable(String key)
+    {
+
         CourseArray courseArry = new CourseArray();
         courseIdColmn.setCellValueFactory(new PropertyValueFactory<Course, String>("courseId"));
         courseNameColmn.setCellValueFactory(new PropertyValueFactory<Course, String>("courseName"));
