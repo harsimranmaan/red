@@ -16,20 +16,26 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import adg.red.BootStrap;
+import adg.red.models.User;
 import javafx.scene.layout.AnchorPane;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
  * @author Witt
  */
-public class LoginController implements Initializable {
-    
+public class LoginController implements Initializable
+{
+
     @FXML //  fx:id="close"
     private MenuItem close; // Value injected by FXMLLoader
     @FXML //  fx:id="loginBtn"
@@ -42,29 +48,33 @@ public class LoginController implements Initializable {
     private TextField usernameTxt; // created by J. Yu
     @FXML
     private PasswordField passwordTxt; // created by J. Yu
-    
+
     /**
      * Initialize all the action events.
+     * <p/>
      * @param url
      * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        
+    public void initialize(URL url, ResourceBundle rb)
+    {
+
         // setOnAction when close menuitem is selected
-        close.setOnAction(new EventHandler<ActionEvent>() {
-            
+        close.setOnAction(new EventHandler<ActionEvent>()
+        {
             @Override
-            public void handle(ActionEvent event) {
+            public void handle(ActionEvent event)
+            {
                 Platform.exit();
             }
         });
-        
+
         // setOnAction when login button is pressed
-        loginBtn.setOnAction(new EventHandler<ActionEvent>()  {
-                        
+        loginBtn.setOnAction(new EventHandler<ActionEvent>()
+        {
             @Override
-            public void handle(ActionEvent event) {                                
+            public void handle(ActionEvent event)
+            {
                 // get userid and password input from gui by J. Yu
                 String uid = usernameTxt.getText().toString();
                 System.out.println(uid);
@@ -73,25 +83,32 @@ public class LoginController implements Initializable {
 
                 // create a api login controller and execute the query to db, created by J. Yu
                 adg.red.api.controller.LoginController login = new adg.red.api.controller.LoginController();
-                try {
+                try
+                {
                     System.out.println("Login return: " + login.login(uid, pwd));
-                    if(login.login(uid, pwd) == 0) {
+                    EntityManagerFactory emf = Persistence.createEntityManagerFactory("RedPU");
+                    EntityManager em = emf.createEntityManager();
+                    List<User> u = em.createNamedQuery("User.login").setParameter("username", uid).setParameter("password", pwd).getResultList();
+                    if (u.size() > 0)
+                    {
                         View view = new View(viewArea);
                         view.loadView("HomeView");
                     }
-                    else {
+                    else
+                    {
                         loginErrLbl.setVisible(true);
                         loginErrLbl.setText("Invalid Username/Password!");
-                        
+
                     }
-                } catch (SQLException ex) {
+                }
+                catch (SQLException ex)
+                {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                 
+
             }
         });
     }
-   
 //    /**
 //     * Load new view.
 //     * @param fxmlView the fxml file name to be loaded.
@@ -110,6 +127,6 @@ public class LoginController implements Initializable {
 //                }
 //                catch (Exception ex){
 //                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-//                }   
-//    } 
+//                }
+//    }
 }
