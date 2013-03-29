@@ -84,9 +84,9 @@ public class LoginController implements Initializable {
 //                try {
 //                    
 //                                    User u;
-//                    u = new User("witty","chot","Wittawas","Chot", true, "witty.chot@gmail.com",
-//                        new SimpleDateFormat("MM-dd-yyyy", Locale.ENGLISH).parse("01-01-1987"), null, new Date(), null,new Date(),true);
-//                    u.setUserTypeId(UserType.getUserTypeByName("Student"));
+//                    u = new User("bahman","password1","Bahman","Razmpa", true, "razmpa@gmail.com",
+//                        new SimpleDateFormat("MM-dd-yyyy", Locale.ENGLISH).parse("02-11-1986"), null, new Date(), null,new Date(),true);
+//                    u.setUserTypeId(UserType.getUserTypeByName("Faculty"));
 //                    u.save();
 //                } catch (ParseException ex) {
 //                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
