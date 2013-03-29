@@ -4,8 +4,10 @@
  */
 package adg.red.models;
 
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,103 +22,92 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author hsmaan
+ * @author harsimran.maan
  */
 @Entity
 @Table(name = "UserType")
 @XmlRootElement
-@NamedQueries(
-{
+@NamedQueries({
     @NamedQuery(name = "UserType.findAll", query = "SELECT u FROM UserType u"),
     @NamedQuery(name = "UserType.findByUserTypeId", query = "SELECT u FROM UserType u WHERE u.userTypeId = :userTypeId"),
-    @NamedQuery(name = "UserType.findByTypeName", query = "SELECT u FROM UserType u WHERE u.typeName = :typeName")
-})
-public class UserType implements Serializable
-{
+    @NamedQuery(name = "UserType.findByName", query = "SELECT u FROM UserType u WHERE u.name = :name")})
+public class UserType implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "userTypeId")
     private Integer userTypeId;
     @Basic(optional = false)
-    @Column(name = "typeName")
-    private String typeName;
+    @Column(name = "name")
+    private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userTypeId")
     private Collection<User> userCollection;
 
-    public UserType()
-    {
+    public UserType() {
     }
 
-    public UserType(Integer userTypeId)
-    {
+    public UserType(Integer userTypeId) {
         this.userTypeId = userTypeId;
     }
 
-    public UserType(Integer userTypeId, String typeName)
-    {
+    public UserType(Integer userTypeId, String name) {
         this.userTypeId = userTypeId;
-        this.typeName = typeName;
+        this.name = name;
     }
 
-    public Integer getUserTypeId()
-    {
+    public Integer getUserTypeId() {
         return userTypeId;
     }
 
-    public void setUserTypeId(Integer userTypeId)
-    {
+    public void setUserTypeId(Integer userTypeId) {
         this.userTypeId = userTypeId;
     }
 
-    public String getTypeName()
-    {
-        return typeName;
+    public String getName() {
+        return name;
     }
 
-    public void setTypeName(String typeName)
-    {
-        this.typeName = typeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @XmlTransient
-    public Collection<User> getUserCollection()
-    {
+    public Collection<User> getUserCollection() {
         return userCollection;
     }
 
-    public void setUserCollection(Collection<User> userCollection)
-    {
+    public void setUserCollection(Collection<User> userCollection) {
         this.userCollection = userCollection;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
         hash += (userTypeId != null ? userTypeId.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object)
-    {
+    public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UserType))
-        {
+        if (!(object instanceof UserType)) {
             return false;
         }
         UserType other = (UserType) object;
-        if ((this.userTypeId == null && other.userTypeId != null) || (this.userTypeId != null && !this.userTypeId.equals(other.userTypeId)))
-        {
+        if ((this.userTypeId == null && other.userTypeId != null) || (this.userTypeId != null && !this.userTypeId.equals(other.userTypeId))) {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "adg.red.models.UserType[ userTypeId=" + userTypeId + " ]";
     }
+    public static UserType getUserTypeByName(String name)
+    {
+        List<UserType> userTypes=RedEntityManager.getEntityManager().createNamedQuery("UserType.findByName").setParameter("name", name).getResultList();
+        return userTypes.get(0);
+    }
+    
 }

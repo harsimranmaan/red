@@ -21,31 +21,28 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author hsmaan
+ * @author harsimran.maan
  */
 @Entity
-@Table(name = "section")
+@Table(name = "Section")
 @XmlRootElement
-@NamedQueries(
-{
+@NamedQueries({
     @NamedQuery(name = "Section.findAll", query = "SELECT s FROM Section s"),
-    @NamedQuery(name = "Section.findByNumber", query = "SELECT s FROM Section s WHERE s.sectionPK.number = :number"),
-    @NamedQuery(name = "Section.findByCourse", query = "SELECT s FROM Section s WHERE s.sectionPK.course = :course"),
-    @NamedQuery(name = "Section.findByDepartment", query = "SELECT s FROM Section s WHERE s.sectionPK.department = :department"),
+    @NamedQuery(name = "Section.findBySectionId", query = "SELECT s FROM Section s WHERE s.sectionPK.sectionId = :sectionId"),
+    @NamedQuery(name = "Section.findByCourseNumber", query = "SELECT s FROM Section s WHERE s.sectionPK.courseNumber = :courseNumber"),
+    @NamedQuery(name = "Section.findByDepartmentId", query = "SELECT s FROM Section s WHERE s.sectionPK.departmentId = :departmentId"),
     @NamedQuery(name = "Section.findByStartDate", query = "SELECT s FROM Section s WHERE s.startDate = :startDate"),
     @NamedQuery(name = "Section.findByEndDate", query = "SELECT s FROM Section s WHERE s.endDate = :endDate"),
     @NamedQuery(name = "Section.findByTerm", query = "SELECT s FROM Section s WHERE s.term = :term"),
-    @NamedQuery(name = "Section.findByTeacher", query = "SELECT s FROM Section s WHERE s.teacher = :teacher"),
-    @NamedQuery(name = "Section.findByType", query = "SELECT s FROM Section s WHERE s.type = :type"),
+    @NamedQuery(name = "Section.findByFacultyMemberId", query = "SELECT s FROM Section s WHERE s.facultyMemberId = :facultyMemberId"),
+    @NamedQuery(name = "Section.findBySectionTypeId", query = "SELECT s FROM Section s WHERE s.sectionTypeId = :sectionTypeId"),
     @NamedQuery(name = "Section.findByTeachingAssistant", query = "SELECT s FROM Section s WHERE s.teachingAssistant = :teachingAssistant"),
     @NamedQuery(name = "Section.findByCreatedBy", query = "SELECT s FROM Section s WHERE s.createdBy = :createdBy"),
-    @NamedQuery(name = "Section.findByCreatedDateTime", query = "SELECT s FROM Section s WHERE s.createdDateTime = :createdDateTime"),
+    @NamedQuery(name = "Section.findByCreatedAt", query = "SELECT s FROM Section s WHERE s.createdAt = :createdAt"),
     @NamedQuery(name = "Section.findByModifiedBy", query = "SELECT s FROM Section s WHERE s.modifiedBy = :modifiedBy"),
-    @NamedQuery(name = "Section.findByModifiedDateTime", query = "SELECT s FROM Section s WHERE s.modifiedDateTime = :modifiedDateTime"),
-    @NamedQuery(name = "Section.findByIsActive", query = "SELECT s FROM Section s WHERE s.isActive = :isActive")
-})
-public class Section implements Serializable
-{
+    @NamedQuery(name = "Section.findByModifiedAt", query = "SELECT s FROM Section s WHERE s.modifiedAt = :modifiedAt"),
+    @NamedQuery(name = "Section.findByIsActive", query = "SELECT s FROM Section s WHERE s.isActive = :isActive")})
+public class Section implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected SectionPK sectionPK;
@@ -61,220 +58,197 @@ public class Section implements Serializable
     @Column(name = "term")
     private String term;
     @Basic(optional = false)
-    @Column(name = "teacher")
-    private String teacher;
+    @Column(name = "facultyMemberId")
+    private String facultyMemberId;
     @Basic(optional = false)
-    @Column(name = "type")
-    private String type;
+    @Column(name = "sectionTypeId")
+    private String sectionTypeId;
     @Column(name = "teachingAssistant")
     private String teachingAssistant;
     @Basic(optional = false)
     @Column(name = "createdBy")
     private String createdBy;
     @Basic(optional = false)
-    @Column(name = "createdDateTime")
+    @Column(name = "createdAt")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDateTime;
+    private Date createdAt;
     @Basic(optional = false)
     @Column(name = "modifiedBy")
     private String modifiedBy;
     @Basic(optional = false)
-    @Column(name = "modifiedDateTime")
+    @Column(name = "modifiedAt")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date modifiedDateTime;
+    private Date modifiedAt;
     @Basic(optional = false)
     @Column(name = "isActive")
     private boolean isActive;
-    @JoinColumn(name = "department", referencedColumnName = "departmentId", insertable = false, updatable = false)
+    @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Department department1;
+    private Department department;
+    @JoinColumn(name = "courseNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Course course;
 
-    public Section()
-    {
+    public Section() {
     }
 
-    public Section(SectionPK sectionPK)
-    {
+    public Section(SectionPK sectionPK) {
         this.sectionPK = sectionPK;
     }
 
-    public Section(SectionPK sectionPK, Date startDate, Date endDate, String term, String teacher, String type, String createdBy, Date createdDateTime, String modifiedBy, Date modifiedDateTime, boolean isActive)
-    {
+    public Section(SectionPK sectionPK, Date startDate, Date endDate, String term, String facultyMemberId, String sectionTypeId, String createdBy, Date createdAt, String modifiedBy, Date modifiedAt, boolean isActive) {
         this.sectionPK = sectionPK;
         this.startDate = startDate;
         this.endDate = endDate;
         this.term = term;
-        this.teacher = teacher;
-        this.type = type;
+        this.facultyMemberId = facultyMemberId;
+        this.sectionTypeId = sectionTypeId;
         this.createdBy = createdBy;
-        this.createdDateTime = createdDateTime;
+        this.createdAt = createdAt;
         this.modifiedBy = modifiedBy;
-        this.modifiedDateTime = modifiedDateTime;
+        this.modifiedAt = modifiedAt;
         this.isActive = isActive;
     }
 
-    public Section(int number, int course, String department)
-    {
-        this.sectionPK = new SectionPK(number, course, department);
+    public Section(int sectionId, int courseNumber, String departmentId) {
+        this.sectionPK = new SectionPK(sectionId, courseNumber, departmentId);
     }
 
-    public SectionPK getSectionPK()
-    {
+    public SectionPK getSectionPK() {
         return sectionPK;
     }
 
-    public void setSectionPK(SectionPK sectionPK)
-    {
+    public void setSectionPK(SectionPK sectionPK) {
         this.sectionPK = sectionPK;
     }
 
-    public Date getStartDate()
-    {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate)
-    {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate()
-    {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate)
-    {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
-    public String getTerm()
-    {
+    public String getTerm() {
         return term;
     }
 
-    public void setTerm(String term)
-    {
+    public void setTerm(String term) {
         this.term = term;
     }
 
-    public String getTeacher()
-    {
-        return teacher;
+    public String getFacultyMemberId() {
+        return facultyMemberId;
     }
 
-    public void setTeacher(String teacher)
-    {
-        this.teacher = teacher;
+    public void setFacultyMemberId(String facultyMemberId) {
+        this.facultyMemberId = facultyMemberId;
     }
 
-    public String getType()
-    {
-        return type;
+    public String getSectionTypeId() {
+        return sectionTypeId;
     }
 
-    public void setType(String type)
-    {
-        this.type = type;
+    public void setSectionTypeId(String sectionTypeId) {
+        this.sectionTypeId = sectionTypeId;
     }
 
-    public String getTeachingAssistant()
-    {
+    public String getTeachingAssistant() {
         return teachingAssistant;
     }
 
-    public void setTeachingAssistant(String teachingAssistant)
-    {
+    public void setTeachingAssistant(String teachingAssistant) {
         this.teachingAssistant = teachingAssistant;
     }
 
-    public String getCreatedBy()
-    {
+    public String getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(String createdBy)
-    {
+    public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
 
-    public Date getCreatedDateTime()
-    {
-        return createdDateTime;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreatedDateTime(Date createdDateTime)
-    {
-        this.createdDateTime = createdDateTime;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public String getModifiedBy()
-    {
+    public String getModifiedBy() {
         return modifiedBy;
     }
 
-    public void setModifiedBy(String modifiedBy)
-    {
+    public void setModifiedBy(String modifiedBy) {
         this.modifiedBy = modifiedBy;
     }
 
-    public Date getModifiedDateTime()
-    {
-        return modifiedDateTime;
+    public Date getModifiedAt() {
+        return modifiedAt;
     }
 
-    public void setModifiedDateTime(Date modifiedDateTime)
-    {
-        this.modifiedDateTime = modifiedDateTime;
+    public void setModifiedAt(Date modifiedAt) {
+        this.modifiedAt = modifiedAt;
     }
 
-    public boolean getIsActive()
-    {
+    public boolean getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(boolean isActive)
-    {
+    public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
 
-    public Department getDepartment1()
-    {
-        return department1;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDepartment1(Department department1)
-    {
-        this.department1 = department1;
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
         hash += (sectionPK != null ? sectionPK.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object)
-    {
+    public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Section))
-        {
+        if (!(object instanceof Section)) {
             return false;
         }
         Section other = (Section) object;
-        if ((this.sectionPK == null && other.sectionPK != null) || (this.sectionPK != null && !this.sectionPK.equals(other.sectionPK)))
-        {
+        if ((this.sectionPK == null && other.sectionPK != null) || (this.sectionPK != null && !this.sectionPK.equals(other.sectionPK))) {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "adg.red.models.Section[ sectionPK=" + sectionPK + " ]";
     }
+    
 }

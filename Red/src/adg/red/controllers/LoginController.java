@@ -17,9 +17,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import adg.red.BootStrap;
 import adg.red.models.User;
+import adg.red.models.UserType;
+import adg.red.utils.RedEntityManager;
 import javafx.scene.layout.AnchorPane;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Label;
@@ -33,8 +39,7 @@ import javax.persistence.Persistence;
  *
  * @author Witt
  */
-public class LoginController implements Initializable
-{
+public class LoginController implements Initializable {
 
     @FXML //  fx:id="close"
     private MenuItem close; // Value injected by FXMLLoader
@@ -56,56 +61,44 @@ public class LoginController implements Initializable
      * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
+    public void initialize(URL url, ResourceBundle rb) {
 
         // setOnAction when close menuitem is selected
-        close.setOnAction(new EventHandler<ActionEvent>()
-        {
+        close.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event)
-            {
+            public void handle(ActionEvent event) {
                 Platform.exit();
             }
         });
 
         // setOnAction when login button is pressed
-        loginBtn.setOnAction(new EventHandler<ActionEvent>()
-        {
+        loginBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event)
-            {
+            public void handle(ActionEvent event) {
                 // get userid and password input from gui by J. Yu
                 String uid = usernameTxt.getText().toString();
                 System.out.println(uid);
                 String pwd = passwordTxt.getText().toString();
                 System.out.println(pwd);
-
-                // create a api login controller and execute the query to db, created by J. Yu
-                adg.red.api.controller.LoginController login = new adg.red.api.controller.LoginController();
-                try
-                {
-                    System.out.println("Login return: " + login.login(uid, pwd));
-                    EntityManagerFactory emf = Persistence.createEntityManagerFactory("RedPU");
-                    EntityManager em = emf.createEntityManager();
-                    List<User> u = em.createNamedQuery("User.login").setParameter("username", uid).setParameter("password", pwd).getResultList();
-                    if (u.size() > 0)
-                    {
-                        View view = new View(viewArea);
-                        view.loadView("HomeView");
-                    }
-                    else
-                    {
-                        loginErrLbl.setVisible(true);
-                        loginErrLbl.setText("Invalid Username/Password!");
-
-                    }
-                }
-                catch (SQLException ex)
-                {
+                try {
+                    //Create dummy user
+                                    User u;
+                    u = new User("harsimran","maan","Harsimran","Maan", true, "maan.harry@gmail.com",
+                        new SimpleDateFormat("MM-dd-yyyy", Locale.ENGLISH).parse("08-25-1987"), null, new Date(), null,new Date(),true);
+                    u.setUserTypeId(UserType.getUserTypeByName("Admin"));
+                    u.save();
+                } catch (ParseException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
+                //LOGIN
+                try {
+                    User user = User.login(uid, pwd);
+                    View view = new View(viewArea);
+                    view.loadView("HomeView");
+                } catch (Exception ex) {
+                    loginErrLbl.setVisible(true);
+                    loginErrLbl.setText("Invalid Username/Password!");
+                }
             }
         });
     }
