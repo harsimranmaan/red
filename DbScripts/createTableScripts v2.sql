@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `AdgTest` ;
-USE `AdgTest`;
+CREATE DATABASE  IF NOT EXISTS `AdgDevelopment` ;
+USE `AdgDevelopment`;
 
 DROP TABLE IF EXISTS `UserType`;
 CREATE TABLE `UserType` (
@@ -25,14 +25,13 @@ CREATE TABLE `Faculty` (
   `facultyId` INT NOT NULL,
   name VARCHAR(50) NOT NULL,
   addressId INT,
-  `headOfFacultyId` INT DEFAULT NULL,/**FK**/
+  `headOfFacultyId` INT DEFAULT NULL,/**FK - after FacultyMember**/
   `phone` varchar(15) DEFAULT NULL,
   `website` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`facultyId`),
   CONSTRAINT `FacultyFKaddressId` FOREIGN KEY (`addressId`) REFERENCES `Address` (`addressId`) ON UPDATE CASCADE ON DELETE RESTRICT,
   UNIQUE KEY `FacultyUNIQname` (name),
-  CONSTRAINT FacultyCHKfacultyId CHECK facultyId > 0
-  /**CONSTRAINT `FacultyFKheadId` FOREIGN KEY (`facultyId`) REFERENCES `Address` (`addressId`) ON UPDATE CASCADE ON DELETE RESTRICT**/
+  CONSTRAINT FacultyCHKfacultyId CHECK (facultyId > 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -46,10 +45,6 @@ CREATE TABLE `Department` (
   `phone` varchar(15) NOT NULL,
   `email` varchar(45) NOT NULL,
   `website` varchar(50) NOT NULL,
-  `createdBy` varchar(15) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `modifiedBy` varchar(15) NOT NULL,
-  `modifiedAt` datetime NOT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`departmentId`),
   CONSTRAINT `DepartmentFKaddressId` FOREIGN KEY (`addressId`) REFERENCES `Address` (`addressId`) ON UPDATE CASCADE ON DELETE RESTRICT,
@@ -68,16 +63,10 @@ CREATE TABLE `User` (
   `phoneNumber` varchar(15) DEFAULT NULL,
   `email` varchar(45) NOT NULL,
   `dateOfBirth` date DEFAULT NULL,
-  `createdBy` varchar(15),
-  `createdAt` datetime NOT NULL,
-  `modifiedBy` varchar(15),
-  `modifiedAt` datetime NOT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`username`),
   CONSTRAINT `UserFKuserTypeId` FOREIGN KEY (`userTypeId`) REFERENCES `UserType` (`userTypeId`) ON UPDATE CASCADE ON DELETE RESTRICT,
-  /**CONSTRAINT `UserFKcreatedBy` FOREIGN KEY (`createdBy`) REFERENCES`User` (`username`) ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT `UserFKmodifiedBy` FOREIGN KEY (`modifiedBy`) REFERENCES `User` (`username`) ON UPDATE CASCADE ON DELETE CASCADE,
-  **/CONSTRAINT `UserFKaddressId` FOREIGN KEY (`addressId`) REFERENCES `Address` (`addressId`) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT `UserFKaddressId` FOREIGN KEY (`addressId`) REFERENCES `Address` (`addressId`) ON UPDATE CASCADE ON DELETE RESTRICT,
   UNIQUE KEY `UserUNIQemail`  (`email`) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -90,10 +79,6 @@ CREATE  TABLE `Program` (
   `addressId` INT NULL ,
   `email` VARCHAR(45) NOT NULL ,
   `phone` VARCHAR(15) NOT NULL ,
-  `createdBy` VARCHAR(15) NOT NULL ,
-  `createdAt` DATETIME NOT NULL ,
-  `modifiedBy` VARCHAR(15) NOT NULL ,
-  `modifiedAt` DATETIME NOT NULL ,
   `isActive` BIT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (`programName`, `departmentId`) ,
   CONSTRAINT `ProgramFKdepartmentId`
@@ -116,16 +101,10 @@ CREATE TABLE `Student` (
   `programName` VARCHAR(30) NOT NULL ,
   `dateOfRegistration` date DEFAULT NULL,
   `highestDegree` varchar(20) DEFAULT NULL,
-  `createdBy` varchar(15) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `modifiedBy` varchar(15) NOT NULL,
-  `modifiedAt` datetime NOT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`studentId`),
   UNIQUE KEY `StudentUNIQusername` (`username`),
   CONSTRAINT `StudentFKusername` FOREIGN KEY (`username`) REFERENCES `User` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `StudentFKcreatedBy` FOREIGN KEY (`createdBy`) REFERENCES `User` (`username`) ON UPDATE CASCADE ON DELETE SET NULL,
-  CONSTRAINT `StudentFKmodifiedBy` FOREIGN KEY (`modifiedBy`) REFERENCES `User` (`username`) ON UPDATE CASCADE ON DELETE SET NULL,
   CONSTRAINT `StudentFKprogramName` FOREIGN KEY (`programName`) REFERENCES `Program` (`programName`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -134,38 +113,35 @@ CREATE TABLE `Administrator` (
   `adminId` INT NOT NULL,
   `username` varchar(10) NOT NULL,
   `dateOfJoining` date NOT NULL,
-  /**--`title` varchar(20) DEFAULT NULL,
- -- `access` varchar(20) NOT NULL,**/
+  /**-- `access` varchar(20) NOT NULL,**/
   `hiringFacultyId` INT NOT NULL,
-  `createdBy` varchar(15) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `modifiedBy` varchar(15) NOT NULL,
-  `modifiedAt` datetime NOT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`adminId`),
   KEY `username_idx` (`username`),
   CONSTRAINT `AdministratorFKusername` FOREIGN KEY (`username`) REFERENCES `User` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT `AdministratorFKfacultyId` FOREIGN KEY (`hiringFacultyId`) REFERENCES `Faculty` (`facultyId`) ON UPDATE CASCADE ON DELETE RESTRICT
+  CONSTRAINT `AdministratorFKfacultyId` FOREIGN KEY (`hiringFacultyId`) REFERENCES `Faculty` (`facultyId`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 DROP TABLE IF EXISTS `FacultyMember`;
 CREATE TABLE `FacultyMember` (
-  `facultyMemberId` varchar(10) NOT NULL,
+  `facultyMemberId` INT NOT NULL,
   `username` varchar(10) NOT NULL,
   `departmentId` varchar(4) NOT NULL,
   `title` varchar(20) NOT NULL,
-  -- `type` varchar(20) NOT NULL,
   `dateOfJoining` date NOT NULL,
   `highestDegree` varchar(25) DEFAULT NULL,
-  `createdBy` varchar(15) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `modifiedBy` varchar(15) NOT NULL,
-  `modifiedAt` datetime NOT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`facultyMemberId`),
   CONSTRAINT `FacultyMemberFKdepartmentId` FOREIGN KEY (`departmentId`) REFERENCES `Department` (`departmentId`) ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT `FacultyMemberFKusername` FOREIGN KEY (`username`) REFERENCES `User` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `Faculty`
+ADD CONSTRAINT `FacultyFKheadId` 
+FOREIGN KEY (`facultyId`) 
+REFERENCES `FacultyMember` (`facultyMemberId`) 
+ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 DROP TABLE IF EXISTS `GradingScheme`;
@@ -186,10 +162,6 @@ CREATE TABLE `Course` (
   `credits` INT NOT NULL,
   `gradingSchemeId`INT NOT NULL,
   `passingRequirement` varchar(45) NOT NULL,
- `createdBy` varchar(15) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `modifiedBy` varchar(15) NOT NULL,
-  `modifiedAt` datetime NOT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`courseNumber`),
   CONSTRAINT `departmentId` FOREIGN KEY (`departmentId`) REFERENCES `Department` (`departmentId`) ON UPDATE CASCADE,
@@ -203,10 +175,6 @@ CREATE TABLE `CoRequisite` (
   `departmentId` varchar(4) NOT NULL,
   `coRequisiteNumber` int NOT NULL,
   `coRequisiteDeptId` varchar(4) NOT NULL,
-  `createdBy` varchar(15) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `modifiedBy` varchar(15) NOT NULL,
-  `modifiedAt` datetime NOT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   isMust bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`courseNumber`,`departmentId`,`coRequisiteNumber`,`coRequisiteDeptId`),
@@ -217,16 +185,12 @@ CREATE TABLE `CoRequisite` (
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
   
-  DROP TABLE IF EXISTS `Prerequisite`;
+DROP TABLE IF EXISTS `Prerequisite`;
 CREATE TABLE `Prerequisite` (
   `courseNumber` int NOT NULL,
   `departmentId` varchar(4) NOT NULL,
   `preRequisiteNumber` int NOT NULL,
   `preRequisiteDeptId` varchar(4) NOT NULL,
-  `createdBy` varchar(15) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `modifiedBy` varchar(15) NOT NULL,
-  `modifiedAt` datetime NOT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   isMust bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`courseNumber`,`departmentId`,`preRequisiteNumber`,`preRequisiteDeptId`),
@@ -244,6 +208,23 @@ CREATE TABLE `SectionType` (
   UNIQUE KEY `SectionTypeUNIQname` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `Session`;
+CREATE TABLE `Session` (
+  `sessionId` INT NOT NULL,
+  `name` VARCHAR(10) NOT NULL,
+  PRIMARY KEY (`sessionId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `Term`;
+CREATE TABLE `Term` (
+  `termId` varchar(10) NOT NULL,
+  `year` YEAR NOT NULL,
+  `sessionId` INT NOT NULL,
+  `isActive` bit(1) NOT NULL DEFAULT b'1',
+  PRIMARY KEY (`termId`),
+  CONSTRAINT `TermFKsessionId` FOREIGN KEY (`sessionId`) REFERENCES `Session` (`sessionId`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 DROP TABLE IF EXISTS `Section`;
 CREATE TABLE `Section` (
   `sectionId` INT NOT NULL,
@@ -251,52 +232,44 @@ CREATE TABLE `Section` (
   `departmentId` varchar(4) NOT NULL,
   `startDate` date NOT NULL,
   `endDate` date NOT NULL,
-  `term` varchar(20) NOT NULL, /* create term table */
-  `facultyMemberId` varchar(20) NOT NULL,
+  `termId` varchar(10) NOT NULL, /* create term table */
+  `facultyMemberId` INT NOT NULL,
   `sectionTypeId` varchar(3) NOT NULL,
   `teachingAssistant` varchar(20) DEFAULT NULL,
-  `createdBy` varchar(15) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `modifiedBy` varchar(15) NOT NULL,
-  `modifiedAt` datetime NOT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
-  PRIMARY KEY (sectionId,`courseNumber`,`departmentId`),
-  CONSTRAINT `SectionFKcourseNumber` FOREIGN KEY (`courseNumber`) REFERENCES `Course` (`courseNumber`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `SectionFKdepartmentId` FOREIGN KEY (`departmentId`) REFERENCES `Department` (`departmentId`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`sectionId`,`courseNumber`,`departmentId`,`termId`),
+  CONSTRAINT `SectionFKcourseNumber` FOREIGN KEY (`courseNumber`) REFERENCES `Course` (`courseNumber`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `SectionFKdepartmentId` FOREIGN KEY (`departmentId`) REFERENCES `Department` (`departmentId`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `SectionFKtermId` FOREIGN KEY (`termId`) REFERENCES `Term` (`termId`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `SectionFKfacultyMemberId` FOREIGN KEY (`facultyMemberId`) REFERENCES `FacultyMember` (`facultyMemberId`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 DROP TABLE IF EXISTS `Registration`;
 CREATE  TABLE `Registration` (
-  `studentId` INT(11) NOT NULL ,
+  `studentId` INT NOT NULL ,
   `programName` VARCHAR(30) NOT NULL ,
   `departmentId` VARCHAR(4) NOT NULL ,
   `startDate` DATE NOT NULL ,
   `graduationDate` DATE NOT NULL ,
-  `createdBy` VARCHAR(15) NOT NULL ,
-  `createdAt` DATETIME NOT NULL ,
-  `modifiedBy` VARCHAR(15) NOT NULL ,
-  `modifiedAt` DATETIME NOT NULL ,
   `isActive` BIT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (`studentId`, `programName`, `departmentId`) ,
-  CONSTRAINT `EnrolmentFKstudentId`
+  CONSTRAINT `RegistrationFKstudentId`
     FOREIGN KEY (`studentId` )
-    REFERENCES `adgtest`.`student` (`studentId` )
+    REFERENCES `Student` (`studentId` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
-  CONSTRAINT `EnrolmentFKprogramName`
+  CONSTRAINT `RegistrationFKprogramName`
     FOREIGN KEY (`programName` )
-    REFERENCES `adgtest`.`program` (`programName` )
+    REFERENCES `Program` (`programName` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
-  CONSTRAINT `EnrolmentFKdepartmentId`
+  CONSTRAINT `RegistrationFKdepartmentId`
     FOREIGN KEY (`departmentId` )
-    REFERENCES `adgtest`.`department` (`departmentId` )
+    REFERENCES `Department` (`departmentId` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 
 
 DROP TABLE IF EXISTS `MessagePriority`;
@@ -314,16 +287,16 @@ CREATE  TABLE `Message` (
   `messageBody` VARCHAR(300) NULL ,
   `priorityId` INT NOT NULL ,
   `senderId` VARCHAR(15) NOT NULL ,
-  `timeStamp` DATETIME NOT NULL ,
+  `dateTime` DATETIME NOT NULL ,
   PRIMARY KEY (`messageId`) ,
   CONSTRAINT `MessageFKpriorityId`
     FOREIGN KEY (`priorityId` )
-    REFERENCES `adgtest`.`messagepriority` (`messagePriorityId` )
+    REFERENCES `MessagePriority` (`messagePriorityId` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `MessageFKsenderId`
     FOREIGN KEY (`senderId` )
-    REFERENCES `adgtest`.`user` (`username` )
+    REFERENCES `User` (`username` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -344,19 +317,19 @@ CREATE  TABLE `MessageReceiver` (
   `statusId` INT NOT NULL DEFAULT 0 ,
   `modifiedAt` DATETIME NOT NULL ,
   PRIMARY KEY (`messageId`, `receiverId`) ,
-  CONSTRAINT `MessageFKmessageId`
+  CONSTRAINT `MessageReceiverFKmessageId`
     FOREIGN KEY (`messageId` )
-    REFERENCES `adgtest`.`message` (`messageId` )
+    REFERENCES `Message` (`messageId` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
-  CONSTRAINT `MessageFKreceiverId`
+  CONSTRAINT `MessageReceiverFKreceiverId`
     FOREIGN KEY (`receiverId` )
-    REFERENCES `adgtest`.`user` (`username` )
+    REFERENCES `User` (`username` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
-  CONSTRAINT `MessageFKstatusId`
+  CONSTRAINT `MessageReceiverFKstatusId`
     FOREIGN KEY (`statusId` )
-    REFERENCES `adgtest`.`messagestatus` (`statusId` )
+    REFERENCES `MessageStatus` (`statusId` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -398,32 +371,58 @@ CREATE  TABLE `SectionTimeTable` (
   `departmentId` VARCHAR(4) NOT NULL ,
   `dayId` INT NOT NULL ,
   `startTime` TIME NOT NULL ,
-  `lengthInMinutes` INT NOT NULL , /* check constraint min 60 */
-  `createdBy` VARCHAR(15) NOT NULL ,
-  `createdAt` DATETIME NOT NULL ,
-  `modifiedBy` VARCHAR(15) NOT NULL ,
-  `modifiedAt` DATETIME NOT NULL ,
+  `lengthInMinutes` INT NOT NULL ,
   PRIMARY KEY (`sectionId`, `courseNumber`, `departmentId`, `dayId`, `startTime`) ,
+   CONSTRAINT SectionTimeTableCHKlengthInMinutes CHECK (lengthInMinutes > 59),
   CONSTRAINT `SectionTimeTableFKsectionId`
     FOREIGN KEY (`sectionId` )
-    REFERENCES `adgtest`.`section` (`sectionId` )
+    REFERENCES `Section` (`sectionId` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `SectionTimeTableFKcourseNumber`
     FOREIGN KEY (`courseNumber` )
-    REFERENCES `adgtest`.`course` (`courseNumber` )
+    REFERENCES `Course` (`courseNumber` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `SectionTimeTableFKdepartmentId`
     FOREIGN KEY (`departmentId` )
-    REFERENCES `adgtest`.`department` (`departmentId` )
+    REFERENCES `Department` (`departmentId` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `SectionTimeTableFKdayId`
     FOREIGN KEY (`dayId` )
-    REFERENCES `adgtest`.`day` (`dayId` )
+    REFERENCES `Day` (`dayId` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/* enrolment */
+
+DROP TABLE IF EXISTS `Enrolment`;
+CREATE  TABLE `Enrolment` (
+  `studentId` INT NOT NULL ,
+  `sectionId` INT NOT NULL ,
+  `courseNumber` INT NOT NULL ,
+  `departmentId` VARCHAR(4) NOT NULL ,
+  `isActive` bit(1) NOT NULL DEFAULT b'1',
+  PRIMARY KEY (`studentId`, `sectionId`, `courseNumber`, `departmentId`) ,
+  CONSTRAINT `EnrolmentFKstudentId`
+    FOREIGN KEY (`studentId` )
+    REFERENCES `Student` (`studentId` )
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `EnrolmentFKsectionId`
+    FOREIGN KEY (`sectionId` )
+    REFERENCES `Section` (`sectionId` )
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `EnrolmentFKcourseNumber`
+    FOREIGN KEY (`courseNumber` )
+    REFERENCES `Course` (`courseNumber` )
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+  CONSTRAINT `EnrolmentFKdepartmentId`
+    FOREIGN KEY (`departmentId` )
+    REFERENCES `Department` (`departmentId` )
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;

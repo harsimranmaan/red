@@ -81,11 +81,11 @@ public class LoginController implements Initializable {
                 String pwd = passwordTxt.getText().toString();
                 System.out.println(pwd);
                 //Create dummy user
-//                try {
+//               try {
 //                    
-//                                    User u;
-//                    u = new User("bahman","password1","Bahman","Razmpa", true, "razmpa@gmail.com",
-//                        new SimpleDateFormat("MM-dd-yyyy", Locale.ENGLISH).parse("02-11-1986"), null, new Date(), null,new Date(),true);
+//                    User u;
+//                    u = new User("jaspreet","jpwd","Jaspreet","Thind", true, "jayzthind@gmail.com",
+//                        new SimpleDateFormat("MM-dd-yyyy", Locale.ENGLISH).parse("20-12-1986"), null, new Date(), null,new Date(),true);
 //                    u.setUserTypeId(UserType.getUserTypeByName("Faculty"));
 //                    u.save();
 //                } catch (ParseException ex) {
