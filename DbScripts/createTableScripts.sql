@@ -230,7 +230,7 @@ CREATE TABLE `Section` (
   `facultyMemberId` varchar(20) NOT NULL,
   `sectionTypeId` varchar(3) NOT NULL,
   `teachingAssistant` varchar(20) DEFAULT NULL,
-	`createdBy` varchar(15) NOT NULL,
+   `createdBy` varchar(15) NOT NULL,
   `createdAt` datetime NOT NULL,
   `modifiedBy` varchar(15) NOT NULL,
   `modifiedAt` datetime NOT NULL,
@@ -239,5 +239,22 @@ CREATE TABLE `Section` (
  
   CONSTRAINT `SectionFKcourseNumber` FOREIGN KEY (`courseNumber`) REFERENCES `Course` (`courseNumber`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `SectionFKdepartmentId` FOREIGN KEY (`departmentId`) REFERENCES `Department` (`departmentId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `Locale`;
+CREATE TABLE `Locale` (
+  `id` INT NOT NULL,
+  `name` varchar(4) NOT NULL,
+   PRIMARY KEY (`id`),
+   UNIQUE KEY `LocaleUNIQname` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS ResourceDictionary;
+CREATE TABLE ResourceDictionary (
+  resourceId INT NOT NULL,
+  localeId INT NOT NULL,
+  textString varchar(1000) NOT NULL,
+  PRIMARY KEY (resourceId ,localeId),
+  CONSTRAINT LocaleFKid FOREIGN KEY (localeId) REFERENCES Locale (id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
