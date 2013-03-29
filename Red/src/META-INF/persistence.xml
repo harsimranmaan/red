@@ -16,6 +16,8 @@
     <class>adg.red.models.Prerequisite</class>
     <class>adg.red.models.User</class>
     <class>adg.red.models.FacultyMember</class>
+    <class>adg.red.models.Locale</class>
+    <class>adg.red.models.ResourceDictionary</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://ec2-50-18-66-213.us-west-1.compute.amazonaws.com:3306/AdgTest?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="red"/>
