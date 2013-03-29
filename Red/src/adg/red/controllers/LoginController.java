@@ -80,16 +80,17 @@ public class LoginController implements Initializable {
                 System.out.println(uid);
                 String pwd = passwordTxt.getText().toString();
                 System.out.println(pwd);
-                try {
-                    //Create dummy user
-                                    User u;
-                    u = new User("harsimran","maan","Harsimran","Maan", true, "maan.harry@gmail.com",
-                        new SimpleDateFormat("MM-dd-yyyy", Locale.ENGLISH).parse("08-25-1987"), null, new Date(), null,new Date(),true);
-                    u.setUserTypeId(UserType.getUserTypeByName("Admin"));
-                    u.save();
-                } catch (ParseException ex) {
-                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                //Create dummy user
+//                try {
+//                    
+//                                    User u;
+//                    u = new User("witty","chot","Wittawas","Chot", true, "witty.chot@gmail.com",
+//                        new SimpleDateFormat("MM-dd-yyyy", Locale.ENGLISH).parse("01-01-1987"), null, new Date(), null,new Date(),true);
+//                    u.setUserTypeId(UserType.getUserTypeByName("Student"));
+//                    u.save();
+//                } catch (ParseException ex) {
+//                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+//                }
                 //LOGIN
                 try {
                     User user = User.login(uid, pwd);
