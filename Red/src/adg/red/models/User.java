@@ -4,9 +4,14 @@
  */
 package adg.red.models;
 
+import adg.red.utils.Encryption;
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,42 +19,37 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author hsmaan
+ * @author harsimran.maan
  */
 @Entity
-@Table(name = "user")
+@Table(name = "User")
 @XmlRootElement
-@NamedQueries(
-        {
+@NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
-    @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u WHERE u.firstName = :firstName"),
     @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u WHERE u.lastName = :lastName"),
     @NamedQuery(name = "User.findByIsOnline", query = "SELECT u FROM User u WHERE u.isOnline = :isOnline"),
-    @NamedQuery(name = "User.findByAddress1", query = "SELECT u FROM User u WHERE u.address1 = :address1"),
-    @NamedQuery(name = "User.findByAddress2", query = "SELECT u FROM User u WHERE u.address2 = :address2"),
-    @NamedQuery(name = "User.findByCity", query = "SELECT u FROM User u WHERE u.city = :city"),
-    @NamedQuery(name = "User.findByPin", query = "SELECT u FROM User u WHERE u.pin = :pin"),
     @NamedQuery(name = "User.findByPhoneNumber", query = "SELECT u FROM User u WHERE u.phoneNumber = :phoneNumber"),
-    @NamedQuery(name = "User.findByEmailAddress", query = "SELECT u FROM User u WHERE u.emailAddress = :emailAddress"),
+    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByDateOfBirth", query = "SELECT u FROM User u WHERE u.dateOfBirth = :dateOfBirth"),
     @NamedQuery(name = "User.findByCreatedBy", query = "SELECT u FROM User u WHERE u.createdBy = :createdBy"),
-    @NamedQuery(name = "User.findByCreatedDateTime", query = "SELECT u FROM User u WHERE u.createdDateTime = :createdDateTime"),
-    @NamedQuery(name = "User.findByLastModifiedBy", query = "SELECT u FROM User u WHERE u.lastModifiedBy = :lastModifiedBy"),
-    @NamedQuery(name = "User.findByModifiedDateTime", query = "SELECT u FROM User u WHERE u.modifiedDateTime = :modifiedDateTime"),
+    @NamedQuery(name = "User.findByCreatedAt", query = "SELECT u FROM User u WHERE u.createdAt = :createdAt"),
+    @NamedQuery(name = "User.findByModifiedBy", query = "SELECT u FROM User u WHERE u.modifiedBy = :modifiedBy"),
+    @NamedQuery(name = "User.findByModifiedAt", query = "SELECT u FROM User u WHERE u.modifiedAt = :modifiedAt"),
     @NamedQuery(name = "User.findByIsActive", query = "SELECT u FROM User u WHERE u.isActive = :isActive"),
-    @NamedQuery(name = "User.login", query = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password")
-})
-public class User implements Serializable
-{
+    @NamedQuery(name = "User.login", query = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password")})
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -68,20 +68,11 @@ public class User implements Serializable
     @Basic(optional = false)
     @Column(name = "isOnline")
     private boolean isOnline;
-    @Column(name = "address1")
-    private String address1;
-    @Column(name = "address2")
-    private String address2;
-    @Column(name = "city")
-    private String city;
-    @Basic(optional = false)
-    @Column(name = "pin")
-    private String pin;
     @Column(name = "phoneNumber")
     private String phoneNumber;
     @Basic(optional = false)
-    @Column(name = "emailAddress")
-    private String emailAddress;
+    @Column(name = "email")
+    private String email;
     @Basic(optional = false)
     @Column(name = "dateOfBirth")
     @Temporal(TemporalType.DATE)
@@ -90,256 +81,238 @@ public class User implements Serializable
     @Column(name = "createdBy")
     private String createdBy;
     @Basic(optional = false)
-    @Column(name = "createdDateTime")
+    @Column(name = "createdAt")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDateTime;
+    private Date createdAt;
     @Basic(optional = false)
-    @Column(name = "lastModifiedBy")
-    private String lastModifiedBy;
+    @Column(name = "modifiedBy")
+    private String modifiedBy;
     @Basic(optional = false)
-    @Column(name = "modifiedDateTime")
+    @Column(name = "modifiedAt")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date modifiedDateTime;
+    private Date modifiedAt;
     @Basic(optional = false)
     @Column(name = "isActive")
     private boolean isActive;
+    @JoinColumn(name = "addressId", referencedColumnName = "addressId")
+    @ManyToOne
+    private Address addressId;
     @JoinColumn(name = "userTypeId", referencedColumnName = "userTypeId")
     @ManyToOne(optional = false)
     private UserType userTypeId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
+    private Collection<Administrator> administratorCollection;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "username")
+    private Student student;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
+    private Collection<FacultyMember> facultyMemberCollection;
 
-    public User()
-    {
+    public User() {
     }
 
-    public User(String username)
-    {
+    public User(String username) {
         this.username = username;
     }
 
-    public User(String username, String password, String firstName, String lastName, boolean isOnline, String pin, String emailAddress, Date dateOfBirth, String createdBy, Date createdDateTime, String lastModifiedBy, Date modifiedDateTime, boolean isActive)
-    {
+    public User(String username, String password, String firstName, String lastName, boolean isOnline, String email, Date dateOfBirth, String createdBy, Date createdAt, String modifiedBy, Date modifiedAt, boolean isActive) {
         this.username = username;
-        this.password = password;
+        this.password = Encryption.encrypt(password);
         this.firstName = firstName;
         this.lastName = lastName;
         this.isOnline = isOnline;
-        this.pin = pin;
-        this.emailAddress = emailAddress;
+        this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.createdBy = createdBy;
-        this.createdDateTime = createdDateTime;
-        this.lastModifiedBy = lastModifiedBy;
-        this.modifiedDateTime = modifiedDateTime;
+        this.createdAt = createdAt;
+        this.modifiedBy = modifiedBy;
+        this.modifiedAt = modifiedAt;
         this.isActive = isActive;
     }
 
-    public String getUsername()
-    {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username)
-    {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public String getPassword()
-    {
-        return password;
+    public void setPassword(String password) {
+        this.password = Encryption.encrypt(password);
     }
 
-    public void setPassword(String password)
-    {
-        this.password = password;
-    }
-
-    public String getFirstName()
-    {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName)
-    {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastName()
-    {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName)
-    {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public boolean getIsOnline()
-    {
+    public boolean getIsOnline() {
         return isOnline;
     }
 
-    public void setIsOnline(boolean isOnline)
-    {
+    public void setIsOnline(boolean isOnline) {
         this.isOnline = isOnline;
     }
 
-    public String getAddress1()
-    {
-        return address1;
-    }
-
-    public void setAddress1(String address1)
-    {
-        this.address1 = address1;
-    }
-
-    public String getAddress2()
-    {
-        return address2;
-    }
-
-    public void setAddress2(String address2)
-    {
-        this.address2 = address2;
-    }
-
-    public String getCity()
-    {
-        return city;
-    }
-
-    public void setCity(String city)
-    {
-        this.city = city;
-    }
-
-    public String getPin()
-    {
-        return pin;
-    }
-
-    public void setPin(String pin)
-    {
-        this.pin = pin;
-    }
-
-    public String getPhoneNumber()
-    {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber)
-    {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getEmailAddress()
-    {
-        return emailAddress;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmailAddress(String emailAddress)
-    {
-        this.emailAddress = emailAddress;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public Date getDateOfBirth()
-    {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth)
-    {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getCreatedBy()
-    {
+    public String getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(String createdBy)
-    {
+    public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
 
-    public Date getCreatedDateTime()
-    {
-        return createdDateTime;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreatedDateTime(Date createdDateTime)
-    {
-        this.createdDateTime = createdDateTime;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public String getLastModifiedBy()
-    {
-        return lastModifiedBy;
+    public String getModifiedBy() {
+        return modifiedBy;
     }
 
-    public void setLastModifiedBy(String lastModifiedBy)
-    {
-        this.lastModifiedBy = lastModifiedBy;
+    public void setModifiedBy(String modifiedBy) {
+        this.modifiedBy = modifiedBy;
     }
 
-    public Date getModifiedDateTime()
-    {
-        return modifiedDateTime;
+    public Date getModifiedAt() {
+        return modifiedAt;
     }
 
-    public void setModifiedDateTime(Date modifiedDateTime)
-    {
-        this.modifiedDateTime = modifiedDateTime;
+    public void setModifiedAt(Date modifiedAt) {
+        this.modifiedAt = modifiedAt;
     }
 
-    public boolean getIsActive()
-    {
+    public boolean getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(boolean isActive)
-    {
+    public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
 
-    public UserType getUserTypeId()
-    {
+    public Address getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Address addressId) {
+        this.addressId = addressId;
+    }
+
+    public UserType getUserTypeId() {
         return userTypeId;
     }
 
-    public void setUserTypeId(UserType userTypeId)
-    {
+    public void setUserTypeId(UserType userTypeId) {
         this.userTypeId = userTypeId;
     }
 
+    @XmlTransient
+    public Collection<Administrator> getAdministratorCollection() {
+        return administratorCollection;
+    }
+
+    public void setAdministratorCollection(Collection<Administrator> administratorCollection) {
+        this.administratorCollection = administratorCollection;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    @XmlTransient
+    public Collection<FacultyMember> getFacultyMemberCollection() {
+        return facultyMemberCollection;
+    }
+
+    public void setFacultyMemberCollection(Collection<FacultyMember> facultyMemberCollection) {
+        this.facultyMemberCollection = facultyMemberCollection;
+    }
+
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
         hash += (username != null ? username.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object)
-    {
+    public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User))
-        {
+        if (!(object instanceof User)) {
             return false;
         }
         User other = (User) object;
-        if ((this.username == null && other.username != null) || (this.username != null && !this.username.equals(other.username)))
-        {
+        if ((this.username == null && other.username != null) || (this.username != null && !this.username.equals(other.username))) {
             return false;
         }
         return true;
     }
-
-    @Override
-    public String toString()
+/**
+ * Logs-in a user 
+ * @param username
+ * @param password
+ * @return
+ * @throws Exception if authentication fails
+ */
+    public static User login(String username, String password) throws Exception {
+        password = Encryption.encrypt(password);
+        List<User> userList = RedEntityManager.getEntityManager().createNamedQuery("User.login").setParameter("username", username).setParameter("password", password).getResultList();
+        if (userList.size() == 1) {
+            return userList.get(0);
+        } else {
+            throw new Exception("Username/password invalid.");
+        }
+    }
+    public void save()
     {
+        RedEntityManager.save(this);
+    
+    }
+    @Override
+    public String toString() {
         return "adg.red.models.User[ username=" + username + " ]";
     }
 }

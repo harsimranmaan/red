@@ -2,14 +2,22 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
   <persistence-unit name="RedPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>adg.red.models.UserType</class>
-    <class>adg.red.models.User</class>
+    <class>adg.red.models.CoRequisite</class>
     <class>adg.red.models.Section</class>
     <class>adg.red.models.Department</class>
-    <class>adg.red.models.Prerequisites</class>
+    <class>adg.red.models.Course</class>
+    <class>adg.red.models.Administrator</class>
+    <class>adg.red.models.Student</class>
+    <class>adg.red.models.UserType</class>
+    <class>adg.red.models.GradingScheme</class>
     <class>adg.red.models.Faculty</class>
+    <class>adg.red.models.Address</class>
+    <class>adg.red.models.SectionType</class>
+    <class>adg.red.models.Prerequisite</class>
+    <class>adg.red.models.User</class>
+    <class>adg.red.models.FacultyMember</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://ec2-50-18-66-213.us-west-1.compute.amazonaws.com:3306/AdgDevelopment?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://ec2-50-18-66-213.us-west-1.compute.amazonaws.com:3306/AdgTest?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="red"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.user" value="adgred"/>

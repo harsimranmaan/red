@@ -5,202 +5,159 @@
 package adg.red.models;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author hsmaan
+ * @author harsimran.maan
  */
 @Entity
 @Table(name = "Faculty")
 @XmlRootElement
-@NamedQueries(
-{
+@NamedQueries({
     @NamedQuery(name = "Faculty.findAll", query = "SELECT f FROM Faculty f"),
-    @NamedQuery(name = "Faculty.findById", query = "SELECT f FROM Faculty f WHERE f.id = :id"),
+    @NamedQuery(name = "Faculty.findByFacultyId", query = "SELECT f FROM Faculty f WHERE f.facultyId = :facultyId"),
     @NamedQuery(name = "Faculty.findByName", query = "SELECT f FROM Faculty f WHERE f.name = :name"),
-    @NamedQuery(name = "Faculty.findByAddress1", query = "SELECT f FROM Faculty f WHERE f.address1 = :address1"),
-    @NamedQuery(name = "Faculty.findByAddress2", query = "SELECT f FROM Faculty f WHERE f.address2 = :address2"),
-    @NamedQuery(name = "Faculty.findByPin", query = "SELECT f FROM Faculty f WHERE f.pin = :pin"),
-    @NamedQuery(name = "Faculty.findByCity", query = "SELECT f FROM Faculty f WHERE f.city = :city"),
-    @NamedQuery(name = "Faculty.findByHeadOfFaculty", query = "SELECT f FROM Faculty f WHERE f.headOfFaculty = :headOfFaculty"),
+    @NamedQuery(name = "Faculty.findByHeadOfFacultyId", query = "SELECT f FROM Faculty f WHERE f.headOfFacultyId = :headOfFacultyId"),
     @NamedQuery(name = "Faculty.findByPhone", query = "SELECT f FROM Faculty f WHERE f.phone = :phone"),
-    @NamedQuery(name = "Faculty.findByWebsite", query = "SELECT f FROM Faculty f WHERE f.website = :website")
-})
-public class Faculty implements Serializable
-{
+    @NamedQuery(name = "Faculty.findByWebsite", query = "SELECT f FROM Faculty f WHERE f.website = :website")})
+public class Faculty implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "id")
-    private String id;
-    @Basic(optional = false)
+    @Column(name = "facultyId")
+    private Integer facultyId;
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
-    @Column(name = "address1")
-    private String address1;
-    @Basic(optional = false)
-    @Column(name = "address2")
-    private String address2;
-    @Basic(optional = false)
-    @Column(name = "pin")
-    private String pin;
-    @Basic(optional = false)
-    @Column(name = "city")
-    private String city;
-    @Basic(optional = false)
-    @Column(name = "headOfFaculty")
-    private String headOfFaculty;
+    @Column(name = "headOfFacultyId")
+    private int headOfFacultyId;
     @Column(name = "phone")
     private String phone;
     @Column(name = "website")
     private String website;
+    @JoinColumn(name = "addressId", referencedColumnName = "addressId")
+    @ManyToOne
+    private Address addressId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hiringFacultyId")
+    private Collection<Administrator> administratorCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "facultyId")
+    private Collection<Department> departmentCollection;
 
-    public Faculty()
-    {
+    public Faculty() {
     }
 
-    public Faculty(String id)
-    {
-        this.id = id;
+    public Faculty(Integer facultyId) {
+        this.facultyId = facultyId;
     }
 
-    public Faculty(String id, String name, String address1, String address2, String pin, String city, String headOfFaculty)
-    {
-        this.id = id;
-        this.name = name;
-        this.address1 = address1;
-        this.address2 = address2;
-        this.pin = pin;
-        this.city = city;
-        this.headOfFaculty = headOfFaculty;
+    public Faculty(Integer facultyId, int headOfFacultyId) {
+        this.facultyId = facultyId;
+        this.headOfFacultyId = headOfFacultyId;
     }
 
-    public String getId()
-    {
-        return id;
+    public Integer getFacultyId() {
+        return facultyId;
     }
 
-    public void setId(String id)
-    {
-        this.id = id;
+    public void setFacultyId(Integer facultyId) {
+        this.facultyId = facultyId;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getAddress1()
-    {
-        return address1;
+    public int getHeadOfFacultyId() {
+        return headOfFacultyId;
     }
 
-    public void setAddress1(String address1)
-    {
-        this.address1 = address1;
+    public void setHeadOfFacultyId(int headOfFacultyId) {
+        this.headOfFacultyId = headOfFacultyId;
     }
 
-    public String getAddress2()
-    {
-        return address2;
-    }
-
-    public void setAddress2(String address2)
-    {
-        this.address2 = address2;
-    }
-
-    public String getPin()
-    {
-        return pin;
-    }
-
-    public void setPin(String pin)
-    {
-        this.pin = pin;
-    }
-
-    public String getCity()
-    {
-        return city;
-    }
-
-    public void setCity(String city)
-    {
-        this.city = city;
-    }
-
-    public String getHeadOfFaculty()
-    {
-        return headOfFaculty;
-    }
-
-    public void setHeadOfFaculty(String headOfFaculty)
-    {
-        this.headOfFaculty = headOfFaculty;
-    }
-
-    public String getPhone()
-    {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone)
-    {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getWebsite()
-    {
+    public String getWebsite() {
         return website;
     }
 
-    public void setWebsite(String website)
-    {
+    public void setWebsite(String website) {
         this.website = website;
     }
 
+    public Address getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Address addressId) {
+        this.addressId = addressId;
+    }
+
+    @XmlTransient
+    public Collection<Administrator> getAdministratorCollection() {
+        return administratorCollection;
+    }
+
+    public void setAdministratorCollection(Collection<Administrator> administratorCollection) {
+        this.administratorCollection = administratorCollection;
+    }
+
+    @XmlTransient
+    public Collection<Department> getDepartmentCollection() {
+        return departmentCollection;
+    }
+
+    public void setDepartmentCollection(Collection<Department> departmentCollection) {
+        this.departmentCollection = departmentCollection;
+    }
+
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (facultyId != null ? facultyId.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object)
-    {
+    public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Faculty))
-        {
+        if (!(object instanceof Faculty)) {
             return false;
         }
         Faculty other = (Faculty) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
-        {
+        if ((this.facultyId == null && other.facultyId != null) || (this.facultyId != null && !this.facultyId.equals(other.facultyId))) {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString()
-    {
-        return "adg.red.models.Faculty[ id=" + id + " ]";
+    public String toString() {
+        return "adg.red.models.Faculty[ facultyId=" + facultyId + " ]";
     }
+    
 }
