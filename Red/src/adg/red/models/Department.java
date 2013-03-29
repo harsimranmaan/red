@@ -42,7 +42,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Department.findByCreatedAt", query = "SELECT d FROM Department d WHERE d.createdAt = :createdAt"),
     @NamedQuery(name = "Department.findByModifiedBy", query = "SELECT d FROM Department d WHERE d.modifiedBy = :modifiedBy"),
     @NamedQuery(name = "Department.findByModifiedAt", query = "SELECT d FROM Department d WHERE d.modifiedAt = :modifiedAt"),
-    @NamedQuery(name = "Department.findByIsActive", query = "SELECT d FROM Department d WHERE d.isActive = :isActive")})
+    @NamedQuery(name = "Department.findByIsActive", query = "SELECT d FROM Department d WHERE d.isActive = :isActive"),
+ @NamedQuery(name = "Department.findSearchLike", query = "SELECT d FROM Department d WHERE d.name LIKE  :keyWord")})
 public class Department implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

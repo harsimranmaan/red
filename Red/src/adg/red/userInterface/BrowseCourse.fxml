@@ -11,7 +11,7 @@
   <children>
     <AnchorPane prefHeight="40.0" prefWidth="640.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
       <children>
-        <HBox id="HBox" alignment="CENTER" layoutY="9.0" prefWidth="640.0" spacing="5.0">
+        <HBox id="HBox" fx:id="hBox" alignment="CENTER" layoutY="9.0" prefWidth="640.0" spacing="5.0">
           <children>
             <Hyperlink fx:id="allLink" text="All" />
             <Hyperlink fx:id="aLink" text="A" />
