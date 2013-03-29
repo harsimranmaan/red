@@ -14,13 +14,12 @@ import javax.persistence.Persistence;
  */
 public class RedEntityManager {
 
-    private static EntityManagerFactory emf;
-    private static EntityManager em;
+    private static final EntityManagerFactory emf;
+    private static final EntityManager em;
 
     static {
         emf = Persistence.createEntityManagerFactory("RedPU");
         em = emf.createEntityManager();
-
     }
 
     public static EntityManager getEntityManager() {
@@ -31,6 +30,7 @@ public class RedEntityManager {
     public static void save(Object obj) {
         // begin transaction 
         em.getTransaction().begin();
+       try{
         if (!em.contains(obj)) {
             // persist object - add to entity manager
             em.persist(obj);
@@ -39,5 +39,10 @@ public class RedEntityManager {
         }
         // commit transaction at all
         em.getTransaction().commit();
+       }
+       catch(Exception ex)
+       {
+       em.getTransaction().rollback();
+       }
     }
 }
