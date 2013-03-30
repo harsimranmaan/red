@@ -17,6 +17,7 @@ CREATE TABLE `Address` (
   city varchar(15)  NOT NULL,
   province varchar(16),
   `postalCode` varchar(6) NOT NULL,
+  country varchar(25) NOT NULL,	/* added */
   PRIMARY KEY (`addressId`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
   
