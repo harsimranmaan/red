@@ -4,7 +4,12 @@
  */
 package adg.red.models;
 
+import adg.red.controllers.LoginController;
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -104,4 +109,14 @@ public class ResourceDictionary implements Serializable {
         return "adg.red.models.ResourceDictionary[ resourceDictionaryPK=" + resourceDictionaryPK + " ]";
     }
     
+    public List<ResourceDictionary> getResourceByLocaleId(int localeId) {
+        List<ResourceDictionary> resources = null;
+        try {
+             resources = RedEntityManager.getEntityManager().createNamedQuery("ResourceDictionary.findByLocaleId").setParameter("localeId", localeId).getResultList();
+        }
+        catch (Exception ex){
+                    Logger.getLogger(ResourceDictionary.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        return resources;
+    }
 }
