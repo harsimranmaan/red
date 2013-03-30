@@ -105,14 +105,16 @@ CREATE TABLE `Student` (
   `studentId` INT NOT NULL AUTO_INCREMENT,	/* Auto Increment */
   `username` varchar(10) NOT NULL,
   `programName` VARCHAR(30) NOT NULL ,
+  `departmentId` VARCHAR(4) NOT NULL ,
   `dateOfRegistration` date DEFAULT NULL,
   `highestDegree` varchar(20) DEFAULT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`studentId`),
   UNIQUE KEY `StudentUNIQusername` (`username`),
   CONSTRAINT `StudentFKusername` FOREIGN KEY (`username`) REFERENCES `User` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `StudentFKprogramName` FOREIGN KEY (`programName`) REFERENCES `Program` (`programName`) ON UPDATE CASCADE ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `StudentFKprogramName` FOREIGN KEY (`programName`) REFERENCES `Program` (`programName`) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT `StudentFKdepartmentId` FOREIGN KEY (`departmentId` ) REFERENCES `Department` (`departmentId` ) ON DELETE RESTRICT ON UPDATE CASCADE
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE Student AUTO_INCREMENT = 100;
 
@@ -128,7 +130,7 @@ CREATE TABLE `Administrator` (
   PRIMARY KEY (`adminId`),
   KEY `username_idx` (`username`),
   CONSTRAINT `AdministratorFKusername` FOREIGN KEY (`username`) REFERENCES `User` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `AdministratorFKfacultyId` FOREIGN KEY (`hiringFacultyId`) REFERENCES `Faculty` (`facultyId`) ON UPDATE CASCADE ON DELETE RESTRICT
+  CONSTRAINT `AdministratorFKhiringFacultyId` FOREIGN KEY (`hiringFacultyId`) REFERENCES `Faculty` (`facultyId`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE Administrator AUTO_INCREMENT = 100;
