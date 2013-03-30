@@ -246,16 +246,17 @@ CREATE TABLE `Section` (
   `departmentId` varchar(4) NOT NULL,
   `startDate` date NOT NULL,
   `endDate` date NOT NULL,
-  `termId` varchar(10) NOT NULL, /* create term table */
+  `termId` varchar(10) NOT NULL, /* created term table */
   `facultyMemberId` INT NOT NULL,
-  `sectionTypeId` varchar(3) NOT NULL,
+  `sectionTypeId` INT NOT NULL,
   `teachingAssistant` varchar(20) DEFAULT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`sectionId`,`courseNumber`,`departmentId`,`termId`),
   CONSTRAINT `SectionFKcourseNumber` FOREIGN KEY (`courseNumber`) REFERENCES `Course` (`courseNumber`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `SectionFKdepartmentId` FOREIGN KEY (`departmentId`) REFERENCES `Department` (`departmentId`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `SectionFKtermId` FOREIGN KEY (`termId`) REFERENCES `Term` (`termId`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `SectionFKfacultyMemberId` FOREIGN KEY (`facultyMemberId`) REFERENCES `FacultyMember` (`facultyMemberId`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `SectionFKfacultyMemberId` FOREIGN KEY (`facultyMemberId`) REFERENCES `FacultyMember` (`facultyMemberId`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `SectionFKsectionTypeId` FOREIGN KEY (`sectionTypeId`) REFERENCES `SectionType` (`sectionTypeId`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
