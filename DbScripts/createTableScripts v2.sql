@@ -1,3 +1,5 @@
+/* Do Not modify */
+
 CREATE DATABASE  IF NOT EXISTS `AdgTest` ;
 USE `AdgTest`;
 
@@ -445,3 +447,22 @@ CREATE  TABLE `Enrolment` (
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `Locale`;
+CREATE TABLE `Locale` (
+  `id` INT NOT NULL,
+  `name` varchar(4) NOT NULL,
+   PRIMARY KEY (`id`),
+   UNIQUE KEY `LocaleUNIQname` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS ResourceDictionary;
+CREATE TABLE ResourceDictionary (
+  resourceId INT NOT NULL,
+  localeId INT NOT NULL,
+  textString varchar(1000) NOT NULL,
+  PRIMARY KEY (resourceId ,localeId),
+  CONSTRAINT LocaleFKid FOREIGN KEY (localeId) REFERENCES Locale (id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

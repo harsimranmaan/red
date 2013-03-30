@@ -1,3 +1,5 @@
+/* Do Not modify */
+
 USE `AdgTest`;
 
 /* insert data into 'Day' table */
