@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `AdgDevelopment` ;
-USE `AdgDevelopment`;
+CREATE DATABASE  IF NOT EXISTS `AdgTest` ;
+USE `AdgTest`;
 
 DROP TABLE IF EXISTS `UserType`;
 CREATE TABLE `UserType` (
@@ -11,7 +11,7 @@ CREATE TABLE `UserType` (
 
 DROP TABLE IF EXISTS `Address`;
 CREATE TABLE `Address` (
-  `addressId` INT NOT NULL,
+  `addressId` INT NOT NULL AUTO_INCREMENT,	/* Auto Increment */
   `addressLineFirst` varchar(45) NOT NULL,
   `addressLineSecond` varchar(45) ,
   city varchar(15)  NOT NULL,
@@ -21,9 +21,12 @@ CREATE TABLE `Address` (
   PRIMARY KEY (`addressId`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
   
+  ALTER TABLE Address AUTO_INCREMENT = 100; /* AI from 100*/
+  
+  
 DROP TABLE IF EXISTS `Faculty`;
 CREATE TABLE `Faculty` (
-  `facultyId` INT NOT NULL,
+  `facultyId` INT NOT NULL AUTO_INCREMENT,	/* Auto Increment */
   name VARCHAR(50) NOT NULL,
   addressId INT,
   `headOfFacultyId` INT DEFAULT NULL,/**FK - after FacultyMember**/
@@ -34,6 +37,8 @@ CREATE TABLE `Faculty` (
   UNIQUE KEY `FacultyUNIQname` (name),
   CONSTRAINT FacultyCHKfacultyId CHECK (facultyId > 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE Faculty AUTO_INCREMENT = 100;
 
 
 DROP TABLE IF EXISTS `Department`;
@@ -97,7 +102,7 @@ CREATE  TABLE `Program` (
 
 DROP TABLE IF EXISTS `Student`;
 CREATE TABLE `Student` (
-  `studentId` INT NOT NULL,
+  `studentId` INT NOT NULL AUTO_INCREMENT,	/* Auto Increment */
   `username` varchar(10) NOT NULL,
   `programName` VARCHAR(30) NOT NULL ,
   `dateOfRegistration` date DEFAULT NULL,
@@ -109,9 +114,12 @@ CREATE TABLE `Student` (
   CONSTRAINT `StudentFKprogramName` FOREIGN KEY (`programName`) REFERENCES `Program` (`programName`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE Student AUTO_INCREMENT = 100;
+
+
 DROP TABLE IF EXISTS `Administrator`;
 CREATE TABLE `Administrator` (
-  `adminId` INT NOT NULL,
+  `adminId` INT NOT NULL AUTO_INCREMENT,	/* Auto Increment */
   `username` varchar(10) NOT NULL,
   `dateOfJoining` date NOT NULL,
   /**-- `access` varchar(20) NOT NULL,**/
@@ -123,10 +131,12 @@ CREATE TABLE `Administrator` (
   CONSTRAINT `AdministratorFKfacultyId` FOREIGN KEY (`hiringFacultyId`) REFERENCES `Faculty` (`facultyId`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE Administrator AUTO_INCREMENT = 100;
+
 
 DROP TABLE IF EXISTS `FacultyMember`;
 CREATE TABLE `FacultyMember` (
-  `facultyMemberId` INT NOT NULL,
+  `facultyMemberId` INT NOT NULL AUTO_INCREMENT,	/* Auto Increment */
   `username` varchar(10) NOT NULL,
   `departmentId` varchar(4) NOT NULL,
   `title` varchar(20) NOT NULL,
@@ -137,6 +147,9 @@ CREATE TABLE `FacultyMember` (
   CONSTRAINT `FacultyMemberFKdepartmentId` FOREIGN KEY (`departmentId`) REFERENCES `Department` (`departmentId`) ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT `FacultyMemberFKusername` FOREIGN KEY (`username`) REFERENCES `User` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE FacultyMember AUTO_INCREMENT = 100;
+
 
 ALTER TABLE `Faculty`
 ADD CONSTRAINT `FacultyFKheadId` 
@@ -283,7 +296,7 @@ CREATE  TABLE `MessagePriority` (
 
 DROP TABLE IF EXISTS `Message`;
 CREATE  TABLE `Message` (
-  `messageId` INT NOT NULL ,
+  `messageId` INT NOT NULL AUTO_INCREMENT,	/* Auto Increment */
   `subject` VARCHAR(45) NULL ,
   `messageBody` VARCHAR(300) NULL ,
   `priorityId` INT NOT NULL ,
@@ -301,6 +314,8 @@ CREATE  TABLE `Message` (
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE Message AUTO_INCREMENT = 100;
 
 
 DROP TABLE IF EXISTS `MessageStatus`;
