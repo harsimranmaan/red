@@ -1,5 +1,7 @@
-CREATE DATABASE  IF NOT EXISTS `AdgDevelopment` ;
-USE `AdgDevelopment`;
+/* Do Not modify */
+
+CREATE DATABASE  IF NOT EXISTS `AdgTest` ;
+USE `AdgTest`;
 
 DROP TABLE IF EXISTS `UserType`;
 CREATE TABLE `UserType` (
@@ -11,18 +13,22 @@ CREATE TABLE `UserType` (
 
 DROP TABLE IF EXISTS `Address`;
 CREATE TABLE `Address` (
-  `addressId` INT NOT NULL,
+  `addressId` INT NOT NULL AUTO_INCREMENT,	/* Auto Increment */
   `addressLineFirst` varchar(45) NOT NULL,
   `addressLineSecond` varchar(45) ,
   city varchar(15)  NOT NULL,
   province varchar(16),
   `postalCode` varchar(6) NOT NULL,
+  country varchar(25) NOT NULL,	/* added */
   PRIMARY KEY (`addressId`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
   
+  ALTER TABLE Address AUTO_INCREMENT = 100; /* AI from 100*/
+  
+  
 DROP TABLE IF EXISTS `Faculty`;
 CREATE TABLE `Faculty` (
-  `facultyId` INT NOT NULL,
+  `facultyId` INT NOT NULL AUTO_INCREMENT,	/* Auto Increment */
   name VARCHAR(50) NOT NULL,
   addressId INT,
   `headOfFacultyId` INT DEFAULT NULL,/**FK - after FacultyMember**/
@@ -33,6 +39,8 @@ CREATE TABLE `Faculty` (
   UNIQUE KEY `FacultyUNIQname` (name),
   CONSTRAINT FacultyCHKfacultyId CHECK (facultyId > 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE Faculty AUTO_INCREMENT = 100;
 
 
 DROP TABLE IF EXISTS `Department`;
@@ -96,21 +104,26 @@ CREATE  TABLE `Program` (
 
 DROP TABLE IF EXISTS `Student`;
 CREATE TABLE `Student` (
-  `studentId` INT NOT NULL,
+  `studentId` INT NOT NULL AUTO_INCREMENT,	/* Auto Increment */
   `username` varchar(10) NOT NULL,
   `programName` VARCHAR(30) NOT NULL ,
+  `departmentId` VARCHAR(4) NOT NULL ,
   `dateOfRegistration` date DEFAULT NULL,
   `highestDegree` varchar(20) DEFAULT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`studentId`),
   UNIQUE KEY `StudentUNIQusername` (`username`),
   CONSTRAINT `StudentFKusername` FOREIGN KEY (`username`) REFERENCES `User` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `StudentFKprogramName` FOREIGN KEY (`programName`) REFERENCES `Program` (`programName`) ON UPDATE CASCADE ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `StudentFKprogramName` FOREIGN KEY (`programName`) REFERENCES `Program` (`programName`) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT `StudentFKdepartmentId` FOREIGN KEY (`departmentId` ) REFERENCES `Department` (`departmentId` ) ON DELETE RESTRICT ON UPDATE CASCADE
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE Student AUTO_INCREMENT = 100;
+
 
 DROP TABLE IF EXISTS `Administrator`;
 CREATE TABLE `Administrator` (
-  `adminId` INT NOT NULL,
+  `adminId` INT NOT NULL AUTO_INCREMENT,	/* Auto Increment */
   `username` varchar(10) NOT NULL,
   `dateOfJoining` date NOT NULL,
   /**-- `access` varchar(20) NOT NULL,**/
@@ -119,13 +132,15 @@ CREATE TABLE `Administrator` (
   PRIMARY KEY (`adminId`),
   KEY `username_idx` (`username`),
   CONSTRAINT `AdministratorFKusername` FOREIGN KEY (`username`) REFERENCES `User` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `AdministratorFKfacultyId` FOREIGN KEY (`hiringFacultyId`) REFERENCES `Faculty` (`facultyId`) ON UPDATE CASCADE ON DELETE RESTRICT
+  CONSTRAINT `AdministratorFKhiringFacultyId` FOREIGN KEY (`hiringFacultyId`) REFERENCES `Faculty` (`facultyId`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE Administrator AUTO_INCREMENT = 100;
 
 
 DROP TABLE IF EXISTS `FacultyMember`;
 CREATE TABLE `FacultyMember` (
-  `facultyMemberId` INT NOT NULL,
+  `facultyMemberId` INT NOT NULL AUTO_INCREMENT,	/* Auto Increment */
   `username` varchar(10) NOT NULL,
   `departmentId` varchar(4) NOT NULL,
   `title` varchar(20) NOT NULL,
@@ -136,6 +151,9 @@ CREATE TABLE `FacultyMember` (
   CONSTRAINT `FacultyMemberFKdepartmentId` FOREIGN KEY (`departmentId`) REFERENCES `Department` (`departmentId`) ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT `FacultyMemberFKusername` FOREIGN KEY (`username`) REFERENCES `User` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE FacultyMember AUTO_INCREMENT = 100;
+
 
 ALTER TABLE `Faculty`
 ADD CONSTRAINT `FacultyFKheadId` 
@@ -232,16 +250,17 @@ CREATE TABLE `Section` (
   `departmentId` varchar(4) NOT NULL,
   `startDate` date NOT NULL,
   `endDate` date NOT NULL,
-  `termId` varchar(10) NOT NULL, /* create term table */
+  `termId` varchar(10) NOT NULL, /* created term table */
   `facultyMemberId` INT NOT NULL,
-  `sectionTypeId` varchar(3) NOT NULL,
+  `sectionTypeId` INT NOT NULL,
   `teachingAssistant` varchar(20) DEFAULT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`sectionId`,`courseNumber`,`departmentId`,`termId`),
   CONSTRAINT `SectionFKcourseNumber` FOREIGN KEY (`courseNumber`) REFERENCES `Course` (`courseNumber`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `SectionFKdepartmentId` FOREIGN KEY (`departmentId`) REFERENCES `Department` (`departmentId`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `SectionFKtermId` FOREIGN KEY (`termId`) REFERENCES `Term` (`termId`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `SectionFKfacultyMemberId` FOREIGN KEY (`facultyMemberId`) REFERENCES `FacultyMember` (`facultyMemberId`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `SectionFKfacultyMemberId` FOREIGN KEY (`facultyMemberId`) REFERENCES `FacultyMember` (`facultyMemberId`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `SectionFKsectionTypeId` FOREIGN KEY (`sectionTypeId`) REFERENCES `SectionType` (`sectionTypeId`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -282,7 +301,7 @@ CREATE  TABLE `MessagePriority` (
 
 DROP TABLE IF EXISTS `Message`;
 CREATE  TABLE `Message` (
-  `messageId` INT NOT NULL ,
+  `messageId` INT NOT NULL AUTO_INCREMENT,	/* Auto Increment */
   `subject` VARCHAR(45) NULL ,
   `messageBody` VARCHAR(300) NULL ,
   `priorityId` INT NOT NULL ,
@@ -300,6 +319,8 @@ CREATE  TABLE `Message` (
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE Message AUTO_INCREMENT = 100;
 
 
 DROP TABLE IF EXISTS `MessageStatus`;
@@ -426,3 +447,22 @@ CREATE  TABLE `Enrolment` (
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `Locale`;
+CREATE TABLE `Locale` (
+  `id` INT NOT NULL,
+  `name` varchar(4) NOT NULL,
+   PRIMARY KEY (`id`),
+   UNIQUE KEY `LocaleUNIQname` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS ResourceDictionary;
+CREATE TABLE ResourceDictionary (
+  resourceId INT NOT NULL,
+  localeId INT NOT NULL,
+  textString varchar(1000) NOT NULL,
+  PRIMARY KEY (resourceId ,localeId),
+  CONSTRAINT LocaleFKid FOREIGN KEY (localeId) REFERENCES Locale (id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

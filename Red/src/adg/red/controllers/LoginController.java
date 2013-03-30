@@ -18,6 +18,10 @@ import javafx.scene.control.MenuItem;
 import adg.red.BootStrap;
 import adg.red.models.User;
 import adg.red.models.UserType;
+import adg.red.models.Locale;
+import adg.red.models.ResourceDictionary;
+import adg.red.models.ResourceDictionaryPK;
+import adg.red.utils.LocaleManager;
 import adg.red.utils.RedEntityManager;
 import javafx.scene.layout.AnchorPane;
 import java.sql.SQLException;
@@ -25,7 +29,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Label;
@@ -49,11 +52,16 @@ public class LoginController implements Initializable {
     private AnchorPane viewArea; // Value injected by FXMLLoader
     @FXML //  fx:id="loginErrLbl"
     private Label loginErrLbl; // Value injected by FXMLLoader
+    @FXML //  fx:id="forgotPassBtn"
+    private Button forgotPassBtn; // Value injected by FXMLLoader    
     @FXML
     private TextField usernameTxt; // created by J. Yu
     @FXML
     private PasswordField passwordTxt; // created by J. Yu
-
+    @FXML //  fx:id="passLbl"
+    private Label passLbl; // Value injected by FXMLLoader
+    @FXML //  fx:id="userLbl"
+    private Label userLbl; // Value injected by FXMLLoader
     /**
      * Initialize all the action events.
      * <p/>
@@ -63,6 +71,12 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        // bind resourceDictionary
+        loginBtn.setText(LocaleManager.getTextbyResourceId(1));
+        forgotPassBtn.setText(LocaleManager.getTextbyResourceId(2));
+        userLbl.setText(LocaleManager.getTextbyResourceId(4));
+        passLbl.setText(LocaleManager.getTextbyResourceId(5));
+        
         // setOnAction when close menuitem is selected
         close.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -91,6 +105,8 @@ public class LoginController implements Initializable {
 //                } catch (ParseException ex) {
 //                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 //                }
+                
+               
                 //LOGIN
                 try {
                     User user = User.login(uid, pwd);
