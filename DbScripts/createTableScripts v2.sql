@@ -113,7 +113,7 @@ CREATE TABLE `Student` (
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`studentId`),
   UNIQUE KEY `StudentUNIQusername` (`username`),
-  CONSTRAINT `StudentFKusername` FOREIGN KEY (`username`) REFERENCES `User` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `StudentFKusername` FOREIGN KEY (`username`) REFERENCES `User` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 /*  CONSTRAINT `StudentFKprogramName` FOREIGN KEY (`programName`) REFERENCES `Program` (`programName`) ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT `StudentFKdepartmentId` FOREIGN KEY (`departmentId` ) REFERENCES `Department` (`departmentId` ) ON DELETE RESTRICT ON UPDATE CASCADE	*/
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
