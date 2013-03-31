@@ -42,7 +42,8 @@ import javax.persistence.Persistence;
  *
  * @author Witt
  */
-public class LoginController implements Initializable {
+public class LoginController implements Initializable
+{
 
     @FXML //  fx:id="close"
     private MenuItem close; // Value injected by FXMLLoader
@@ -53,7 +54,7 @@ public class LoginController implements Initializable {
     @FXML //  fx:id="loginErrLbl"
     private Label loginErrLbl; // Value injected by FXMLLoader
     @FXML //  fx:id="forgotPassBtn"
-    private Button forgotPassBtn; // Value injected by FXMLLoader    
+    private Button forgotPassBtn; // Value injected by FXMLLoader
     @FXML
     private TextField usernameTxt; // created by J. Yu
     @FXML
@@ -62,6 +63,7 @@ public class LoginController implements Initializable {
     private Label passLbl; // Value injected by FXMLLoader
     @FXML //  fx:id="userLbl"
     private Label userLbl; // Value injected by FXMLLoader
+
     /**
      * Initialize all the action events.
      * <p/>
@@ -69,74 +71,51 @@ public class LoginController implements Initializable {
      * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
 
         // bind resourceDictionary
-        loginBtn.setText(LocaleManager.getTextbyResourceId(1));
-        forgotPassBtn.setText(LocaleManager.getTextbyResourceId(2));
-        userLbl.setText(LocaleManager.getTextbyResourceId(4));
-        passLbl.setText(LocaleManager.getTextbyResourceId(5));
-        
+        loginBtn.setText(LocaleManager.get(1));
+        forgotPassBtn.setText(LocaleManager.get(2));
+        userLbl.setText(LocaleManager.get(3));
+        passLbl.setText(LocaleManager.get(4));
+
         // setOnAction when close menuitem is selected
-        close.setOnAction(new EventHandler<ActionEvent>() {
+        close.setOnAction(new EventHandler<ActionEvent>()
+        {
             @Override
-            public void handle(ActionEvent event) {
+            public void handle(ActionEvent event)
+            {
                 Platform.exit();
             }
         });
 
         // setOnAction when login button is pressed
-        loginBtn.setOnAction(new EventHandler<ActionEvent>() {
+        loginBtn.setOnAction(new EventHandler<ActionEvent>()
+        {
             @Override
-            public void handle(ActionEvent event) {
+            public void handle(ActionEvent event)
+            {
                 // get userid and password input from gui by J. Yu
                 String uid = usernameTxt.getText().toString();
-                System.out.println(uid);
+
                 String pwd = passwordTxt.getText().toString();
+                System.out.println(uid);
                 System.out.println(pwd);
-                //Create dummy user
-//               try {
-//                    
-//                    User u;
-//                    u = new User("jaspreet","jpwd","Jaspreet","Thind", true, "jayzthind@gmail.com",
-//                        new SimpleDateFormat("MM-dd-yyyy", Locale.ENGLISH).parse("20-12-1986"), null, new Date(), null,new Date(),true);
-//                    u.setUserTypeId(UserType.getUserTypeByName("Faculty"));
-//                    u.save();
-//                } catch (ParseException ex) {
-//                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-                
-               
+
                 //LOGIN
-                try {
+                try
+                {
                     User user = User.login(uid, pwd);
                     View view = new View(viewArea);
                     view.loadView("HomeView");
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     loginErrLbl.setVisible(true);
-                    loginErrLbl.setText("Invalid Username/Password!");
+                    loginErrLbl.setText(ex.getMessage());
                 }
             }
         });
     }
-//    /**
-//     * Load new view.
-//     * @param fxmlView the fxml file name to be loaded.
-//     */
-//    public void loadView(String fxmlView) {
-//        // load home view
-//                try {
-//                    BootStrap boot = new BootStrap();
-//                    Node view = FXMLLoader.load(getClass().getResource(boot.getUserInterfaceUrl(fxmlView)));
-//                    viewArea.getChildren().setAll(view);
-//                    // set anchors
-//                    AnchorPane.setLeftAnchor(view, 0.0);
-//                    AnchorPane.setRightAnchor(view, 0.0);
-//                    AnchorPane.setTopAnchor(view, 0.0);
-//                    AnchorPane.setBottomAnchor(view, 0.0);
-//                }
-//                catch (Exception ex){
-//                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//    }
 }

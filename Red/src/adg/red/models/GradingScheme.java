@@ -25,11 +25,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "GradingScheme")
 @XmlRootElement
-@NamedQueries({
+@NamedQueries(
+{
     @NamedQuery(name = "GradingScheme.findAll", query = "SELECT g FROM GradingScheme g"),
     @NamedQuery(name = "GradingScheme.findByGradingSchemeId", query = "SELECT g FROM GradingScheme g WHERE g.gradingSchemeId = :gradingSchemeId"),
-    @NamedQuery(name = "GradingScheme.findByName", query = "SELECT g FROM GradingScheme g WHERE g.name = :name")})
-public class GradingScheme implements Serializable {
+    @NamedQuery(name = "GradingScheme.findByName", query = "SELECT g FROM GradingScheme g WHERE g.name = :name")
+})
+public class GradingScheme implements Serializable
+{
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -41,66 +44,79 @@ public class GradingScheme implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "gradingSchemeId")
     private Collection<Course> courseCollection;
 
-    public GradingScheme() {
+    public GradingScheme()
+    {
     }
 
-    public GradingScheme(Integer gradingSchemeId) {
+    public GradingScheme(Integer gradingSchemeId)
+    {
         this.gradingSchemeId = gradingSchemeId;
     }
 
-    public GradingScheme(Integer gradingSchemeId, String name) {
+    public GradingScheme(Integer gradingSchemeId, String name)
+    {
         this.gradingSchemeId = gradingSchemeId;
         this.name = name;
     }
 
-    public Integer getGradingSchemeId() {
+    public Integer getGradingSchemeId()
+    {
         return gradingSchemeId;
     }
 
-    public void setGradingSchemeId(Integer gradingSchemeId) {
+    public void setGradingSchemeId(Integer gradingSchemeId)
+    {
         this.gradingSchemeId = gradingSchemeId;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
     @XmlTransient
-    public Collection<Course> getCourseCollection() {
+    public Collection<Course> getCourseCollection()
+    {
         return courseCollection;
     }
 
-    public void setCourseCollection(Collection<Course> courseCollection) {
+    public void setCourseCollection(Collection<Course> courseCollection)
+    {
         this.courseCollection = courseCollection;
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int hash = 0;
         hash += (gradingSchemeId != null ? gradingSchemeId.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(Object object)
+    {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GradingScheme)) {
+        if (!(object instanceof GradingScheme))
+        {
             return false;
         }
         GradingScheme other = (GradingScheme) object;
-        if ((this.gradingSchemeId == null && other.gradingSchemeId != null) || (this.gradingSchemeId != null && !this.gradingSchemeId.equals(other.gradingSchemeId))) {
+        if ((this.gradingSchemeId == null && other.gradingSchemeId != null) || (this.gradingSchemeId != null && !this.gradingSchemeId.equals(other.gradingSchemeId)))
+        {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "adg.red.models.GradingScheme[ gradingSchemeId=" + gradingSchemeId + " ]";
     }
-    
 }

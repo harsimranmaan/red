@@ -14,8 +14,11 @@ import javax.persistence.Embeddable;
  * @author harsimran.maan
  */
 @Embeddable
-public class SectionPK implements Serializable
+public class EnrolmentPK implements Serializable
 {
+    @Basic(optional = false)
+    @Column(name = "studentId")
+    private int studentId;
     @Basic(optional = false)
     @Column(name = "sectionId")
     private int sectionId;
@@ -25,20 +28,27 @@ public class SectionPK implements Serializable
     @Basic(optional = false)
     @Column(name = "departmentId")
     private String departmentId;
-    @Basic(optional = false)
-    @Column(name = "termId")
-    private String termId;
 
-    public SectionPK()
+    public EnrolmentPK()
     {
     }
 
-    public SectionPK(int sectionId, int courseNumber, String departmentId, String termId)
+    public EnrolmentPK(int studentId, int sectionId, int courseNumber, String departmentId)
     {
+        this.studentId = studentId;
         this.sectionId = sectionId;
         this.courseNumber = courseNumber;
         this.departmentId = departmentId;
-        this.termId = termId;
+    }
+
+    public int getStudentId()
+    {
+        return studentId;
+    }
+
+    public void setStudentId(int studentId)
+    {
+        this.studentId = studentId;
     }
 
     public int getSectionId()
@@ -71,24 +81,14 @@ public class SectionPK implements Serializable
         this.departmentId = departmentId;
     }
 
-    public String getTermId()
-    {
-        return termId;
-    }
-
-    public void setTermId(String termId)
-    {
-        this.termId = termId;
-    }
-
     @Override
     public int hashCode()
     {
         int hash = 0;
+        hash += (int) studentId;
         hash += (int) sectionId;
         hash += (int) courseNumber;
         hash += (departmentId != null ? departmentId.hashCode() : 0);
-        hash += (termId != null ? termId.hashCode() : 0);
         return hash;
     }
 
@@ -96,11 +96,15 @@ public class SectionPK implements Serializable
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SectionPK))
+        if (!(object instanceof EnrolmentPK))
         {
             return false;
         }
-        SectionPK other = (SectionPK) object;
+        EnrolmentPK other = (EnrolmentPK) object;
+        if (this.studentId != other.studentId)
+        {
+            return false;
+        }
         if (this.sectionId != other.sectionId)
         {
             return false;
@@ -113,16 +117,12 @@ public class SectionPK implements Serializable
         {
             return false;
         }
-        if ((this.termId == null && other.termId != null) || (this.termId != null && !this.termId.equals(other.termId)))
-        {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString()
     {
-        return "adg.red.models.SectionPK[ sectionId=" + sectionId + ", courseNumber=" + courseNumber + ", departmentId=" + departmentId + ", termId=" + termId + " ]";
+        return "adg.red.models.EnrolmentPK[ studentId=" + studentId + ", sectionId=" + sectionId + ", courseNumber=" + courseNumber + ", departmentId=" + departmentId + " ]";
     }
 }
