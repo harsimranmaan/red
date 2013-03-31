@@ -4,10 +4,10 @@
  */
 package adg.red.controllers;
 
-import adg.red.api.model.Course;
-import adg.red.api.model.CourseArray;
-import adg.red.api.model.DepartmentArray;
+import adg.red.models.Course;
+import adg.red.models.Department;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,12 +40,18 @@ public class CourseViewController implements Initializable
         populateCourseTable(Context.getInstance().getUserSelect());
     }
 
-    public void populateCourseTable(String key)
+    public void populateCourseTable(String departmentId)
     {
 
-        CourseArray courseArry = new CourseArray();
-        courseIdColmn.setCellValueFactory(new PropertyValueFactory<Course, String>("courseId"));
-        courseNameColmn.setCellValueFactory(new PropertyValueFactory<Course, String>("courseName"));
-        disTable.getItems().setAll(courseArry.filterByDept(key));
+        List<Course> courses = Course.getByDepartment(Department.getDepartmentById(departmentId));
+        populate(courses);
+
+    }
+
+    private void populate(List<Course> courses)
+    {
+        courseIdColmn.setCellValueFactory(new PropertyValueFactory<Course, String>("courseName"));
+        courseNameColmn.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));
+        disTable.getItems().setAll(courses);
     }
 }

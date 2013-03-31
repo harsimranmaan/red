@@ -5,17 +5,23 @@
 package adg.red.models;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author harsimran.maan
  */
 @Embeddable
-public class CoRequisitePK implements Serializable
+public class SectionTimeTablePK implements Serializable
 {
+    @Basic(optional = false)
+    @Column(name = "sectionId")
+    private int sectionId;
     @Basic(optional = false)
     @Column(name = "courseNumber")
     private int courseNumber;
@@ -23,22 +29,34 @@ public class CoRequisitePK implements Serializable
     @Column(name = "departmentId")
     private String departmentId;
     @Basic(optional = false)
-    @Column(name = "coRequisiteNumber")
-    private int coRequisiteNumber;
+    @Column(name = "dayId")
+    private int dayId;
     @Basic(optional = false)
-    @Column(name = "coRequisiteDeptId")
-    private String coRequisiteDeptId;
+    @Column(name = "startTime")
+    @Temporal(TemporalType.TIME)
+    private Date startTime;
 
-    public CoRequisitePK()
+    public SectionTimeTablePK()
     {
     }
 
-    public CoRequisitePK(int courseNumber, String departmentId, int coRequisiteNumber, String coRequisiteDeptId)
+    public SectionTimeTablePK(int sectionId, int courseNumber, String departmentId, int dayId, Date startTime)
     {
+        this.sectionId = sectionId;
         this.courseNumber = courseNumber;
         this.departmentId = departmentId;
-        this.coRequisiteNumber = coRequisiteNumber;
-        this.coRequisiteDeptId = coRequisiteDeptId;
+        this.dayId = dayId;
+        this.startTime = startTime;
+    }
+
+    public int getSectionId()
+    {
+        return sectionId;
+    }
+
+    public void setSectionId(int sectionId)
+    {
+        this.sectionId = sectionId;
     }
 
     public int getCourseNumber()
@@ -61,34 +79,35 @@ public class CoRequisitePK implements Serializable
         this.departmentId = departmentId;
     }
 
-    public int getCoRequisiteNumber()
+    public int getDayId()
     {
-        return coRequisiteNumber;
+        return dayId;
     }
 
-    public void setCoRequisiteNumber(int coRequisiteNumber)
+    public void setDayId(int dayId)
     {
-        this.coRequisiteNumber = coRequisiteNumber;
+        this.dayId = dayId;
     }
 
-    public String getCoRequisiteDeptId()
+    public Date getStartTime()
     {
-        return coRequisiteDeptId;
+        return startTime;
     }
 
-    public void setCoRequisiteDeptId(String coRequisiteDeptId)
+    public void setStartTime(Date startTime)
     {
-        this.coRequisiteDeptId = coRequisiteDeptId;
+        this.startTime = startTime;
     }
 
     @Override
     public int hashCode()
     {
         int hash = 0;
+        hash += (int) sectionId;
         hash += (int) courseNumber;
         hash += (departmentId != null ? departmentId.hashCode() : 0);
-        hash += (int) coRequisiteNumber;
-        hash += (coRequisiteDeptId != null ? coRequisiteDeptId.hashCode() : 0);
+        hash += (int) dayId;
+        hash += (startTime != null ? startTime.hashCode() : 0);
         return hash;
     }
 
@@ -96,11 +115,15 @@ public class CoRequisitePK implements Serializable
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CoRequisitePK))
+        if (!(object instanceof SectionTimeTablePK))
         {
             return false;
         }
-        CoRequisitePK other = (CoRequisitePK) object;
+        SectionTimeTablePK other = (SectionTimeTablePK) object;
+        if (this.sectionId != other.sectionId)
+        {
+            return false;
+        }
         if (this.courseNumber != other.courseNumber)
         {
             return false;
@@ -109,11 +132,11 @@ public class CoRequisitePK implements Serializable
         {
             return false;
         }
-        if (this.coRequisiteNumber != other.coRequisiteNumber)
+        if (this.dayId != other.dayId)
         {
             return false;
         }
-        if ((this.coRequisiteDeptId == null && other.coRequisiteDeptId != null) || (this.coRequisiteDeptId != null && !this.coRequisiteDeptId.equals(other.coRequisiteDeptId)))
+        if ((this.startTime == null && other.startTime != null) || (this.startTime != null && !this.startTime.equals(other.startTime)))
         {
             return false;
         }
@@ -123,6 +146,6 @@ public class CoRequisitePK implements Serializable
     @Override
     public String toString()
     {
-        return "adg.red.models.CoRequisitePK[ courseNumber=" + courseNumber + ", departmentId=" + departmentId + ", coRequisiteNumber=" + coRequisiteNumber + ", coRequisiteDeptId=" + coRequisiteDeptId + " ]";
+        return "adg.red.models.SectionTimeTablePK[ sectionId=" + sectionId + ", courseNumber=" + courseNumber + ", departmentId=" + departmentId + ", dayId=" + dayId + ", startTime=" + startTime + " ]";
     }
 }

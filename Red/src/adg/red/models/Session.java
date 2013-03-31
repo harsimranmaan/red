@@ -23,50 +23,50 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author harsimran.maan
  */
 @Entity
-@Table(name = "UserType")
+@Table(name = "Session")
 @XmlRootElement
 @NamedQueries(
 {
-    @NamedQuery(name = "UserType.findAll", query = "SELECT u FROM UserType u"),
-    @NamedQuery(name = "UserType.findByUserTypeId", query = "SELECT u FROM UserType u WHERE u.userTypeId = :userTypeId"),
-    @NamedQuery(name = "UserType.findByName", query = "SELECT u FROM UserType u WHERE u.name = :name")
+    @NamedQuery(name = "Session.findAll", query = "SELECT s FROM Session s"),
+    @NamedQuery(name = "Session.findBySessionId", query = "SELECT s FROM Session s WHERE s.sessionId = :sessionId"),
+    @NamedQuery(name = "Session.findByName", query = "SELECT s FROM Session s WHERE s.name = :name")
 })
-public class UserType implements Serializable
+public class Session implements Serializable
 {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "userTypeId")
-    private Integer userTypeId;
+    @Column(name = "sessionId")
+    private Integer sessionId;
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userTypeId")
-    private Collection<User> userCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sessionId")
+    private Collection<Term> termCollection;
 
-    public UserType()
+    public Session()
     {
     }
 
-    public UserType(Integer userTypeId)
+    public Session(Integer sessionId)
     {
-        this.userTypeId = userTypeId;
+        this.sessionId = sessionId;
     }
 
-    public UserType(Integer userTypeId, String name)
+    public Session(Integer sessionId, String name)
     {
-        this.userTypeId = userTypeId;
+        this.sessionId = sessionId;
         this.name = name;
     }
 
-    public Integer getUserTypeId()
+    public Integer getSessionId()
     {
-        return userTypeId;
+        return sessionId;
     }
 
-    public void setUserTypeId(Integer userTypeId)
+    public void setSessionId(Integer sessionId)
     {
-        this.userTypeId = userTypeId;
+        this.sessionId = sessionId;
     }
 
     public String getName()
@@ -80,21 +80,21 @@ public class UserType implements Serializable
     }
 
     @XmlTransient
-    public Collection<User> getUserCollection()
+    public Collection<Term> getTermCollection()
     {
-        return userCollection;
+        return termCollection;
     }
 
-    public void setUserCollection(Collection<User> userCollection)
+    public void setTermCollection(Collection<Term> termCollection)
     {
-        this.userCollection = userCollection;
+        this.termCollection = termCollection;
     }
 
     @Override
     public int hashCode()
     {
         int hash = 0;
-        hash += (userTypeId != null ? userTypeId.hashCode() : 0);
+        hash += (sessionId != null ? sessionId.hashCode() : 0);
         return hash;
     }
 
@@ -102,12 +102,12 @@ public class UserType implements Serializable
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UserType))
+        if (!(object instanceof Session))
         {
             return false;
         }
-        UserType other = (UserType) object;
-        if ((this.userTypeId == null && other.userTypeId != null) || (this.userTypeId != null && !this.userTypeId.equals(other.userTypeId)))
+        Session other = (Session) object;
+        if ((this.sessionId == null && other.sessionId != null) || (this.sessionId != null && !this.sessionId.equals(other.sessionId)))
         {
             return false;
         }
@@ -117,6 +117,6 @@ public class UserType implements Serializable
     @Override
     public String toString()
     {
-        return "adg.red.models.UserType[ userTypeId=" + userTypeId + " ]";
+        return "adg.red.models.Session[ sessionId=" + sessionId + " ]";
     }
 }

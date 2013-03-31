@@ -8,50 +8,50 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane id="AnchorPane" fx:id="disView" prefHeight="464.0" prefWidth="642.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.BrowseCourseController">
-  <children>
-    <AnchorPane prefHeight="40.0" prefWidth="640.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-      <children>
-        <HBox id="HBox" fx:id="hBox" alignment="CENTER" layoutY="9.0" prefWidth="640.0" spacing="5.0">
-          <children>
-            <Hyperlink fx:id="allLink" text="All" />
-            <Hyperlink fx:id="aLink" text="A" />
-            <Hyperlink fx:id="bLink" text="B" />
-            <Hyperlink fx:id="cLink" text="C" />
-            <Hyperlink fx:id="dLink" text="D" />
-            <Hyperlink text="E" />
-            <Hyperlink text="F" />
-            <Hyperlink text="G" />
-            <Hyperlink text="H" />
-            <Hyperlink text="I" />
-            <Hyperlink text="J" />
-            <Hyperlink text="K" />
-            <Hyperlink text="L" />
-            <Hyperlink text="M" />
-            <Hyperlink text="N" />
-            <Hyperlink text="O" />
-            <Hyperlink text="P" />
-            <Hyperlink text="Q" />
-            <Hyperlink text="R" />
-            <Hyperlink text="S" />
-            <Hyperlink text="T" />
-            <Hyperlink text="U" />
-            <Hyperlink text="V" />
-            <Hyperlink text="W" />
-            <Hyperlink text="X" />
-            <Hyperlink text="Y" />
-            <Hyperlink text="Z" />
-          </children>
-        </HBox>
-      </children>
-    </AnchorPane>
-    <TableView fx:id="disTable" prefHeight="424.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
-      <columns>
-        <TableColumn minWidth="152.0" prefWidth="152.0" text="Department Id" fx:id="deptIdColmn" />
-        <TableColumn minWidth="490.0" prefWidth="490.0" text="Department Name" fx:id="deptNameColmn" />
-      </columns>
-    </TableView>
-  </children>
-  <stylesheets>
-    <URL value="@css/mainForm.css" />
-  </stylesheets>
+    <children>
+        <AnchorPane prefHeight="40.0" prefWidth="640.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <children>
+                <HBox id="HBox" fx:id="hBox" alignment="CENTER" layoutY="9.0" prefWidth="640.0" spacing="5.0">
+                    <children>
+                        <Hyperlink  text="All" />
+                        <Hyperlink  text="A" />
+                        <Hyperlink  text="B" />
+                        <Hyperlink  text="C" />
+                        <Hyperlink text="D" />
+                        <Hyperlink text="E" />
+                        <Hyperlink text="F" />
+                        <Hyperlink text="G" />
+                        <Hyperlink text="H" />
+                        <Hyperlink text="I" />
+                        <Hyperlink text="J" />
+                        <Hyperlink text="K" />
+                        <Hyperlink text="L" />
+                        <Hyperlink text="M" />
+                        <Hyperlink text="N" />
+                        <Hyperlink text="O" />
+                        <Hyperlink text="P" />
+                        <Hyperlink text="Q" />
+                        <Hyperlink text="R" />
+                        <Hyperlink text="S" />
+                        <Hyperlink text="T" />
+                        <Hyperlink text="U" />
+                        <Hyperlink text="V" />
+                        <Hyperlink text="W" />
+                        <Hyperlink text="X" />
+                        <Hyperlink text="Y" />
+                        <Hyperlink text="Z" />
+                    </children>
+                </HBox>
+            </children>
+        </AnchorPane>
+        <TableView fx:id="disTable" prefHeight="424.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+            <columns>
+                <TableColumn minWidth="152.0" prefWidth="152.0" text="Department Id" fx:id="deptIdColmn" />
+                <TableColumn minWidth="490.0" prefWidth="490.0" text="Department Name" fx:id="deptNameColmn" />
+            </columns>
+        </TableView>
+    </children>
+    <stylesheets>
+        <URL value="@css/mainForm.css" />
+    </stylesheets>
 </AnchorPane>

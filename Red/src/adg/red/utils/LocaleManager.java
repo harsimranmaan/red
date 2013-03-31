@@ -7,40 +7,39 @@ package adg.red.utils;
 import adg.red.models.Locale;
 import adg.red.models.ResourceDictionary;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Witt
  */
-public class LocaleManager {
-    
-    private static final List <ResourceDictionary> resourceList; 
+public class LocaleManager
+{
+
+    private static final List<ResourceDictionary> resourceList;
     private static final Locale loc;
-    
-    static {
-        loc = new Locale(2);
-        resourceList = new ResourceDictionary().getResourceByLocaleId(loc.getId());
+
+    static
+    {
+        loc = Locale.findByName("enUS");
+        resourceList = ResourceDictionary.getResourceByLocaleId(loc.getId());
     }
-    
+
     /**
      *
-     * @param resourceId
+     * @param resourceId <p/>
      * @return
      */
-    public static String getTextbyResourceId(int resourceId) {
-        
-        String text = "";
-        try {
-            for (ResourceDictionary reDict : resourceList)
-                {
-                    if (reDict.getResourceDictionaryPK().getResourceId() == resourceId) {
-                        text = reDict.getTextString();
-                    }
-                }
-        } catch (Exception ex) {
-                    Logger.getLogger(LocaleManager.class.getName()).log(Level.SEVERE, null, ex);
+    public static String get(int resourceId)
+    {
+
+        String text = "Invalid Resource Id";
+
+        for (ResourceDictionary reDict : resourceList)
+        {
+            if (reDict.getResourceDictionaryPK().getResourceId() == resourceId)
+            {
+                text = reDict.getTextString();
+            }
         }
         return text;
     }
