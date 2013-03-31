@@ -19,7 +19,7 @@ LOCK TABLES `UserType` WRITE;
 
 INSERT INTO `UserType` (`userTypeId`, `name`) 
 VALUES 
-('2', 'Admin'),('1', 'Faculty'),('0', 'Student');
+('102', 'Admin'),('101', 'Faculty'),('100', 'Student');
 
 UNLOCK TABLES;
 
