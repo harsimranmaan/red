@@ -106,16 +106,16 @@ DROP TABLE IF EXISTS `Student`;
 CREATE TABLE `Student` (
   `studentId` INT NOT NULL AUTO_INCREMENT,	/* Auto Increment */
   `username` varchar(10) NOT NULL,
-  `programName` VARCHAR(30) NOT NULL ,
-  `departmentId` VARCHAR(4) NOT NULL ,
+/*  `programName` VARCHAR(30) NOT NULL ,
+  `departmentId` VARCHAR(4) NOT NULL ,	*/
   `dateOfRegistration` date DEFAULT NULL,
   `highestDegree` varchar(20) DEFAULT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`studentId`),
   UNIQUE KEY `StudentUNIQusername` (`username`),
   CONSTRAINT `StudentFKusername` FOREIGN KEY (`username`) REFERENCES `User` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `StudentFKprogramName` FOREIGN KEY (`programName`) REFERENCES `Program` (`programName`) ON UPDATE CASCADE ON DELETE RESTRICT,
-  CONSTRAINT `StudentFKdepartmentId` FOREIGN KEY (`departmentId` ) REFERENCES `Department` (`departmentId` ) ON DELETE RESTRICT ON UPDATE CASCADE
+/*  CONSTRAINT `StudentFKprogramName` FOREIGN KEY (`programName`) REFERENCES `Program` (`programName`) ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT `StudentFKdepartmentId` FOREIGN KEY (`departmentId` ) REFERENCES `Department` (`departmentId` ) ON DELETE RESTRICT ON UPDATE CASCADE	*/
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE Student AUTO_INCREMENT = 100;
@@ -196,8 +196,12 @@ CREATE TABLE `CoRequisite` (
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   isMust bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`courseNumber`,`departmentId`,`coRequisiteNumber`,`coRequisiteDeptId`),
-  CONSTRAINT `CoRequisiteFKdepartmentId` FOREIGN KEY (`departmentId`) REFERENCES `Department` (`departmentId`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `CoRequisiteFKcoRequisiteDeptId` FOREIGN KEY (`coRequisiteDeptId`) REFERENCES `Department` (`departmentId`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `CoRequisiteFKdepartmentId` 
+/* changed table name to Course from Department */
+FOREIGN KEY (`departmentId`) REFERENCES `Course` (`departmentId`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `CoRequisiteFKcoRequisiteDeptId` 
+/* changed table name to Course from Department */
+FOREIGN KEY (`coRequisiteDeptId`) REFERENCES `Course` (`departmentId`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `CoRequisiteFKcoRequisiteNumber` FOREIGN KEY (`coRequisiteNumber`) REFERENCES `Course` (`courseNumber`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `CoRequisiteFKcourseNumber` FOREIGN KEY (`courseNumber`) REFERENCES `Course` (`courseNumber`) ON DELETE RESTRICT ON UPDATE CASCADE
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -212,8 +216,12 @@ CREATE TABLE `Prerequisite` (
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   isMust bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`courseNumber`,`departmentId`,`preRequisiteNumber`,`preRequisiteDeptId`),
-  CONSTRAINT `PrerequisiteFKdepartmentId` FOREIGN KEY (`departmentId`) REFERENCES `Department` (`departmentId`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `PrerequisiteFKpreRequisiteDeptId` FOREIGN KEY (`preRequisiteDeptId`) REFERENCES `Department` (`departmentId`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `PrerequisiteFKdepartmentId` 
+/* changed table name to Course from Department */
+FOREIGN KEY (`departmentId`) REFERENCES `Course` (`departmentId`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `PrerequisiteFKpreRequisiteDeptId` 
+/* changed table name to Course from Department */
+FOREIGN KEY (`preRequisiteDeptId`) REFERENCES `Course` (`departmentId`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `PrerequisiteFKpreRequisiteNumber` FOREIGN KEY (`preRequisiteNumber`) REFERENCES `Course` (`courseNumber`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `PrerequisiteFKcourseNumber` FOREIGN KEY (`courseNumber`) REFERENCES `Course` (`courseNumber`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -257,7 +265,9 @@ CREATE TABLE `Section` (
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`sectionId`,`courseNumber`,`departmentId`,`termId`),
   CONSTRAINT `SectionFKcourseNumber` FOREIGN KEY (`courseNumber`) REFERENCES `Course` (`courseNumber`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `SectionFKdepartmentId` FOREIGN KEY (`departmentId`) REFERENCES `Department` (`departmentId`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `SectionFKdepartmentId` 
+/* changed table name to Course from Department */
+FOREIGN KEY (`departmentId`) REFERENCES `Course` (`departmentId`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `SectionFKtermId` FOREIGN KEY (`termId`) REFERENCES `Term` (`termId`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `SectionFKfacultyMemberId` FOREIGN KEY (`facultyMemberId`) REFERENCES `FacultyMember` (`facultyMemberId`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `SectionFKsectionTypeId` FOREIGN KEY (`sectionTypeId`) REFERENCES `SectionType` (`sectionTypeId`) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -285,7 +295,8 @@ CREATE  TABLE `Registration` (
     ON UPDATE CASCADE,
   CONSTRAINT `RegistrationFKdepartmentId`
     FOREIGN KEY (`departmentId` )
-    REFERENCES `Department` (`departmentId` )
+/* changed table name to Program from Department */
+    REFERENCES `Program` (`departmentId` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -402,12 +413,14 @@ CREATE  TABLE `SectionTimeTable` (
     ON UPDATE CASCADE,
   CONSTRAINT `SectionTimeTableFKcourseNumber`
     FOREIGN KEY (`courseNumber` )
-    REFERENCES `Course` (`courseNumber` )
+/* changed table name to Section from Course */
+    REFERENCES `Section` (`courseNumber` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `SectionTimeTableFKdepartmentId`
     FOREIGN KEY (`departmentId` )
-    REFERENCES `Department` (`departmentId` )
+/* changed table name to Section from Department */
+    REFERENCES `Section` (`departmentId` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `SectionTimeTableFKdayId`
@@ -438,12 +451,14 @@ CREATE  TABLE `Enrolment` (
     ON UPDATE CASCADE,
   CONSTRAINT `EnrolmentFKcourseNumber`
     FOREIGN KEY (`courseNumber` )
-    REFERENCES `Course` (`courseNumber` )
+/* changed table name to Section from Course */
+    REFERENCES `Section` (`courseNumber` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `EnrolmentFKdepartmentId`
     FOREIGN KEY (`departmentId` )
-    REFERENCES `Department` (`departmentId` )
+/* changed table name to Section from Department */
+    REFERENCES `Section` (`departmentId` )
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
