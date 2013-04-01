@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="464.0" prefWidth="642.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.FaqController">
+  <children>
+    <Label layoutX="20.0" layoutY="14.0" text="FAQ">
+      <font>
+        <Font name="System Bold" size="18.0" />
+      </font>
+    </Label>
+    <ListView prefHeight="412.0" prefWidth="608.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="38.0" />
+  </children>
+  <stylesheets>
+    <URL value="@css/mainForm.css" />
+  </stylesheets>
+</AnchorPane>

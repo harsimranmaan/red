@@ -43,7 +43,7 @@
                 </children>
               </VBox>
               <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
-              <Button fx:id="logOut" mnemonicParsing="false" onAction="#logOut" prefHeight="30.0" prefWidth="77.0" text="Log Out" />
+            <Button fx:id="logOut" mnemonicParsing="false" onAction="#logOut" prefHeight="30.0" prefWidth="77.0" text="Log Out" />
             </children>
           </VBox>
           <ImageView id="ADG-Logo3.jpg" fitHeight="75.0" fitWidth="150.0" preserveRatio="true" AnchorPane.bottomAnchor="-9.0">
@@ -78,8 +78,8 @@
                   <Label fx:id="menuLk" text="Student:" />
                   <Hyperlink fx:id="homeLk" text="Home:" />
                   <Hyperlink fx:id="browseCourseLk" text="Browse Course:" visible="false" />
-                  <Hyperlink fx:id="deptLk" text="" visible="false" />
-                  <Hyperlink fx:id="courseLk" text="" visible="false" />
+                  <Hyperlink fx:id="deptLk" visible="false" />
+                  <Hyperlink fx:id="courseLk" visible="false" />
                 </children>
               </HBox>
             </children>
