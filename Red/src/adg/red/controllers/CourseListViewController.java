@@ -39,8 +39,8 @@ public class CourseListViewController implements Initializable
     private TableView<Course> disTable; // Value injected by FXMLLoader
     @FXML //  fx:id="disView"
     private AnchorPane disView; // Value injected by FXMLLoader
-    @FXML //  fx:id="deptLbl"
-    private Hyperlink deptLbl; // Value injected by FXMLLoader
+//    @FXML //  fx:id="deptLbl"
+//    private Hyperlink deptLbl; // Value injected by FXMLLoader
    
     /**
      * Initializes the controller class.
@@ -50,7 +50,8 @@ public class CourseListViewController implements Initializable
     {
         // TODO
         populateCourseTable(Context.getInstance().getUserSelectDeptId());
-        deptLbl.setText(Context.getInstance().getUserSelectDeptId());
+        HomeViewController.getDeptLk().setText(Context.getInstance().getUserSelectDeptId());
+        HomeViewController.getDeptLk().setVisible(true);
         
         // action when user clicked on the table
         disTable.setOnMousePressed(new EventHandler<MouseEvent>()
