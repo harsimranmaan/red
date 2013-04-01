@@ -67,8 +67,8 @@
           <children>
             <Label id="menuLbl" text="Student:" />
             <Label text="Browse Course:" />
-            <Hyperlink id="deptLbl" text="Label" visible="false" />
-            <Hyperlink id="courseLbl" text="Label" visible="false" />
+            <Label id="deptLbl" text="Label" />
+            <Label id="courseLbl" text="Label" />
           </children>
         </HBox>
       </children>

@@ -62,14 +62,14 @@
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
               <children>
-                <Button id="pwdSaveBtn" font="$x1" layoutX="166.0" layoutY="245.0" mnemonicParsing="false" text="SAVE" />
-                <Button id="pwdCancelBtn" font="$x1" layoutX="307.0" layoutY="246.0" mnemonicParsing="false" text="CANCEL" />
-                <Label id="oldPwdLabel" font="$x1" layoutX="166.0" layoutY="63.0" text="Old Password :" textAlignment="RIGHT" />
-                <Label font="$x1" layoutX="161.0" layoutY="110.0" text="New Password :" textAlignment="RIGHT" />
-                <Label font="$x1" layoutX="198.0" layoutY="154.0" text="Re-enter :" textAlignment="RIGHT" />
-                <PasswordField id="oldPwdTxt" layoutX="283.0" layoutY="60.0" prefWidth="200.0" />
-                <PasswordField id="newPwdTxt" layoutX="283.0" layoutY="104.0" prefWidth="200.0" />
-                <PasswordField id="pwdReTxt" layoutX="283.0" layoutY="151.0" prefWidth="200.0" />
+                <Button id="pwdSaveBtn" font="$x1" layoutX="182.0" layoutY="239.0" mnemonicParsing="false" text="SAVE" />
+                <Button id="pwdCancelBtn" font="$x1" layoutX="323.0" layoutY="240.0" mnemonicParsing="false" text="CANCEL" />
+                <Label id="oldPwdLabel" font="$x1" layoutX="144.0" layoutY="60.0" text="Old Password :" textAlignment="RIGHT" />
+                <Label font="$x1" layoutX="139.0" layoutY="107.0" text="New Password :" textAlignment="RIGHT" />
+                <Label font="$x1" layoutX="176.0" layoutY="151.0" text="Re-enter :" textAlignment="RIGHT" />
+                <PasswordField id="oldPwdTxt" layoutX="261.0" layoutY="57.0" prefWidth="200.0" />
+                <PasswordField id="newPwdTxt" layoutX="261.0" layoutY="101.0" prefWidth="200.0" />
+                <PasswordField id="pwdReTxt" layoutX="261.0" layoutY="148.0" prefWidth="200.0" />
               </children>
             </AnchorPane>
           </content>

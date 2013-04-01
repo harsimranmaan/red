@@ -338,4 +338,9 @@ public class Course implements Serializable
     {
         return RedEntityManager.getEntityManager().createNamedQuery("Course.findByDepartment").setParameter("departmentId", department).getResultList();
     }
+    
+    public static Course getCourseByCourseNumer(int courseNumber)
+    {
+        return ((List<Course>) RedEntityManager.getEntityManager().createNamedQuery("Course.findByCourseNumber").setParameter("courseNumber", courseNumber).getResultList()).get(0);
+    }
 }
