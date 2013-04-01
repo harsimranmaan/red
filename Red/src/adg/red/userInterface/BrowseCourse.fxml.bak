@@ -51,28 +51,6 @@
         <TableColumn minWidth="490.0" prefWidth="490.0" text="Department Name" fx:id="deptNameColmn" />
       </columns>
     </TableView>
-    <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="642.0">
-      <children>
-        <HBox id="HBox" alignment="CENTER" layoutY="10.0" spacing="5.0" AnchorPane.rightAnchor="6.0">
-          <children>
-            <Label text="Search:" HBox.hgrow="NEVER" />
-            <TextField prefWidth="131.0" HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" text="Go" HBox.hgrow="NEVER" />
-          </children>
-          <padding>
-            <Insets bottom="1.0" top="1.0" />
-          </padding>
-        </HBox>
-        <HBox id="HBox" alignment="CENTER" layoutX="14.0" layoutY="15.0" spacing="5.0">
-          <children>
-            <Label id="menuLbl" text="Student:" />
-            <Label text="Browse Course:" />
-            <Label id="deptLbl" text="Label" />
-            <Label id="courseLbl" text="Label" />
-          </children>
-        </HBox>
-      </children>
-    </AnchorPane>
   </children>
   <stylesheets>
     <URL value="@css/mainForm.css" />

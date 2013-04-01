@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -23,6 +25,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -67,13 +70,7 @@ public class CourseViewController implements Initializable {
 
     @FXML //  fx:id="typeColmn"
     private TableColumn<Section, String> typeColmn; // Value injected by FXMLLoader
-    
-    @FXML //  fx:id="courseLbl"
-    private Hyperlink courseLbl; // Value injected by FXMLLoader
-
-    @FXML //  fx:id="deptLbl"
-    private Hyperlink deptLbl; // Value injected by FXMLLoader
-    
+      
     @FXML //  fx:id="disView"
     private AnchorPane disView; // Value injected by FXMLLoader
     /**
@@ -82,8 +79,7 @@ public class CourseViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        courseLbl.setText("" + Context.getInstance().getUserSelectCourseNumer());
-        deptLbl.setText(Context.getInstance().getUserSelectDeptId());
+
         populateSectionTable(Context.getInstance().getUserSelectDeptId(), Context.getInstance().getUserSelectCourseNumer());
         creditLbl.setText("" + Context.getInstance().getUserSelectCourse().getCredits());
         passRqLbl.setText(Context.getInstance().getUserSelectCourse().getPassingRequirement());
@@ -91,17 +87,31 @@ public class CourseViewController implements Initializable {
         courseNameLbl.setText(Context.getInstance().getUserSelectCourse().getName());
         deptIdAndCourseNoLbl.setText(Context.getInstance().getUserSelectCourse().getDepartmentIdAndCourseNumber());
         gradingSchmLbl.setText(Context.getInstance().getUserSelectCourse().getGradingSchemeId().getName());
+        HomeViewController.getCourseLk().setText(""+Context.getInstance().getUserSelectCourseNumer());
+        HomeViewController.getCourseLk().setVisible(true);
         
-        // action when dept hyperlink is clicked
-        deptLbl.setOnAction(new EventHandler<ActionEvent>()
+        // action when user clicked on the table
+        disTable.setOnMousePressed(new EventHandler<MouseEvent>()
         {
             @Override
-            public void handle(ActionEvent event)
+            public void handle(MouseEvent event)
             {
+                try
+                {
+                    int key = disTable.getSelectionModel().getSelectedItem().getSectionId();
+                    Context.getInstance().setUserSelectSectionId(key);
+                    //Context.getInstance().setUserSelectCourse(disTable.getSelectionModel().getSelectedItem());
                     View view = new View(disView);
-                    view.loadView("CourseListView");
+                    view.loadView("SectionView");
+
                 }
-            });
+                catch (Exception ex)
+                {
+                    Logger.getLogger(BrowseCourseController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+       
     }   
     
      public void populateSectionTable(String departmentId, int courseNumber)

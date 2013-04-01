@@ -22,6 +22,15 @@ public class Context {
     private int userSelectCourseNumer = 0;
     private Course userSelectCourse = null;
     private Department userSelectDepartment = null;
+    private int userSelectSectionId = 0;
+
+    public int getUserSelectSectionId() {
+        return userSelectSectionId;
+    }
+
+    public void setUserSelectSectionId(int userSelectSectionId) {
+        this.userSelectSectionId = userSelectSectionId;
+    }
 
     public Department getUserSelectDepartment() {
         return userSelectDepartment;
