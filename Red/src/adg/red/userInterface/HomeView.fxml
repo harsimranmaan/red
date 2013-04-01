@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane fx:id="homeView" prefHeight="510.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.HomeViewController">
-  <SplitPane id="homeView" dividerPositions="0.19172932330827067" focusTraversable="true" prefHeight="510.0" prefWidth="800.0">
+  <SplitPane id="homeView" dividerPositions="0.19172932330827067" focusTraversable="true" prefHeight="510.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
     <items>
       <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="150.0">
         <children>
@@ -56,7 +56,7 @@
       <AnchorPane id="disBrwCourseArea" minHeight="0.0" minWidth="0.0" prefHeight="308.0" prefWidth="456.9999000000025">
         <children>
           <AnchorPane id="AnchorPane" prefWidth="454.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-          <AnchorPane fx:id="disBrwCourseArea" prefHeight="464.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.5" AnchorPane.rightAnchor="-0.5" AnchorPane.topAnchor="44.0">
+          <AnchorPane fx:id="disBrwCourseArea" prefHeight="464.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
             <children>
               <Label alignment="CENTER" contentDisplay="CENTER" layoutX="281.0" layoutY="224.0" text="Displaying area" />
             </children>

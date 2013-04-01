@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="disView" prefHeight="464.0" prefWidth="642.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.BrowseCourseController">
   <children>
-    <AnchorPane prefHeight="40.0" prefWidth="640.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+    <AnchorPane prefHeight="40.0" prefWidth="640.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
         <HBox id="HBox" fx:id="hBox" alignment="CENTER" layoutY="9.0" prefWidth="640.0" spacing="5.0">
           <children>
@@ -47,8 +47,8 @@
     </AnchorPane>
     <TableView fx:id="disTable" prefHeight="424.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
       <columns>
-        <TableColumn minWidth="152.0" prefWidth="152.0" text="Department Id" fx:id="deptIdColmn" />
-        <TableColumn minWidth="490.0" prefWidth="490.0" text="Department Name" fx:id="deptNameColmn" />
+        <TableColumn minWidth="151.0" prefWidth="151.0" text="Department Id" fx:id="deptIdColmn" />
+        <TableColumn minWidth="489.0" prefWidth="489.0" text="Department Name" fx:id="deptNameColmn" />
       </columns>
     </TableView>
   </children>
