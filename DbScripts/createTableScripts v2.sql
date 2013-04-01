@@ -46,7 +46,7 @@ ALTER TABLE Faculty AUTO_INCREMENT = 100;
 DROP TABLE IF EXISTS `Department`;
 CREATE TABLE `Department` (
   `departmentId` varchar(4) NOT NULL,
-  `name` varchar(30) NOT NULL,
+  `name` varchar(100) NOT NULL,
    addressId INT,
   `directorId` INT DEFAULT NULL,/**FK**/
    facultyId INT NOT NULL,
@@ -181,7 +181,7 @@ CREATE TABLE `Course` (
   `gradingSchemeId`INT NOT NULL,
   `passingRequirement` varchar(45) NOT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
-  PRIMARY KEY (`courseNumber`),
+  PRIMARY KEY (`courseNumber`,`departmentId`),
   CONSTRAINT `departmentId` FOREIGN KEY (`departmentId`) REFERENCES `Department` (`departmentId`) ON UPDATE CASCADE,
   CONSTRAINT `CourseFKgradingSchemeId` FOREIGN KEY (`gradingSchemeId`) REFERENCES `GradingScheme` (`gradingSchemeId`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
