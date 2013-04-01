@@ -61,9 +61,10 @@ public class BrowseCourseController implements Initializable
                 try
                 {
                     String key = disTable.getSelectionModel().getSelectedItem().getDepartmentId();
-                    Context.getInstance().setUserSelect(key);
+                    Context.getInstance().setUserSelectDeptId(key);
+                    Context.getInstance().setUserSelectDepartment(disTable.getSelectionModel().getSelectedItem());
                     View view = new View(disView);
-                    view.loadView("CourseView");
+                    view.loadView("CourseListView");
 
                 }
                 catch (Exception ex)

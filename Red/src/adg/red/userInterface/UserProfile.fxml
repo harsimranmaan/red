@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.collections.*?>
 <?import javafx.scene.*?>
@@ -77,4 +78,7 @@
       </tabs>
     </TabPane>
   </children>
+  <stylesheets>
+    <URL value="@css/mainForm.css" />
+  </stylesheets>
 </AnchorPane>

@@ -4,9 +4,11 @@
  */
 package adg.red.models;
 
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,7 +42,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Section.findByEndDate", query = "SELECT s FROM Section s WHERE s.endDate = :endDate"),
     @NamedQuery(name = "Section.findByTermId", query = "SELECT s FROM Section s WHERE s.sectionPK.termId = :termId"),
     @NamedQuery(name = "Section.findByTeachingAssistant", query = "SELECT s FROM Section s WHERE s.teachingAssistant = :teachingAssistant"),
-    @NamedQuery(name = "Section.findByIsActive", query = "SELECT s FROM Section s WHERE s.isActive = :isActive")
+    @NamedQuery(name = "Section.findByIsActive", query = "SELECT s FROM Section s WHERE s.isActive = :isActive"),
+    @NamedQuery(name = "Section.findByDepartmentAndCourseNumber", query = "SELECT s FROM Section s WHERE s.sectionPK.departmentId = :departmentId AND s.sectionPK.courseNumber = :courseNumber")
 })
 public class Section implements Serializable
 {
@@ -116,6 +119,10 @@ public class Section implements Serializable
         return sectionPK;
     }
 
+    public int getSectionId()
+    {
+        return this.sectionPK.getSectionId();
+    }
     public void setSectionPK(SectionPK sectionPK)
     {
         this.sectionPK = sectionPK;
@@ -203,6 +210,11 @@ public class Section implements Serializable
         this.term = term;
     }
 
+    public String getSectionType()
+    {
+        return sectionTypeId.getName();
+    }
+    
     public SectionType getSectionTypeId()
     {
         return sectionTypeId;
@@ -218,6 +230,11 @@ public class Section implements Serializable
         return facultyMemberId;
     }
 
+    public String getFacultyMemberName()
+    {
+        return facultyMemberId.getUsername().getFirstName() + " " + facultyMemberId.getUsername().getLastName();
+    }
+    
     public void setFacultyMemberId(FacultyMember facultyMemberId)
     {
         this.facultyMemberId = facultyMemberId;
@@ -303,5 +320,11 @@ public class Section implements Serializable
     public String toString()
     {
         return "adg.red.models.Section[ sectionPK=" + sectionPK + " ]";
+    }
+    
+    public static List<Section> getByDepartmentAndCourseNumber(Department department, Course course)
+    {
+        
+        return RedEntityManager.getEntityManager().createNamedQuery("Section.findByDepartmentAndCourseNumber").setParameter("departmentId", department.getDepartmentId()).setParameter("courseNumber", course.getCourseNumber()).getResultList();
     }
 }

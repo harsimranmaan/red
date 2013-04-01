@@ -51,7 +51,7 @@
         </ImageView>
       </children>
     </AnchorPane>
-    <AnchorPane fx:id="disBrwCourseArea" minHeight="0.0" minWidth="0.0" prefHeight="308.0" prefWidth="456.9999000000025">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="308.0" prefWidth="456.9999000000025">
       <children>
         <AnchorPane id="AnchorPane" prefWidth="454.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <children>
@@ -72,7 +72,7 @@
             </AnchorPane>
           </children>
         </AnchorPane>
-        <AnchorPane id="disBrwCourseArea" prefHeight="464.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
+        <AnchorPane fx:id="disBrwCourseArea" prefHeight="464.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="44.0">
           <children>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="281.0" layoutY="224.0" text="Displaying area" />
           </children>
