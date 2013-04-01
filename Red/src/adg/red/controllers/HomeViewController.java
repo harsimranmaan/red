@@ -31,6 +31,8 @@ public class HomeViewController implements Initializable {
     
     @FXML //  fx:id="menuLbl"
     private Label menuLbl; // Value injected by FXMLLoader
+    @FXML
+    private Button logOut;
 
     /**
      * Initializes the controller class.
@@ -55,4 +57,8 @@ public class HomeViewController implements Initializable {
             }
         });
     }    
+
+    @FXML
+    private void logOut(ActionEvent event) {
+    }
 }
