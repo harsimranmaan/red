@@ -11,8 +11,9 @@
   <children>
     <TableView fx:id="disTable" prefHeight="464.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <columns>
-        <TableColumn minWidth="152.0" prefWidth="152.0" text="Course Number" fx:id="courseNumberColmn" />
-        <TableColumn minWidth="490.0" prefWidth="490.0" text="Course Name" fx:id="courseNameColmn" />
+        <TableColumn minWidth="100.0" prefWidth="100.0" text="Department Id" fx:id="DeptId" />
+        <TableColumn minWidth="100.0" prefWidth="100.0" text="Course Number" fx:id="courseNumberColmn" />
+        <TableColumn minWidth="442.0" prefWidth="442.0" text="Course Name" fx:id="courseNameColmn" />
       </columns>
     </TableView>
   </children>

@@ -223,6 +223,11 @@ public class Course implements Serializable
         this.gradingSchemeId = gradingSchemeId;
     }
 
+    public String getDepartmentIdAndCourseNumber()
+    {
+        return this.getDepartmentId().getDepartmentId() + " " + this.getCourseNumber();
+    }
+    
     public Department getDepartmentId()
     {
         return departmentId;
