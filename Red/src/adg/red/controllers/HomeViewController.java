@@ -25,6 +25,8 @@ public class HomeViewController implements Initializable {
 
     @FXML //  fx:id="brwCourseBtn"
     private Button brwCourseBtn; // Value injected by FXMLLoader    
+    @FXML //  fx:id="faqBtn"
+    private Button faqBtn; // Value injected by FXMLLoader
     @FXML //  fx:id="disBrwCourseArea"
     private AnchorPane disBrwCourseArea; // Value injected by FXMLLoader    
     @FXML //  fx:id="homeLk"
@@ -64,7 +66,7 @@ public class HomeViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         
-         // setOnAction when 
+         // setOnAction when browse course button is pressed
         brwCourseBtn.setOnAction(new EventHandler<ActionEvent>()  {
                         
             @Override
@@ -73,6 +75,25 @@ public class HomeViewController implements Initializable {
                     View view = new View(disBrwCourseArea);
                     view.loadView("BrowseCourse");     
                     browseCourseLk.setVisible(true);
+                    browseCourseLk.setText("Browse Course:");
+                } 
+                catch (Exception ex) {
+                    Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                 
+            }
+        });
+        
+         // setOnAction when faq button is pressed
+        faqBtn.setOnAction(new EventHandler<ActionEvent>()  {
+                        
+            @Override
+            public void handle(ActionEvent event) {                   
+                try {                    
+                    View view = new View(disBrwCourseArea);
+                    view.loadView("FaqView");     
+                    browseCourseLk.setVisible(true);
+                    browseCourseLk.setText("Faq");
                 } 
                 catch (Exception ex) {
                     Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -101,14 +122,20 @@ public class HomeViewController implements Initializable {
                         
             @Override
             public void handle(ActionEvent event) {                   
-                try {                    
-                    View view = new View(disBrwCourseArea);
-                    view.loadView("BrowseCourse");   
-                    deptLk.setVisible(false);
-                    courseLk.setVisible(false);
-                    browseCourseLk.setVisited(false);
-                    deptLk.setVisited(false);
-                    courseLk.setVisited(false);
+                try {      
+                    if(((Hyperlink)event.getSource()).getText().contains("Browse")) {
+                        View view = new View(disBrwCourseArea);
+                        view.loadView("BrowseCourse");  
+                        deptLk.setVisible(false);
+                        courseLk.setVisible(false);
+                        deptLk.setVisited(false);
+                        courseLk.setVisited(false);
+                    }
+                    if(((Hyperlink)event.getSource()).getText().contains("faq")) {
+                        View view = new View(disBrwCourseArea);
+                        view.loadView("FaqView");  
+                    }                    
+                    browseCourseLk.setVisited(false);                    
                 } 
                 catch (Exception ex) {
                     Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);

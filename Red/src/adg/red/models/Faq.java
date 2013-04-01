@@ -4,7 +4,9 @@
  */
 package adg.red.models;
 
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -101,5 +103,10 @@ public class Faq implements Serializable
     public String toString()
     {
         return "adg.red.models.Faq[ question=" + question + " ]";
+    }
+    
+    public static List<Faq> getAllFaq() 
+    {
+       return RedEntityManager.getEntityManager().createNamedQuery("Faq.findAll").getResultList();
     }
 }
