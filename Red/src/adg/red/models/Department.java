@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Department.findByEmail", query = "SELECT d FROM Department d WHERE d.email = :email"),
     @NamedQuery(name = "Department.findByWebsite", query = "SELECT d FROM Department d WHERE d.website = :website"),
     @NamedQuery(name = "Department.findByIsActive", query = "SELECT d FROM Department d WHERE d.isActive = :isActive"),
-    @NamedQuery(name = "Department.findByNameBeginsWith", query = "SELECT d FROM Department d WHERE d.name LIKE  :keyWord")
+    @NamedQuery(name = "Department.findByDepartmentIdBeginsWith", query = "SELECT d FROM Department d WHERE d.departmentId LIKE  :keyWord")
 })
 public class Department implements Serializable
 {
@@ -251,9 +251,9 @@ public class Department implements Serializable
         return "adg.red.models.Department[ departmentId=" + departmentId + " ]";
     }
 
-    public static List<Department> getByNameBeginsWith(String beginsWith)
+    public static List<Department> getByDepartmnetIdBeginsWith(String beginsWith)
     {
-        return RedEntityManager.getEntityManager().createNamedQuery("Department.findByNameBeginsWith").setParameter("keyWord", beginsWith + "%").getResultList();
+        return RedEntityManager.getEntityManager().createNamedQuery("Department.findByDepartmentIdBeginsWith").setParameter("keyWord", beginsWith + "%").getResultList();
     }
 
     public static List<Department> getAll()
