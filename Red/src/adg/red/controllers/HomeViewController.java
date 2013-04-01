@@ -76,6 +76,8 @@ public class HomeViewController implements Initializable {
                     view.loadView("BrowseCourse");     
                     browseCourseLk.setVisible(true);
                     browseCourseLk.setText("Browse Course:");
+                    deptLk.setVisible(false);
+                    courseLk.setVisible(false);
                 } 
                 catch (Exception ex) {
                     Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -94,6 +96,8 @@ public class HomeViewController implements Initializable {
                     view.loadView("FaqView");     
                     browseCourseLk.setVisible(true);
                     browseCourseLk.setText("Faq");
+                    deptLk.setVisible(false);
+                    courseLk.setVisible(false);
                 } 
                 catch (Exception ex) {
                     Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);

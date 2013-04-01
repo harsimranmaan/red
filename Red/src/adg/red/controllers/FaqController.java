@@ -40,12 +40,12 @@ public class FaqController implements Initializable {
         
         for(Faq faq: faqList) {
             Text textQ = new Text();
-            textQ.setWrappingWidth(faqLv.getPrefWidth()-5);
+            textQ.wrappingWidthProperty().bind(faqLv.widthProperty());
             textQ.setText("Q: " + faq.getQuestion());            
             stringList.add(textQ);
             
-            Text textA = new Text();
-            textA.setWrappingWidth(faqLv.getPrefWidth()-5);
+            Text textA = new Text();            
+            textA.wrappingWidthProperty().bind(faqLv.widthProperty());
             textA.setText("A: " + faq.getAnswer());            
             stringList.add(textA);
         }           
