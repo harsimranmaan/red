@@ -24,7 +24,7 @@ public class CourseViewController implements Initializable
 {
 
     @FXML //  fx:id="courseIdColmn"
-    private TableColumn<Course, String> courseIdColmn; // Value injected by FXMLLoader
+    private TableColumn<Course, String> courseNumberColmn; // Value injected by FXMLLoader
     @FXML //  fx:id="courseNameColmn"
     private TableColumn<Course, String> courseNameColmn; // Value injected by FXMLLoader
     @FXML //  fx:id="disTable"
@@ -50,8 +50,8 @@ public class CourseViewController implements Initializable
 
     private void populate(List<Course> courses)
     {
-        courseIdColmn.setCellValueFactory(new PropertyValueFactory<Course, String>("courseName"));
-        courseNameColmn.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));
+        courseNumberColmn.setCellValueFactory(new PropertyValueFactory<Course, String>("departmentIdAndCourseNumber"));
+        courseNameColmn.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));        
         disTable.getItems().setAll(courses);
     }
 }

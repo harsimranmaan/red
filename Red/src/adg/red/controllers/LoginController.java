@@ -79,7 +79,8 @@ public class LoginController implements Initializable
         forgotPassBtn.setText(LocaleManager.get(2));
         userLbl.setText(LocaleManager.get(3));
         passLbl.setText(LocaleManager.get(4));
-
+        loginErrLbl.setText(LocaleManager.get(5));
+        
         // setOnAction when close menuitem is selected
         close.setOnAction(new EventHandler<ActionEvent>()
         {
