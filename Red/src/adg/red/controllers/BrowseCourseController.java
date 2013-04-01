@@ -98,7 +98,7 @@ public class BrowseCourseController implements Initializable
         }
         else
         {
-            departments = Department.getByNameBeginsWith(beginsWith);
+            departments = Department.getByDepartmnetIdBeginsWith(beginsWith);
         }
         populate(departments);
     }
