@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author harsimran.maan
  */
-public class Encryption {
+public class Encryptor {
 
     private static String getString(byte[] digest) {
         StringBuilder hexString = new StringBuilder();
@@ -36,7 +36,7 @@ public class Encryption {
             hash = getString(md.digest());
 
         } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(Encryption.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Encryptor.class.getName()).log(Level.SEVERE, null, ex);
         }
         return hash;
     }

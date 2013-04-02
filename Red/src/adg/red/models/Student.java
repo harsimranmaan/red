@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Student")
 @XmlRootElement
 @NamedQueries(
-        {
+{
     @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s"),
     @NamedQuery(name = "Student.findByStudentId", query = "SELECT s FROM Student s WHERE s.studentId = :studentId"),
     @NamedQuery(name = "Student.findByDateOfRegistration", query = "SELECT s FROM Student s WHERE s.dateOfRegistration = :dateOfRegistration"),
@@ -42,7 +42,6 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class Student implements Serializable
 {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,10 +56,10 @@ public class Student implements Serializable
     @Basic(optional = false)
     @Column(name = "isActive")
     private boolean isActive;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-//    private Collection<Registration> registrationCollection;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-//    private Collection<Enrolment> enrolmentCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+    private Collection<Registration> registrationCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+    private Collection<Enrolment> enrolmentCollection;
     @JoinColumn(name = "username", referencedColumnName = "username")
     @OneToOne(optional = false)
     private User username;
@@ -120,27 +119,28 @@ public class Student implements Serializable
         this.isActive = isActive;
     }
 
-//    @XmlTransient
-//    public Collection<Registration> getRegistrationCollection()
-//    {
-//        return registrationCollection;
-//    }
-//
-//    public void setRegistrationCollection(Collection<Registration> registrationCollection)
-//    {
-//        this.registrationCollection = registrationCollection;
-//    }
-//
-//    @XmlTransient
-//    public Collection<Enrolment> getEnrolmentCollection()
-//    {
-//        return enrolmentCollection;
-//    }
-//
-//    public void setEnrolmentCollection(Collection<Enrolment> enrolmentCollection)
-//    {
-//        this.enrolmentCollection = enrolmentCollection;
-//    }
+    @XmlTransient
+    public Collection<Registration> getRegistrationCollection()
+    {
+        return registrationCollection;
+    }
+
+    public void setRegistrationCollection(Collection<Registration> registrationCollection)
+    {
+        this.registrationCollection = registrationCollection;
+    }
+
+    @XmlTransient
+    public Collection<Enrolment> getEnrolmentCollection()
+    {
+        return enrolmentCollection;
+    }
+
+    public void setEnrolmentCollection(Collection<Enrolment> enrolmentCollection)
+    {
+        this.enrolmentCollection = enrolmentCollection;
+    }
+
     public User getUsername()
     {
         return username;

@@ -15,6 +15,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -64,12 +65,8 @@ public class Section implements Serializable
     @Basic(optional = false)
     @Column(name = "isActive")
     private boolean isActive;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "section")
-//    private Collection<Enrolment> enrolmentCollection;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "section1")
-//    private Collection<Enrolment> enrolmentCollection1;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "section2")
-//    private Collection<Enrolment> enrolmentCollection2;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "section")
+    private Collection<Enrolment> enrolmentCollection;
     @JoinColumn(name = "termId", referencedColumnName = "termId", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Term term;
@@ -79,18 +76,15 @@ public class Section implements Serializable
     @JoinColumn(name = "facultyMemberId", referencedColumnName = "facultyMemberId")
     @ManyToOne(optional = false)
     private FacultyMember facultyMemberId;
-    @JoinColumn(name = "courseNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false)
+    @JoinColumns(
+            {
+        @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false),
+        @JoinColumn(name = "courseNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false)
+    })
     @ManyToOne(optional = false)
     private Course course;
-    @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Course course1;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "section")
-//    private Collection<SectionTimeTable> sectionTimeTableCollection;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "section1")
-//    private Collection<SectionTimeTable> sectionTimeTableCollection1;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "section2")
-//    private Collection<SectionTimeTable> sectionTimeTableCollection2;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "section")
+    private Collection<SectionTimeTable> sectionTimeTableCollection;
 
     public Section()
     {
@@ -168,38 +162,17 @@ public class Section implements Serializable
         this.isActive = isActive;
     }
 
-//    @XmlTransient
-//    public Collection<Enrolment> getEnrolmentCollection()
-//    {
-//        return enrolmentCollection;
-//    }
-//
-//    public void setEnrolmentCollection(Collection<Enrolment> enrolmentCollection)
-//    {
-//        this.enrolmentCollection = enrolmentCollection;
-//    }
-//
-//    @XmlTransient
-//    public Collection<Enrolment> getEnrolmentCollection1()
-//    {
-//        return enrolmentCollection1;
-//    }
-//
-//    public void setEnrolmentCollection1(Collection<Enrolment> enrolmentCollection1)
-//    {
-//        this.enrolmentCollection1 = enrolmentCollection1;
-//    }
-//
-//    @XmlTransient
-//    public Collection<Enrolment> getEnrolmentCollection2()
-//    {
-//        return enrolmentCollection2;
-//    }
-//
-//    public void setEnrolmentCollection2(Collection<Enrolment> enrolmentCollection2)
-//    {
-//        this.enrolmentCollection2 = enrolmentCollection2;
-//    }
+    @XmlTransient
+    public Collection<Enrolment> getEnrolmentCollection()
+    {
+        return enrolmentCollection;
+    }
+
+    public void setEnrolmentCollection(Collection<Enrolment> enrolmentCollection)
+    {
+        this.enrolmentCollection = enrolmentCollection;
+    }
+
     public Term getTerm()
     {
         return term;
@@ -230,11 +203,6 @@ public class Section implements Serializable
         return facultyMemberId;
     }
 
-    public String getFacultyMemberName()
-    {
-        return facultyMemberId.getUsername().getFirstName() + " " + facultyMemberId.getUsername().getLastName();
-    }
-    
     public void setFacultyMemberId(FacultyMember facultyMemberId)
     {
         this.facultyMemberId = facultyMemberId;
@@ -250,48 +218,17 @@ public class Section implements Serializable
         this.course = course;
     }
 
-    public Course getCourse1()
+    @XmlTransient
+    public Collection<SectionTimeTable> getSectionTimeTableCollection()
     {
-        return course1;
+        return sectionTimeTableCollection;
     }
 
-    public void setCourse1(Course course1)
+    public void setSectionTimeTableCollection(Collection<SectionTimeTable> sectionTimeTableCollection)
     {
-        this.course1 = course1;
+        this.sectionTimeTableCollection = sectionTimeTableCollection;
     }
 
-//    @XmlTransient
-//    public Collection<SectionTimeTable> getSectionTimeTableCollection()
-//    {
-//        return sectionTimeTableCollection;
-//    }
-//
-//    public void setSectionTimeTableCollection(Collection<SectionTimeTable> sectionTimeTableCollection)
-//    {
-//        this.sectionTimeTableCollection = sectionTimeTableCollection;
-//    }
-//
-//    @XmlTransient
-//    public Collection<SectionTimeTable> getSectionTimeTableCollection1()
-//    {
-//        return sectionTimeTableCollection1;
-//    }
-//
-//    public void setSectionTimeTableCollection1(Collection<SectionTimeTable> sectionTimeTableCollection1)
-//    {
-//        this.sectionTimeTableCollection1 = sectionTimeTableCollection1;
-//    }
-//
-//    @XmlTransient
-//    public Collection<SectionTimeTable> getSectionTimeTableCollection2()
-//    {
-//        return sectionTimeTableCollection2;
-//    }
-//
-//    public void setSectionTimeTableCollection2(Collection<SectionTimeTable> sectionTimeTableCollection2)
-//    {
-//        this.sectionTimeTableCollection2 = sectionTimeTableCollection2;
-//    }
     @Override
     public int hashCode()
     {
@@ -321,10 +258,15 @@ public class Section implements Serializable
     {
         return "adg.red.models.Section[ sectionPK=" + sectionPK + " ]";
     }
-    
-    public static List<Section> getByDepartmentAndCourseNumber(Department department, Course course)
+
+    public static List<Section> getByCourse(Course course)
     {
-        
-        return RedEntityManager.getEntityManager().createNamedQuery("Section.findByDepartmentAndCourseNumber").setParameter("departmentId", department.getDepartmentId()).setParameter("courseNumber", course.getCourseNumber()).getResultList();
+
+        return RedEntityManager.getEntityManager().createNamedQuery("Section.findByDepartmentAndCourseNumber").setParameter("departmentId", course.getCoursePK().getDepartmentId()).setParameter("courseNumber", course.getCoursePK().getCourseNumber()).getResultList();
+    }
+
+    public String getFacultyMemberName()
+    {
+        return facultyMemberId.getUsername().getFirstName() + " " + facultyMemberId.getUsername().getLastName();
     }
 }

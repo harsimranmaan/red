@@ -252,9 +252,10 @@ CREATE TABLE `Section` (
   `sectionId` INT NOT NULL,
   `courseNumber` INT NOT NULL,
   `departmentId` varchar(4) NOT NULL,
+  `termId` varchar(10) NOT NULL,
   `startDate` date NOT NULL,
   `endDate` date NOT NULL,
-  `termId` varchar(10) NOT NULL, /* created term table */
+   /* created term table */
   `facultyMemberId` INT NOT NULL,
   `sectionTypeId` INT NOT NULL,
   `teachingAssistant` varchar(20) DEFAULT NULL,
@@ -392,29 +393,20 @@ CREATE  TABLE `SectionTimeTable` (
   `sectionId` INT NOT NULL ,
   `courseNumber` INT NOT NULL ,
   `departmentId` VARCHAR(4) NOT NULL ,
+  `termId` varchar(10) NOT NULL,
   `dayId` INT NOT NULL ,
   `startTime` TIME NOT NULL ,
   `lengthInMinutes` INT NOT NULL ,
-  PRIMARY KEY (`sectionId`, `courseNumber`, `departmentId`, `dayId`, `startTime`) ,
+  PRIMARY KEY (`sectionId`, `courseNumber`, `departmentId`,termId, `dayId`, `startTime`) ,
    CONSTRAINT SectionTimeTableCHKlengthInMinutes CHECK (lengthInMinutes > 59),
 /* changed table name to Section from Course and merged foreign keys*/
 /* changed table name to Section from Department and merged foreign keys*/
   CONSTRAINT `SectionTimeTableFKsectionIdcourseNumberdepartmentId`
-    FOREIGN KEY (`sectionId`,`courseNumber`,`departmentId` )
-    REFERENCES `Section` (`sectionId`,`courseNumber`,`departmentId` )
+    FOREIGN KEY (`sectionId`,`courseNumber`,`departmentId`,termId )
+    REFERENCES `Section` (`sectionId`,`courseNumber`,`departmentId`,termId )
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
-/*  CONSTRAINT `SectionTimeTableFKcourseNumber`
-    FOREIGN KEY (`courseNumber` )
-    REFERENCES `Section` (`courseNumber` )
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE,
-  CONSTRAINT `SectionTimeTableFKdepartmentId`
-    FOREIGN KEY (`departmentId` )
-    REFERENCES `Section` (`departmentId` )
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE,*/
-  CONSTRAINT `SectionTimeTableFKdayId`
+   CONSTRAINT `SectionTimeTableFKdayId`
     FOREIGN KEY (`dayId` )
     REFERENCES `Day` (`dayId` )
     ON DELETE RESTRICT
@@ -428,8 +420,9 @@ CREATE  TABLE `Enrolment` (
   `sectionId` INT NOT NULL ,
   `courseNumber` INT NOT NULL ,
   `departmentId` VARCHAR(4) NOT NULL ,
+  `termId` varchar(10) NOT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
-  PRIMARY KEY (`studentId`, `sectionId`, `courseNumber`, `departmentId`) ,
+  PRIMARY KEY (`studentId`, `sectionId`, `courseNumber`, `departmentId`,termId) ,
   CONSTRAINT `EnrolmentFKstudentId`
     FOREIGN KEY (`studentId` )
     REFERENCES `Student` (`studentId` )
@@ -438,8 +431,8 @@ CREATE  TABLE `Enrolment` (
 /* changed table name to Section from Course  and merged foreign keys */
 /* changed table name to Section from Department and merged foreign keys */
   CONSTRAINT `EnrolmentFKsectionIdcourseNumberdepartmentId`
-    FOREIGN KEY (`sectionId`,`courseNumber`,`departmentId` )
-    REFERENCES `Section` (`sectionId`,`courseNumber`,`departmentId` )
+    FOREIGN KEY (`sectionId`,`courseNumber`,`departmentId`,termId )
+    REFERENCES `Section` (`sectionId`,`courseNumber`,`departmentId` ,termId)
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 /*  CONSTRAINT `EnrolmentFKcourseNumber`
