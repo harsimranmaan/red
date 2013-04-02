@@ -113,6 +113,10 @@ public class Section implements Serializable
         return sectionPK;
     }
 
+    public int getSectionId()
+    {
+        return this.sectionPK.getSectionId();
+    }
     public void setSectionPK(SectionPK sectionPK)
     {
         this.sectionPK = sectionPK;
@@ -179,6 +183,11 @@ public class Section implements Serializable
         this.term = term;
     }
 
+    public String getSectionType()
+    {
+        return sectionTypeId.getName();
+    }
+    
     public SectionType getSectionTypeId()
     {
         return sectionTypeId;

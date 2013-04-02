@@ -44,13 +44,13 @@ public class SectionViewController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
-        secLbl.setText("Secion " + Context.getInstance().getUserSelectSection().getSectionPK().getSectionId());
-        creditLbl.setText("" + Context.getInstance().getUserSelectCourse().getCredits());
-        passRqLbl.setText(Context.getInstance().getUserSelectCourse().getPassingRequirement());
-        courseDesTxt.setText(Context.getInstance().getUserSelectCourse().getDescription());
-        courseNameLbl.setText(Context.getInstance().getUserSelectCourse().getName());
-        deptIdAndCourseNoLbl.setText(Context.getInstance().getUserSelectCourse().getDepartmentIdAndCourseNumber());
-        gradingSchmLbl.setText(Context.getInstance().getUserSelectCourse().getGradingSchemeId().getName());
+        secLbl.setText("Secion " + Context.getInstance().getSelectedSection().getSectionPK().getSectionId());
+        creditLbl.setText("" + Context.getInstance().getSelectedCourse().getCredits());
+        passRqLbl.setText(Context.getInstance().getSelectedCourse().getPassingRequirement());
+        courseDesTxt.setText(Context.getInstance().getSelectedCourse().getDescription());
+        courseNameLbl.setText(Context.getInstance().getSelectedCourse().getName());
+        deptIdAndCourseNoLbl.setText(Context.getInstance().getSelectedCourse().getDepartmentIdAndCourseNumber());
+        gradingSchmLbl.setText(Context.getInstance().getSelectedCourse().getGradingSchemeId().getName());
     }
 
     private void populateList()
