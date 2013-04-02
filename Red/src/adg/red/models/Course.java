@@ -11,8 +11,8 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -32,22 +32,20 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries(
         {
     @NamedQuery(name = "Course.findAll", query = "SELECT c FROM Course c"),
-    @NamedQuery(name = "Course.findByCourseNumber", query = "SELECT c FROM Course c WHERE c.courseNumber = :courseNumber"),
+    @NamedQuery(name = "Course.findByCourseNumber", query = "SELECT c FROM Course c WHERE c.coursePK.courseNumber = :courseNumber"),
+    @NamedQuery(name = "Course.findByDepartmentId", query = "SELECT c FROM Course c WHERE c.coursePK.departmentId = :departmentId"),
     @NamedQuery(name = "Course.findByName", query = "SELECT c FROM Course c WHERE c.name = :name"),
     @NamedQuery(name = "Course.findByDescription", query = "SELECT c FROM Course c WHERE c.description = :description"),
     @NamedQuery(name = "Course.findByCredits", query = "SELECT c FROM Course c WHERE c.credits = :credits"),
     @NamedQuery(name = "Course.findByPassingRequirement", query = "SELECT c FROM Course c WHERE c.passingRequirement = :passingRequirement"),
-    @NamedQuery(name = "Course.findByIsActive", query = "SELECT c FROM Course c WHERE c.isActive = :isActive"),
-    @NamedQuery(name = "Course.findByDepartment", query = "SELECT c FROM Course c WHERE c.departmentId = :departmentId")
+    @NamedQuery(name = "Course.findByIsActive", query = "SELECT c FROM Course c WHERE c.isActive = :isActive")
 })
 public class Course implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "courseNumber")
-    private Integer courseNumber;
+    @EmbeddedId
+    protected CoursePK coursePK;
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
@@ -67,41 +65,31 @@ public class Course implements Serializable
     private Collection<CoRequisite> coRequisiteCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course1")
     private Collection<CoRequisite> coRequisiteCollection1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course2")
-    private Collection<CoRequisite> coRequisiteCollection2;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course3")
-    private Collection<CoRequisite> coRequisiteCollection3;
+    @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Department department;
     @JoinColumn(name = "gradingSchemeId", referencedColumnName = "gradingSchemeId")
     @ManyToOne(optional = false)
     private GradingScheme gradingSchemeId;
-    @JoinColumn(name = "departmentId", referencedColumnName = "departmentId")
-    @ManyToOne(optional = false)
-    private Department departmentId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
     private Collection<Prerequisite> prerequisiteCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course1")
     private Collection<Prerequisite> prerequisiteCollection1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course2")
-    private Collection<Prerequisite> prerequisiteCollection2;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course3")
-    private Collection<Prerequisite> prerequisiteCollection3;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
     private Collection<Section> sectionCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course1")
-    private Collection<Section> sectionCollection1;
 
     public Course()
     {
     }
 
-    public Course(Integer courseNumber)
+    public Course(CoursePK coursePK)
     {
-        this.courseNumber = courseNumber;
+        this.coursePK = coursePK;
     }
 
-    public Course(Integer courseNumber, String name, String description, int credits, String passingRequirement, boolean isActive)
+    public Course(CoursePK coursePK, String name, String description, int credits, String passingRequirement, boolean isActive)
     {
-        this.courseNumber = courseNumber;
+        this.coursePK = coursePK;
         this.name = name;
         this.description = description;
         this.credits = credits;
@@ -109,14 +97,19 @@ public class Course implements Serializable
         this.isActive = isActive;
     }
 
-    public Integer getCourseNumber()
+    public Course(int courseNumber, String departmentId)
     {
-        return courseNumber;
+        this.coursePK = new CoursePK(courseNumber, departmentId);
     }
 
-    public void setCourseNumber(Integer courseNumber)
+    public CoursePK getCoursePK()
     {
-        this.courseNumber = courseNumber;
+        return coursePK;
+    }
+
+    public void setCoursePK(CoursePK coursePK)
+    {
+        this.coursePK = coursePK;
     }
 
     public String getName()
@@ -191,26 +184,14 @@ public class Course implements Serializable
         this.coRequisiteCollection1 = coRequisiteCollection1;
     }
 
-    @XmlTransient
-    public Collection<CoRequisite> getCoRequisiteCollection2()
+    public Department getDepartment()
     {
-        return coRequisiteCollection2;
+        return department;
     }
 
-    public void setCoRequisiteCollection2(Collection<CoRequisite> coRequisiteCollection2)
+    public void setDepartment(Department department)
     {
-        this.coRequisiteCollection2 = coRequisiteCollection2;
-    }
-
-    @XmlTransient
-    public Collection<CoRequisite> getCoRequisiteCollection3()
-    {
-        return coRequisiteCollection3;
-    }
-
-    public void setCoRequisiteCollection3(Collection<CoRequisite> coRequisiteCollection3)
-    {
-        this.coRequisiteCollection3 = coRequisiteCollection3;
+        this.department = department;
     }
 
     public GradingScheme getGradingSchemeId()
@@ -225,17 +206,7 @@ public class Course implements Serializable
 
     public String getDepartmentIdAndCourseNumber()
     {
-        return this.getDepartmentId().getDepartmentId() + " " + this.getCourseNumber();
-    }
-    
-    public Department getDepartmentId()
-    {
-        return departmentId;
-    }
-
-    public void setDepartmentId(Department departmentId)
-    {
-        this.departmentId = departmentId;
+        return this.coursePK.getDepartmentId() + " " + this.coursePK.getCourseNumber();
     }
 
     @XmlTransient
@@ -261,28 +232,6 @@ public class Course implements Serializable
     }
 
     @XmlTransient
-    public Collection<Prerequisite> getPrerequisiteCollection2()
-    {
-        return prerequisiteCollection2;
-    }
-
-    public void setPrerequisiteCollection2(Collection<Prerequisite> prerequisiteCollection2)
-    {
-        this.prerequisiteCollection2 = prerequisiteCollection2;
-    }
-
-    @XmlTransient
-    public Collection<Prerequisite> getPrerequisiteCollection3()
-    {
-        return prerequisiteCollection3;
-    }
-
-    public void setPrerequisiteCollection3(Collection<Prerequisite> prerequisiteCollection3)
-    {
-        this.prerequisiteCollection3 = prerequisiteCollection3;
-    }
-
-    @XmlTransient
     public Collection<Section> getSectionCollection()
     {
         return sectionCollection;
@@ -293,22 +242,11 @@ public class Course implements Serializable
         this.sectionCollection = sectionCollection;
     }
 
-    @XmlTransient
-    public Collection<Section> getSectionCollection1()
-    {
-        return sectionCollection1;
-    }
-
-    public void setSectionCollection1(Collection<Section> sectionCollection1)
-    {
-        this.sectionCollection1 = sectionCollection1;
-    }
-
     @Override
     public int hashCode()
     {
         int hash = 0;
-        hash += (courseNumber != null ? courseNumber.hashCode() : 0);
+        hash += (coursePK != null ? coursePK.hashCode() : 0);
         return hash;
     }
 
@@ -321,7 +259,7 @@ public class Course implements Serializable
             return false;
         }
         Course other = (Course) object;
-        if ((this.courseNumber == null && other.courseNumber != null) || (this.courseNumber != null && !this.courseNumber.equals(other.courseNumber)))
+        if ((this.coursePK == null && other.coursePK != null) || (this.coursePK != null && !this.coursePK.equals(other.coursePK)))
         {
             return false;
         }
@@ -331,14 +269,14 @@ public class Course implements Serializable
     @Override
     public String toString()
     {
-        return "adg.red.models.Course[ courseNumber=" + courseNumber + " ]";
+        return "adg.red.models.Course[ coursePK=" + coursePK + " ]";
     }
 
     public static List<Course> getByDepartment(Department department)
     {
-        return RedEntityManager.getEntityManager().createNamedQuery("Course.findByDepartment").setParameter("departmentId", department).getResultList();
+        return RedEntityManager.getEntityManager().createNamedQuery("Course.findByDepartmentId").setParameter("departmentId", department.getDepartmentId()).getResultList();
     }
-    
+
     public static Course getCourseByCourseNumer(int courseNumber)
     {
         return ((List<Course>) RedEntityManager.getEntityManager().createNamedQuery("Course.findByCourseNumber").setParameter("courseNumber", courseNumber).getResultList()).get(0);

@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Department")
 @XmlRootElement
 @NamedQueries(
-        {
+{
     @NamedQuery(name = "Department.findAll", query = "SELECT d FROM Department d"),
     @NamedQuery(name = "Department.findByDepartmentId", query = "SELECT d FROM Department d WHERE d.departmentId = :departmentId"),
     @NamedQuery(name = "Department.findByName", query = "SELECT d FROM Department d WHERE d.name = :name"),
@@ -43,7 +43,6 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class Department implements Serializable
 {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -66,7 +65,7 @@ public class Department implements Serializable
     @Basic(optional = false)
     @Column(name = "isActive")
     private boolean isActive;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departmentId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "department")
     private Collection<Course> courseCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "departmentId")
     private Collection<FacultyMember> facultyMemberCollection;

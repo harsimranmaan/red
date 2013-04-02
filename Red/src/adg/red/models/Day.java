@@ -26,14 +26,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Day")
 @XmlRootElement
 @NamedQueries(
-        {
+{
     @NamedQuery(name = "Day.findAll", query = "SELECT d FROM Day d"),
     @NamedQuery(name = "Day.findByDayId", query = "SELECT d FROM Day d WHERE d.dayId = :dayId"),
     @NamedQuery(name = "Day.findByDay", query = "SELECT d FROM Day d WHERE d.day = :day")
 })
 public class Day implements Serializable
 {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -42,8 +41,8 @@ public class Day implements Serializable
     @Basic(optional = false)
     @Column(name = "day")
     private String day;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "day")
-//    private Collection<SectionTimeTable> sectionTimeTableCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "day")
+    private Collection<SectionTimeTable> sectionTimeTableCollection;
 
     public Day()
     {
@@ -80,16 +79,17 @@ public class Day implements Serializable
         this.day = day;
     }
 
-//    @XmlTransient
-//    public Collection<SectionTimeTable> getSectionTimeTableCollection()
-//    {
-//        return sectionTimeTableCollection;
-//    }
-//
-//    public void setSectionTimeTableCollection(Collection<SectionTimeTable> sectionTimeTableCollection)
-//    {
-//        this.sectionTimeTableCollection = sectionTimeTableCollection;
-//    }
+    @XmlTransient
+    public Collection<SectionTimeTable> getSectionTimeTableCollection()
+    {
+        return sectionTimeTableCollection;
+    }
+
+    public void setSectionTimeTableCollection(Collection<SectionTimeTable> sectionTimeTableCollection)
+    {
+        this.sectionTimeTableCollection = sectionTimeTableCollection;
+    }
+
     @Override
     public int hashCode()
     {

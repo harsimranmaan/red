@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "ResourceDictionary")
 @XmlRootElement
 @NamedQueries(
-        {
+{
     @NamedQuery(name = "ResourceDictionary.findAll", query = "SELECT r FROM ResourceDictionary r"),
     @NamedQuery(name = "ResourceDictionary.findByResourceId", query = "SELECT r FROM ResourceDictionary r WHERE r.resourceDictionaryPK.resourceId = :resourceId"),
     @NamedQuery(name = "ResourceDictionary.findByLocaleId", query = "SELECT r FROM ResourceDictionary r WHERE r.resourceDictionaryPK.localeId = :localeId"),
@@ -34,7 +34,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 })
 public class ResourceDictionary implements Serializable
 {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ResourceDictionaryPK resourceDictionaryPK;
