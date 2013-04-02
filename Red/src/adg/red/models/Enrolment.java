@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Enrolment")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "Enrolment.findAll", query = "SELECT e FROM Enrolment e"),
     @NamedQuery(name = "Enrolment.findByStudentId", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.studentId = :studentId"),
     @NamedQuery(name = "Enrolment.findBySectionId", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.sectionId = :sectionId"),
@@ -37,10 +37,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Enrolment.findByTermId", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.termId = :termId"),
     @NamedQuery(name = "Enrolment.findByIsActive", query = "SELECT e FROM Enrolment e WHERE e.isActive = :isActive"),
     @NamedQuery(name = "Enrolment.findByEnrolmentPK", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.studentId = :studentId "
-        + " AND e.enrolmentPK.sectionId = :sectionId AND e.enrolmentPK.courseNumber = :courseNumber AND e.enrolmentPK.departmentId = :departmentId AND e.enrolmentPK.termId = :termId")
+            + " AND e.enrolmentPK.sectionId = :sectionId AND e.enrolmentPK.courseNumber = :courseNumber AND e.enrolmentPK.departmentId = :departmentId AND e.enrolmentPK.termId = :termId")
 })
 public class Enrolment implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected EnrolmentPK enrolmentPK;
@@ -48,7 +49,7 @@ public class Enrolment implements Serializable
     @Column(name = "isActive")
     private boolean isActive;
     @JoinColumns(
-    {
+            {
         @JoinColumn(name = "sectionId", referencedColumnName = "sectionId", insertable = false, updatable = false),
         @JoinColumn(name = "courseNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false),
         @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false),
@@ -149,7 +150,12 @@ public class Enrolment implements Serializable
     {
         return "adg.red.models.Enrolment[ enrolmentPK=" + enrolmentPK + " ]";
     }
-    
+
+    public void save()
+    {
+        RedEntityManager.save(this);
+    }
+
     public static Enrolment getEnrolmentByEnrolmentPK(Enrolment enrol) throws Exception
     {
         List<Enrolment> enrolList = RedEntityManager.getEntityManager().createNamedQuery("Enrolment.findByEnrolmentPK")
