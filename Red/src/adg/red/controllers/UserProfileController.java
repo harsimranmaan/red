@@ -7,7 +7,7 @@ package adg.red.controllers;
 import adg.red.models.Address;
 import adg.red.models.Department;
 import adg.red.models.User;
-import adg.red.utils.Encryption;
+import adg.red.utils.Encryptor;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +89,8 @@ public class UserProfileController implements Initializable {
                 User user;
                 try {
                     user = User.getUserProfileByName(userName);
-                    if (user.getPassword().equals(Encryption.encrypt(oldPwd)))
+                    if (user.getPassword().equals(Encryptor.encrypt(oldPwd)))
+                    //if (user.getPassword().equals(oldPwd))
                     {
                         if (newPwd.equals(pwdRe))
                         {
