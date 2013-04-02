@@ -9,7 +9,6 @@ import adg.red.models.Student;
 import adg.red.utils.Context;
 import adg.red.utils.LocaleManager;
 import adg.red.utils.RedEntityManager;
-import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -53,8 +52,8 @@ public class SectionViewController implements Initializable
     private Button btnDrop; // Value injected by FXMLLoader
     @FXML //  fx:id="lblResponse"
     private Label lblResponse; // Value injected by FXMLLoader
-    
     private Enrolment enrolment = null;
+
     /**
      * Initializes the controller class.
      */
@@ -64,24 +63,23 @@ public class SectionViewController implements Initializable
         // TODO
         try
         {
-            enrolment = new Enrolment(Student.getStudentByUsername(Context.getInstance().getCurrentUser()).getStudentId(), 
-                            Context.getInstance().getSelectedSection().getSectionId(), 
-                            Context.getInstance().getSelectedSection().getCourse().getCoursePK().getCourseNumber(),
-                            Context.getInstance().getSelectedDepartment().getDepartmentId(),
-                            Context.getInstance().getSelectedSection().getTerm().getTermId()
-                            );           
+            enrolment = new Enrolment(Student.getStudentByUsername(Context.getInstance().getCurrentUser()).getStudentId(),
+                    Context.getInstance().getSelectedSection().getSectionId(),
+                    Context.getInstance().getSelectedSection().getCourse().getCoursePK().getCourseNumber(),
+                    Context.getInstance().getSelectedDepartment().getDepartmentId(),
+                    Context.getInstance().getSelectedSection().getTerm().getTermId());
         }
         catch (Exception ex)
         {
             Logger.getLogger(SectionViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if(checkUserAlreadyEnrolled(enrolment))
+
+        if (checkUserAlreadyEnrolled(enrolment))
         {
             btnRegister.setDisable(true);
             btnDrop.setDisable(false);
         }
-        
+
         secLbl.setText("Secion " + Context.getInstance().getSelectedSection().getSectionPK().getSectionId());
         creditLbl.setText("" + Context.getInstance().getSelectedCourse().getCredits());
         passRqLbl.setText(Context.getInstance().getSelectedCourse().getPassingRequirement());
@@ -89,7 +87,7 @@ public class SectionViewController implements Initializable
         courseNameLbl.setText(Context.getInstance().getSelectedCourse().getName());
         deptIdAndCourseNoLbl.setText(Context.getInstance().getSelectedCourse().getDepartmentIdAndCourseNumber());
         gradingSchmLbl.setText(Context.getInstance().getSelectedCourse().getGradingSchemeId().getName());
-        
+
         // setOnAction when register button is pressed
         btnRegister.setOnAction(new EventHandler<ActionEvent>()
         {
@@ -103,8 +101,8 @@ public class SectionViewController implements Initializable
 //                    browseCourseLk.setVisible(true);
 //                    browseCourseLk.setText("Faq");
 //                    deptLk.setVisible(false);
-//                    courseLk.setVisible(false);                   
-                   
+//                    courseLk.setVisible(false);
+
                     RedEntityManager.save(enrolment);
                     lblResponse.setText(LocaleManager.get(10));
                     lblResponse.setVisible(true);
@@ -129,9 +127,10 @@ public class SectionViewController implements Initializable
         }
         catch (Exception ex)
         {
-           return false;
+            return false;
         }
     }
+
     private void populateList()
     {
 
