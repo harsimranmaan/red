@@ -338,4 +338,18 @@ public class User implements Serializable
     {
         RedEntityManager.save(this);
     }
+    
+    // get user profile query added by Jingbo Yu
+    public static User getUserProfileByName(String username) throws Exception
+    {
+        List<User> userList = RedEntityManager.getEntityManager().createNamedQuery("User.findByUsername").setParameter("username", username).getResultList();
+        if (userList.size() == 1)
+        {
+            return userList.get(0);
+        }
+        else
+        {
+            throw new Exception(LocaleManager.get(5));
+        }
+    }
 }
