@@ -6,62 +6,66 @@ package adg.red.controllers;
 
 import adg.red.models.Course;
 import adg.red.models.Department;
+import adg.red.models.Section;
 
 /**
  *
  * @author Witt
  */
-public class Context {
+public class Context
+{
+
     private final static Context instance = new Context();
 
-    public static Context getInstance() {
+    public static Context getInstance()
+    {
         return instance;
     }
+    private Course userSelectCourse;
+    private Department userSelectDepartment;
+    private Section userSelectSection;
 
-    private String userSelectDeptId = null;
-    private int userSelectCourseNumer = 0;
-    private Course userSelectCourse = null;
-    private Department userSelectDepartment = null;
-    private int userSelectSectionId = 0;
-
-    public int getUserSelectSectionId() {
-        return userSelectSectionId;
+    public Section getUserSelectSection()
+    {
+        return userSelectSection;
     }
 
-    public void setUserSelectSectionId(int userSelectSectionId) {
-        this.userSelectSectionId = userSelectSectionId;
+    public void setUserSelectSection(Section userSelectSectionId)
+    {
+        this.userSelectSection = userSelectSectionId;
     }
 
-    public Department getUserSelectDepartment() {
+    public Department getUserSelectDepartment()
+    {
         return userSelectDepartment;
     }
 
-    public void setUserSelectDepartment(Department userSelectDepartment) {
+    public void setUserSelectDepartment(Department userSelectDepartment)
+    {
         this.userSelectDepartment = userSelectDepartment;
     }
 
-    public Course getUserSelectCourse() {
+    public Course getUserSelectCourse()
+    {
         return userSelectCourse;
     }
 
-    public void setUserSelectCourse(Course userSelectCourse) {
+    public void setUserSelectCourse(Course userSelectCourse)
+    {
         this.userSelectCourse = userSelectCourse;
     }
-    
-    public int getUserSelectCourseNumer() {
-        return userSelectCourseNumer;
-    }
-
-    public void setUserSelectCourseNumer(int courseNumer) {
-        this.userSelectCourseNumer = courseNumer;
-    }
-
-    public String getUserSelectDeptId() {
-        return userSelectDeptId;
-    }
-
-    public void setUserSelectDeptId(String userSelect) {
-        this.userSelectDeptId = userSelect;
-    }
-    
+//    public int getUserSelectCourseNumer() {
+//        return userSelectCourseNumer;
+//    }
+//
+//    public void setUserSelectCourseNumer(int courseNumer) {
+//        this.userSelectCourseNumer = courseNumer;
+//    }
+//    public String getUserSelectDeptId() {
+//        return userSelectDeptId;
+//    }
+//
+//    public void setUserSelectDeptId(String userSelect) {
+//        this.userSelectDeptId = userSelect;
+//    }
 }

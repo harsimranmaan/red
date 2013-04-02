@@ -28,14 +28,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Locale")
 @XmlRootElement
 @NamedQueries(
-        {
+{
     @NamedQuery(name = "Locale.findAll", query = "SELECT l FROM Locale l"),
     @NamedQuery(name = "Locale.findById", query = "SELECT l FROM Locale l WHERE l.id = :id"),
     @NamedQuery(name = "Locale.findByName", query = "SELECT l FROM Locale l WHERE l.name = :name")
 })
 public class Locale implements Serializable
 {
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -122,7 +121,6 @@ public class Locale implements Serializable
     {
         return "adg.red.models.Locale[ id=" + id + " ]";
     }
-
     public static Locale findByName(String localeName)
     {
         List<Locale> localeList = RedEntityManager.getEntityManager().createNamedQuery("Locale.findByName").setParameter("name", localeName).getResultList();

@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -44,18 +45,20 @@ public class CoRequisite implements Serializable
     @Basic(optional = false)
     @Column(name = "isMust")
     private boolean isMust;
-    @JoinColumn(name = "courseNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false)
+    @JoinColumns(
+    {
+        @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false),
+        @JoinColumn(name = "courseNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false)
+    })
     @ManyToOne(optional = false)
     private Course course;
-    @JoinColumn(name = "coRequisiteNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false)
+    @JoinColumns(
+    {
+        @JoinColumn(name = "coRequisiteDeptId", referencedColumnName = "departmentId", insertable = false, updatable = false),
+        @JoinColumn(name = "coRequisiteNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false)
+    })
     @ManyToOne(optional = false)
     private Course course1;
-    @JoinColumn(name = "coRequisiteDeptId", referencedColumnName = "departmentId", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Course course2;
-    @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Course course3;
 
     public CoRequisite()
     {
@@ -126,26 +129,6 @@ public class CoRequisite implements Serializable
     public void setCourse1(Course course1)
     {
         this.course1 = course1;
-    }
-
-    public Course getCourse2()
-    {
-        return course2;
-    }
-
-    public void setCourse2(Course course2)
-    {
-        this.course2 = course2;
-    }
-
-    public Course getCourse3()
-    {
-        return course3;
-    }
-
-    public void setCourse3(Course course3)
-    {
-        this.course3 = course3;
     }
 
     @Override
