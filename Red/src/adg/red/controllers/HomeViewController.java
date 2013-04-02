@@ -48,6 +48,9 @@ public class HomeViewController implements Initializable {
     private static Hyperlink courseLk; // Value injected by FXMLLoader
     @FXML //fx:id="logOut"
     private Button logOut; // Value injected by FXMLoader
+    @FXML //fx:id="userProfileBtn" // added by Jingbo Yu
+    private Button userProfileBtn; // Value injected by FXMLoader
+
     
     public static Hyperlink getCourseLk() {
         return courseLk;
@@ -104,6 +107,26 @@ public class HomeViewController implements Initializable {
                     view.loadView("FaqView");     
                     browseCourseLk.setVisible(true);
                     browseCourseLk.setText("Faq");
+                    deptLk.setVisible(false);
+                    courseLk.setVisible(false);
+                } 
+                catch (Exception ex) {
+                    Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                 
+            }
+        });
+        
+         // setOnAction when browse course button is pressed added by Jingbo Yu
+        userProfileBtn.setOnAction(new EventHandler<ActionEvent>()  {
+                        
+            @Override
+            public void handle(ActionEvent event) {                   
+                try {                    
+                    View view = new View(disBrwCourseArea);
+                    view.loadView("UserProfile");     
+                    browseCourseLk.setVisible(true);
+                    browseCourseLk.setText("User Profile:");
                     deptLk.setVisible(false);
                     courseLk.setVisible(false);
                 } 

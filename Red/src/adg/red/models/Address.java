@@ -4,6 +4,7 @@
  */
 package adg.red.models;
 
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -230,5 +231,10 @@ public class Address implements Serializable
     public String toString()
     {
         return "adg.red.models.Address[ addressId=" + addressId + " ]";
+    }
+    
+    public void save()
+    {
+        RedEntityManager.save(this);
     }
 }
