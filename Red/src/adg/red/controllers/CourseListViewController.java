@@ -46,8 +46,8 @@ public class CourseListViewController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
-        populateCourseTable(Context.getInstance().getUserSelectDepartment());
-        HomeViewController.getDeptLk().setText(Context.getInstance().getUserSelectDepartment().getDepartmentId());
+        populateCourseTable(Context.getInstance().getSelectedDepartment());
+        HomeViewController.getDeptLk().setText(Context.getInstance().getSelectedDepartment().getDepartmentId());
         HomeViewController.getDeptLk().setVisible(true);
 
         // action when user clicked on the table
@@ -60,7 +60,7 @@ public class CourseListViewController implements Initializable
                 {
                     //int key = disTable.getSelectionModel().getSelectedItem().
                     // Context.getInstance().setUserSelectCourseNumer(key);
-                    Context.getInstance().setUserSelectCourse(disTable.getSelectionModel().getSelectedItem());
+                    Context.getInstance().setSelectedCourse(disTable.getSelectionModel().getSelectedItem());
                     View view = new View(disView);
                     view.loadView("CourseView");
 

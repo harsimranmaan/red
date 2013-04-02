@@ -62,7 +62,7 @@ public class BrowseCourseController implements Initializable
                 {
 //                    String key = tabDisplayCourse.getSelectionModel().getSelectedItem().getDepartmentId();
 //                    Context.getInstance().setUserSelectDeptId(key);
-                    Context.getInstance().setUserSelectDepartment(tabDisplayDepartment.getSelectionModel().getSelectedItem());
+                    Context.getInstance().setSelectedDepartment(tabDisplayDepartment.getSelectionModel().getSelectedItem());
                     View view = new View(disView);
                     view.loadView("CourseListView");
 

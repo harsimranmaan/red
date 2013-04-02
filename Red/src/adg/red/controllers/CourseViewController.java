@@ -66,14 +66,14 @@ public class CourseViewController implements Initializable
     {
         // TODO
 
-        populateSectionTable(Context.getInstance().getUserSelectCourse());
-        lblCredit.setText("" + Context.getInstance().getUserSelectCourse().getCredits());
-        passRqLbl.setText(Context.getInstance().getUserSelectCourse().getPassingRequirement());
-        txtCourseDescription.setText(Context.getInstance().getUserSelectCourse().getDescription());
-        lblCourseName.setText(Context.getInstance().getUserSelectCourse().getName());
-        lblDeptIdAndCourseNo.setText(Context.getInstance().getUserSelectCourse().getDepartmentIdAndCourseNumber());
-        lblGradingScheme.setText(Context.getInstance().getUserSelectCourse().getGradingSchemeId().getName());
-        HomeViewController.getCourseLk().setText("" + Context.getInstance().getUserSelectCourse().getCoursePK().getCourseNumber());
+        populateSectionTable(Context.getInstance().getSelectedCourse());
+        lblCredit.setText("" + Context.getInstance().getSelectedCourse().getCredits());
+        passRqLbl.setText(Context.getInstance().getSelectedCourse().getPassingRequirement());
+        txtCourseDescription.setText(Context.getInstance().getSelectedCourse().getDescription());
+        lblCourseName.setText(Context.getInstance().getSelectedCourse().getName());
+        lblDeptIdAndCourseNo.setText(Context.getInstance().getSelectedCourse().getDepartmentIdAndCourseNumber());
+        lblGradingScheme.setText(Context.getInstance().getSelectedCourse().getGradingSchemeId().getName());
+        HomeViewController.getCourseLk().setText("" + Context.getInstance().getSelectedCourse().getCoursePK().getCourseNumber());
         HomeViewController.getCourseLk().setVisible(true);
 
         // action when user clicked on the table
@@ -84,8 +84,8 @@ public class CourseViewController implements Initializable
             {
                 try
                 {
-                    Context.getInstance().setUserSelectSection(tabCourse.getSelectionModel().getSelectedItem());
-                    //Context.getInstance().setUserSelectCourse(disTable.getSelectionModel().getSelectedItem());
+                    Context.getInstance().setSelectedSection(tabCourse.getSelectionModel().getSelectedItem());
+                    //Context.getInstance().setSelectedCourse(disTable.getSelectionModel().getSelectedItem());
                     View view = new View(disView);
                     view.loadView("SectionView");
 

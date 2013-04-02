@@ -7,6 +7,7 @@ package adg.red.controllers;
 import adg.red.models.Course;
 import adg.red.models.Department;
 import adg.red.models.Section;
+import adg.red.models.User;
 
 /**
  *
@@ -15,7 +16,18 @@ import adg.red.models.Section;
 public class Context
 {
 
-    private final static Context instance = new Context();
+    private final static Context instance;
+    private boolean loggedIn;
+
+    //Singleton
+    private Context()
+    {
+    }
+
+    static
+    {
+        instance = new Context();
+    }
 
     public static Context getInstance()
     {
@@ -24,48 +36,55 @@ public class Context
     private Course userSelectCourse;
     private Department userSelectDepartment;
     private Section userSelectSection;
+    private User currentUser;
 
-    public Section getUserSelectSection()
+    public void setCurrentUser(User user)
+    {
+        currentUser = user;
+    }
+
+    public User getCurrentUser()
+    {
+        return currentUser;
+    }
+
+    public Section getSelectedSection()
     {
         return userSelectSection;
     }
 
-    public void setUserSelectSection(Section userSelectSectionId)
+    public void setSelectedSection(Section userSelectSectionId)
     {
         this.userSelectSection = userSelectSectionId;
     }
 
-    public Department getUserSelectDepartment()
+    public Department getSelectedDepartment()
     {
         return userSelectDepartment;
     }
 
-    public void setUserSelectDepartment(Department userSelectDepartment)
+    public void setSelectedDepartment(Department userSelectDepartment)
     {
         this.userSelectDepartment = userSelectDepartment;
     }
 
-    public Course getUserSelectCourse()
+    public Course getSelectedCourse()
     {
         return userSelectCourse;
     }
 
-    public void setUserSelectCourse(Course userSelectCourse)
+    public void setSelectedCourse(Course userSelectCourse)
     {
         this.userSelectCourse = userSelectCourse;
     }
-//    public int getUserSelectCourseNumer() {
-//        return userSelectCourseNumer;
-//    }
-//
-//    public void setUserSelectCourseNumer(int courseNumer) {
-//        this.userSelectCourseNumer = courseNumer;
-//    }
-//    public String getUserSelectDeptId() {
-//        return userSelectDeptId;
-//    }
-//
-//    public void setUserSelectDeptId(String userSelect) {
-//        this.userSelectDeptId = userSelect;
-//    }
+
+    public void setWasLoggedIn(boolean loggedIn)
+    {
+        this.loggedIn = loggedIn;
+    }
+
+    public boolean WasLoggedIn()
+    {
+        return loggedIn;
+    }
 }
