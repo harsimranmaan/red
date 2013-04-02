@@ -4,9 +4,12 @@
  */
 package adg.red.models;
 
+import adg.red.utils.LocaleManager;
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -38,7 +41,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Student.findByStudentId", query = "SELECT s FROM Student s WHERE s.studentId = :studentId"),
     @NamedQuery(name = "Student.findByDateOfRegistration", query = "SELECT s FROM Student s WHERE s.dateOfRegistration = :dateOfRegistration"),
     @NamedQuery(name = "Student.findByHighestDegree", query = "SELECT s FROM Student s WHERE s.highestDegree = :highestDegree"),
-    @NamedQuery(name = "Student.findByIsActive", query = "SELECT s FROM Student s WHERE s.isActive = :isActive")
+    @NamedQuery(name = "Student.findByIsActive", query = "SELECT s FROM Student s WHERE s.isActive = :isActive"),
+    @NamedQuery(name = "Student.findByUsername", query = "SELECT s FROM Student s WHERE s.username = :username")
 })
 public class Student implements Serializable
 {
@@ -179,5 +183,18 @@ public class Student implements Serializable
     public String toString()
     {
         return "adg.red.models.Student[ studentId=" + studentId + " ]";
+    }
+    
+    public static Student getStudentByUsername(User username) throws Exception
+    {
+        List<Student> studentList = RedEntityManager.getEntityManager().createNamedQuery("Student.findByUsername").setParameter("username", username).getResultList();
+        if (studentList.size() == 1)
+        {
+            return studentList.get(0);
+        }
+        else
+        {
+            throw new Exception(LocaleManager.get(5));
+        }
     }
 }

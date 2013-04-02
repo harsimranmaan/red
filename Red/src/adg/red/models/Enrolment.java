@@ -4,7 +4,10 @@
  */
 package adg.red.models;
 
+import adg.red.utils.LocaleManager;
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -32,7 +35,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Enrolment.findByCourseNumber", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.courseNumber = :courseNumber"),
     @NamedQuery(name = "Enrolment.findByDepartmentId", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.departmentId = :departmentId"),
     @NamedQuery(name = "Enrolment.findByTermId", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.termId = :termId"),
-    @NamedQuery(name = "Enrolment.findByIsActive", query = "SELECT e FROM Enrolment e WHERE e.isActive = :isActive")
+    @NamedQuery(name = "Enrolment.findByIsActive", query = "SELECT e FROM Enrolment e WHERE e.isActive = :isActive"),
+    @NamedQuery(name = "Enrolment.findByEnrolmentPK", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.studentId = :studentId "
+        + " AND e.enrolmentPK.sectionId = :sectionId AND e.enrolmentPK.courseNumber = :courseNumber AND e.enrolmentPK.departmentId = :departmentId AND e.enrolmentPK.termId = :termId")
 })
 public class Enrolment implements Serializable
 {
@@ -143,5 +148,24 @@ public class Enrolment implements Serializable
     public String toString()
     {
         return "adg.red.models.Enrolment[ enrolmentPK=" + enrolmentPK + " ]";
+    }
+    
+    public static Enrolment getEnrolmentByEnrolmentPK(Enrolment enrol) throws Exception
+    {
+        List<Enrolment> enrolList = RedEntityManager.getEntityManager().createNamedQuery("Enrolment.findByEnrolmentPK")
+                .setParameter("studentId", enrol.getEnrolmentPK().getStudentId())
+                .setParameter("sectionId", enrol.getEnrolmentPK().getSectionId())
+                .setParameter("courseNumber", enrol.getEnrolmentPK().getCourseNumber())
+                .setParameter("departmentId", enrol.getEnrolmentPK().getDepartmentId())
+                .setParameter("termId", enrol.getEnrolmentPK().getTermId())
+                .getResultList();
+        if (enrolList.size() == 1)
+        {
+            return enrolList.get(0);
+        }
+        else
+        {
+            throw new Exception(LocaleManager.get(5));
+        }
     }
 }
