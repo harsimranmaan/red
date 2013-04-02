@@ -103,7 +103,7 @@ public class SectionViewController implements Initializable
 //                    deptLk.setVisible(false);
 //                    courseLk.setVisible(false);
 
-                    RedEntityManager.save(enrolment);
+                    enrolment.save();
                     lblResponse.setText(LocaleManager.get(10));
                     lblResponse.setVisible(true);
                     btnRegister.setDisable(true);
