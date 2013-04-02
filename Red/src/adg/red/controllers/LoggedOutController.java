@@ -85,7 +85,6 @@ public class LoggedOutController implements Initializable
             @Override
             public void handle(ActionEvent event)
             {
-                System.out.println("Login Button Pressed..");
                 // get userid and password input from gui by J. Yu
                 String uid = usernameTxt.getText().toString();
                 String pwd = passwordTxt.getText().toString();
