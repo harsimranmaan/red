@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package adg.red.controllers;
+package adg.red.utils;
 
 import adg.red.BootStrap;
 import java.net.URL;
@@ -17,11 +17,11 @@ import javafx.scene.layout.Pane;
  * The class that can load a new view
  * @author Witt
  */
-public class View {
+public class ViewLoader {
     private Pane viewArea;
     
     // constructor
-    public View(Pane viewArea) {
+    public ViewLoader(Pane viewArea) {
         this.viewArea = viewArea;        
     }
     
@@ -44,7 +44,7 @@ public class View {
                     AnchorPane.setBottomAnchor(view, 0.0);
                 }
                 catch (Exception ex){
-                    Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ViewLoader.class.getName()).log(Level.SEVERE, null, ex);
                 }   
     } 
     

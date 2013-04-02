@@ -4,6 +4,8 @@
  */
 package adg.red.controllers;
 
+import adg.red.utils.Context;
+import adg.red.utils.ViewLoader;
 import adg.red.models.Course;
 import adg.red.models.Section;
 import java.net.URL;
@@ -86,7 +88,7 @@ public class CourseViewController implements Initializable
                 {
                     Context.getInstance().setSelectedSection(tabCourse.getSelectionModel().getSelectedItem());
                     //Context.getInstance().setSelectedCourse(disTable.getSelectionModel().getSelectedItem());
-                    View view = new View(disView);
+                    ViewLoader view = new ViewLoader(disView);
                     view.loadView("SectionView");
 
                 }
