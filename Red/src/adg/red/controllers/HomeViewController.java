@@ -194,7 +194,8 @@ public class HomeViewController implements Initializable {
             @Override
             public void handle(ActionEvent event) {                   
                 try {                    
-                    System.out.println("Log Out Button Pressed");        
+                    System.out.println("Log Out Button Pressed");
+                    
                     View view = new View(homeView);
                     view.loadView("LoggedOut");
                 } 

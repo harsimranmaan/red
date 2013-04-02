@@ -108,6 +108,7 @@ public class LoginController implements Initializable
                 try
                 {
                     User user = User.login(uid, pwd);
+                    
                     View view = new View(viewArea);
                     view.loadView("HomeView");
                 }
