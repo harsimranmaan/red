@@ -4,6 +4,8 @@
  */
 package adg.red.controllers;
 
+import adg.red.utils.Context;
+import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -84,7 +86,7 @@ public class LoginController implements Initializable
                 {
                     User user = User.login(uid, pwd);
                     Context.getInstance().setCurrentUser(user);
-                    View view = new View((AnchorPane) loginViewArea.getParent());
+                    ViewLoader view = new ViewLoader((AnchorPane) loginViewArea.getParent());
                     view.loadView("HomeView");
                 }
                 catch (Exception ex)

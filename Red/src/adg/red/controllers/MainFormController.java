@@ -4,6 +4,7 @@
  */
 package adg.red.controllers;
 
+import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -42,7 +43,7 @@ public class MainFormController implements Initializable
                 Platform.exit();
             }
         });
-        View view = new View(viewArea);
+        ViewLoader view = new ViewLoader(viewArea);
         view.loadView("Login");
     }
 }

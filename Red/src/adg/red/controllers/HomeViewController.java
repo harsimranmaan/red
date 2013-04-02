@@ -4,6 +4,8 @@
  */
 package adg.red.controllers;
 
+import adg.red.utils.Context;
+import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -82,7 +84,7 @@ public class HomeViewController implements Initializable
             {
                 try
                 {
-                    View view = new View(disBrwCourseArea);
+                    ViewLoader view = new ViewLoader(disBrwCourseArea);
                     view.loadView("BrowseCourse");
                     browseCourseLk.setVisible(true);
                     browseCourseLk.setText("Browse Course:");
@@ -105,7 +107,7 @@ public class HomeViewController implements Initializable
             {
                 try
                 {
-                    View view = new View(disBrwCourseArea);
+                    ViewLoader view = new ViewLoader(disBrwCourseArea);
                     view.loadView("FaqView");
                     browseCourseLk.setVisible(true);
                     browseCourseLk.setText("Faq");
@@ -128,7 +130,7 @@ public class HomeViewController implements Initializable
             {
                 try
                 {
-                    View view = new View(homeView);
+                    ViewLoader view = new ViewLoader(homeView);
                     view.loadView("HomeView");
                 }
                 catch (Exception ex)
@@ -148,7 +150,7 @@ public class HomeViewController implements Initializable
                 {
                     if (((Hyperlink) event.getSource()).getText().contains("Browse"))
                     {
-                        View view = new View(disBrwCourseArea);
+                        ViewLoader view = new ViewLoader(disBrwCourseArea);
                         view.loadView("BrowseCourse");
                         deptLk.setVisible(false);
                         courseLk.setVisible(false);
@@ -157,7 +159,7 @@ public class HomeViewController implements Initializable
                     }
                     if (((Hyperlink) event.getSource()).getText().contains("faq"))
                     {
-                        View view = new View(disBrwCourseArea);
+                        ViewLoader view = new ViewLoader(disBrwCourseArea);
                         view.loadView("FaqView");
                     }
                     browseCourseLk.setVisited(false);
@@ -177,7 +179,7 @@ public class HomeViewController implements Initializable
             {
                 try
                 {
-                    View view = new View(disBrwCourseArea);
+                    ViewLoader view = new ViewLoader(disBrwCourseArea);
                     view.loadView("CourseListView");
                     courseLk.setVisible(false);
                     deptLk.setVisited(false);
@@ -197,7 +199,7 @@ public class HomeViewController implements Initializable
             {
                 try
                 {
-                    View view = new View(disBrwCourseArea);
+                    ViewLoader view = new ViewLoader(disBrwCourseArea);
                     view.loadView("CourseView");
                     courseLk.setVisited(false);
                 }
@@ -217,7 +219,7 @@ public class HomeViewController implements Initializable
                 try
                 {
 
-                    View view = new View(homeView);
+                    ViewLoader view = new ViewLoader(homeView);
                     Context.getInstance().setWasLoggedIn(true);
                     view.loadView("Login");
                 }

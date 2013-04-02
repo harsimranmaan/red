@@ -4,6 +4,8 @@
  */
 package adg.red.controllers;
 
+import adg.red.utils.Context;
+import adg.red.utils.ViewLoader;
 import adg.red.models.Course;
 import adg.red.models.Department;
 import java.net.URL;
@@ -61,7 +63,7 @@ public class CourseListViewController implements Initializable
                     //int key = disTable.getSelectionModel().getSelectedItem().
                     // Context.getInstance().setUserSelectCourseNumer(key);
                     Context.getInstance().setSelectedCourse(disTable.getSelectionModel().getSelectedItem());
-                    View view = new View(disView);
+                    ViewLoader view = new ViewLoader(disView);
                     view.loadView("CourseView");
 
                 }
