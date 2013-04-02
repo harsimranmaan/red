@@ -10,11 +10,15 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane fx:id="homeView" prefHeight="510.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.HomeViewController">
+<<<<<<< HEAD
   <SplitPane id="homeView" dividerPositions="0.19172932330827067" focusTraversable="true" prefHeight="510.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+=======
+  <SplitPane id="homeView" dividerPositions="0.19298245614035087" focusTraversable="true" layoutX="-1.0" prefHeight="510.0" prefWidth="800.0">
+>>>>>>> loggedOut controller and view added
     <items>
-      <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="150.0">
+      <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0000999999975" prefWidth="150.00009999999747">
         <children>
-          <VBox id="VBox" alignment="CENTER" layoutX="0.5" prefHeight="442.0" prefWidth="150.0" spacing="2.0" AnchorPane.topAnchor="0.0">
+          <VBox id="VBox" alignment="CENTER" layoutX="1.0" prefHeight="442.0" prefWidth="150.0" spacing="2.0" AnchorPane.topAnchor="0.0">
             <children>
               <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Monday, March 18, 2013" />
               <Label maxHeight="-Infinity" maxWidth="-Infinity" text="1:31PM" />
@@ -61,7 +65,7 @@
               <Label alignment="CENTER" contentDisplay="CENTER" layoutX="281.0" layoutY="224.0" text="Displaying area" />
             </children>
           </AnchorPane>
-          <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="642.0">
+          <AnchorPane layoutY="1.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="642.0">
             <children>
               <HBox id="HBox" alignment="CENTER" layoutY="10.0" spacing="5.0" AnchorPane.rightAnchor="6.0">
                 <children>

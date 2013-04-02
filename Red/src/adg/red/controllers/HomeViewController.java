@@ -4,6 +4,7 @@
  */
 package adg.red.controllers;
 
+import adg.red.BootStrap;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -11,10 +12,16 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -39,7 +46,9 @@ public class HomeViewController implements Initializable {
     private static Hyperlink deptLk; // Value injected by FXMLLoader
     @FXML //  fx:id="courseLk"
     private static Hyperlink courseLk; // Value injected by FXMLLoader
-
+    @FXML //fx:id="logOut"
+    private Button logOut; // Value injected by FXMLoader
+    
     public static Hyperlink getCourseLk() {
         return courseLk;
     }
@@ -55,9 +64,8 @@ public class HomeViewController implements Initializable {
     public static void setDeptLk(Hyperlink deptLk) {
         HomeViewController.deptLk = deptLk;
     }
-    
     @FXML
-    private Button logOut;
+    private Label menuLk;
 
     /**
      * Initializes the controller class.
@@ -178,8 +186,31 @@ public class HomeViewController implements Initializable {
                     Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
                 }                 
             }
-        });
-    }    
+        });    
+
+    // setOnAction when course link is clicked
+        logOut.setOnAction(new EventHandler<ActionEvent>()  {
+                        
+            @Override
+            public void handle(ActionEvent event) {                   
+                try {                    
+                    System.out.println("Log Out Button Pressed");        
+//                    Parent root = FXMLLoader.load(getClass().getResource("/adg/red/userInterface/Login.fxml"));
+//                    Scene scene = new Scene(root);
+//                    Stage stage = new Stage();
+//                    stage.setScene(scene);
+//                    stage.show();
+                    
+                    View view = new View(homeView);
+                    view.loadView("LoggedOut");
+                    
+                } 
+                catch (Exception ex) {
+                    Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }                 
+            }
+        });    
+    }
 
     @FXML
     private void logOut(ActionEvent event) {
