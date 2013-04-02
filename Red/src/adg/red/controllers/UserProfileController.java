@@ -5,12 +5,11 @@
 package adg.red.controllers;
 
 import adg.red.models.Address;
-import adg.red.models.Department;
 import adg.red.models.User;
+import adg.red.utils.Context;
 import adg.red.utils.Encryptor;
+import adg.red.utils.LocaleManager;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,18 +21,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
- *
+ * <p/>
  * @author jingboyu
  */
-public class UserProfileController implements Initializable {
+public class UserProfileController implements Initializable
+{
 
-    @FXML
-    private String userName = "nicole";
     @FXML
     private TextField addrTxt1;
     @FXML
@@ -49,7 +46,7 @@ public class UserProfileController implements Initializable {
     @FXML
     private ChoiceBox provinceChoiceBox;
     @FXML
-    private ChoiceBox countryChoiceBox;  
+    private ChoiceBox countryChoiceBox;
     @FXML
     private Button contactCancelBtn;
     @FXML
@@ -68,54 +65,60 @@ public class UserProfileController implements Initializable {
     private PasswordField newPwdTxt;
     @FXML
     private PasswordField pwdReTxt;
-    
+    private User currentUser;
+
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        
+    public void initialize(URL url, ResourceBundle rb)
+    {
+        currentUser = Context.getInstance().getCurrentUser();
         showUserProfile();
-        
+
         pwdSaveBtn.setOnAction(new EventHandler<ActionEvent>()
         {
+            private void showPasswordMessage(String pwdErrorMsg)
+            {
+                pwdErrorLabel.setVisible(true);
+                pwdErrorLabel.setText(pwdErrorMsg);
+            }
+
             @Override
             public void handle(ActionEvent event)
             {
+                pwdErrorLabel.setVisible(false);
                 String oldPwd = oldPwdTxt.getText();
                 String newPwd = newPwdTxt.getText();
                 String pwdRe = pwdReTxt.getText();
                 String pwdErrorMsg = "";
-                User user;
-                try {
-                    user = User.getUserProfileByName(userName);
-                    if (user.getPassword().equals(Encryptor.encrypt(oldPwd)))
-                    //if (user.getPassword().equals(oldPwd))
+                //User user;
+                try
+                {
+                    //check if old password is valid
+                    User.login(currentUser.getUsername(), oldPwd);
+
+                    if (newPwd.equals(pwdRe))
                     {
-                        if (newPwd.equals(pwdRe))
-                        {
-                            user.setPassword(newPwd);
-                            user.save();
-                            pwdErrorMsg += "Password updated!";
-                        }
-                        else
-                        {
-                            pwdErrorMsg += "Re-entered password does not match!";
-                        }
+                        currentUser.setPassword(newPwd);
+                        currentUser.save();
+                        pwdErrorMsg = LocaleManager.get(11);
                     }
                     else
                     {
-                        pwdErrorMsg += "Wrong old password!";
+                        pwdErrorMsg = LocaleManager.get(12);
                     }
-                    pwdErrorLabel.setVisible(true);
-                    pwdErrorLabel.setText(pwdErrorMsg);
-                    
-                } catch (Exception ex) {
-                    Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
+                    showPasswordMessage(pwdErrorMsg);
+                }
+                catch (Exception ex)
+                {
+                    pwdErrorMsg = LocaleManager.get(13);
+                    showPasswordMessage(pwdErrorMsg);
+                    // Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
-        
+
         pwdCancelBtn.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -127,7 +130,7 @@ public class UserProfileController implements Initializable {
                 pwdErrorLabel.setVisible(false);
             }
         });
-        
+
         contactCancelBtn.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -137,13 +140,14 @@ public class UserProfileController implements Initializable {
                 errorLabel.setVisible(false);
             }
         });
-        
+
         contactSaveBtn.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent event)
             {
-                try {
+                try
+                {
                     // modify user profile
                     String errorMsg = "";
                     boolean isValid = true;
@@ -167,7 +171,8 @@ public class UserProfileController implements Initializable {
                         errorMsg += "Empty postal code! ";
                     }
                     String phone = phoneTxt.getText();
-                    try{
+                    try
+                    {
                         Integer.valueOf(phone);
                     }
                     catch (Exception e)
@@ -181,23 +186,22 @@ public class UserProfileController implements Initializable {
                         isValid = false;
                         errorMsg += "Invalid email!";
                     }
-                    
+
                     String provinceChoice = provinceChoiceBox.getValue().toString();
-                    String countryChoice = countryChoiceBox.getValue().toString();       
-    
+                    String countryChoice = countryChoiceBox.getValue().toString();
+
                     if (isValid)
                     {
-                        User user = User.getUserProfileByName(userName);
-                        Address addr = user.getAddressId();
+                        Address addr = currentUser.getAddressId();
                         addr.setAddressLineFirst(addr1);
                         addr.setAddressLineSecond(addr2);
                         addr.setCity(city);
                         addr.setProvince(provinceChoice);
                         addr.setCountry(countryChoice);
-                        user.setAddressId(addr);
-                        user.setPhoneNumber(phone);
-                        user.setEmail(email);
-                        user.save();
+                        currentUser.setAddressId(addr);
+                        currentUser.setPhoneNumber(phone);
+                        currentUser.setEmail(email);
+                        currentUser.save();
                         errorLabel.setVisible(true);
                         errorLabel.setText("User profile updated!");
                     }
@@ -206,27 +210,20 @@ public class UserProfileController implements Initializable {
                         errorLabel.setVisible(true);
                         errorLabel.setText(errorMsg);
                     }
-                    
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
             }
         });
-    }    
-  
+    }
+
     private void showUserProfile()
     {
-        try {
-            // display user profile by retriving database
-            User user = User.getUserProfileByName(userName);
-            displayUserProfile(user);
-            
-        } catch (Exception ex) {
-            Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }        
-    
+        displayUserProfile(currentUser);
+    }
+
     private void displayUserProfile(User user)
     {
         addrTxt1.setText(user.getAddressId().getAddressLineFirst());
@@ -238,6 +235,4 @@ public class UserProfileController implements Initializable {
         provinceChoiceBox.setValue(user.getAddressId().getProvince());
         countryChoiceBox.setValue(user.getAddressId().getCountry());
     }
-    
-    
 }

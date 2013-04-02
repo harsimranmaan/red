@@ -48,7 +48,6 @@ public class HomeViewController implements Initializable
     @FXML //fx:id="userProfileBtn" // added by Jingbo Yu
     private Button userProfileBtn; // Value injected by FXMLoader
 
-    
     public static Hyperlink getCourseLk()
     {
 
@@ -125,24 +124,27 @@ public class HomeViewController implements Initializable
 
             }
         });
-        
-         // setOnAction when browse course button is pressed added by Jingbo Yu
-        userProfileBtn.setOnAction(new EventHandler<ActionEvent>()  {
-                        
+
+        // setOnAction when browse course button is pressed added by Jingbo Yu
+        userProfileBtn.setOnAction(new EventHandler<ActionEvent>()
+        {
             @Override
-            public void handle(ActionEvent event) {                   
-                try {                    
+            public void handle(ActionEvent event)
+            {
+                try
+                {
                     ViewLoader view = new ViewLoader(disBrwCourseArea);
-                    view.loadView("UserProfile");     
+                    view.loadView("UserProfile");
                     browseCourseLk.setVisible(true);
                     browseCourseLk.setText("User Profile:");
                     deptLk.setVisible(false);
                     courseLk.setVisible(false);
-                } 
-                catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                 
+
             }
         });
 
@@ -234,7 +236,7 @@ public class HomeViewController implements Initializable
             }
         });
 
-        // setOnAction when course link is clicked
+        // setOnAction when logout link is clicked
         logOut.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
