@@ -127,11 +127,6 @@ public class User implements Serializable
     {
         this.username = username;
     }
-    
-    public String getPassword()
-    {
-        return password;
-    }
 
     public void setPassword(String password)
     {
@@ -338,7 +333,7 @@ public class User implements Serializable
     {
         RedEntityManager.save(this);
     }
-    
+
     // get user profile query added by Jingbo Yu
     public static User getUserProfileByName(String username) throws Exception
     {
