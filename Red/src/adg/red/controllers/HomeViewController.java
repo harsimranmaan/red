@@ -195,24 +195,13 @@ public class HomeViewController implements Initializable {
             public void handle(ActionEvent event) {                   
                 try {                    
                     System.out.println("Log Out Button Pressed");        
-//                    Parent root = FXMLLoader.load(getClass().getResource("/adg/red/userInterface/Login.fxml"));
-//                    Scene scene = new Scene(root);
-//                    Stage stage = new Stage();
-//                    stage.setScene(scene);
-//                    stage.show();
-                    
                     View view = new View(homeView);
                     view.loadView("LoggedOut");
-                    
                 } 
                 catch (Exception ex) {
                     Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
                 }                 
             }
         });    
-    }
-
-    @FXML
-    private void logOut(ActionEvent event) {
     }
 }
