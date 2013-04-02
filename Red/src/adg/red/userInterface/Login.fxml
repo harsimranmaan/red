@@ -9,60 +9,34 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.LoginController">
-  <children>
-    <MenuBar prefWidth="600.0" styleClass="menubar" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" styleClass="menuitem" text="Close" fx:id="close" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <Pane prefHeight="66.0" prefWidth="599.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
-      <children>
-        <ImageView id="red-logo.png" fitHeight="64.2932007137278" fitWidth="571.0" layoutX="11.0" layoutY="2.0" preserveRatio="true">
-          <image>
-            <Image url="@images/red-logo.png" preserveRatio="true" smooth="true" />
-          </image>
-        </ImageView>
-      </children>
-    </Pane>
-    <AnchorPane fx:id="viewArea" prefHeight="510.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="90.0">
-      <children>
-        <AnchorPane id="AnchorPane" minWidth="352.0" prefHeight="151.0" prefWidth="352.0" AnchorPane.bottomAnchor="179.0" AnchorPane.leftAnchor="224.0" AnchorPane.rightAnchor="224.0" AnchorPane.topAnchor="180.0">
-          <children>
+<AnchorPane fx:id="loginViewArea" prefHeight="510.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.LoginController">
+    <AnchorPane id="AnchorPane" minWidth="352.0" prefHeight="151.0" prefWidth="352.0" AnchorPane.bottomAnchor="179.0" AnchorPane.leftAnchor="224.0" AnchorPane.rightAnchor="224.0" AnchorPane.topAnchor="180.0">
+        <children>
             <Label fx:id="userLbl" layoutY="3.0" text="Username:">
-              <font>
-                <Font name="System Bold" size="12.0" fx:id="x1" />
-              </font>
+                <font>
+                    <Font name="System Bold" size="12.0" fx:id="x1" />
+                </font>
             </Label>
             <Label fx:id="passLbl" font="$x1" layoutY="46.0" text="Password:" />
             <TextField fx:id="usernameTxt" minWidth="-Infinity" prefWidth="199.0" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="69.0" />
             <PasswordField fx:id="passwordTxt" layoutY="43.0" minWidth="-Infinity" prefWidth="199.0" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="69.0" />
-            <HBox id="HBox" alignment="CENTER" layoutX="34.0" layoutY="94.0" spacing="60.0">
-              <children>
-                <Button fx:id="loginBtn" mnemonicParsing="false" prefHeight="32.0" text="Login" textAlignment="CENTER" />
-                <Button fx:id="forgotPassBtn" mnemonicParsing="false" prefHeight="32.0" text="Forgot Password" textAlignment="CENTER" />
-              </children>
+            <HBox id="HBox" alignment="CENTER" layoutX="34.0" layoutY="84.0" spacing="60.0">
+                <children>
+                    <Button fx:id="loginBtn" mnemonicParsing="false" prefHeight="32.0" text="Login" textAlignment="CENTER" />
+                    <Button fx:id="forgotPassBtn" mnemonicParsing="false" prefHeight="32.0" text="Forgot Password" textAlignment="CENTER" />
+                </children>
             </HBox>
-          </children>
-        </AnchorPane>
-        <Label id="loginErrMsg" fx:id="loginErrLbl" alignment="CENTER" contentDisplay="CENTER" layoutX="224.0" layoutY="142.0" prefWidth="283.0" text="label" textFill="#cc0000" visible="false">
-          <font>
-            <Font name="System Bold" size="20.0" />
-          </font>
-        </Label>
-      </children>
+            <HBox id="hBMsg" alignment="CENTER" layoutX="34.0" layoutY="124.0" spacing="20">
+                <Label id="loginErrMsg" fx:id="loginErrLbl" alignment="CENTER" contentDisplay="CENTER" text="label" textFill="#cc0000" visible="false">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+            </HBox>
+        </children>
+        <stylesheets>
+            <URL value="@css/mainForm.css" />
+        </stylesheets>
     </AnchorPane>
-  </children>
-  <stylesheets>
-    <URL value="@css/mainForm.css" />
-  </stylesheets>
+
 </AnchorPane>

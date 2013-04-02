@@ -4,7 +4,7 @@
  */
 package adg.red.models;
 
-import adg.red.utils.Encryption;
+import adg.red.utils.Encryptor;
 import adg.red.utils.LocaleManager;
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
@@ -110,7 +110,7 @@ public class User implements Serializable
     public User(String username, String password, String firstName, String lastName, boolean isOnline, String email, boolean isActive)
     {
         this.username = username;
-        this.password = Encryption.encrypt(password);
+        this.password = Encryptor.encrypt(password);
         this.firstName = firstName;
         this.lastName = lastName;
         this.isOnline = isOnline;
@@ -128,14 +128,9 @@ public class User implements Serializable
         this.username = username;
     }
 
-    public String getPassword()
-    {
-        return password;
-    }
-
     public void setPassword(String password)
     {
-        this.password = Encryption.encrypt(password);
+        this.password = Encryptor.encrypt(password);
     }
 
     public String getFirstName()
@@ -322,7 +317,7 @@ public class User implements Serializable
      */
     public static User login(String username, String password) throws Exception
     {
-        password = Encryption.encrypt(password);
+        password = Encryptor.encrypt(password);
         List<User> userList1 = RedEntityManager.getEntityManager().createNamedQuery("User.login").setParameter("username", username).setParameter("password", password).getResultList();
         if (userList1.size() == 1)
         {

@@ -29,6 +29,9 @@ public class SectionTimeTablePK implements Serializable
     @Column(name = "departmentId")
     private String departmentId;
     @Basic(optional = false)
+    @Column(name = "termId")
+    private String termId;
+    @Basic(optional = false)
     @Column(name = "dayId")
     private int dayId;
     @Basic(optional = false)
@@ -40,11 +43,12 @@ public class SectionTimeTablePK implements Serializable
     {
     }
 
-    public SectionTimeTablePK(int sectionId, int courseNumber, String departmentId, int dayId, Date startTime)
+    public SectionTimeTablePK(int sectionId, int courseNumber, String departmentId, String termId, int dayId, Date startTime)
     {
         this.sectionId = sectionId;
         this.courseNumber = courseNumber;
         this.departmentId = departmentId;
+        this.termId = termId;
         this.dayId = dayId;
         this.startTime = startTime;
     }
@@ -79,6 +83,16 @@ public class SectionTimeTablePK implements Serializable
         this.departmentId = departmentId;
     }
 
+    public String getTermId()
+    {
+        return termId;
+    }
+
+    public void setTermId(String termId)
+    {
+        this.termId = termId;
+    }
+
     public int getDayId()
     {
         return dayId;
@@ -106,6 +120,7 @@ public class SectionTimeTablePK implements Serializable
         hash += (int) sectionId;
         hash += (int) courseNumber;
         hash += (departmentId != null ? departmentId.hashCode() : 0);
+        hash += (termId != null ? termId.hashCode() : 0);
         hash += (int) dayId;
         hash += (startTime != null ? startTime.hashCode() : 0);
         return hash;
@@ -132,6 +147,10 @@ public class SectionTimeTablePK implements Serializable
         {
             return false;
         }
+        if ((this.termId == null && other.termId != null) || (this.termId != null && !this.termId.equals(other.termId)))
+        {
+            return false;
+        }
         if (this.dayId != other.dayId)
         {
             return false;
@@ -146,6 +165,6 @@ public class SectionTimeTablePK implements Serializable
     @Override
     public String toString()
     {
-        return "adg.red.models.SectionTimeTablePK[ sectionId=" + sectionId + ", courseNumber=" + courseNumber + ", departmentId=" + departmentId + ", dayId=" + dayId + ", startTime=" + startTime + " ]";
+        return "adg.red.models.SectionTimeTablePK[ sectionId=" + sectionId + ", courseNumber=" + courseNumber + ", departmentId=" + departmentId + ", termId=" + termId + ", dayId=" + dayId + ", startTime=" + startTime + " ]";
     }
 }

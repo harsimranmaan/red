@@ -28,17 +28,21 @@ public class EnrolmentPK implements Serializable
     @Basic(optional = false)
     @Column(name = "departmentId")
     private String departmentId;
+    @Basic(optional = false)
+    @Column(name = "termId")
+    private String termId;
 
     public EnrolmentPK()
     {
     }
 
-    public EnrolmentPK(int studentId, int sectionId, int courseNumber, String departmentId)
+    public EnrolmentPK(int studentId, int sectionId, int courseNumber, String departmentId, String termId)
     {
         this.studentId = studentId;
         this.sectionId = sectionId;
         this.courseNumber = courseNumber;
         this.departmentId = departmentId;
+        this.termId = termId;
     }
 
     public int getStudentId()
@@ -81,6 +85,16 @@ public class EnrolmentPK implements Serializable
         this.departmentId = departmentId;
     }
 
+    public String getTermId()
+    {
+        return termId;
+    }
+
+    public void setTermId(String termId)
+    {
+        this.termId = termId;
+    }
+
     @Override
     public int hashCode()
     {
@@ -89,6 +103,7 @@ public class EnrolmentPK implements Serializable
         hash += (int) sectionId;
         hash += (int) courseNumber;
         hash += (departmentId != null ? departmentId.hashCode() : 0);
+        hash += (termId != null ? termId.hashCode() : 0);
         return hash;
     }
 
@@ -117,12 +132,16 @@ public class EnrolmentPK implements Serializable
         {
             return false;
         }
+        if ((this.termId == null && other.termId != null) || (this.termId != null && !this.termId.equals(other.termId)))
+        {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString()
     {
-        return "adg.red.models.EnrolmentPK[ studentId=" + studentId + ", sectionId=" + sectionId + ", courseNumber=" + courseNumber + ", departmentId=" + departmentId + " ]";
+        return "adg.red.models.EnrolmentPK[ studentId=" + studentId + ", sectionId=" + sectionId + ", courseNumber=" + courseNumber + ", departmentId=" + departmentId + ", termId=" + termId + " ]";
     }
 }

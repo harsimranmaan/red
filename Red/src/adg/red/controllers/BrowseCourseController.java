@@ -4,6 +4,8 @@
  */
 package adg.red.controllers;
 
+import adg.red.utils.Context;
+import adg.red.utils.ViewLoader;
 import adg.red.models.Department;
 import java.net.URL;
 import java.util.Iterator;
@@ -33,11 +35,11 @@ public class BrowseCourseController implements Initializable
 {
 
     @FXML //  fx:id="disTable"
-    private TableView<Department> disTable; // Value injected by FXMLLoader
+    private TableView<Department> tabDisplayDepartment; // Value injected by FXMLLoader
     @FXML //  fx:id="deptIdColmn"
-    private TableColumn<Department, String> deptIdColmn; // Value injected by FXMLLoader
+    private TableColumn<Department, String> colDeptId; // Value injected by FXMLLoader
     @FXML //  fx:id="deptNameColm"
-    private TableColumn<Department, String> deptNameColmn; // Value injected by FXMLLoader
+    private TableColumn<Department, String> colDeptName; // Value injected by FXMLLoader
     @FXML //  fx:id="disView"
     private AnchorPane disView; // Value injected by FXMLLoader
     @FXML //  fx:id="hBox"
@@ -53,17 +55,17 @@ public class BrowseCourseController implements Initializable
         populateDeptTable("All");
 
         // action when user clicked on the table
-        disTable.setOnMousePressed(new EventHandler<MouseEvent>()
+        tabDisplayDepartment.setOnMousePressed(new EventHandler<MouseEvent>()
         {
             @Override
             public void handle(MouseEvent event)
             {
                 try
                 {
-                    String key = disTable.getSelectionModel().getSelectedItem().getDepartmentId();
-                    Context.getInstance().setUserSelectDeptId(key);
-                    Context.getInstance().setUserSelectDepartment(disTable.getSelectionModel().getSelectedItem());
-                    View view = new View(disView);
+//                    String key = tabDisplayCourse.getSelectionModel().getSelectedItem().getDepartmentId();
+//                    Context.getInstance().setUserSelectDeptId(key);
+                    Context.getInstance().setSelectedDepartment(tabDisplayDepartment.getSelectionModel().getSelectedItem());
+                    ViewLoader view = new ViewLoader(disView);
                     view.loadView("CourseListView");
 
                 }
@@ -105,8 +107,8 @@ public class BrowseCourseController implements Initializable
 
     private void populate(List<Department> departments)
     {
-        deptIdColmn.setCellValueFactory(new PropertyValueFactory<Department, String>("departmentId"));
-        deptNameColmn.setCellValueFactory(new PropertyValueFactory<Department, String>("name"));
-        disTable.getItems().setAll(departments);
+        colDeptId.setCellValueFactory(new PropertyValueFactory<Department, String>("departmentId"));
+        colDeptName.setCellValueFactory(new PropertyValueFactory<Department, String>("name"));
+        tabDisplayDepartment.getItems().setAll(departments);
     }
 }

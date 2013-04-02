@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Program")
 @XmlRootElement
 @NamedQueries(
-        {
+{
     @NamedQuery(name = "Program.findAll", query = "SELECT p FROM Program p"),
     @NamedQuery(name = "Program.findByProgramName", query = "SELECT p FROM Program p WHERE p.programPK.programName = :programName"),
     @NamedQuery(name = "Program.findByDepartmentId", query = "SELECT p FROM Program p WHERE p.programPK.departmentId = :departmentId"),
@@ -38,7 +38,6 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class Program implements Serializable
 {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ProgramPK programPK;
@@ -51,10 +50,8 @@ public class Program implements Serializable
     @Basic(optional = false)
     @Column(name = "isActive")
     private boolean isActive;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "program")
-//    private Collection<Registration> registrationCollection;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "program1")
-//    private Collection<Registration> registrationCollection1;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "program")
+    private Collection<Registration> registrationCollection;
     @JoinColumn(name = "addressId", referencedColumnName = "addressId")
     @ManyToOne
     private Address addressId;
@@ -124,27 +121,17 @@ public class Program implements Serializable
         this.isActive = isActive;
     }
 
-//    @XmlTransient
-//    public Collection<Registration> getRegistrationCollection()
-//    {
-//        return registrationCollection;
-//    }
-//
-//    public void setRegistrationCollection(Collection<Registration> registrationCollection)
-//    {
-//        this.registrationCollection = registrationCollection;
-//    }
-//
-//    @XmlTransient
-//    public Collection<Registration> getRegistrationCollection1()
-//    {
-//        return registrationCollection1;
-//    }
-//
-//    public void setRegistrationCollection1(Collection<Registration> registrationCollection1)
-//    {
-//        this.registrationCollection1 = registrationCollection1;
-//    }
+    @XmlTransient
+    public Collection<Registration> getRegistrationCollection()
+    {
+        return registrationCollection;
+    }
+
+    public void setRegistrationCollection(Collection<Registration> registrationCollection)
+    {
+        this.registrationCollection = registrationCollection;
+    }
+
     public Address getAddressId()
     {
         return addressId;

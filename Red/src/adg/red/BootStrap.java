@@ -20,14 +20,18 @@ public class BootStrap extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource(getUserInterfaceUrl("Login")));
-
+        Parent root = FXMLLoader.load(getClass().getResource(getUserInterfaceUrl("MainForm")));
         Scene scene = new Scene(root);
-
         stage.setScene(scene);
         stage.show();
     }
 
+    /**
+     * Gets the URI for the fxml file
+     * <p/>
+     * @param fileName <p/>
+     * @return
+     */
     public String getUserInterfaceUrl(String fileName)
     {
         return "/adg/red/userInterface/" + fileName + ".fxml";
