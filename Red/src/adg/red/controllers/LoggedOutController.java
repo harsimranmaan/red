@@ -59,8 +59,8 @@ public class LoggedOutController implements Initializable
     private PasswordField passwordTxt; // created by J. Yu
     @FXML //  fx:id="passLbl"
     private Label passLbl; // Value injected by FXMLLoader
-    @FXML
-    private Label userLbl;
+    @FXML //  fx:id="userLbl"
+    private Label userLbl; // Value injected by FXMLLoader
 
     /**
      * Initialize all the action events.
@@ -85,11 +85,10 @@ public class LoggedOutController implements Initializable
             @Override
             public void handle(ActionEvent event)
             {
-                System.out.println("Login Button Pressed.");
+                System.out.println("Login Button Pressed..");
                 // get userid and password input from gui by J. Yu
                 String uid = usernameTxt.getText().toString();
                 String pwd = passwordTxt.getText().toString();
-                
                 System.out.println(uid);
                 System.out.println(pwd);
 
