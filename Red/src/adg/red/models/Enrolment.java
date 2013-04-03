@@ -8,7 +8,6 @@ import adg.red.utils.LocaleManager;
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -83,7 +82,7 @@ public class Enrolment implements Serializable
         this.isActive = isActive;
     }
 
-    public Enrolment(int studentId, int sectionId, int courseNumber, String departmentId, Date termYear, int sessionId, int sectionTypeId)
+    public Enrolment(int studentId, int sectionId, int courseNumber, String departmentId, int termYear, int sessionId, int sectionTypeId)
     {
         this.enrolmentPK = new EnrolmentPK(studentId, sectionId, courseNumber, departmentId, termYear, sessionId, sectionTypeId);
     }

@@ -5,12 +5,9 @@
 package adg.red.models;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -19,6 +16,7 @@ import javax.persistence.TemporalType;
 @Embeddable
 public class EnrolmentPK implements Serializable
 {
+
     @Basic(optional = false)
     @Column(name = "studentId")
     private int studentId;
@@ -33,8 +31,7 @@ public class EnrolmentPK implements Serializable
     private String departmentId;
     @Basic(optional = false)
     @Column(name = "termYear")
-    @Temporal(TemporalType.DATE)
-    private Date termYear;
+    private int termYear;
     @Basic(optional = false)
     @Column(name = "sessionId")
     private int sessionId;
@@ -46,7 +43,7 @@ public class EnrolmentPK implements Serializable
     {
     }
 
-    public EnrolmentPK(int studentId, int sectionId, int courseNumber, String departmentId, Date termYear, int sessionId, int sectionTypeId)
+    public EnrolmentPK(int studentId, int sectionId, int courseNumber, String departmentId, int termYear, int sessionId, int sectionTypeId)
     {
         this.studentId = studentId;
         this.sectionId = sectionId;
@@ -97,12 +94,12 @@ public class EnrolmentPK implements Serializable
         this.departmentId = departmentId;
     }
 
-    public Date getTermYear()
+    public int getTermYear()
     {
         return termYear;
     }
 
-    public void setTermYear(Date termYear)
+    public void setTermYear(int termYear)
     {
         this.termYear = termYear;
     }
@@ -135,7 +132,7 @@ public class EnrolmentPK implements Serializable
         hash += (int) sectionId;
         hash += (int) courseNumber;
         hash += (departmentId != null ? departmentId.hashCode() : 0);
-        hash += (termYear != null ? termYear.hashCode() : 0);
+        hash += termYear;
         hash += (int) sessionId;
         hash += (int) sectionTypeId;
         return hash;
@@ -166,7 +163,7 @@ public class EnrolmentPK implements Serializable
         {
             return false;
         }
-        if ((this.termYear == null && other.termYear != null) || (this.termYear != null && !this.termYear.equals(other.termYear)))
+        if (this.termYear != other.termYear)
         {
             return false;
         }

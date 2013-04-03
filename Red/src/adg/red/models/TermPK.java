@@ -5,12 +5,9 @@
 package adg.red.models;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -19,10 +16,10 @@ import javax.persistence.TemporalType;
 @Embeddable
 public class TermPK implements Serializable
 {
+
     @Basic(optional = false)
     @Column(name = "termYear")
-    @Temporal(TemporalType.DATE)
-    private Date termYear;
+    private int termYear;
     @Basic(optional = false)
     @Column(name = "sessionId")
     private int sessionId;
@@ -31,18 +28,18 @@ public class TermPK implements Serializable
     {
     }
 
-    public TermPK(Date termYear, int sessionId)
+    public TermPK(int termYear, int sessionId)
     {
         this.termYear = termYear;
         this.sessionId = sessionId;
     }
 
-    public Date getTermYear()
+    public int getTermYear()
     {
         return termYear;
     }
 
-    public void setTermYear(Date termYear)
+    public void setTermYear(int termYear)
     {
         this.termYear = termYear;
     }
@@ -61,8 +58,8 @@ public class TermPK implements Serializable
     public int hashCode()
     {
         int hash = 0;
-        hash += (termYear != null ? termYear.hashCode() : 0);
-        hash += (int) sessionId;
+        hash += termYear;
+        hash += sessionId;
         return hash;
     }
 
@@ -75,7 +72,7 @@ public class TermPK implements Serializable
             return false;
         }
         TermPK other = (TermPK) object;
-        if ((this.termYear == null && other.termYear != null) || (this.termYear != null && !this.termYear.equals(other.termYear)))
+        if (this.termYear != other.termYear)
         {
             return false;
         }
