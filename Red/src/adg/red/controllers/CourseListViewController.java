@@ -49,7 +49,7 @@ public class CourseListViewController implements Initializable
     {
         // TODO
         populateCourseTable(Context.getInstance().getSelectedDepartment());
-        HomeViewController.getDeptLk().setText(Context.getInstance().getSelectedDepartment().getDepartmentId());
+        HomeViewController.getDeptLk().setText(Context.getInstance().getSelectedDepartment().getDepartmentId() + ":");
         HomeViewController.getDeptLk().setVisible(true);
 
         // action when user clicked on the table
