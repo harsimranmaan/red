@@ -108,7 +108,7 @@ public class User implements Serializable
     public User(String username, String password, String firstName, String lastName, boolean isOnline, String email, boolean isActive)
     {
         this.username = username;
-        this.password = Encryptor.encrypt(password);
+        this.password = Encryptor.encryptSHA(password);
         this.firstName = firstName;
         this.lastName = lastName;
         this.isOnline = isOnline;
@@ -128,7 +128,7 @@ public class User implements Serializable
 
     public void setPassword(String password)
     {
-        this.password = Encryptor.encrypt(password);
+        this.password = Encryptor.encryptSHA(password);
     }
 
     public String getFirstName()
@@ -315,7 +315,7 @@ public class User implements Serializable
      */
     public static User login(String username, String password) throws Exception
     {
-        password = Encryptor.encrypt(password);
+        password = Encryptor.encryptSHA(password);
         List<User> userList1 = RedEntityManager.getEntityManager().createNamedQuery("User.login").setParameter("username", username).setParameter("password", password).getResultList();
         if (userList1.size() == 1)
         {

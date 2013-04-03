@@ -4,8 +4,11 @@
  */
 package adg.red.utils;
 
+import adg.red.config.Config;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -26,7 +29,7 @@ public class ConfigManager
         properties = new Properties();
         try
         {
-            properties.load(new FileInputStream("config.properties"));
+            properties.load(Config.getPropFileStream("config.properties"));
         }
         catch (IOException ex)
         {
@@ -44,8 +47,9 @@ public class ConfigManager
         return properties;
     }
 
-    public void setProperties(Properties properties)
+    public String getPropertyValue(String key)
     {
-        //   this.properties.store(new FileOutputStream(propertiesFile, "Properties for MyApp"), null);
+        return properties.getProperty(key);
+
     }
 }
