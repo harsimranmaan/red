@@ -109,7 +109,7 @@ public class Section implements Serializable
         this.isActive = isActive;
     }
 
-    public Section(int sectionId, int sectionTypeId, int courseNumber, String departmentId, Date termYear, int sessionId)
+    public Section(int sectionId, int sectionTypeId, int courseNumber, String departmentId, int termYear, int sessionId)
     {
         this.sectionPK = new SectionPK(sectionId, sectionTypeId, courseNumber, departmentId, termYear, sessionId);
     }
