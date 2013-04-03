@@ -245,7 +245,7 @@ ALTER TABLE `Session` AUTO_INCREMENT = 100;
 
 DROP TABLE IF EXISTS `Term`;
 CREATE TABLE `Term` (
-  `termYear` YEAR NOT NULL,
+  `termYear` SMALLINT NOT NULL,
   `sessionId` INT NOT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`termYear`,`sessionId`),
@@ -260,7 +260,7 @@ CREATE TABLE `Section` (
   `sectionTypeId` INT NOT NULL,
   `courseNumber` INT NOT NULL,
   `departmentId` varchar(4) NOT NULL,
-  `termYear` YEAR NOT NULL,
+  `termYear` SMALLINT NOT NULL,
   `sessionId` INT NOT NULL,
   `startDate` date NOT NULL,
   `endDate` date NOT NULL,
@@ -313,8 +313,8 @@ CREATE  TABLE `MessagePriority` (
 DROP TABLE IF EXISTS `Message`;
 CREATE  TABLE `Message` (
   `messageId` INT NOT NULL AUTO_INCREMENT,	/* Auto Increment */
-  `subject` VARCHAR(45) NULL ,
-  `messageBody` VARCHAR(300) NULL ,
+  `subject` VARCHAR(250) NULL ,
+  `messageBody` VARCHAR(5000) NULL ,
   `priorityId` INT NOT NULL ,
   `senderId` VARCHAR(15) NOT NULL ,
   `dateTime` DATETIME NOT NULL ,
@@ -400,7 +400,7 @@ CREATE  TABLE `SectionTimeTable` (
   `sectionId` INT NOT NULL ,
   `courseNumber` INT NOT NULL ,
   `departmentId` VARCHAR(4) NOT NULL ,
-  `termYear` YEAR NOT NULL,
+  `termYear` SMALLINT NOT NULL,
   `sessionId` INT NOT NULL,
   `sectionTypeId` INT NOT NULL,
   `dayId` INT NOT NULL ,
@@ -429,7 +429,7 @@ CREATE  TABLE `Enrolment` (
   `sectionId` INT NOT NULL ,
   `courseNumber` INT NOT NULL ,
   `departmentId` VARCHAR(4) NOT NULL ,
-  `termYear` YEAR NOT NULL,
+  `termYear` SMALLINT NOT NULL,
   `sessionId` INT NOT NULL,
   `sectionTypeId` INT NOT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',

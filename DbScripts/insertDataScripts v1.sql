@@ -3,7 +3,7 @@
 USE `AdgTest`;
 
 /* insert data into 'Day' table */
-LOCK TABLES `Day` WRITE;
+LOCK TABLES `WeekDay` WRITE;
 
 INSERT INTO `WeekDay` (`weekDay`) 
 VALUES 
@@ -242,9 +242,6 @@ where facultyId = '100';
 UPDATE Faculty
 SET headOfFacultyId = '101'
 where facultyId = '101';
-
-
-/*  update directorId of Department table */
 
 
 /* insert data into 'Administrator' table */
@@ -490,7 +487,295 @@ VALUES
 UNLOCK TABLES;
 
 
-/* insert data into '' table
+/* insert data into 'Term' table */
+LOCK TABLES `Term` WRITE;
+
+INSERT INTO `Term` 
+(`termYear`, `sessionId`) 
+VALUES 
+('2013', '100'),('2013', '101'),('2013', '102'),('2013', '103');
+
+UNLOCK TABLES;
+
+/* insert data into 'Section' table */
+LOCK TABLES `Section` WRITE;
+
+INSERT INTO `Section` 
+(`sectionId`, `sectionTypeId`, `courseNumber`, `departmentId`, `termYear`, `sessionId`, `startDate`, `endDate`, `facultyMemberId`, `teachingAssistant`) 
+VALUES 
+('01', '100', '505', 'CICS', '2013', '101', '2013-01-01', '2013-04-31', '100', null),
+('01', '102', '505', 'CICS', '2013', '101', '2013-01-01', '2013-04-31', '100', 'Iliya'),
+('01', '100', '520', 'CICS', '2013', '101', '2013-01-01', '2013-04-31', '101', null),
+('01', '101', '520', 'CICS', '2013', '101', '2013-01-01', '2013-04-31', '101', 'Hootan'),
+('02', '100', '520', 'CICS', '2013', '101', '2013-01-01', '2013-04-31', '100', null),
+('02', '101', '520', 'CICS', '2013', '101', '2013-01-01', '2013-04-31', '100', 'Hootan');
+
+UNLOCK TABLES;
+
+
+/* insert data into 'SectionTimeTable' table */
+LOCK TABLES `SectionTimeTable` WRITE;
+
+INSERT INTO `SectionTimeTable` 
+(`sectionId`, `courseNumber`, `departmentId`, `termYear`, `sessionId`, `sectionTypeId`, `dayId`, `startTime`, `lengthInMinutes`) 
+VALUES 
+('01', '505', 'CICS', '2013', '101', '100', '102', '11:00:00', '180'),
+('01', '505', 'CICS', '2013', '101', '100', '104', '14:00:00', '180'),
+('01', '505', 'CICS', '2013', '101', '102', '100', '12:00:00', '120'),
+('01', '505', 'CICS', '2013', '101', '102', '103', '14:30', '120'),
+('01', '520', 'CICS', '2013', '101', '100', '100', '16:00', '90'),
+('01', '520', 'CICS', '2013', '101', '100', '102', '16:00', '90'),
+('01', '520', 'CICS', '2013', '101', '101', '104', '11:30', '120'),
+('02', '520', 'CICS', '2013', '101', '100', '100', '19:30', '90'),
+('02', '520', 'CICS', '2013', '101', '100', '102', '19:30', '90'),
+('02', '520', 'CICS', '2013', '101', '101', '104', '19:00', '120');
+
+UNLOCK TABLES;
+
+
+/* insert data into 'Enrolment' table */
+LOCK TABLES `Enrolment` WRITE;
+
+INSERT INTO `Enrolment` 
+(`studentId`, `sectionId`, `courseNumber`, `departmentId`, `termYear`, `sessionId`, `sectionTypeId`) 
+VALUES 
+('100', '01', '505', 'CICS', '2013', '101', '100'),
+('100', '01', '505', 'CICS', '2013', '101', '102'),
+('100', '01', '520', 'CICS', '2013', '101', '100'),
+('100', '01', '520', 'CICS', '2013', '101', '101'),
+('101', '01', '505', 'CICS', '2013', '101', '100'),
+('101', '01', '505', 'CICS', '2013', '101', '102'),
+('101', '02', '520', 'CICS', '2013', '101', '100'),
+('101', '02', '520', 'CICS', '2013', '101', '101');
+
+UNLOCK TABLES;
+
+
+/* insert data into 'Glossary' table */
+LOCK TABLES `Glossary` WRITE;
+
+INSERT INTO `Glossary` 
+(`term`, `definition`) 
+VALUES 
+('abc', 'definition of term'),
+('Admin', 'Admin is the secondary target user for the system who is an administrator at the university.'),
+('Course', 'The User generally views course as a literal meaning. A course in the RED system contains all the information about the course.'),
+('Degree', 'Degree is the acknowledgement a student will receive after finishing each specific program.'),
+('Department', 'Department is the name of the particular branch of the faculty that offers courses to students.'),
+('Faculty ', 'Faculty is the third target user for the system who is a faculty member or an instructor at the university.'),
+('Program', 'Program is a set of courses that a student has to take to specialize in a particular field.');
+
+UNLOCK TABLES;
+
+/* insert data into 'FAQ' table */
+LOCK TABLES `FAQ` WRITE;
+
+INSERT INTO `FAQ` 
+(`question`, `answer`) 
+VALUES 
+('Where can I get information about your program?', 'The Master of Software Systems website contains all the information needed for applying to our program. '),
+('What are your language requirements?', 'TOEFL (Test of English as a Foreign Language): we require a minimum score of 100 (internet-based).'),
+('What is your deadline for admission?', 'Applications for January 2014 will be accepted from February 1st to June 14, 2013.');
+
+UNLOCK TABLES;
+
+/* insert data into 'Registration' table */ 
+LOCK TABLES `Registration` WRITE;
+
+INSERT INTO `Registration` 
+(`studentId`, `programName`, `departmentId`, `startDate`, `graduationDate`) 
+VALUES 
+('100', 'Master of Software Systems', 'CICS', '2013-01-01', '2014-04-30'),
+('101', 'Master of Software Systems', 'CICS', '2013-01-01', '2014-04-30');
+
+UNLOCK TABLES;
+
+
+/* insert data into 'MessagePriority' table */
+LOCK TABLES `MessagePriority` WRITE;
+
+INSERT INTO `MessagePriority` 
+(`messagePriorityId`, `name`) 
+VALUES 
+('1', 'Normal'),
+('2', 'Important'),
+('3', 'Urgent');
+
+UNLOCK TABLES;
+
+/* insert data into 'MessageStatus' table */
+LOCK TABLES `MessageStatus` WRITE;
+
+INSERT INTO `MessageStatus` 
+(`statusId`, `name`) 
+VALUES 
+('1', 'read'),
+('2', 'unread'),
+('3', 'deleted');
+
+UNLOCK TABLES;
+
+
+/* insert data into 'Message' table */
+LOCK TABLES `Message` WRITE;
+
+INSERT INTO `Message` 
+(`subject`,`messageBody`,`priorityId`,`senderId`,`dateTime`) 
+VALUES 
+('Welcome to RED','Welcome to become a  member in RED. If you have any questions, please first browse  FAQ and Glossary.','1','harsimran','2013-04-02 00:00:00');
+
+UNLOCK TABLES;
+
+
+/* insert data into 'MessageReceiver' table */
+LOCK TABLES `MessageReceiver` WRITE;
+
+INSERT INTO `MessageReceiver` 
+(`messageId`,`receiverId`,`statusId`,`modifiedAt`) 
+VALUES 
+('100','witty','2','2013-04-02 00:00:00'),
+('100','nicole','1','2013-04-02 00:00:00');
+
+UNLOCK TABLES;
+
+
+/* insert data into 'CoRequisite' table */
+LOCK TABLES `CoRequisite` WRITE;
+
+INSERT INTO `CoRequisite`
+(`courseNumber`,`departmentId`,`coRequisiteNumber`,`coRequisiteDeptId`,`isMust`)
+VALUES
+('230', 'EECE', '251', 'EECE', '0'),
+('230', 'EECE', '253', 'EECE', '1'),
+('251', 'EECE', '530', 'MATH', '0'),
+('251', 'EECE', '534', 'MATH', '0'),
+('511', 'CICS', '505', 'CICS', '1'),
+('511', 'CICS', '520', 'CICS', '1'),
+('520', 'CICS', '505', 'CICS', '1'),
+('520', 'CICS', '511', 'CICS', '1');
+
+UNLOCK TABLES;
+
+
+/* insert data into 'Prerequisite' table */
+LOCK TABLES `Prerequisite` WRITE;
+
+INSERT INTO `Prerequisite`
+(`courseNumber`,`departmentId`,`preRequisiteNumber`,`preRequisiteDeptId`,`isMust`)
+VALUES
+('500', 'CICS', '505', 'CICS', '1'),
+('500', 'CICS', '511', 'CICS', '1'),
+('500', 'CICS', '520', 'CICS', '1');
+
+UNLOCK TABLES;
+
+
+/* insert data into 'Locale' table */
+LOCK TABLES `Locale` WRITE;
+
+INSERT INTO `Locale`
+(`id`,`name`)
+VALUES
+('5', 'chCH'),
+('1', 'enUS'),
+('2', 'hiIN'),
+('3', 'pbIN'),
+('4', 'thTH');
+
+UNLOCK TABLES;
+
+
+/* insert data into 'ResourceDictionary' table */
+LOCK TABLES `ResourceDictionary` WRITE;
+
+INSERT INTO `ResourceDictionary`
+(`resourceId`,`LocaleId`,`textString`)
+VALUES
+('1', '1', 'Login'),
+('1', '4', 'เข้าใช้งาน'),
+('1', '5', '登录'),
+('2', '1', 'Forgot Password'),
+('2', '4', 'ลืมรหัสผ่าน'),
+('2', '5', '忘记密码'),
+('3', '1', 'Username'),
+('3', '4', 'ชื่อผู้ใช้งาน'),
+('3', '5', '用户名'),
+('4', '1', 'Password'),
+('4', '4', 'รหัสผ่าน'),
+('4', '5', '密码'),
+('5', '1', 'Invalid Username/Password'),
+('5', '4', 'ชื่อผู้ใช้งาน/รหัสผ่าน ไม่ถูกต้อง'),
+('5', '5', '用户名/密码错误'),
+('6', '1', 'User is already logged in'),
+('6', '4', 'คุณได้เข้าสู่ระบบเป็นที่เรียบร้อยแล้ว'),
+('6', '5', '用户已登录'),
+('7', '1', 'Browse Course'),
+('7', '4', 'เลือกวิชาเรียน'),
+('7', '5', '课程导航'),
+('8', '1', 'Logout'),
+('8', '4', 'ออกจากระบบ'),
+('8', '5', '退出系统'),
+('9', '1', 'Your have been successfully logged out'),
+('9', '4', 'คุณได้ออกจากระบบเป็นที่เรียบร้อยแล้ว'),
+('9', '5', '你已成功退出系统'),
+('10', '1', 'You have been successfully enrolled to the section'),
+('10', '4', 'คุณได้ทำการลงทะเบียนเป็นที่เรียบร้อยแล้ว'),
+('10', '5', '你已经成功注册该课段'),
+('11', '1', 'Password has been sucessfully updated'),
+('11', '4', 'รหัสผ่านได้เปลี่ยนเป็นที่เรียบร้อยแล้ว'),
+('11', '5', '密码已更改成功'),
+('12', '1', 'New passwords dont match'),
+('12', '4', 'รหัสผ่านใหม่ไม่ตรงกัน'),
+('12', '5', '新密码输入错误'),
+('13', '1', 'Old Password doesnt match'),
+('13', '4', 'รหัสผ่านเก่าไม่ตรงกัน'),
+('13', '5', '旧密码输入错误'),
+('14', '1', 'Glossary'),
+('14', '4', 'อภิธานศัพท์'),
+('14', '5', '词汇表'),
+('15', '1', 'User Profile'),
+('15', '4', 'ข้อมูลส่วนตัวผู้ใช้'),
+('15', '5', '用户资料'),
+('16', '1', 'FAQ'),
+('16', '4', 'คำถามที่พบบ่อย'),
+('16', '5', 'FAQ'),
+('17', '1', 'Manage Course'),
+('17', '4', 'จัดการวิชาเรียน'),
+('18', '1', 'View Timetable'),
+('18', '4', 'ดูตารางเรียน'),
+('19', '1', 'View Enrolment'),
+('19', '4', 'ดูการลงทะเบียน'),
+('20', '1', 'View Degree Info'),
+('20', '4', 'ดูข้อมูลปริญญา'),
+('21', '1', 'Personal Info'),
+('21', '4', 'ข้อมูลส่วนตัวผู้ใช้'),
+('22', '1', 'Messages'),
+('22', '4', 'ข้อความ'),
+('23', '1', 'Student'),
+('23', '4', 'นักเรียน'),
+('24', '1', 'Home'),
+('24', '4', 'หน้าแรก'),
+('25', '1', 'Search'),
+('25', '4', 'ค้นหา'),
+('26', '1', 'Go'),
+('26', '4', 'ไปยัง'),
+('27', '1', 'Exit'),
+('27', '4', 'ออกจาก'),
+('28', '1', 'File'),
+('28', '4', 'ไฟล์'),
+('29', '1', 'Help'),
+('29', '4', 'ช่วยเหลือ'),
+('30', '1', 'Close'),
+('30', '4', 'ปิด'),
+('31', '1', 'About'),
+('31', '4', 'เกี่ยวกับ');
+
+UNLOCK TABLES;
+
+
+
+
+/* insert data into '' table 
 LOCK TABLES `` WRITE;
 
 
