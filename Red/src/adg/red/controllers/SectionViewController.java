@@ -69,17 +69,23 @@ public class SectionViewController implements Initializable
                     Context.getInstance().getSelectedSection().getTerm().getTermPK().getTermYear(),
                     Context.getInstance().getSelectedSection().getTerm().getTermPK().getSessionId(),
                     Context.getInstance().getSelectedSection().getSectionType().getSectionTypeId());
+
+            if (checkUserAlreadyEnrolled(enrolment))
+            {
+                btnRegister.setDisable(true);
+                //check to see if the student has already dropped the section
+                if (Enrolment.getEnrolmentByEnrolmentPK(enrolment).getIsActive())
+                {
+                    btnDrop.setDisable(false);
+                }
+            }
         }
         catch (Exception ex)
         {
             Logger.getLogger(SectionViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        if (checkUserAlreadyEnrolled(enrolment))
-        {
-            btnRegister.setDisable(true);
-            btnDrop.setDisable(false);
-        }
+
 
         secLbl.setText("Secion " + Context.getInstance().getSelectedSection().getSectionPK().getSectionId());
         creditLbl.setText("" + Context.getInstance().getSelectedCourse().getCredits());
@@ -103,7 +109,7 @@ public class SectionViewController implements Initializable
 //                    browseCourseLk.setText("Faq");
 //                    deptLk.setVisible(false);
 //                    courseLk.setVisible(false);
-
+                    enrolment.setIsActive(true);
                     enrolment.save();
                     lblResponse.setText(LocaleManager.get(10));
                     lblResponse.setVisible(true);
@@ -115,6 +121,28 @@ public class SectionViewController implements Initializable
                     Logger.getLogger(SectionViewController.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
+            }
+        });
+
+        // setOnAction when drop button is pressed
+        btnDrop.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                try
+                {
+                    Enrolment enrol = Enrolment.getEnrolmentByEnrolmentPK(enrolment);
+                    enrol.setIsActive(false);
+                    enrol.save();
+                    lblResponse.setText(LocaleManager.get(32));
+                    lblResponse.setVisible(true);
+                    btnDrop.setDisable(true);
+                }
+                catch (Exception ex)
+                {
+                    Logger.getLogger(SectionViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

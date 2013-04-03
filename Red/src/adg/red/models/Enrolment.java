@@ -40,8 +40,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Enrolment.findBySectionTypeId", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.sectionTypeId = :sectionTypeId"),
     @NamedQuery(name = "Enrolment.findByIsActive", query = "SELECT e FROM Enrolment e WHERE e.isActive = :isActive"),
     @NamedQuery(name = "Enrolment.findByEnrolmentPK", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.studentId = :studentId "
-            + " AND e.enrolmentPK.sectionId = :sectionId AND e.enrolmentPK.courseNumber = :courseNumber AND e.enrolmentPK.departmentId = :departmentId"
-            + " AND e.enrolmentPK.termYear = :termYear AND e.enrolmentPK.sessionId = :sessionId")
+            + " AND e.enrolmentPK.sectionTypeId = :sectionTypeId AND e.enrolmentPK.courseNumber = :courseNumber AND e.enrolmentPK.departmentId = :departmentId"
+            + " AND e.enrolmentPK.termYear = :termYear AND e.enrolmentPK.sessionId = :sessionId AND e.enrolmentPK.sectionId = :sectionId")
 })
 public class Enrolment implements Serializable
 {
@@ -166,6 +166,7 @@ public class Enrolment implements Serializable
     {
         List<Enrolment> enrolList = RedEntityManager.getEntityManager().createNamedQuery("Enrolment.findByEnrolmentPK")
                 .setParameter("studentId", enrol.getEnrolmentPK().getStudentId())
+                .setParameter("sectionTypeId", enrol.getEnrolmentPK().getSectionTypeId())
                 .setParameter("sectionId", enrol.getEnrolmentPK().getSectionId())
                 .setParameter("courseNumber", enrol.getEnrolmentPK().getCourseNumber())
                 .setParameter("departmentId", enrol.getEnrolmentPK().getDepartmentId())
