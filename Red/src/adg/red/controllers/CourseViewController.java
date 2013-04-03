@@ -75,7 +75,7 @@ public class CourseViewController implements Initializable
         lblCourseName.setText(Context.getInstance().getSelectedCourse().getName());
         lblDeptIdAndCourseNo.setText(Context.getInstance().getSelectedCourse().getDepartmentIdAndCourseNumber());
         lblGradingScheme.setText(Context.getInstance().getSelectedCourse().getGradingSchemeId().getName());
-        HomeViewController.getCourseLk().setText("" + Context.getInstance().getSelectedCourse().getCoursePK().getCourseNumber());
+        HomeViewController.getCourseLk().setText("" + Context.getInstance().getSelectedCourse().getCoursePK().getCourseNumber() + ":");
         HomeViewController.getCourseLk().setVisible(true);
 
         // action when user clicked on the table

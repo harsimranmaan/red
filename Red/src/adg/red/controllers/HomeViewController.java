@@ -28,49 +28,64 @@ import javafx.scene.layout.AnchorPane;
 public class HomeViewController implements Initializable
 {
 
-    @FXML //  fx:id="brwCourseBtn"
-    private Button brwCourseBtn; // Value injected by FXMLLoader
-    @FXML //  fx:id="faqBtn"
-    private Button faqBtn; // Value injected by FXMLLoader
+    @FXML //  fx:id="btnBrowseCourse"
+    private Button btnBrowseCourse; // Value injected by FXMLLoader
+    @FXML //  fx:id="btnManageCourse"
+    private Button btnManageCourse; // Value injected by FXMLLoader
+    @FXML //  fx:id="btnMessage"
+    private Button btnMessage; // Value injected by FXMLLoader
+    @FXML //  fx:id="btnViewDegreeInfo"
+    private Button btnViewDegreeInfo; // Value injected by FXMLLoader
+    @FXML //  fx:id="btnViewEnrolment"
+    private Button btnViewEnrolment; // Value injected by FXMLLoader
+    @FXML //  fx:id="btnViewTimetable"
+    private Button btnViewTimetable; // Value injected by FXMLLoader
+    @FXML //  fx:id="btnFaq"
+    private Button btnFaq; // Value injected by FXMLLoader
+    @FXML //  fx:id="btnGlossary"
+    private Button btnGlossary; // Value injected by FXMLLoader
+    @FXML //  fx:id="btnGo"
+    private Button btnGo; // Value injected by FXMLLoader
+    @FXML //  fx:id="lblSearch"
+    private Label lblSearch; // Value injected by FXMLLoader
+    @FXML //  fx:id="lblUserType"
+    private Label lblUserType; // Value injected by FXMLLoader
     @FXML //  fx:id="disBrwCourseArea"
     private AnchorPane disBrwCourseArea; // Value injected by FXMLLoader
     @FXML //  fx:id="homeLk"
-    private Hyperlink homeLk; // Value injected by FXMLLoader
+    private Hyperlink hplHome; // Value injected by FXMLLoader
     @FXML //  fx:id="browseCourseLk"
-    private Hyperlink browseCourseLk; // Value injected by FXMLLoader
+    private Hyperlink hplBrowseCourse; // Value injected by FXMLLoader
     @FXML //  fx:id="homeView"
     private AnchorPane homeView; // Value injected by FXMLLoader
     @FXML //  fx:id="deptLk"
-    private static Hyperlink deptLk; // Value injected by FXMLLoader
+    private static Hyperlink hplDept; // Value injected by FXMLLoader
     @FXML //  fx:id="courseLk"
-    private static Hyperlink courseLk; // Value injected by FXMLLoader
-    @FXML //fx:id="logOut"
-    private Button logOut; // Value injected by FXMLoader
+    private static Hyperlink hplCourse; // Value injected by FXMLLoader
+    @FXML //fx:id="btnLogout"
+    private Button btnLogout; // Value injected by FXMLoader
     @FXML //fx:id="userProfileBtn" // added by Jingbo Yu
-    private Button userProfileBtn; // Value injected by FXMLoader
+    private Button btnUserProfile; // Value injected by FXMLoader
 
-    @FXML //fx:id="userProfileBtn" // added by Jingbo Yu
-    private Button glossaryBtn; // Value injected by FXMLoader
-    
     public static Hyperlink getCourseLk()
     {
 
-        return courseLk;
+        return hplCourse;
     }
 
     public static void setCourseLk(Hyperlink courseLk)
     {
-        HomeViewController.courseLk = courseLk;
+        HomeViewController.hplCourse = courseLk;
     }
 
     public static Hyperlink getDeptLk()
     {
-        return deptLk;
+        return hplDept;
     }
 
     public static void setDeptLk(Hyperlink deptLk)
     {
-        HomeViewController.deptLk = deptLk;
+        HomeViewController.hplDept = deptLk;
     }
     @FXML
     private Label menuLk;
@@ -81,10 +96,9 @@ public class HomeViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
-
+        initializeComponentsByLocale();
         // setOnAction when browse course button is pressed
-        brwCourseBtn.setOnAction(new EventHandler<ActionEvent>()
+        btnBrowseCourse.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent event)
@@ -93,10 +107,10 @@ public class HomeViewController implements Initializable
                 {
                     ViewLoader view = new ViewLoader(disBrwCourseArea);
                     view.loadView("BrowseCourse");
-                    browseCourseLk.setVisible(true);
-                    browseCourseLk.setText(LocaleManager.get(7));
-                    deptLk.setVisible(false);
-                    courseLk.setVisible(false);
+                    hplBrowseCourse.setVisible(true);
+                    hplBrowseCourse.setText(LocaleManager.get(7) + ":");
+                    hplDept.setVisible(false);
+                    hplCourse.setVisible(false);
                 }
                 catch (Exception ex)
                 {
@@ -107,7 +121,7 @@ public class HomeViewController implements Initializable
         });
 
         // setOnAction when faq button is pressed
-        faqBtn.setOnAction(new EventHandler<ActionEvent>()
+        btnFaq.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent event)
@@ -116,10 +130,10 @@ public class HomeViewController implements Initializable
                 {
                     ViewLoader view = new ViewLoader(disBrwCourseArea);
                     view.loadView("FaqView");
-                    browseCourseLk.setVisible(true);
-                    browseCourseLk.setText(LocaleManager.get(16));
-                    deptLk.setVisible(false);
-                    courseLk.setVisible(false);
+                    hplBrowseCourse.setVisible(true);
+                    hplBrowseCourse.setText(LocaleManager.get(16));
+                    hplDept.setVisible(false);
+                    hplCourse.setVisible(false);
                 }
                 catch (Exception ex)
                 {
@@ -130,7 +144,7 @@ public class HomeViewController implements Initializable
         });
 
         // setOnAction when personal info button is pressed added by Jingbo Yu
-        userProfileBtn.setOnAction(new EventHandler<ActionEvent>()
+        btnUserProfile.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent event)
@@ -139,10 +153,10 @@ public class HomeViewController implements Initializable
                 {
                     ViewLoader view = new ViewLoader(disBrwCourseArea);
                     view.loadView("UserProfile");
-                    browseCourseLk.setVisible(true);
-                    browseCourseLk.setText(LocaleManager.get(15));
-                    deptLk.setVisible(false);
-                    courseLk.setVisible(false);
+                    hplBrowseCourse.setVisible(true);
+                    hplBrowseCourse.setText(LocaleManager.get(15));
+                    hplDept.setVisible(false);
+                    hplCourse.setVisible(false);
                 }
                 catch (Exception ex)
                 {
@@ -174,9 +188,9 @@ public class HomeViewController implements Initializable
 //
 //            }
 //        });
-//        
+//
 //        // setOnAction when home link is clicked
-        homeLk.setOnAction(new EventHandler<ActionEvent>()
+        hplHome.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent event)
@@ -194,7 +208,7 @@ public class HomeViewController implements Initializable
         });
 
         // setOnAction when browse course link is clicked
-        browseCourseLk.setOnAction(new EventHandler<ActionEvent>()
+        hplBrowseCourse.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent event)
@@ -205,17 +219,17 @@ public class HomeViewController implements Initializable
                     {
                         ViewLoader view = new ViewLoader(disBrwCourseArea);
                         view.loadView("BrowseCourse");
-                        deptLk.setVisible(false);
-                        courseLk.setVisible(false);
-                        deptLk.setVisited(false);
-                        courseLk.setVisited(false);
+                        hplDept.setVisible(false);
+                        hplCourse.setVisible(false);
+                        hplDept.setVisited(false);
+                        hplCourse.setVisited(false);
                     }
                     if (((Hyperlink) event.getSource()).getText().contains("faq"))
                     {
                         ViewLoader view = new ViewLoader(disBrwCourseArea);
                         view.loadView("FaqView");
                     }
-                    browseCourseLk.setVisited(false);
+                    hplBrowseCourse.setVisited(false);
                 }
                 catch (Exception ex)
                 {
@@ -225,7 +239,7 @@ public class HomeViewController implements Initializable
         });
 
         // setOnAction when dept link is clicked
-        deptLk.setOnAction(new EventHandler<ActionEvent>()
+        hplDept.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent event)
@@ -234,8 +248,8 @@ public class HomeViewController implements Initializable
                 {
                     ViewLoader view = new ViewLoader(disBrwCourseArea);
                     view.loadView("CourseListView");
-                    courseLk.setVisible(false);
-                    deptLk.setVisited(false);
+                    hplCourse.setVisible(false);
+                    hplDept.setVisited(false);
                 }
                 catch (Exception ex)
                 {
@@ -245,7 +259,7 @@ public class HomeViewController implements Initializable
         });
 
         // setOnAction when course link is clicked
-        courseLk.setOnAction(new EventHandler<ActionEvent>()
+        hplCourse.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent event)
@@ -254,7 +268,7 @@ public class HomeViewController implements Initializable
                 {
                     ViewLoader view = new ViewLoader(disBrwCourseArea);
                     view.loadView("CourseView");
-                    courseLk.setVisited(false);
+                    hplCourse.setVisited(false);
                 }
                 catch (Exception ex)
                 {
@@ -264,7 +278,7 @@ public class HomeViewController implements Initializable
         });
 
         // setOnAction when logout link is clicked
-        logOut.setOnAction(new EventHandler<ActionEvent>()
+        btnLogout.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent event)
@@ -282,5 +296,24 @@ public class HomeViewController implements Initializable
                 }
             }
         });
+    }
+
+    private void initializeComponentsByLocale()
+    {
+        // TODO
+        btnBrowseCourse.setText(LocaleManager.get(7));
+        btnManageCourse.setText(LocaleManager.get(17));
+        btnViewTimetable.setText(LocaleManager.get(18));
+        btnViewEnrolment.setText(LocaleManager.get(19));
+        btnViewDegreeInfo.setText(LocaleManager.get(20));
+        btnUserProfile.setText(LocaleManager.get(21));
+        btnMessage.setText(LocaleManager.get(22));
+        btnGlossary.setText(LocaleManager.get(14));
+        btnFaq.setText(LocaleManager.get(16));
+        btnLogout.setText(LocaleManager.get(8));
+        lblUserType.setText(LocaleManager.get(23) + ":");
+        hplHome.setText(LocaleManager.get(24) + ":");
+        lblSearch.setText(LocaleManager.get(25) + ":");
+        btnGo.setText(LocaleManager.get(26));
     }
 }
