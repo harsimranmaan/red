@@ -15,7 +15,7 @@
         <Font name="System Bold" size="18.0" />
       </font>
     </Label>
-    <ListView fx:id="faqLv" prefHeight="412.0" prefWidth="608.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="38.0" />
+    <Accordion id="questionPane" fx:id="questionsPane" layoutX="20.0" layoutY="38.0" prefHeight="412.0" prefWidth="608.0" />
   </children>
   <stylesheets>
     <URL value="@css/mainForm.css" />

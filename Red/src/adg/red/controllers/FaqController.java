@@ -13,6 +13,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
+import javafx.scene.control.Accordion;
+import javafx.scene.control.TitledPane;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.TextArea;
 
 /**
  * FXML Controller class
@@ -21,8 +26,11 @@ import javafx.scene.text.Text;
  */
 public class FaqController implements Initializable {
 
-    @FXML //  fx:id="faqLv"
+    @FXML //  fx:id="accordion"
+    private Accordion accordion; // Value injected by FXMLLoader
+    
     private ListView<Text> faqLv; // Value injected by FXMLLoader
+    
     /**
      * Initializes the controller class.
      */
@@ -33,24 +41,11 @@ public class FaqController implements Initializable {
     }    
     
     public void populateListView() {
-        List<Faq> faqList;
-        faqList= Faq.getAllFaq();
-        List<Text> stringList = new ArrayList<>();
-          
         
-        for(Faq faq: faqList) {
-            Text textQ = new Text();
-            textQ.wrappingWidthProperty().bind(faqLv.widthProperty());
-            textQ.setText("Q: " + faq.getQuestion());            
-            stringList.add(textQ);
-            
-            Text textA = new Text();            
-            textA.wrappingWidthProperty().bind(faqLv.widthProperty());
-            textA.setText("A: " + faq.getAnswer());            
-            stringList.add(textA);
-        }           
-        
-        faqLv.getItems().setAll(stringList);
-        
+        List<Faq> faqList= Faq.getAllFaq();
+        for(Faq faq: faqList) 
+        {
+           accordion.getPanes().add(new TitledPane(faq.getQuestion(),new TextArea(faq.getAnswer())));
+        }
     }
 }
