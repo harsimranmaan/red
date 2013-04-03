@@ -6,7 +6,6 @@ package adg.red.models;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Term")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "Term.findAll", query = "SELECT t FROM Term t"),
     @NamedQuery(name = "Term.findByTermYear", query = "SELECT t FROM Term t WHERE t.termPK.termYear = :termYear"),
     @NamedQuery(name = "Term.findBySessionId", query = "SELECT t FROM Term t WHERE t.termPK.sessionId = :sessionId"),
@@ -37,6 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class Term implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected TermPK termPK;
@@ -64,7 +64,7 @@ public class Term implements Serializable
         this.isActive = isActive;
     }
 
-    public Term(Date termYear, int sessionId)
+    public Term(int termYear, int sessionId)
     {
         this.termPK = new TermPK(termYear, sessionId);
     }
