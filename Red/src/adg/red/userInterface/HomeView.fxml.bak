@@ -31,7 +31,7 @@
               <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
               <VBox id="VBox" alignment="CENTER" spacing="1.0">
                 <children>
-                  <Button id="userProfileBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Personal Info" />
+                  <Button fx:id="userProfileBtn" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Personal Info" />
                   <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Messages" />
                 </children>
               </VBox>

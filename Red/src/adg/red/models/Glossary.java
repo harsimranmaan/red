@@ -4,7 +4,9 @@
  */
 package adg.red.models;
 
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -26,7 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Glossary.findAll", query = "SELECT g FROM Glossary g"),
     @NamedQuery(name = "Glossary.findByPageId", query = "SELECT g FROM Glossary g WHERE g.glossaryPK.pageId = :pageId"),
     @NamedQuery(name = "Glossary.findByTerm", query = "SELECT g FROM Glossary g WHERE g.glossaryPK.term = :term"),
-    @NamedQuery(name = "Glossary.findByDefinition", query = "SELECT g FROM Glossary g WHERE g.definition = :definition")
+    @NamedQuery(name = "Glossary.findByDefinition", query = "SELECT g FROM Glossary g WHERE g.definition = :definition"),
+    @NamedQuery(name = "Glossary.findByTermBeginsWith", query = "SELECT g FROM Glossary g WHERE g.glossaryPK.term LIKE  :keyWord")
 })
 public class Glossary implements Serializable
 {
@@ -106,4 +109,15 @@ public class Glossary implements Serializable
     {
         return "adg.red.models.Glossary[ glossaryPK=" + glossaryPK + " ]";
     }
+    
+        public static List<Glossary> getAllGlossary() 
+    {
+       return RedEntityManager.getEntityManager().createNamedQuery("Glossary.findAll").getResultList();
+    }
+        
+        public static List<Glossary> getByTermBeginsWith(String beginsWith)
+    {
+        return RedEntityManager.getEntityManager().createNamedQuery("Glossary.findByTermBeginsWith").setParameter("keyWord", beginsWith + "%").getResultList();
+    }
+
 }
