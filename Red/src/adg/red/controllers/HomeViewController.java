@@ -5,6 +5,7 @@
 package adg.red.controllers;
 
 import adg.red.utils.Context;
+import adg.red.utils.LocaleManager;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -48,6 +49,9 @@ public class HomeViewController implements Initializable
     @FXML //fx:id="userProfileBtn" // added by Jingbo Yu
     private Button userProfileBtn; // Value injected by FXMLoader
 
+    @FXML //fx:id="userProfileBtn" // added by Jingbo Yu
+    private Button glossaryBtn; // Value injected by FXMLoader
+    
     public static Hyperlink getCourseLk()
     {
 
@@ -90,7 +94,7 @@ public class HomeViewController implements Initializable
                     ViewLoader view = new ViewLoader(disBrwCourseArea);
                     view.loadView("BrowseCourse");
                     browseCourseLk.setVisible(true);
-                    browseCourseLk.setText("Browse Course:");
+                    browseCourseLk.setText(LocaleManager.get(7));
                     deptLk.setVisible(false);
                     courseLk.setVisible(false);
                 }
@@ -113,7 +117,7 @@ public class HomeViewController implements Initializable
                     ViewLoader view = new ViewLoader(disBrwCourseArea);
                     view.loadView("FaqView");
                     browseCourseLk.setVisible(true);
-                    browseCourseLk.setText("Faq");
+                    browseCourseLk.setText(LocaleManager.get(16));
                     deptLk.setVisible(false);
                     courseLk.setVisible(false);
                 }
@@ -125,7 +129,7 @@ public class HomeViewController implements Initializable
             }
         });
 
-        // setOnAction when browse course button is pressed added by Jingbo Yu
+        // setOnAction when personal info button is pressed added by Jingbo Yu
         userProfileBtn.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -136,7 +140,7 @@ public class HomeViewController implements Initializable
                     ViewLoader view = new ViewLoader(disBrwCourseArea);
                     view.loadView("UserProfile");
                     browseCourseLk.setVisible(true);
-                    browseCourseLk.setText("User Profile:");
+                    browseCourseLk.setText(LocaleManager.get(15));
                     deptLk.setVisible(false);
                     courseLk.setVisible(false);
                 }
@@ -148,7 +152,30 @@ public class HomeViewController implements Initializable
             }
         });
 
-        // setOnAction when home link is clicked
+//                // setOnAction when personal info button is pressed added by Jingbo Yu
+//        glossaryBtn.setOnAction(new EventHandler<ActionEvent>()
+//        {
+//            @Override
+//            public void handle(ActionEvent event)
+//            {
+//                try
+//                {
+//                    ViewLoader view = new ViewLoader(disBrwCourseArea);
+//                    view.loadView("Glossary");
+//                    browseCourseLk.setVisible(true);
+//                    browseCourseLk.setText(LocaleManager.get(14));
+//                    deptLk.setVisible(false);
+//                    courseLk.setVisible(false);
+//                }
+//                catch (Exception ex)
+//                {
+//                    Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//
+//            }
+//        });
+//        
+//        // setOnAction when home link is clicked
         homeLk.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override

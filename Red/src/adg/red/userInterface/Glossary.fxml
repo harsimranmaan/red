@@ -50,7 +50,7 @@
         </HBox>
       </children>
     </AnchorPane>
-    <TextArea layoutX="48.0" layoutY="76.0" prefHeight="350.0" prefWidth="551.0" wrapText="true" />
+    <ListView id="glossryLv" layoutX="20.0" layoutY="76.0" prefHeight="374.0" prefWidth="608.0" />
   </children>
   <stylesheets>
     <URL value="@glossary.css" />
