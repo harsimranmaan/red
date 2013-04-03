@@ -20,7 +20,7 @@ public class LocaleManager
 
     static
     {
-        loc = Locale.findByName("chCH");
+        loc = Locale.findByName("enUS");
         resourceList = ResourceDictionary.getResourceByLocaleId(loc.getId());
     }
 

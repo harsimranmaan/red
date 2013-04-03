@@ -31,7 +31,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "SectionTimeTable.findBySectionId", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.sectionId = :sectionId"),
     @NamedQuery(name = "SectionTimeTable.findByCourseNumber", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.courseNumber = :courseNumber"),
     @NamedQuery(name = "SectionTimeTable.findByDepartmentId", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.departmentId = :departmentId"),
-    @NamedQuery(name = "SectionTimeTable.findByTermId", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.termId = :termId"),
+    @NamedQuery(name = "SectionTimeTable.findByTermYear", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.termYear = :termYear"),
+    @NamedQuery(name = "SectionTimeTable.findBySessionId", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.sessionId = :sessionId"),
+    @NamedQuery(name = "SectionTimeTable.findBySectionTypeId", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.sectionTypeId = :sectionTypeId"),
     @NamedQuery(name = "SectionTimeTable.findByDayId", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.dayId = :dayId"),
     @NamedQuery(name = "SectionTimeTable.findByStartTime", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.startTime = :startTime"),
     @NamedQuery(name = "SectionTimeTable.findByLengthInMinutes", query = "SELECT s FROM SectionTimeTable s WHERE s.lengthInMinutes = :lengthInMinutes")
@@ -46,13 +48,15 @@ public class SectionTimeTable implements Serializable
     private int lengthInMinutes;
     @JoinColumn(name = "dayId", referencedColumnName = "dayId", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Day day;
+    private WeekDay weekDay;
     @JoinColumns(
     {
         @JoinColumn(name = "sectionId", referencedColumnName = "sectionId", insertable = false, updatable = false),
         @JoinColumn(name = "courseNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false),
         @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false),
-        @JoinColumn(name = "termId", referencedColumnName = "termId", insertable = false, updatable = false)
+        @JoinColumn(name = "termYear", referencedColumnName = "termYear", insertable = false, updatable = false),
+        @JoinColumn(name = "sessionId", referencedColumnName = "sessionId", insertable = false, updatable = false),
+        @JoinColumn(name = "sectionTypeId", referencedColumnName = "sectionTypeId", insertable = false, updatable = false)
     })
     @ManyToOne(optional = false)
     private Section section;
@@ -72,9 +76,9 @@ public class SectionTimeTable implements Serializable
         this.lengthInMinutes = lengthInMinutes;
     }
 
-    public SectionTimeTable(int sectionId, int courseNumber, String departmentId, String termId, int dayId, Date startTime)
+    public SectionTimeTable(int sectionId, int courseNumber, String departmentId, Date termYear, int sessionId, int sectionTypeId, int dayId, Date startTime)
     {
-        this.sectionTimeTablePK = new SectionTimeTablePK(sectionId, courseNumber, departmentId, termId, dayId, startTime);
+        this.sectionTimeTablePK = new SectionTimeTablePK(sectionId, courseNumber, departmentId, termYear, sessionId, sectionTypeId, dayId, startTime);
     }
 
     public SectionTimeTablePK getSectionTimeTablePK()
@@ -97,14 +101,14 @@ public class SectionTimeTable implements Serializable
         this.lengthInMinutes = lengthInMinutes;
     }
 
-    public Day getDay()
+    public WeekDay getWeekDay()
     {
-        return day;
+        return weekDay;
     }
 
-    public void setDay(Day day)
+    public void setWeekDay(WeekDay weekDay)
     {
-        this.day = day;
+        this.weekDay = weekDay;
     }
 
     public Section getSection()

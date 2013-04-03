@@ -7,6 +7,8 @@ package adg.red.models;
 import adg.red.utils.LocaleManager;
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
+
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -34,10 +36,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Enrolment.findBySectionId", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.sectionId = :sectionId"),
     @NamedQuery(name = "Enrolment.findByCourseNumber", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.courseNumber = :courseNumber"),
     @NamedQuery(name = "Enrolment.findByDepartmentId", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.departmentId = :departmentId"),
-    @NamedQuery(name = "Enrolment.findByTermId", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.termId = :termId"),
+    @NamedQuery(name = "Enrolment.findByTermYear", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.termYear = :termYear"),
+    @NamedQuery(name = "Enrolment.findBySessionId", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.sessionId = :sessionId"),
+    @NamedQuery(name = "Enrolment.findBySectionTypeId", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.sectionTypeId = :sectionTypeId"),
     @NamedQuery(name = "Enrolment.findByIsActive", query = "SELECT e FROM Enrolment e WHERE e.isActive = :isActive"),
     @NamedQuery(name = "Enrolment.findByEnrolmentPK", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.studentId = :studentId "
-            + " AND e.enrolmentPK.sectionId = :sectionId AND e.enrolmentPK.courseNumber = :courseNumber AND e.enrolmentPK.departmentId = :departmentId AND e.enrolmentPK.termId = :termId")
+            + " AND e.enrolmentPK.sectionId = :sectionId AND e.enrolmentPK.courseNumber = :courseNumber AND e.enrolmentPK.departmentId = :departmentId"
+            + " AND e.enrolmentPK.termYear = :termYear AND e.enrolmentPK.sessionId = :sessionId")
 })
 public class Enrolment implements Serializable
 {
@@ -53,7 +58,9 @@ public class Enrolment implements Serializable
         @JoinColumn(name = "sectionId", referencedColumnName = "sectionId", insertable = false, updatable = false),
         @JoinColumn(name = "courseNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false),
         @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false),
-        @JoinColumn(name = "termId", referencedColumnName = "termId", insertable = false, updatable = false)
+        @JoinColumn(name = "termYear", referencedColumnName = "termYear", insertable = false, updatable = false),
+        @JoinColumn(name = "sessionId", referencedColumnName = "sessionId", insertable = false, updatable = false),
+        @JoinColumn(name = "sectionTypeId", referencedColumnName = "sectionTypeId", insertable = false, updatable = false)
     })
     @ManyToOne(optional = false)
     private Section section;
@@ -76,9 +83,9 @@ public class Enrolment implements Serializable
         this.isActive = isActive;
     }
 
-    public Enrolment(int studentId, int sectionId, int courseNumber, String departmentId, String termId)
+    public Enrolment(int studentId, int sectionId, int courseNumber, String departmentId, Date termYear, int sessionId, int sectionTypeId)
     {
-        this.enrolmentPK = new EnrolmentPK(studentId, sectionId, courseNumber, departmentId, termId);
+        this.enrolmentPK = new EnrolmentPK(studentId, sectionId, courseNumber, departmentId, termYear, sessionId, sectionTypeId);
     }
 
     public EnrolmentPK getEnrolmentPK()
@@ -163,7 +170,8 @@ public class Enrolment implements Serializable
                 .setParameter("sectionId", enrol.getEnrolmentPK().getSectionId())
                 .setParameter("courseNumber", enrol.getEnrolmentPK().getCourseNumber())
                 .setParameter("departmentId", enrol.getEnrolmentPK().getDepartmentId())
-                .setParameter("termId", enrol.getEnrolmentPK().getTermId())
+                .setParameter("termYear", enrol.getEnrolmentPK().getTermYear())
+                .setParameter("sessionId", enrol.getEnrolmentPK().getSessionId())
                 .getResultList();
         if (enrolList.size() == 1)
         {

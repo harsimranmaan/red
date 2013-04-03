@@ -37,11 +37,13 @@ import javax.xml.bind.annotation.XmlTransient;
         {
     @NamedQuery(name = "Section.findAll", query = "SELECT s FROM Section s"),
     @NamedQuery(name = "Section.findBySectionId", query = "SELECT s FROM Section s WHERE s.sectionPK.sectionId = :sectionId"),
+    @NamedQuery(name = "Section.findBySectionTypeId", query = "SELECT s FROM Section s WHERE s.sectionPK.sectionTypeId = :sectionTypeId"),
     @NamedQuery(name = "Section.findByCourseNumber", query = "SELECT s FROM Section s WHERE s.sectionPK.courseNumber = :courseNumber"),
     @NamedQuery(name = "Section.findByDepartmentId", query = "SELECT s FROM Section s WHERE s.sectionPK.departmentId = :departmentId"),
+    @NamedQuery(name = "Section.findByTermYear", query = "SELECT s FROM Section s WHERE s.sectionPK.termYear = :termYear"),
+    @NamedQuery(name = "Section.findBySessionId", query = "SELECT s FROM Section s WHERE s.sectionPK.sessionId = :sessionId"),
     @NamedQuery(name = "Section.findByStartDate", query = "SELECT s FROM Section s WHERE s.startDate = :startDate"),
     @NamedQuery(name = "Section.findByEndDate", query = "SELECT s FROM Section s WHERE s.endDate = :endDate"),
-    @NamedQuery(name = "Section.findByTermId", query = "SELECT s FROM Section s WHERE s.sectionPK.termId = :termId"),
     @NamedQuery(name = "Section.findByTeachingAssistant", query = "SELECT s FROM Section s WHERE s.teachingAssistant = :teachingAssistant"),
     @NamedQuery(name = "Section.findByIsActive", query = "SELECT s FROM Section s WHERE s.isActive = :isActive"),
     @NamedQuery(name = "Section.findByDepartmentAndCourseNumber", query = "SELECT s FROM Section s WHERE s.sectionPK.departmentId = :departmentId AND s.sectionPK.courseNumber = :courseNumber")
@@ -67,19 +69,23 @@ public class Section implements Serializable
     private boolean isActive;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "section")
     private Collection<Enrolment> enrolmentCollection;
-    @JoinColumn(name = "termId", referencedColumnName = "termId", insertable = false, updatable = false)
+    @JoinColumn(name = "sectionTypeId", referencedColumnName = "sectionTypeId", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Term term;
-    @JoinColumn(name = "sectionTypeId", referencedColumnName = "sectionTypeId")
-    @ManyToOne(optional = false)
-    private SectionType sectionTypeId;
+    private SectionType sectionType;
     @JoinColumn(name = "facultyMemberId", referencedColumnName = "facultyMemberId")
     @ManyToOne(optional = false)
     private FacultyMember facultyMemberId;
     @JoinColumns(
             {
-        @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false),
-        @JoinColumn(name = "courseNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false)
+        @JoinColumn(name = "termYear", referencedColumnName = "termYear", insertable = false, updatable = false),
+        @JoinColumn(name = "sessionId", referencedColumnName = "sessionId", insertable = false, updatable = false)
+    })
+    @ManyToOne(optional = false)
+    private Term term;
+    @JoinColumns(
+            {
+        @JoinColumn(name = "courseNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false),
+        @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false)
     })
     @ManyToOne(optional = false)
     private Course course;
@@ -103,9 +109,9 @@ public class Section implements Serializable
         this.isActive = isActive;
     }
 
-    public Section(int sectionId, int courseNumber, String departmentId, String termId)
+    public Section(int sectionId, int sectionTypeId, int courseNumber, String departmentId, Date termYear, int sessionId)
     {
-        this.sectionPK = new SectionPK(sectionId, courseNumber, departmentId, termId);
+        this.sectionPK = new SectionPK(sectionId, sectionTypeId, courseNumber, departmentId, termYear, sessionId);
     }
 
     public SectionPK getSectionPK()
@@ -117,6 +123,7 @@ public class Section implements Serializable
     {
         return this.sectionPK.getSectionId();
     }
+
     public void setSectionPK(SectionPK sectionPK)
     {
         this.sectionPK = sectionPK;
@@ -173,29 +180,19 @@ public class Section implements Serializable
         this.enrolmentCollection = enrolmentCollection;
     }
 
-    public Term getTerm()
+    public String getSectionTypeName()
     {
-        return term;
+        return sectionType.getName();
     }
 
-    public void setTerm(Term term)
+    public SectionType getSectionType()
     {
-        this.term = term;
+        return sectionType;
     }
 
-    public String getSectionType()
+    public void setSectionType(SectionType sectionType)
     {
-        return sectionTypeId.getName();
-    }
-    
-    public SectionType getSectionTypeId()
-    {
-        return sectionTypeId;
-    }
-
-    public void setSectionTypeId(SectionType sectionTypeId)
-    {
-        this.sectionTypeId = sectionTypeId;
+        this.sectionType = sectionType;
     }
 
     public FacultyMember getFacultyMemberId()
@@ -206,6 +203,16 @@ public class Section implements Serializable
     public void setFacultyMemberId(FacultyMember facultyMemberId)
     {
         this.facultyMemberId = facultyMemberId;
+    }
+
+    public Term getTerm()
+    {
+        return term;
+    }
+
+    public void setTerm(Term term)
+    {
+        this.term = term;
     }
 
     public Course getCourse()
