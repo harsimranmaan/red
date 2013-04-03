@@ -114,7 +114,7 @@ public class CourseViewController implements Initializable
         secColmn.setCellValueFactory(new PropertyValueFactory<Section, Integer>("sectionId"));
         colEndDate.setCellValueFactory(new PropertyValueFactory<Section, Date>("endDate"));
         startDateColmn.setCellValueFactory(new PropertyValueFactory<Section, Date>("startDate"));
-        typeColmn.setCellValueFactory(new PropertyValueFactory<Section, String>("sectionType"));
+        typeColmn.setCellValueFactory(new PropertyValueFactory<Section, String>("sectionTypeName"));
         instructorColmn.setCellValueFactory(new PropertyValueFactory<Section, String>("facultyMemberName"));
         tabCourse.getItems().setAll(sections);
 

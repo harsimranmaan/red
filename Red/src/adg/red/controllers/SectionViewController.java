@@ -8,7 +8,6 @@ import adg.red.models.Enrolment;
 import adg.red.models.Student;
 import adg.red.utils.Context;
 import adg.red.utils.LocaleManager;
-import adg.red.utils.RedEntityManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -67,7 +66,9 @@ public class SectionViewController implements Initializable
                     Context.getInstance().getSelectedSection().getSectionId(),
                     Context.getInstance().getSelectedSection().getCourse().getCoursePK().getCourseNumber(),
                     Context.getInstance().getSelectedDepartment().getDepartmentId(),
-                    Context.getInstance().getSelectedSection().getTerm().getTermId());
+                    Context.getInstance().getSelectedSection().getTerm().getTermPK().getTermYear(),
+                    Context.getInstance().getSelectedSection().getTerm().getTermPK().getSessionId(),
+                    Context.getInstance().getSelectedSection().getSectionType().getSectionTypeId());
         }
         catch (Exception ex)
         {
