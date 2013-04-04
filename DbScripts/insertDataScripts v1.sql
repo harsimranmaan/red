@@ -533,6 +533,27 @@ VALUES
 UNLOCK TABLES;
 
 
+/* insert data into 'Grade' table */
+LOCK TABLES `Grade` WRITE;
+
+INSERT INTO `Grade` (`name`) 
+VALUES 
+('A'),('B'),('C'),
+('D'),('E'),('F');
+
+UNLOCK TABLES;
+
+
+/* insert data into 'Result' table */
+LOCK TABLES `Result` WRITE;
+
+INSERT INTO `Result` (`name`) 
+VALUES 
+('Pass'),('Fail');
+
+UNLOCK TABLES;
+
+
 /* insert data into 'Enrolment' table */
 LOCK TABLES `Enrolment` WRITE;
 
@@ -543,6 +564,8 @@ VALUES
 ('100', '01', '505', 'CICS', '2013', '101', '102'),
 ('100', '01', '520', 'CICS', '2013', '101', '100'),
 ('100', '01', '520', 'CICS', '2013', '101', '101'),
+('100', '02', '520', 'CICS', '2013', '101', '100'),
+('100', '02', '520', 'CICS', '2013', '101', '101'),
 ('101', '01', '505', 'CICS', '2013', '101', '100'),
 ('101', '01', '505', 'CICS', '2013', '101', '102'),
 ('101', '02', '520', 'CICS', '2013', '101', '100'),
