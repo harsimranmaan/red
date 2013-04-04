@@ -423,6 +423,26 @@ CREATE  TABLE `SectionTimeTable` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+DROP TABLE IF EXISTS `Grade`;
+CREATE TABLE `Grade` (
+  `GradeId` INT NOT NULL AUTO_INCREMENT,
+  `name` varchar(5) NOT NULL,
+   PRIMARY KEY (`GradeId`),
+   UNIQUE KEY `GradeUNIQname` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE `Grade` AUTO_INCREMENT = 100;
+
+
+DROP TABLE IF EXISTS `Result`;
+CREATE TABLE `Result` (
+  `resultId` INT NOT NULL AUTO_INCREMENT,
+  `name` varchar(4) NOT NULL,
+   PRIMARY KEY (`ResultId`),
+   UNIQUE KEY `ResultUNIQname` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE `Result` AUTO_INCREMENT = 100;
+
+
 DROP TABLE IF EXISTS `Enrolment`;
 CREATE  TABLE `Enrolment` (
   `studentId` INT NOT NULL ,
@@ -433,8 +453,8 @@ CREATE  TABLE `Enrolment` (
   `sessionId` INT NOT NULL,
   `sectionTypeId` INT NOT NULL,
   `score` INT DEFAULT NULL,
-  `grade` varchar(45) DEFAULT NULL,
-  `result` varchar(45) DEFAULT NULL,
+  `gradeId` INT DEFAULT NULL,
+  `resultId` INT DEFAULT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`studentId`, `sectionId`,`sectionTypeId`, `courseNumber`, `departmentId`,  `termYear`,`sessionId`) ,
   CONSTRAINT `EnrolmentFKstudentId`
@@ -444,11 +464,16 @@ CREATE  TABLE `Enrolment` (
     ON UPDATE CASCADE,
 /* changed table name to Section from Course  and merged foreign keys */
 /* changed table name to Section from Department and merged foreign keys */
-  CONSTRAINT `EnrolmentFKsectionIdcourseNumberdepartmentId`
+/* CONSTRAINT EnrolmentCHKscore CHECK (`score` > -1 AND `score` < 101),*/
+	CONSTRAINT `EnrolmentFKsectionIdcourseNumberdepartmentId`
     FOREIGN KEY (`sectionId`,`courseNumber`,`departmentId`,`termYear`,`sessionId`,`sectionTypeId` )
     REFERENCES `Section` (`sectionId`,`courseNumber`,`departmentId`,`termYear`,`sessionId`,`sectionTypeId`)
     ON DELETE RESTRICT
-    ON UPDATE CASCADE
+    ON UPDATE CASCADE,
+	CONSTRAINT `EnrolmentFKgradeId`
+    FOREIGN KEY (`gradeId`) REFERENCES `Grade` (`gradeId`) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT `EnrolmentFKresultId`
+    FOREIGN KEY (`resultId`) REFERENCES `Result` (`resultId`) ON DELETE RESTRICT ON UPDATE CASCADE
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
