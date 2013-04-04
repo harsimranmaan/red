@@ -16,7 +16,6 @@
     <class>adg.red.models.ResourceDictionary</class>
     <class>adg.red.models.Administrator</class>
     <class>adg.red.models.Enrolment</class>
-    <class>adg.red.models.Prerequisite</class>
     <class>adg.red.models.SectionType</class>
     <class>adg.red.models.Program</class>
     <class>adg.red.models.Glossary</class>
@@ -32,6 +31,7 @@
     <class>adg.red.models.User</class>
     <class>adg.red.models.MessageReceiver</class>
     <class>adg.red.models.WeekDay</class>
+    <class>adg.red.models.Prerequisite</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://ec2-50-18-66-213.us-west-1.compute.amazonaws.com:3306/AdgDevelopment?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="red"/>

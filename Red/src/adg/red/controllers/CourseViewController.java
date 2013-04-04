@@ -4,9 +4,12 @@
  */
 package adg.red.controllers;
 
+import adg.red.models.CoRequisite;
 import adg.red.utils.Context;
 import adg.red.utils.ViewLoader;
 import adg.red.models.Course;
+import adg.red.models.PrerequisitePK;
+import adg.red.models.Prerequisite;
 import adg.red.models.Section;
 import java.net.URL;
 import java.util.Date;
@@ -18,12 +21,16 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 
 /**
  * FXML Controller class
@@ -57,6 +64,12 @@ public class CourseViewController implements Initializable
     private TableColumn<Section, Date> startDateColmn; // Value injected by FXMLLoader
     @FXML //  fx:id="typeColmn"
     private TableColumn<Section, String> typeColmn; // Value injected by FXMLLoader
+    @FXML //  fx:id="colTa"
+    private TableColumn<Section, String> colTa; // Value injected by FXMLLoader
+    @FXML //  fx:id="lsvCoReq"
+    private ListView<CoRequisite> lsvCoReq; // Value injected by FXMLLoader
+    @FXML //  fx:id="lsvPrereq"
+    private ListView<Prerequisite> lsvPrereq; // Value injected by FXMLLoader
     @FXML //  fx:id="disView"
     private AnchorPane disView; // Value injected by FXMLLoader
 
@@ -67,16 +80,18 @@ public class CourseViewController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
-
+        populatePrereqListView(Context.getInstance().getSelectedCourse());
+        populateCoreqListView(Context.getInstance().getSelectedCourse());
         populateSectionTable(Context.getInstance().getSelectedCourse());
-        lblCredit.setText("" + Context.getInstance().getSelectedCourse().getCredits());
+        lblCredit.setText(Integer.toString(Context.getInstance().getSelectedCourse().getCredits()));
         passRqLbl.setText(Context.getInstance().getSelectedCourse().getPassingRequirement());
         txtCourseDescription.setText(Context.getInstance().getSelectedCourse().getDescription());
         lblCourseName.setText(Context.getInstance().getSelectedCourse().getName());
         lblDeptIdAndCourseNo.setText(Context.getInstance().getSelectedCourse().getDepartmentIdAndCourseNumber());
         lblGradingScheme.setText(Context.getInstance().getSelectedCourse().getGradingSchemeId().getName());
-        HomeViewController.getCourseLk().setText("" + Context.getInstance().getSelectedCourse().getCoursePK().getCourseNumber() + ":");
+        HomeViewController.getCourseLk().setText(Integer.toString(Context.getInstance().getSelectedCourse().getCoursePK().getCourseNumber()) + ":");
         HomeViewController.getCourseLk().setVisible(true);
+
 
         // action when user clicked on the table
         tabCourse.setOnMousePressed(new EventHandler<MouseEvent>()
@@ -105,6 +120,60 @@ public class CourseViewController implements Initializable
 
     }
 
+    public void populatePrereqListView(Course selectedCourse)
+    {
+        List<Prerequisite> prereq = Prerequisite.getByCourse(selectedCourse);
+
+        lsvPrereq.setCellFactory(new Callback<ListView<Prerequisite>, ListCell<Prerequisite>>()
+        {
+            @Override
+            public ListCell<Prerequisite> call(ListView<Prerequisite> param)
+            {
+                ListCell<Prerequisite> cell = new ListCell<Prerequisite>()
+                {
+                    @Override
+                    public void updateItem(Prerequisite pre, boolean empty)
+                    {
+                        super.updateItem(pre, empty);
+                        if (pre != null)
+                        {
+                            this.setText(pre.getPrerequisitePK().getPreRequisiteDeptId() + " " + pre.getPrerequisitePK().getPreRequisiteNumber());
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+        lsvPrereq.getItems().setAll(prereq);
+    }
+
+    public void populateCoreqListView(Course selectedCourse)
+    {
+        List<CoRequisite> coReq = CoRequisite.getByCourse(selectedCourse);
+
+        lsvCoReq.setCellFactory(new Callback<ListView<CoRequisite>, ListCell<CoRequisite>>()
+        {
+            @Override
+            public ListCell<CoRequisite> call(ListView<CoRequisite> param)
+            {
+                ListCell<CoRequisite> cell = new ListCell<CoRequisite>()
+                {
+                    @Override
+                    public void updateItem(CoRequisite co, boolean empty)
+                    {
+                        super.updateItem(co, empty);
+                        if (co != null)
+                        {
+                            this.setText(co.getCoRequisitePK().getCoRequisiteDeptId() + " " + co.getCoRequisitePK().getCoRequisiteNumber());
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+        lsvCoReq.getItems().setAll(coReq);
+    }
+
     public void populateSectionTable(Course selectedCourse)
     {
 
@@ -120,6 +189,7 @@ public class CourseViewController implements Initializable
         startDateColmn.setCellValueFactory(new PropertyValueFactory<Section, Date>("startDate"));
         typeColmn.setCellValueFactory(new PropertyValueFactory<Section, String>("sectionTypeName"));
         instructorColmn.setCellValueFactory(new PropertyValueFactory<Section, String>("facultyMemberName"));
+        colTa.setCellValueFactory(new PropertyValueFactory<Section, String>("teachingAssistant"));
         tabCourse.getItems().setAll(sections);
 
     }
