@@ -432,6 +432,9 @@ CREATE  TABLE `Enrolment` (
   `termYear` SMALLINT NOT NULL,
   `sessionId` INT NOT NULL,
   `sectionTypeId` INT NOT NULL,
+  `score` INT DEFAULT NULL,
+  `grade` varchar(45) DEFAULT NULL,
+  `result` varchar(45) DEFAULT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`studentId`, `sectionId`,`sectionTypeId`, `courseNumber`, `departmentId`,  `termYear`,`sessionId`) ,
   CONSTRAINT `EnrolmentFKstudentId`
