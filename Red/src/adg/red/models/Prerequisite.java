@@ -4,7 +4,9 @@
  */
 package adg.red.models;
 
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -25,17 +27,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Prerequisite")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "Prerequisite.findAll", query = "SELECT p FROM Prerequisite p"),
     @NamedQuery(name = "Prerequisite.findByCourseNumber", query = "SELECT p FROM Prerequisite p WHERE p.prerequisitePK.courseNumber = :courseNumber"),
     @NamedQuery(name = "Prerequisite.findByDepartmentId", query = "SELECT p FROM Prerequisite p WHERE p.prerequisitePK.departmentId = :departmentId"),
     @NamedQuery(name = "Prerequisite.findByPreRequisiteNumber", query = "SELECT p FROM Prerequisite p WHERE p.prerequisitePK.preRequisiteNumber = :preRequisiteNumber"),
     @NamedQuery(name = "Prerequisite.findByPreRequisiteDeptId", query = "SELECT p FROM Prerequisite p WHERE p.prerequisitePK.preRequisiteDeptId = :preRequisiteDeptId"),
     @NamedQuery(name = "Prerequisite.findByIsActive", query = "SELECT p FROM Prerequisite p WHERE p.isActive = :isActive"),
-    @NamedQuery(name = "Prerequisite.findByIsMust", query = "SELECT p FROM Prerequisite p WHERE p.isMust = :isMust")
+    @NamedQuery(name = "Prerequisite.findByIsMust", query = "SELECT p FROM Prerequisite p WHERE p.isMust = :isMust"),
+    @NamedQuery(name = "Prerequisite.findByCourseNumberAndDepartmentId", query = "SELECT p FROM Prerequisite p WHERE p.prerequisitePK.courseNumber = :courseNumber AND p.prerequisitePK.departmentId = :departmentId")
 })
 public class Prerequisite implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected PrerequisitePK prerequisitePK;
@@ -46,14 +50,14 @@ public class Prerequisite implements Serializable
     @Column(name = "isMust")
     private boolean isMust;
     @JoinColumns(
-    {
+            {
         @JoinColumn(name = "preRequisiteDeptId", referencedColumnName = "departmentId", insertable = false, updatable = false),
         @JoinColumn(name = "preRequisiteNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false)
     })
     @ManyToOne(optional = false)
     private Course course;
     @JoinColumns(
-    {
+            {
         @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false),
         @JoinColumn(name = "courseNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false)
     })
@@ -159,5 +163,10 @@ public class Prerequisite implements Serializable
     public String toString()
     {
         return "adg.red.models.Prerequisite[ prerequisitePK=" + prerequisitePK + " ]";
+    }
+
+    public static List<Prerequisite> getByCourse(Course course)
+    {
+        return RedEntityManager.getEntityManager().createNamedQuery("Prerequisite.findByCourseNumberAndDepartmentId").setParameter("departmentId", course.getCoursePK().getDepartmentId()).setParameter("courseNumber", course.getCoursePK().getCourseNumber()).getResultList();
     }
 }
