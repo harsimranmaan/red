@@ -101,8 +101,8 @@ public class SectionViewController implements Initializable
 
 
 
-        secLbl.setText("Secion " + Context.getInstance().getSelectedSection().getSectionPK().getSectionId());
-        creditLbl.setText("" + Context.getInstance().getSelectedCourse().getCredits());
+        secLbl.setText("Section " + Context.getInstance().getSelectedSection().getSectionPK().getSectionId());
+        creditLbl.setText(Integer.toString(Context.getInstance().getSelectedCourse().getCredits()));
         passRqLbl.setText(Context.getInstance().getSelectedCourse().getPassingRequirement());
         courseDesTxt.setText(Context.getInstance().getSelectedCourse().getDescription());
         courseNameLbl.setText(Context.getInstance().getSelectedCourse().getName());
