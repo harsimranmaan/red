@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Student")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s"),
     @NamedQuery(name = "Student.findByStudentId", query = "SELECT s FROM Student s WHERE s.studentId = :studentId"),
     @NamedQuery(name = "Student.findByDateOfRegistration", query = "SELECT s FROM Student s WHERE s.dateOfRegistration = :dateOfRegistration"),
@@ -46,6 +46,7 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class Student implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -184,7 +185,7 @@ public class Student implements Serializable
     {
         return "adg.red.models.Student[ studentId=" + studentId + " ]";
     }
-    
+
     public static Student getStudentByUsername(User username) throws Exception
     {
         List<Student> studentList = RedEntityManager.getEntityManager().createNamedQuery("Student.findByUsername").setParameter("username", username).getResultList();
@@ -194,7 +195,7 @@ public class Student implements Serializable
         }
         else
         {
-            throw new Exception(LocaleManager.get(5));
+            throw new Exception(LocaleManager.get(34));
         }
     }
 }

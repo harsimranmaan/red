@@ -86,10 +86,14 @@ public class CourseViewController implements Initializable
             {
                 try
                 {
-                    Context.getInstance().setSelectedSection(tabCourse.getSelectionModel().getSelectedItem());
-                    //Context.getInstance().setSelectedCourse(disTable.getSelectionModel().getSelectedItem());
-                    ViewLoader view = new ViewLoader(disView);
-                    view.loadView("SectionView");
+                    //handle no records click
+                    if (tabCourse.getSelectionModel().getSelectedItem() != null)
+                    {
+                        Context.getInstance().setSelectedSection(tabCourse.getSelectionModel().getSelectedItem());
+
+                        ViewLoader view = new ViewLoader(disView);
+                        view.loadView("SectionView");
+                    }
 
                 }
                 catch (Exception ex)

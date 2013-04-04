@@ -5,6 +5,8 @@
 package adg.red.controllers;
 
 import adg.red.models.Enrolment;
+import adg.red.models.EnrolmentPK;
+import adg.red.models.Section;
 import adg.red.models.Student;
 import adg.red.utils.Context;
 import adg.red.utils.LocaleManager;
@@ -52,6 +54,22 @@ public class SectionViewController implements Initializable
     @FXML //  fx:id="lblResponse"
     private Label lblResponse; // Value injected by FXMLLoader
     private Enrolment enrolment = null;
+    private EnrolmentPK enrolmentPk;
+
+    private void toggleRegDropButtons()
+    {
+        //check to see if the student has already dropped the section
+        if (enrolment.getIsActive())
+        {
+            btnRegister.setDisable(true);
+            btnDrop.setDisable(false);
+        }
+        else
+        {
+            btnRegister.setDisable(false);
+            btnDrop.setDisable(true);
+        }
+    }
 
     /**
      * Initializes the controller class.
@@ -62,22 +80,18 @@ public class SectionViewController implements Initializable
         // TODO
         try
         {
-            enrolment = new Enrolment(Student.getStudentByUsername(Context.getInstance().getCurrentUser()).getStudentId(),
-                    Context.getInstance().getSelectedSection().getSectionId(),
-                    Context.getInstance().getSelectedSection().getCourse().getCoursePK().getCourseNumber(),
-                    Context.getInstance().getSelectedDepartment().getDepartmentId(),
-                    Context.getInstance().getSelectedSection().getTerm().getTermPK().getTermYear(),
-                    Context.getInstance().getSelectedSection().getTerm().getTermPK().getSessionId(),
+            Section section = Context.getInstance().getSelectedSection();
+            enrolmentPk = new EnrolmentPK(Student.getStudentByUsername(Context.getInstance().getCurrentUser()).getStudentId(),
+                    section.getSectionId(),
+                    section.getCourse().getCoursePK().getCourseNumber(),
+                    section.getCourse().getCoursePK().getDepartmentId(),
+                    section.getTerm().getTermPK().getTermYear(),
+                    section.getTerm().getTermPK().getSessionId(),
                     Context.getInstance().getSelectedSection().getSectionType().getSectionTypeId());
 
-            if (checkUserAlreadyEnrolled(enrolment))
+            if (checkUserAlreadyEnrolled(enrolmentPk))
             {
-                btnRegister.setDisable(true);
-                //check to see if the student has already dropped the section
-                if (Enrolment.getEnrolmentByEnrolmentPK(enrolment).getIsActive())
-                {
-                    btnDrop.setDisable(false);
-                }
+                toggleRegDropButtons();
             }
         }
         catch (Exception ex)
@@ -103,18 +117,17 @@ public class SectionViewController implements Initializable
             {
                 try
                 {
-//                    ViewLoader view = new ViewLoader(disBrwCourseArea);
-//                    view.loadView("FaqView");
-//                    browseCourseLk.setVisible(true);
-//                    browseCourseLk.setText("Faq");
-//                    deptLk.setVisible(false);
-//                    courseLk.setVisible(false);
+
+                    if (enrolment == null)
+                    {
+                        //first time
+                        enrolment = new Enrolment(enrolmentPk);
+                    }
                     enrolment.setIsActive(true);
                     enrolment.save();
                     lblResponse.setText(LocaleManager.get(10));
                     lblResponse.setVisible(true);
-                    btnRegister.setDisable(true);
-                    btnDrop.setDisable(false);
+                    toggleRegDropButtons();
                 }
                 catch (Exception ex)
                 {
@@ -125,6 +138,7 @@ public class SectionViewController implements Initializable
         });
 
         // setOnAction when drop button is pressed
+        //should fire only when we have an enrolment selected
         btnDrop.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -132,12 +146,11 @@ public class SectionViewController implements Initializable
             {
                 try
                 {
-                    Enrolment enrol = Enrolment.getEnrolmentByEnrolmentPK(enrolment);
-                    enrol.setIsActive(false);
-                    enrol.save();
+                    enrolment.setIsActive(false);
+                    enrolment.save();
                     lblResponse.setText(LocaleManager.get(32));
                     lblResponse.setVisible(true);
-                    btnDrop.setDisable(true);
+                    toggleRegDropButtons();
                 }
                 catch (Exception ex)
                 {
@@ -147,15 +160,16 @@ public class SectionViewController implements Initializable
         });
     }
 
-    private boolean checkUserAlreadyEnrolled(Enrolment enrol)
+    private boolean checkUserAlreadyEnrolled(EnrolmentPK enrolPk)
     {
         try
         {
-            Enrolment.getEnrolmentByEnrolmentPK(enrol);
+            enrolment = Enrolment.getEnrolmentByEnrolmentPK(enrolPk);
             return true;
         }
         catch (Exception ex)
         {
+            enrolment = null;
             return false;
         }
     }
