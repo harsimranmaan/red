@@ -66,7 +66,7 @@ public class SectionViewController implements Initializable
         }
         else
         {
-            btnRegister.setDisable(false);
+            btnRegister.setDisable(true);
             btnDrop.setDisable(true);
         }
     }
