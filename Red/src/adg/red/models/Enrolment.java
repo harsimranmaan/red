@@ -175,4 +175,13 @@ public class Enrolment implements Serializable
             throw new Exception(LocaleManager.get(33));
         }
     }
+
+    public static List<Enrolment> getEnrolmentsByStudentId(int studentId)
+    {
+        return RedEntityManager.getEntityManager()
+                .createNamedQuery("Enrolment.findByStudentId")
+                .setParameter("studentId", studentId)
+                .getResultList();
+
+    }
 }
