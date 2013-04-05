@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package adg.red.controllers;
+package adg.red.controllers.student;
 
+import adg.red.controllers.HomeViewController;
 import adg.red.models.CoRequisite;
 import adg.red.utils.Context;
 import adg.red.utils.ViewLoader;
 import adg.red.models.Course;
-import adg.red.models.PrerequisitePK;
 import adg.red.models.Prerequisite;
 import adg.red.models.Section;
 import java.net.URL;
@@ -30,7 +30,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
-import javafx.util.StringConverter;
 
 /**
  * FXML Controller class
@@ -107,7 +106,7 @@ public class CourseViewController implements Initializable
                         Context.getInstance().setSelectedSection(tabCourse.getSelectionModel().getSelectedItem());
 
                         ViewLoader view = new ViewLoader(disView);
-                        view.loadView("SectionView");
+                        view.loadView("student/SectionView");
                     }
 
                 }
