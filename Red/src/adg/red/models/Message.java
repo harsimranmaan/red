@@ -140,7 +140,7 @@ public class Message implements Serializable
 
     public static Message findMessageByMessageId(int messageId)
     {
-        return ((List<Message>) RedEntityManager.getEntityManager().createNamedQuery("Message.findByMessageId").setParameter("messageId", messageId).getResultList()).get(0);
+        return (Message) RedEntityManager.getEntityManager().createNamedQuery("Message.findByMessageId").setParameter("messageId", messageId).getSingleResult();
     }
 
     @Override

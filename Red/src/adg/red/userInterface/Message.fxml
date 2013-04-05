@@ -34,9 +34,9 @@
             <TextArea id="messageBody" fx:id="txtMessageBody" prefHeight="231.0" prefWidth="640.0" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0" />
             <SplitMenuButton id="btnMessageAction" layoutX="545.0" layoutY="14.0" mnemonicParsing="false" text="Action">
               <items>
-                <MenuItem mnemonicParsing="false" text="Delete" fx:id="btnDelete" />
-                <MenuItem mnemonicParsing="false" text="Mark as Read" fx:id="btnMarkRead" />
-                <MenuItem mnemonicParsing="false" text="Mark as Unread" fx:id="btnMarkUnread" />
+                <MenuItem mnemonicParsing="false" onAction="#deleteMessage" text="Delete" fx:id="btnDelete" />
+                <MenuItem mnemonicParsing="false" onAction="#markMessageRead" text="Mark as Read" fx:id="btnMarkRead" />
+                <MenuItem mnemonicParsing="false" onAction="#markMessageUnread" text="Mark as Unread" fx:id="btnMarkUnread" />
               </items>
               <stylesheets>
                 <URL value="@css/mainForm.css" />
