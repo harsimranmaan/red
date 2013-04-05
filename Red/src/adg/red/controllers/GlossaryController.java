@@ -22,8 +22,8 @@ import javafx.scene.text.Text;
 public class GlossaryController implements Initializable
 {
 
-    @FXML //  fx:id="glossaryLv"
-    private ListView<Text> glossaryLv; // Value injected by FXMLLoader
+    @FXML 
+    private ListView<Text> glossaryLv; 
 
     /**
      * Initializes the controller class.

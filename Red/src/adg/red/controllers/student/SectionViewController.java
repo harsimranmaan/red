@@ -41,38 +41,40 @@ import javafx.util.Callback;
 public class SectionViewController implements Initializable
 {
 
-    @FXML //  fx:id="courseDesTxt"
-    private TextArea courseDesTxt; // Value injected by FXMLLoader
-    @FXML //  fx:id="courseNameLbl"
-    private Label courseNameLbl; // Value injected by FXMLLoader
-    @FXML //  fx:id="secLbl"
-    private Label secLbl; // Value injected by FXMLLoader
-    @FXML //  fx:id="creditLbl"
-    private Label creditLbl; // Value injected by FXMLLoader
-    @FXML //  fx:id="deptIdAndCourseNoLbl"
-    private Label deptIdAndCourseNoLbl; // Value injected by FXMLLoader
-    @FXML //  fx:id="gradingSchmLbl"
-    private Label gradingSchmLbl; // Value injected by FXMLLoader
-    @FXML //  fx:id="passRqLbl"
-    private Label passRqLbl; // Value injected by FXMLLoader
-    @FXML //  fx:id="btnRegister"
-    private Button btnRegister; // Value injected by FXMLLoader
-    @FXML //  fx:id="btnDrop"
-    private Button btnDrop; // Value injected by FXMLLoader
-    @FXML //  fx:id="lblResponse"
-    private Label lblResponse; // Value injected by FXMLLoader
-    @FXML //  fx:id="lblSecType"
-    private Label lblSecType; // Value injected by FXMLLoader
-    @FXML //  fx:id="lblSession"
-    private Label lblSession; // Value injected by FXMLLoader
-    @FXML //  fx:id="lblTermYear"
-    private Label lblTermYear; // Value injected by FXMLLoader
-    @FXML //  fx:id="lsvOutstandPrereq"
-    private ListView<Prerequisite> lsvOutstandPrereq; // Value injected by FXMLLoader
-    @FXML //  fx:id="lsvOutstandCoReq"
-    private ListView<CoRequisite> lsvOutstandCoReq; // Value injected by FXMLLoader
-    @FXML //  fx:id="disView"
-    private AnchorPane disView; // Value injected by FXMLLoader
+    @FXML
+    private TextArea courseDesTxt;
+    @FXML
+    private Label courseNameLbl;
+    @FXML
+    private Label secLbl;
+    @FXML
+    private Label creditLbl;
+    @FXML
+    private Label deptIdAndCourseNoLbl;
+    @FXML
+    private Label gradingSchmLbl;
+    @FXML
+    private Label passRqLbl;
+    @FXML
+    private ListView<String> dateLv;
+    @FXML
+    private Button btnRegister;
+    @FXML
+    private Button btnDrop;
+    @FXML
+    private Label lblResponse;
+    @FXML
+    private Label lblSecType;
+    @FXML
+    private AnchorPane disView;
+    @FXML
+    private Label lblSession;
+    @FXML
+    private Label lblTermYear;
+    @FXML
+    private ListView<Prerequisite> lsvOutstandPrereq;
+    @FXML
+    private ListView<CoRequisite> lsvOutstandCoReq;
     private Enrolment enrolment = null;
     private EnrolmentPK enrolmentPk;
 

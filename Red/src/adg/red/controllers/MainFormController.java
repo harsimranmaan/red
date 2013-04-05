@@ -25,16 +25,16 @@ import javafx.scene.layout.AnchorPane;
 public class MainFormController implements Initializable
 {
 
-    @FXML //  fx:id="mnuClose"
-    private MenuItem mniClose; // Value injected by FXMLLoader
-    @FXML //  fx:id="viewArea"
-    private AnchorPane viewArea; // Value injected by FXMLLoader
-    @FXML //  fx:id="menFile"
-    private Menu menFile; // Value injected by FXMLLoader
-    @FXML //  fx:id="menHelp"
-    private Menu menHelp; // Value injected by FXMLLoader
-    @FXML //  fx:id="mniAbout"
-    private MenuItem mniAbout; // Value injected by FXMLLoader
+    @FXML
+    private MenuItem mniClose;
+    @FXML
+    private AnchorPane viewArea;
+    @FXML
+    private Menu menFile;
+    @FXML
+    private Menu menHelp;
+    @FXML
+    private MenuItem mniAbout;
 
     /**
      * Initializes the controller class.
@@ -43,17 +43,16 @@ public class MainFormController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         initializeComponentsByLocale();
-        // setOnAction when close menuitem is selected
-        mniClose.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent event)
-            {
-                Platform.exit();
-            }
-        });
+
+
+
         ViewLoader view = new ViewLoader(viewArea);
         view.loadView("Login");
+    }
+
+    public void close(ActionEvent event)
+    {
+        Platform.exit();
     }
 
     private void initializeComponentsByLocale()
