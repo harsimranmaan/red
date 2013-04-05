@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="disView" prefHeight="464.0" prefWidth="642.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.student.CourseListViewController">
+    <children>
+        <TableView fx:id="disTable" prefHeight="466.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <columns>
+                <TableColumn minWidth="152.0" prefWidth="152.0" text="Course Number" fx:id="courseNumberColmn" />
+                <TableColumn minWidth="490.0" prefWidth="490.0" text="Course Name" fx:id="courseNameColmn" />
+            </columns>
+        </TableView>
+    </children>
+    <stylesheets>
+        <URL value="@css/mainForm.css" />
+    </stylesheets>
+</AnchorPane>

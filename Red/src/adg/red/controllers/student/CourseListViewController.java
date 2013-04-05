@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package adg.red.controllers;
+package adg.red.controllers.student;
 
+import adg.red.controllers.HomeViewController;
 import adg.red.utils.Context;
 import adg.red.utils.ViewLoader;
 import adg.red.models.Course;
@@ -64,7 +65,7 @@ public class CourseListViewController implements Initializable
                     // Context.getInstance().setUserSelectCourseNumer(key);
                     Context.getInstance().setSelectedCourse(disTable.getSelectionModel().getSelectedItem());
                     ViewLoader view = new ViewLoader(disView);
-                    view.loadView("CourseView");
+                    view.loadView("student/CourseView");
 
                 }
                 catch (Exception ex)
