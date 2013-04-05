@@ -49,6 +49,8 @@ public class MessageController implements Initializable
     @FXML
     private TableView<MessageReceiver> tblMessages;
     private User currentUser;
+    @FXML
+    private Text txtSubject;
 
     @FXML
     private void deleteMessage(ActionEvent event)
@@ -56,6 +58,7 @@ public class MessageController implements Initializable
         MessageReceiver receiver = tblMessages.getSelectionModel().getSelectedItem();
         receiver.setStatusId(MessageStatus.getByStatusName("Deleted"));
         receiver.save();
+        initTable();
     }
 
     @FXML
@@ -64,6 +67,7 @@ public class MessageController implements Initializable
         MessageReceiver receiver = tblMessages.getSelectionModel().getSelectedItem();
         receiver.setStatusId(MessageStatus.getByStatusName("Read"));
         receiver.save();
+        initTable();
     }
 
     @FXML
@@ -72,6 +76,7 @@ public class MessageController implements Initializable
         MessageReceiver receiver = tblMessages.getSelectionModel().getSelectedItem();
         receiver.setStatusId(MessageStatus.getByStatusName("Unread"));
         receiver.save();
+        initTable();
     }
 
     @FXML
@@ -86,13 +91,10 @@ public class MessageController implements Initializable
     private void displayMessageText(Message message)
     {
         txtMessageBody.setText(message.getMessageBody());
+        txtSubject.setText(message.getSubject());
     }
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb)
+    private void initTable()
     {
         currentUser = adg.red.utils.Context.getInstance().getCurrentUser();
         String userId = currentUser.getUsername();
@@ -102,6 +104,15 @@ public class MessageController implements Initializable
         {
             displayMessageText(messagesReceived.get(0).getMessage());
         }
+    }
+
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb)
+    {
+        initTable();
     }
 
     public void populateMessageList(List<MessageReceiver> messages)
