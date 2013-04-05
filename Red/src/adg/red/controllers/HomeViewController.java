@@ -151,7 +151,7 @@ public class HomeViewController implements Initializable
 
             }
         });
-
+//        
 //                // setOnAction when personal info button is pressed added by Jingbo Yu
 //        glossaryBtn.setOnAction(new EventHandler<ActionEvent>()
 //        {
@@ -175,6 +175,7 @@ public class HomeViewController implements Initializable
 //            }
 //        });
 //        
+       
 //        // setOnAction when home link is clicked
         homeLk.setOnAction(new EventHandler<ActionEvent>()
         {
