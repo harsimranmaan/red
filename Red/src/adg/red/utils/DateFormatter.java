@@ -37,4 +37,17 @@ public class DateFormatter
             return "";
         }
     }
+
+    public static String formatDateTime(Date date)
+    {
+        if (date != null)
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy HH:mm");
+            return sdf.format(date);
+        }
+        else
+        {
+            return "";
+        }
+    }
 }

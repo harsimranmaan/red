@@ -4,6 +4,7 @@
  */
 package adg.red.models;
 
+import adg.red.utils.DateFormatter;
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 import java.util.Date;
@@ -32,9 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
         {
     @NamedQuery(name = "MessageReceiver.findAll", query = "SELECT m FROM MessageReceiver m"),
     @NamedQuery(name = "MessageReceiver.findByMessageId", query = "SELECT m FROM MessageReceiver m WHERE m.messageReceiverPK.messageId = :messageId"),
-    @NamedQuery(name = "MessageReceiver.findByReceiverId", query = "SELECT m FROM MessageReceiver m WHERE m.messageReceiverPK.receiverId = :receiverId"),
-    @NamedQuery(name = "MessageReceiver.findByModifiedAt", query = "SELECT m FROM MessageReceiver m WHERE m.modifiedAt = :modifiedAt"),
-    @NamedQuery(name = "MessageReceiver.findAllMessagesIds", query = "SELECT m.messageReceiverPK.messageId FROM MessageReceiver m WHERE m.messageReceiverPK.receiverId = :receiverId")
+    @NamedQuery(name = "MessageReceiver.findByReceiverId", query = "SELECT m FROM MessageReceiver m WHERE m.messageReceiverPK.receiverId = :receiverId AND m.statusId.name!='Deleted' ORDER BY m.statusId.statusId DESC, m.message.dateTime DESC"),
+    @NamedQuery(name = "MessageReceiver.findByModifiedAt", query = "SELECT m FROM MessageReceiver m WHERE m.modifiedAt = :modifiedAt")
 })
 public class MessageReceiver implements Serializable
 {
@@ -126,11 +126,6 @@ public class MessageReceiver implements Serializable
         this.message = message;
     }
 
-    public static List<Integer> findMessageByReceiverId(String receiverId)
-    {
-        return RedEntityManager.getEntityManager().createNamedQuery("MessageReceiver.findAllMessagesIds").setParameter("receiverId", receiverId).getResultList();
-    }
-
     @Override
     public int hashCode()
     {
@@ -159,5 +154,42 @@ public class MessageReceiver implements Serializable
     public String toString()
     {
         return "adg.red.models.MessageReceiver[ messageReceiverPK=" + messageReceiverPK + " ]";
+    }
+
+    public static List<MessageReceiver> findMessagesReceivedByReceiverId(String receiverId)
+    {
+        List<MessageReceiver> messagesReceived = RedEntityManager.getEntityManager().createNamedQuery("MessageReceiver.findByReceiverId").setParameter("receiverId", receiverId).getResultList();
+
+        return messagesReceived;
+    }
+
+    public String getSenderName()
+    {
+        return (message.getSenderId().getLastName() + ", " + message.getSenderId().getFirstName());
+    }
+
+    public String getDateTime()
+    {
+        return DateFormatter.formatDateTime(message.getDateTime());
+    }
+
+    public String getSubject()
+    {
+        return message.getSubject();
+    }
+
+    public String getBody()
+    {
+        return message.getMessageBody();
+    }
+
+    public String getStatusName()
+    {
+        return statusId.getName();
+    }
+
+    public static void refresh()
+    {
+        RedEntityManager.getEntityManager().refresh(RedEntityManager.getEntityByName("MessageReceiver"));
     }
 }
