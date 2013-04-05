@@ -4,7 +4,9 @@
  */
 package adg.red.controllers.admin;
 
+import adg.red.utils.Context;
 import adg.red.utils.LocaleManager;
+import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -27,17 +29,11 @@ public class HomeViewController implements Initializable
     @FXML
     private Button btnPrograms;
     @FXML
-    private Button btnMessage;
-    @FXML
     private Button btnCourses;
     @FXML
     private Button btnSections;
     @FXML
     private Button btnUsers;
-    @FXML
-    private Button btnFaq;
-    @FXML
-    private Button btnGlossary;
     @FXML
     private Button btnGo;
     @FXML
@@ -55,9 +51,7 @@ public class HomeViewController implements Initializable
     @FXML
     private static Hyperlink hplCourse;
     @FXML
-    private Button btnLogout;
-    @FXML  // added by Jingbo Yu
-    private Button btnUserProfile;
+    private AnchorPane commonButtonArea;
 
     public static Hyperlink getCourseLk()
     {
@@ -88,8 +82,10 @@ public class HomeViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        ViewLoader view = new ViewLoader(commonButtonArea);
+        view.loadView("CommonButtons");
         initializeComponentsByLocale();
-
+        Context.getInstance().setDisplayView(disBrwCourseArea);
     }
 
     private void initializeComponentsByLocale()
@@ -97,15 +93,9 @@ public class HomeViewController implements Initializable
         // TODO
         btnDepartments.setText(LocaleManager.get(36));
         btnPrograms.setText(LocaleManager.get(37));
-
         btnSections.setText(LocaleManager.get(38));
         btnCourses.setText(LocaleManager.get(39));
         btnUsers.setText(LocaleManager.get(40));
-        btnUserProfile.setText(LocaleManager.get(21));
-        btnMessage.setText(LocaleManager.get(22));
-        btnGlossary.setText(LocaleManager.get(14));
-        btnFaq.setText(LocaleManager.get(16));
-        btnLogout.setText(LocaleManager.get(8));
         hplHome.setText(LocaleManager.get(24) + ":");
         lblSearch.setText(LocaleManager.get(25) + ":");
         btnGo.setText(LocaleManager.get(26));

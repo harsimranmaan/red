@@ -33,17 +33,11 @@ public class HomeViewController implements Initializable
     @FXML
     private Button btnManageCourse;
     @FXML
-    private Button btnMessage;
-    @FXML
     private Button btnViewDegreeInfo;
     @FXML
     private Button btnViewEnrolment;
     @FXML
     private Button btnViewTimetable;
-    @FXML
-    private Button btnFaq;
-    @FXML
-    private Button btnGlossary;
     @FXML
     private Button btnGo;
     @FXML
@@ -61,9 +55,7 @@ public class HomeViewController implements Initializable
     @FXML
     private static Hyperlink hplCourse;
     @FXML
-    private Button btnLogout;
-    @FXML  // added by Jingbo Yu
-    private Button btnUserProfile;
+    private AnchorPane commonButtonArea;
 
     public static Hyperlink getCourseLk()
     {
@@ -94,7 +86,10 @@ public class HomeViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        ViewLoader view = new ViewLoader(commonButtonArea);
+        view.loadView("CommonButtons");
         initializeComponentsByLocale();
+        Context.getInstance().setDisplayView(disBrwCourseArea);
         // setOnAction when browse course button is pressed
         btnBrowseCourse.setOnAction(new EventHandler<ActionEvent>()
         {
@@ -118,98 +113,7 @@ public class HomeViewController implements Initializable
             }
         });
 
-        // setOnAction when faq button is pressed
-        btnFaq.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent event)
-            {
-                try
-                {
-                    ViewLoader view = new ViewLoader(disBrwCourseArea);
-                    view.loadView("FaqView");
-                    hplBrowseCourse.setVisible(true);
-                    hplBrowseCourse.setText(LocaleManager.get(16));
-                    hplDept.setVisible(false);
-                    hplCourse.setVisible(false);
-                }
-                catch (Exception ex)
-                {
-                    Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-        });
-
-        btnMessage.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent event)
-            {
-                try
-                {
-                    ViewLoader view = new ViewLoader(disBrwCourseArea);
-                    view.loadView("Message");
-                    hplBrowseCourse.setVisible(true);
-                    hplBrowseCourse.setText(LocaleManager.get(22));
-                    hplDept.setVisible(false);
-                    hplCourse.setVisible(false);
-                }
-                catch (Exception ex)
-                {
-                    Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-        });
-
-        // setOnAction when personal info button is pressed added by Jingbo Yu
-        btnUserProfile.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent event)
-            {
-                try
-                {
-                    ViewLoader view = new ViewLoader(disBrwCourseArea);
-                    view.loadView("student/UserProfile");
-                    hplBrowseCourse.setVisible(true);
-                    hplBrowseCourse.setText(LocaleManager.get(15));
-                    hplDept.setVisible(false);
-                    hplCourse.setVisible(false);
-                }
-                catch (Exception ex)
-                {
-                    Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-        });
-
-//                // setOnAction when personal info button is pressed added by Jingbo Yu
-//        glossaryBtn.setOnAction(new EventHandler<ActionEvent>()
-//        {
-//            @Override
-//            public void handle(ActionEvent event)
-//            {
-//                try
-//                {
-//                    ViewLoader view = new ViewLoader(disBrwCourseArea);
-//                    view.loadView("Glossary");
-//                    browseCourseLk.setVisible(true);
-//                    browseCourseLk.setText(LocaleManager.get(14));
-//                    deptLk.setVisible(false);
-//                    courseLk.setVisible(false);
-//                }
-//                catch (Exception ex)
-//                {
-//                    Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//
-//            }
-//        });
-//
-//        // setOnAction when home link is clicked
+        // setOnAction when home link is clicked
         hplHome.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
@@ -297,25 +201,7 @@ public class HomeViewController implements Initializable
             }
         });
 
-        // setOnAction when logout link is clicked
-        btnLogout.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent event)
-            {
-                try
-                {
 
-                    ViewLoader view = new ViewLoader(homeView);
-                    Context.getInstance().setWasLoggedIn(true);
-                    view.loadView("Login");
-                }
-                catch (Exception ex)
-                {
-                    Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
     }
 
     private void initializeComponentsByLocale()
@@ -326,11 +212,6 @@ public class HomeViewController implements Initializable
         btnViewTimetable.setText(LocaleManager.get(18));
         btnViewEnrolment.setText(LocaleManager.get(19));
         btnViewDegreeInfo.setText(LocaleManager.get(20));
-        btnUserProfile.setText(LocaleManager.get(21));
-        btnMessage.setText(LocaleManager.get(22));
-        btnGlossary.setText(LocaleManager.get(14));
-        btnFaq.setText(LocaleManager.get(16));
-        btnLogout.setText(LocaleManager.get(8));
         hplHome.setText(LocaleManager.get(24) + ":");
         lblSearch.setText(LocaleManager.get(25) + ":");
         btnGo.setText(LocaleManager.get(26));

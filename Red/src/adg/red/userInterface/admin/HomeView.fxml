@@ -29,22 +29,7 @@
                                     <Button id="btnViewDegreeInfo" fx:id="btnUsers" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Users" />
                                 </children>
                             </VBox>
-                            <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
-                            <VBox id="VBox" alignment="CENTER" spacing="1.0">
-                                <children>
-                                    <Button id="userProfileBtn" fx:id="btnUserProfile" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Personal Info" />
-                                    <Button fx:id="btnMessage" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Messages" />
-                                </children>
-                            </VBox>
-                            <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
-                            <VBox id="VBox" alignment="CENTER" spacing="1.0">
-                                <children>
-                                    <Button id="glossaryBtn" fx:id="btnGlossary" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Glossary" />
-                                    <Button id="faqBtn" fx:id="btnFaq" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="FAQ" />
-                                </children>
-                            </VBox>
-                            <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
-                            <Button id="logOut" fx:id="btnLogout" mnemonicParsing="false" prefHeight="30.0" prefWidth="77.0" text="Log Out" />
+                            <AnchorPane fx:id="commonButtonArea"></AnchorPane>
                         </children>
                     </VBox>
                     <ImageView id="ADG-Logo3.jpg" fitHeight="75.0" fitWidth="150.0" preserveRatio="true" AnchorPane.bottomAnchor="-9.0">

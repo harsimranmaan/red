@@ -4,13 +4,13 @@
  */
 package adg.red.controllers;
 
+import adg.red.utils.Context;
 import adg.red.utils.LocaleManager;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Menu;
@@ -43,9 +43,7 @@ public class MainFormController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         initializeComponentsByLocale();
-
-
-
+        Context.getInstance().setMainView(viewArea);
         ViewLoader view = new ViewLoader(viewArea);
         view.loadView("Login");
     }
