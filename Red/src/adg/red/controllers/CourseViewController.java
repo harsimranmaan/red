@@ -13,13 +13,17 @@ import adg.red.models.Prerequisite;
 import adg.red.models.Section;
 import java.net.URL;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -29,6 +33,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
@@ -70,6 +75,8 @@ public class CourseViewController implements Initializable
     private ListView<CoRequisite> lsvCoReq; // Value injected by FXMLLoader
     @FXML //  fx:id="lsvPrereq"
     private ListView<Prerequisite> lsvPrereq; // Value injected by FXMLLoader
+    @FXML //  fx:id="hbxPreAndCoReq"
+    private HBox hbxPreAndCoReq; // Value injected by FXMLLoader
     @FXML //  fx:id="disView"
     private AnchorPane disView; // Value injected by FXMLLoader
 
@@ -80,17 +87,19 @@ public class CourseViewController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
-        populatePrereqListView(Context.getInstance().getSelectedCourse());
-        populateCoreqListView(Context.getInstance().getSelectedCourse());
-        populateSectionTable(Context.getInstance().getSelectedCourse());
+
         lblCredit.setText(Integer.toString(Context.getInstance().getSelectedCourse().getCredits()));
         passRqLbl.setText(Context.getInstance().getSelectedCourse().getPassingRequirement());
         txtCourseDescription.setText(Context.getInstance().getSelectedCourse().getDescription());
         lblCourseName.setText(Context.getInstance().getSelectedCourse().getName());
         lblDeptIdAndCourseNo.setText(Context.getInstance().getSelectedCourse().getDepartmentIdAndCourseNumber());
         lblGradingScheme.setText(Context.getInstance().getSelectedCourse().getGradingSchemeId().getName());
+        HomeViewController.getDeptLk().setText(Context.getInstance().getSelectedDepartment().getDepartmentId() + ":");
         HomeViewController.getCourseLk().setText(Integer.toString(Context.getInstance().getSelectedCourse().getCoursePK().getCourseNumber()) + ":");
         HomeViewController.getCourseLk().setVisible(true);
+        populatePrereqListView(Context.getInstance().getSelectedCourse());
+        populateCoreqListView(Context.getInstance().getSelectedCourse());
+        populateSectionTable(Context.getInstance().getSelectedCourse());
 
 
         // action when user clicked on the table
@@ -113,16 +122,62 @@ public class CourseViewController implements Initializable
                 }
                 catch (Exception ex)
                 {
-                    Logger.getLogger(BrowseCourseController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(CourseViewController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
 
+        // action when user clicked on coreq list view
+        lsvCoReq.setOnMousePressed(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent event)
+            {
+                try
+                {
+                    //handle no records click
+                    if (lsvCoReq.getSelectionModel().getSelectedItem() != null)
+                    {
+                        Context.getInstance().setSelectedCourse(lsvCoReq.getSelectionModel().getSelectedItem().getCourse1());
+                        Context.getInstance().setSelectedDepartment(lsvCoReq.getSelectionModel().getSelectedItem().getCourse1().getDepartment());
+                        ViewLoader view = new ViewLoader(disView);
+                        view.loadView("CourseView");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.getLogger(CourseViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        // action when user clicked on prereq list view
+        lsvPrereq.setOnMousePressed(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent event)
+            {
+                try
+                {
+                    //handle no records click
+                    if (lsvPrereq.getSelectionModel().getSelectedItem() != null)
+                    {
+                        Context.getInstance().setSelectedCourse(lsvPrereq.getSelectionModel().getSelectedItem().getCourse());
+                        Context.getInstance().setSelectedDepartment(lsvPrereq.getSelectionModel().getSelectedItem().getCourse().getDepartment());
+                        ViewLoader view = new ViewLoader(disView);
+                        view.loadView("CourseView");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.getLogger(CourseViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }
 
     public void populatePrereqListView(Course selectedCourse)
     {
-        List<Prerequisite> prereq = Prerequisite.getByCourse(selectedCourse);
+        final List<Prerequisite> prereq = Prerequisite.getByCourse(selectedCourse);
 
         lsvPrereq.setCellFactory(new Callback<ListView<Prerequisite>, ListCell<Prerequisite>>()
         {
@@ -132,9 +187,9 @@ public class CourseViewController implements Initializable
                 ListCell<Prerequisite> cell = new ListCell<Prerequisite>()
                 {
                     @Override
-                    public void updateItem(Prerequisite pre, boolean empty)
+                    public void updateItem(Prerequisite pre, boolean bln)
                     {
-                        super.updateItem(pre, empty);
+                        super.updateItem(pre, bln);
                         if (pre != null)
                         {
                             this.setText(pre.getPrerequisitePK().getPreRequisiteDeptId() + " " + pre.getPrerequisitePK().getPreRequisiteNumber());
@@ -145,6 +200,8 @@ public class CourseViewController implements Initializable
             }
         });
         lsvPrereq.getItems().setAll(prereq);
+
+
     }
 
     public void populateCoreqListView(Course selectedCourse)
@@ -159,9 +216,9 @@ public class CourseViewController implements Initializable
                 ListCell<CoRequisite> cell = new ListCell<CoRequisite>()
                 {
                     @Override
-                    public void updateItem(CoRequisite co, boolean empty)
+                    public void updateItem(CoRequisite co, boolean bln)
                     {
-                        super.updateItem(co, empty);
+                        super.updateItem(co, bln);
                         if (co != null)
                         {
                             this.setText(co.getCoRequisitePK().getCoRequisiteDeptId() + " " + co.getCoRequisitePK().getCoRequisiteNumber());
