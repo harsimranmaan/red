@@ -4,13 +4,17 @@
  */
 package adg.red.controllers.student;
 
+import adg.red.models.Course;
 import adg.red.models.Enrolment;
 import adg.red.models.EnrolmentPK;
+import adg.red.models.Prerequisite;
 import adg.red.models.Section;
 import adg.red.models.Student;
 import adg.red.utils.Context;
 import adg.red.utils.LocaleManager;
 import java.net.URL;
+import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,6 +57,8 @@ public class SectionViewController implements Initializable
     private Button btnDrop; // Value injected by FXMLLoader
     @FXML //  fx:id="lblResponse"
     private Label lblResponse; // Value injected by FXMLLoader
+    @FXML //  fx:id="lblSecType"
+    private Label lblSecType; // Value injected by FXMLLoader
     private Enrolment enrolment = null;
     private EnrolmentPK enrolmentPk;
 
@@ -89,17 +95,21 @@ public class SectionViewController implements Initializable
                     section.getTerm().getTermPK().getSessionId(),
                     section.getSectionType().getSectionTypeId());
 
-            if (checkUserAlreadyEnrolled(enrolmentPk))
+            if (checkStudentAlreadyEnrolled(enrolmentPk))
             {
                 toggleRegDropButtons();
+            }
+            else if (!checkStudentPrereq(section.getCourse()))
+            {
+                btnRegister.setDisable(true);
+                lblResponse.setText(LocaleManager.get(35));
+                lblResponse.setVisible(true);
             }
         }
         catch (Exception ex)
         {
             Logger.getLogger(SectionViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
 
         secLbl.setText("Section " + Context.getInstance().getSelectedSection().getSectionPK().getSectionId());
         creditLbl.setText(Integer.toString(Context.getInstance().getSelectedCourse().getCredits()));
@@ -108,6 +118,7 @@ public class SectionViewController implements Initializable
         courseNameLbl.setText(Context.getInstance().getSelectedCourse().getName());
         deptIdAndCourseNoLbl.setText(Context.getInstance().getSelectedCourse().getDepartmentIdAndCourseNumber());
         gradingSchmLbl.setText(Context.getInstance().getSelectedCourse().getGradingSchemeId().getName());
+        lblSecType.setText("(" + Context.getInstance().getSelectedSection().getSectionType().getName() + ")");
 
         // setOnAction when register button is pressed
         btnRegister.setOnAction(new EventHandler<ActionEvent>()
@@ -160,7 +171,42 @@ public class SectionViewController implements Initializable
         });
     }
 
-    private boolean checkUserAlreadyEnrolled(EnrolmentPK enrolPk)
+    private boolean checkStudentPrereq(Course course)
+    {
+        boolean hasAllPrereq = true;
+        try
+        {
+            List<Enrolment> enrolList = Enrolment.getEnrolmentsByStudentId(Context.getInstance().getCurrentUser().getStudent().getStudentId());
+            List<Prerequisite> prereqList = Prerequisite.getByCourse(course);
+            if (prereqList.isEmpty())
+            {
+                return true;
+            }
+            for (Prerequisite prereq : prereqList)
+            {
+                for (Enrolment enrol : enrolList)
+                {
+                    if ((enrol.getEnrolmentPK().getCourseNumber() == prereq.getPrerequisitePK().getPreRequisiteNumber())
+                            && (enrol.getEnrolmentPK().getDepartmentId().equals(prereq.getPrerequisitePK().getPreRequisiteDeptId())))
+                    {
+                        if (!enrol.getResultId().getName().equalsIgnoreCase("pass"))
+                        {
+                            hasAllPrereq = false;
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(SectionViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return hasAllPrereq;
+
+    }
+
+    private boolean checkStudentAlreadyEnrolled(EnrolmentPK enrolPk)
     {
         try
         {
