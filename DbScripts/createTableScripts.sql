@@ -131,7 +131,7 @@ CREATE TABLE `Administrator` (
   `hiringFacultyId` INT NOT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`adminId`),
-  KEY `username_idx` (`username`),
+  UNIQUE KEY `AdministratorUNIQusername` (`username`),
   CONSTRAINT `AdministratorFKusername` FOREIGN KEY (`username`) REFERENCES `User` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `AdministratorFKhiringFacultyId` FOREIGN KEY (`hiringFacultyId`) REFERENCES `Faculty` (`facultyId`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -149,6 +149,7 @@ CREATE TABLE `FacultyMember` (
   `highestDegree` varchar(25) DEFAULT NULL,
   `isActive` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`facultyMemberId`),
+  UNIQUE KEY `FacultyMemberUNIQusername` (`username`),
   CONSTRAINT `FacultyMemberFKdepartmentId` FOREIGN KEY (`departmentId`) REFERENCES `Department` (`departmentId`) ON UPDATE CASCADE ON DELETE RESTRICT,
   CONSTRAINT `FacultyMemberFKusername` FOREIGN KEY (`username`) REFERENCES `User` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -425,9 +426,9 @@ CREATE  TABLE `SectionTimeTable` (
 
 DROP TABLE IF EXISTS `Grade`;
 CREATE TABLE `Grade` (
-  `GradeId` INT NOT NULL AUTO_INCREMENT,
-  `name` varchar(5) NOT NULL,
-   PRIMARY KEY (`GradeId`),
+  `gradeId` INT NOT NULL AUTO_INCREMENT,
+  `name` varchar(1) NOT NULL,
+   PRIMARY KEY (`gradeId`),
    UNIQUE KEY `GradeUNIQname` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ALTER TABLE `Grade` AUTO_INCREMENT = 100;
@@ -437,7 +438,7 @@ DROP TABLE IF EXISTS `Result`;
 CREATE TABLE `Result` (
   `resultId` INT NOT NULL AUTO_INCREMENT,
   `name` varchar(4) NOT NULL,
-   PRIMARY KEY (`ResultId`),
+   PRIMARY KEY (`resultId`),
    UNIQUE KEY `ResultUNIQname` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ALTER TABLE `Result` AUTO_INCREMENT = 100;
