@@ -7,11 +7,9 @@ package adg.red.models;
 import adg.red.utils.LocaleManager;
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,13 +18,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -61,10 +57,6 @@ public class Student implements Serializable
     @Basic(optional = false)
     @Column(name = "isActive")
     private boolean isActive;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-    private Collection<Registration> registrationCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-    private Collection<Enrolment> enrolmentCollection;
     @JoinColumn(name = "username", referencedColumnName = "username")
     @OneToOne(optional = false)
     private User username;
@@ -122,28 +114,6 @@ public class Student implements Serializable
     public void setIsActive(boolean isActive)
     {
         this.isActive = isActive;
-    }
-
-    @XmlTransient
-    public Collection<Registration> getRegistrationCollection()
-    {
-        return registrationCollection;
-    }
-
-    public void setRegistrationCollection(Collection<Registration> registrationCollection)
-    {
-        this.registrationCollection = registrationCollection;
-    }
-
-    @XmlTransient
-    public Collection<Enrolment> getEnrolmentCollection()
-    {
-        return enrolmentCollection;
-    }
-
-    public void setEnrolmentCollection(Collection<Enrolment> enrolmentCollection)
-    {
-        this.enrolmentCollection = enrolmentCollection;
     }
 
     public User getUsername()

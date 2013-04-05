@@ -8,7 +8,6 @@ import adg.red.utils.Encryptor;
 import adg.red.utils.LocaleManager;
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -20,13 +19,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -51,11 +48,11 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class User implements Serializable
 {
+
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "username")
     private FacultyMember facultyMember;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "username")
     private Administrator administrator;
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -299,19 +296,23 @@ public class User implements Serializable
         }
     }
 
-    public FacultyMember getFacultyMember() {
+    public FacultyMember getFacultyMember()
+    {
         return facultyMember;
     }
 
-    public void setFacultyMember(FacultyMember facultyMember) {
+    public void setFacultyMember(FacultyMember facultyMember)
+    {
         this.facultyMember = facultyMember;
     }
 
-    public Administrator getAdministrator() {
+    public Administrator getAdministrator()
+    {
         return administrator;
     }
 
-    public void setAdministrator(Administrator administrator) {
+    public void setAdministrator(Administrator administrator)
+    {
         this.administrator = administrator;
     }
 }

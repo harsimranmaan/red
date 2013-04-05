@@ -5,9 +5,7 @@
 package adg.red.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -15,10 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -46,8 +42,6 @@ public class Term implements Serializable
     @JoinColumn(name = "sessionId", referencedColumnName = "sessionId", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Session session;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "term")
-    private Collection<Section> sectionCollection;
 
     public Term()
     {
@@ -97,17 +91,6 @@ public class Term implements Serializable
     public void setSession(Session session)
     {
         this.session = session;
-    }
-
-    @XmlTransient
-    public Collection<Section> getSectionCollection()
-    {
-        return sectionCollection;
-    }
-
-    public void setSectionCollection(Collection<Section> sectionCollection)
-    {
-        this.sectionCollection = sectionCollection;
     }
 
     @Override

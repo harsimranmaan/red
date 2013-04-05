@@ -5,18 +5,14 @@
 package adg.red.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,13 +22,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "MessagePriority")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "MessagePriority.findAll", query = "SELECT m FROM MessagePriority m"),
     @NamedQuery(name = "MessagePriority.findByMessagePriorityId", query = "SELECT m FROM MessagePriority m WHERE m.messagePriorityId = :messagePriorityId"),
     @NamedQuery(name = "MessagePriority.findByName", query = "SELECT m FROM MessagePriority m WHERE m.name = :name")
 })
 public class MessagePriority implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -41,8 +38,6 @@ public class MessagePriority implements Serializable
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "priorityId")
-    private Collection<Message> messageCollection;
 
     public MessagePriority()
     {
@@ -77,17 +72,6 @@ public class MessagePriority implements Serializable
     public void setName(String name)
     {
         this.name = name;
-    }
-
-    @XmlTransient
-    public Collection<Message> getMessageCollection()
-    {
-        return messageCollection;
-    }
-
-    public void setMessageCollection(Collection<Message> messageCollection)
-    {
-        this.messageCollection = messageCollection;
     }
 
     @Override
