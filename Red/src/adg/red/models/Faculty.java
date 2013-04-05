@@ -5,9 +5,7 @@
 package adg.red.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,11 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Faculty")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "Faculty.findAll", query = "SELECT f FROM Faculty f"),
     @NamedQuery(name = "Faculty.findByFacultyId", query = "SELECT f FROM Faculty f WHERE f.facultyId = :facultyId"),
     @NamedQuery(name = "Faculty.findByName", query = "SELECT f FROM Faculty f WHERE f.name = :name"),
@@ -41,6 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class Faculty implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,16 +53,12 @@ public class Faculty implements Serializable
     private String phone;
     @Column(name = "website")
     private String website;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "facultyId")
-    private Collection<Department> departmentCollection;
     @JoinColumn(name = "addressId", referencedColumnName = "addressId")
     @ManyToOne
     private Address addressId;
     @JoinColumn(name = "facultyId", referencedColumnName = "facultyMemberId", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private FacultyMember facultyMember;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hiringFacultyId")
-    private Collection<Administrator> administratorCollection;
 
     public Faculty()
     {
@@ -132,17 +125,6 @@ public class Faculty implements Serializable
         this.website = website;
     }
 
-    @XmlTransient
-    public Collection<Department> getDepartmentCollection()
-    {
-        return departmentCollection;
-    }
-
-    public void setDepartmentCollection(Collection<Department> departmentCollection)
-    {
-        this.departmentCollection = departmentCollection;
-    }
-
     public Address getAddressId()
     {
         return addressId;
@@ -161,17 +143,6 @@ public class Faculty implements Serializable
     public void setFacultyMember(FacultyMember facultyMember)
     {
         this.facultyMember = facultyMember;
-    }
-
-    @XmlTransient
-    public Collection<Administrator> getAdministratorCollection()
-    {
-        return administratorCollection;
-    }
-
-    public void setAdministratorCollection(Collection<Administrator> administratorCollection)
-    {
-        this.administratorCollection = administratorCollection;
     }
 
     @Override

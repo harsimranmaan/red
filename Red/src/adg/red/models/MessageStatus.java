@@ -5,18 +5,14 @@
 package adg.red.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,13 +22,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "MessageStatus")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "MessageStatus.findAll", query = "SELECT m FROM MessageStatus m"),
     @NamedQuery(name = "MessageStatus.findByStatusId", query = "SELECT m FROM MessageStatus m WHERE m.statusId = :statusId"),
     @NamedQuery(name = "MessageStatus.findByName", query = "SELECT m FROM MessageStatus m WHERE m.name = :name")
 })
 public class MessageStatus implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -41,8 +38,6 @@ public class MessageStatus implements Serializable
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "statusId")
-    private Collection<MessageReceiver> messageReceiverCollection;
 
     public MessageStatus()
     {
@@ -77,17 +72,6 @@ public class MessageStatus implements Serializable
     public void setName(String name)
     {
         this.name = name;
-    }
-
-    @XmlTransient
-    public Collection<MessageReceiver> getMessageReceiverCollection()
-    {
-        return messageReceiverCollection;
-    }
-
-    public void setMessageReceiverCollection(Collection<MessageReceiver> messageReceiverCollection)
-    {
-        this.messageReceiverCollection = messageReceiverCollection;
     }
 
     @Override

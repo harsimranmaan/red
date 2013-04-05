@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package adg.red.controllers;
+package adg.red.controllers.student;
 
 import adg.red.utils.Context;
 import adg.red.utils.ViewLoader;
@@ -62,11 +62,13 @@ public class BrowseCourseController implements Initializable
             {
                 try
                 {
-//                    String key = tabDisplayCourse.getSelectionModel().getSelectedItem().getDepartmentId();
-//                    Context.getInstance().setUserSelectDeptId(key);
-                    Context.getInstance().setSelectedDepartment(tabDisplayDepartment.getSelectionModel().getSelectedItem());
-                    ViewLoader view = new ViewLoader(disView);
-                    view.loadView("CourseListView");
+
+                    if (tabDisplayDepartment.getSelectionModel().getSelectedItem() != null)
+                    {
+                        Context.getInstance().setSelectedDepartment(tabDisplayDepartment.getSelectionModel().getSelectedItem());
+                        ViewLoader view = new ViewLoader(disView);
+                        view.loadView("student/CourseListView");
+                    }
 
                 }
                 catch (Exception ex)

@@ -8,7 +8,6 @@ import adg.red.utils.Encryptor;
 import adg.red.utils.LocaleManager;
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -20,13 +19,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -47,12 +44,15 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByDateOfBirth", query = "SELECT u FROM User u WHERE u.dateOfBirth = :dateOfBirth"),
     @NamedQuery(name = "User.findByIsActive", query = "SELECT u FROM User u WHERE u.isActive = :isActive"),
-    @NamedQuery(name = "User.findByIsOnline", query = "SELECT u FROM User u WHERE u.isOnline = :isOnline"),
     @NamedQuery(name = "User.login", query = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password AND u.isActive=1")
 })
 public class User implements Serializable
 {
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "username")
+    private FacultyMember facultyMember;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "username")
+    private Administrator administrator;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -87,14 +87,6 @@ public class User implements Serializable
     @JoinColumn(name = "userTypeId", referencedColumnName = "userTypeId")
     @ManyToOne(optional = false)
     private UserType userTypeId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
-    private Collection<FacultyMember> facultyMemberCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "senderId")
-    private Collection<Message> messageCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
-    private Collection<Administrator> administratorCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Collection<MessageReceiver> messageReceiverCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "username")
     private Student student;
 
@@ -110,7 +102,7 @@ public class User implements Serializable
     public User(String username, String password, String firstName, String lastName, boolean isOnline, String email, boolean isActive)
     {
         this.username = username;
-        this.password = Encryptor.encrypt(password);
+        this.password = Encryptor.encryptSHA(password);
         this.firstName = firstName;
         this.lastName = lastName;
         this.isOnline = isOnline;
@@ -130,7 +122,7 @@ public class User implements Serializable
 
     public void setPassword(String password)
     {
-        this.password = Encryptor.encrypt(password);
+        this.password = Encryptor.encryptSHA(password);
     }
 
     public String getFirstName()
@@ -223,50 +215,6 @@ public class User implements Serializable
         this.userTypeId = userTypeId;
     }
 
-    @XmlTransient
-    public Collection<FacultyMember> getFacultyMemberCollection()
-    {
-        return facultyMemberCollection;
-    }
-
-    public void setFacultyMemberCollection(Collection<FacultyMember> facultyMemberCollection)
-    {
-        this.facultyMemberCollection = facultyMemberCollection;
-    }
-
-    @XmlTransient
-    public Collection<Message> getMessageCollection()
-    {
-        return messageCollection;
-    }
-
-    public void setMessageCollection(Collection<Message> messageCollection)
-    {
-        this.messageCollection = messageCollection;
-    }
-
-    @XmlTransient
-    public Collection<Administrator> getAdministratorCollection()
-    {
-        return administratorCollection;
-    }
-
-    public void setAdministratorCollection(Collection<Administrator> administratorCollection)
-    {
-        this.administratorCollection = administratorCollection;
-    }
-
-    @XmlTransient
-    public Collection<MessageReceiver> getMessageReceiverCollection()
-    {
-        return messageReceiverCollection;
-    }
-
-    public void setMessageReceiverCollection(Collection<MessageReceiver> messageReceiverCollection)
-    {
-        this.messageReceiverCollection = messageReceiverCollection;
-    }
-
     public Student getStudent()
     {
         return student;
@@ -317,11 +265,11 @@ public class User implements Serializable
      */
     public static User login(String username, String password) throws Exception
     {
-        password = Encryptor.encrypt(password);
-        List<User> userList1 = RedEntityManager.getEntityManager().createNamedQuery("User.login").setParameter("username", username).setParameter("password", password).getResultList();
-        if (userList1.size() == 1)
+        password = Encryptor.encryptSHA(password);
+        List<User> userList = RedEntityManager.getEntityManager().createNamedQuery("User.login").setParameter("username", username).setParameter("password", password).getResultList();
+        if (userList.size() == 1)
         {
-            return userList1.get(0);
+            return userList.get(0);
         }
         else
         {
@@ -346,5 +294,25 @@ public class User implements Serializable
         {
             throw new Exception(LocaleManager.get(5));
         }
+    }
+
+    public FacultyMember getFacultyMember()
+    {
+        return facultyMember;
+    }
+
+    public void setFacultyMember(FacultyMember facultyMember)
+    {
+        this.facultyMember = facultyMember;
+    }
+
+    public Administrator getAdministrator()
+    {
+        return administrator;
+    }
+
+    public void setAdministrator(Administrator administrator)
+    {
+        this.administrator = administrator;
     }
 }

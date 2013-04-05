@@ -15,6 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import adg.red.models.User;
 import adg.red.utils.LocaleManager;
+import javafx.application.Platform;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -28,13 +30,13 @@ public class LoginController implements Initializable
 {
 
     @FXML //  fx:id="loginBtn"
-    private Button loginBtn; // Value injected by FXMLLoader
+    private Button btnLogin; // Value injected by FXMLLoader
     @FXML //  fx:id="viewArea"
     private AnchorPane loginViewArea; // Value injected by FXMLLoader
     @FXML //  fx:id="loginErrLbl"
     private Label loginErrLbl; // Value injected by FXMLLoader
     @FXML //  fx:id="forgotPassBtn"
-    private Button forgotPassBtn; // Value injected by FXMLLoader
+    private Button btnExit; // Value injected by FXMLLoader
     @FXML
     private TextField usernameTxt; // created by J. Yu
     @FXML
@@ -43,6 +45,8 @@ public class LoginController implements Initializable
     private Label passLbl; // Value injected by FXMLLoader
     @FXML //  fx:id="userLbl"
     private Label userLbl; // Value injected by FXMLLoader
+    @FXML
+    private Hyperlink hpForgotPassword;
 
     /**
      * Initialize all the action events.
@@ -55,10 +59,11 @@ public class LoginController implements Initializable
     {
 
         // bind resourceDictionary
-        loginBtn.setText(LocaleManager.get(1));
-        forgotPassBtn.setText(LocaleManager.get(2));
+        btnLogin.setText(LocaleManager.get(1));
+        btnExit.setText(LocaleManager.get(27));
         userLbl.setText(LocaleManager.get(3));
         passLbl.setText(LocaleManager.get(4));
+        hpForgotPassword.setText(LocaleManager.get(2) + "?");
         loginErrLbl.setVisible(false);
         if (Context.getInstance().WasLoggedIn())
         {
@@ -69,7 +74,7 @@ public class LoginController implements Initializable
 
 
         // setOnAction when login button is pressed
-        loginBtn.setOnAction(new EventHandler<ActionEvent>()
+        btnLogin.setOnAction(new EventHandler<ActionEvent>()
         {
             @Override
             public void handle(ActionEvent event)
@@ -85,13 +90,21 @@ public class LoginController implements Initializable
                     User user = User.login(uid, pwd);
                     Context.getInstance().setCurrentUser(user);
                     ViewLoader view = new ViewLoader((AnchorPane) loginViewArea.getParent());
-                    view.loadView("HomeView");
+                    view.loadView(user.getUserTypeId().getName().toLowerCase() + "/HomeView");
                 }
                 catch (Exception ex)
                 {
                     loginErrLbl.setText(ex.getMessage());
                     loginErrLbl.setVisible(true);
                 }
+            }
+        });
+        btnExit.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                Platform.exit();
             }
         });
     }

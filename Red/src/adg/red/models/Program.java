@@ -5,9 +5,7 @@
 package adg.red.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -15,10 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -50,8 +46,6 @@ public class Program implements Serializable
     @Basic(optional = false)
     @Column(name = "isActive")
     private boolean isActive;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "program")
-    private Collection<Registration> registrationCollection;
     @JoinColumn(name = "addressId", referencedColumnName = "addressId")
     @ManyToOne
     private Address addressId;
@@ -119,17 +113,6 @@ public class Program implements Serializable
     public void setIsActive(boolean isActive)
     {
         this.isActive = isActive;
-    }
-
-    @XmlTransient
-    public Collection<Registration> getRegistrationCollection()
-    {
-        return registrationCollection;
-    }
-
-    public void setRegistrationCollection(Collection<Registration> registrationCollection)
-    {
-        this.registrationCollection = registrationCollection;
     }
 
     public Address getAddressId()

@@ -5,10 +5,8 @@
 package adg.red.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,12 +16,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Message")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "Message.findAll", query = "SELECT m FROM Message m"),
     @NamedQuery(name = "Message.findByMessageId", query = "SELECT m FROM Message m WHERE m.messageId = :messageId"),
     @NamedQuery(name = "Message.findBySubject", query = "SELECT m FROM Message m WHERE m.subject = :subject"),
@@ -42,6 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class Message implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,8 +59,6 @@ public class Message implements Serializable
     @JoinColumn(name = "priorityId", referencedColumnName = "messagePriorityId")
     @ManyToOne(optional = false)
     private MessagePriority priorityId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "message")
-    private Collection<MessageReceiver> messageReceiverCollection;
 
     public Message()
     {
@@ -138,17 +133,6 @@ public class Message implements Serializable
     public void setPriorityId(MessagePriority priorityId)
     {
         this.priorityId = priorityId;
-    }
-
-    @XmlTransient
-    public Collection<MessageReceiver> getMessageReceiverCollection()
-    {
-        return messageReceiverCollection;
-    }
-
-    public void setMessageReceiverCollection(Collection<MessageReceiver> messageReceiverCollection)
-    {
-        this.messageReceiverCollection = messageReceiverCollection;
     }
 
     @Override

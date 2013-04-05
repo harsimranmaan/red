@@ -4,7 +4,9 @@
  */
 package adg.red.models;
 
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -25,17 +27,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "CoRequisite")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "CoRequisite.findAll", query = "SELECT c FROM CoRequisite c"),
     @NamedQuery(name = "CoRequisite.findByCourseNumber", query = "SELECT c FROM CoRequisite c WHERE c.coRequisitePK.courseNumber = :courseNumber"),
     @NamedQuery(name = "CoRequisite.findByDepartmentId", query = "SELECT c FROM CoRequisite c WHERE c.coRequisitePK.departmentId = :departmentId"),
     @NamedQuery(name = "CoRequisite.findByCoRequisiteNumber", query = "SELECT c FROM CoRequisite c WHERE c.coRequisitePK.coRequisiteNumber = :coRequisiteNumber"),
     @NamedQuery(name = "CoRequisite.findByCoRequisiteDeptId", query = "SELECT c FROM CoRequisite c WHERE c.coRequisitePK.coRequisiteDeptId = :coRequisiteDeptId"),
     @NamedQuery(name = "CoRequisite.findByIsActive", query = "SELECT c FROM CoRequisite c WHERE c.isActive = :isActive"),
-    @NamedQuery(name = "CoRequisite.findByIsMust", query = "SELECT c FROM CoRequisite c WHERE c.isMust = :isMust")
+    @NamedQuery(name = "CoRequisite.findByIsMust", query = "SELECT c FROM CoRequisite c WHERE c.isMust = :isMust"),
+    @NamedQuery(name = "CoRequisite.findByCourseNumberAndDepartmentId", query = "SELECT c FROM CoRequisite c WHERE c.coRequisitePK.courseNumber = :courseNumber AND c.coRequisitePK.departmentId = :departmentId")
 })
 public class CoRequisite implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CoRequisitePK coRequisitePK;
@@ -46,14 +50,14 @@ public class CoRequisite implements Serializable
     @Column(name = "isMust")
     private boolean isMust;
     @JoinColumns(
-    {
+            {
         @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false),
         @JoinColumn(name = "courseNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false)
     })
     @ManyToOne(optional = false)
     private Course course;
     @JoinColumns(
-    {
+            {
         @JoinColumn(name = "coRequisiteDeptId", referencedColumnName = "departmentId", insertable = false, updatable = false),
         @JoinColumn(name = "coRequisiteNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false)
     })
@@ -159,5 +163,10 @@ public class CoRequisite implements Serializable
     public String toString()
     {
         return "adg.red.models.CoRequisite[ coRequisitePK=" + coRequisitePK + " ]";
+    }
+
+    public static List<CoRequisite> getByCourse(Course course)
+    {
+        return RedEntityManager.getEntityManager().createNamedQuery("CoRequisite.findByCourseNumberAndDepartmentId").setParameter("departmentId", course.getCoursePK().getDepartmentId()).setParameter("courseNumber", course.getCoursePK().getCourseNumber()).getResultList();
     }
 }

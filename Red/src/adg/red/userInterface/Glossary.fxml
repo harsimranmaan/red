@@ -10,47 +10,43 @@
 
 <AnchorPane id="AnchorPane" prefHeight="464.0" prefWidth="642.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.GlossaryController">
   <children>
+    <HBox id="HBox" fx:id="alphabetHbox"  alignment="CENTER" layoutX="4.0" layoutY="36.0" prefWidth="640.0" spacing="5.0">
+      <children>
+        <Hyperlink text="All" />
+        <Hyperlink text="A" />
+        <Hyperlink text="B" />
+        <Hyperlink text="C" />
+        <Hyperlink text="D" />
+        <Hyperlink text="E" />
+        <Hyperlink text="F" />
+        <Hyperlink text="G" />
+        <Hyperlink text="H" />
+        <Hyperlink text="I" />
+        <Hyperlink text="J" />
+        <Hyperlink text="K" />
+        <Hyperlink text="L" />
+        <Hyperlink text="M" />
+        <Hyperlink text="N" />
+        <Hyperlink text="O" />
+        <Hyperlink text="P" />
+        <Hyperlink text="Q" />
+        <Hyperlink text="R" />
+        <Hyperlink text="S" />
+        <Hyperlink text="T" />
+        <Hyperlink text="U" />
+        <Hyperlink text="V" />
+        <Hyperlink text="W" />
+        <Hyperlink text="X" />
+        <Hyperlink text="Y" />
+        <Hyperlink text="Z" />
+      </children>
+    </HBox>
+    <Accordion fx:id="glossaryAccordion" layoutX="20.0" layoutY="69.0" prefHeight="381.0" prefWidth="608.0" />
     <Label layoutX="14.0" layoutY="14.0" text="Glossary">
       <font>
         <Font name="System Bold" size="18.0" />
       </font>
     </Label>
-    <AnchorPane layoutX="-5.0" layoutY="36.0" prefHeight="40.0" prefWidth="642.0">
-      <children>
-        <HBox id="HBox" alignment="CENTER" layoutY="9.0" prefWidth="640.0" spacing="5.0">
-          <children>
-            <Hyperlink text="All" />
-            <Hyperlink text="A" />
-            <Hyperlink text="B" />
-            <Hyperlink text="C" />
-            <Hyperlink text="D" />
-            <Hyperlink text="E" />
-            <Hyperlink text="F" />
-            <Hyperlink text="G" />
-            <Hyperlink text="H" />
-            <Hyperlink text="I" />
-            <Hyperlink text="J" />
-            <Hyperlink text="K" />
-            <Hyperlink text="L" />
-            <Hyperlink text="M" />
-            <Hyperlink text="N" />
-            <Hyperlink text="O" />
-            <Hyperlink text="P" />
-            <Hyperlink text="Q" />
-            <Hyperlink text="R" />
-            <Hyperlink text="S" />
-            <Hyperlink text="T" />
-            <Hyperlink text="U" />
-            <Hyperlink text="V" />
-            <Hyperlink text="W" />
-            <Hyperlink text="X" />
-            <Hyperlink text="Y" />
-            <Hyperlink text="Z" />
-          </children>
-        </HBox>
-      </children>
-    </AnchorPane>
-    <ListView id="glossryLv" layoutX="20.0" layoutY="76.0" prefHeight="374.0" prefWidth="608.0" />
   </children>
   <stylesheets>
     <URL value="@glossary.css" />

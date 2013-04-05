@@ -5,23 +5,16 @@
 package adg.red.models;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,66 +24,53 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Term")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "Term.findAll", query = "SELECT t FROM Term t"),
-    @NamedQuery(name = "Term.findByTermId", query = "SELECT t FROM Term t WHERE t.termId = :termId"),
-    @NamedQuery(name = "Term.findByYear", query = "SELECT t FROM Term t WHERE t.year = :year"),
+    @NamedQuery(name = "Term.findByTermYear", query = "SELECT t FROM Term t WHERE t.termPK.termYear = :termYear"),
+    @NamedQuery(name = "Term.findBySessionId", query = "SELECT t FROM Term t WHERE t.termPK.sessionId = :sessionId"),
     @NamedQuery(name = "Term.findByIsActive", query = "SELECT t FROM Term t WHERE t.isActive = :isActive")
 })
 public class Term implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @Column(name = "termId")
-    private String termId;
-    @Basic(optional = false)
-    @Column(name = "year")
-    @Temporal(TemporalType.DATE)
-    private Date year;
+    @EmbeddedId
+    protected TermPK termPK;
     @Basic(optional = false)
     @Column(name = "isActive")
     private boolean isActive;
-    @JoinColumn(name = "sessionId", referencedColumnName = "sessionId")
+    @JoinColumn(name = "sessionId", referencedColumnName = "sessionId", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Session sessionId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "term")
-    private Collection<Section> sectionCollection;
+    private Session session;
 
     public Term()
     {
     }
 
-    public Term(String termId)
+    public Term(TermPK termPK)
     {
-        this.termId = termId;
+        this.termPK = termPK;
     }
 
-    public Term(String termId, Date year, boolean isActive)
+    public Term(TermPK termPK, boolean isActive)
     {
-        this.termId = termId;
-        this.year = year;
+        this.termPK = termPK;
         this.isActive = isActive;
     }
 
-    public String getTermId()
+    public Term(int termYear, int sessionId)
     {
-        return termId;
+        this.termPK = new TermPK(termYear, sessionId);
     }
 
-    public void setTermId(String termId)
+    public TermPK getTermPK()
     {
-        this.termId = termId;
+        return termPK;
     }
 
-    public Date getYear()
+    public void setTermPK(TermPK termPK)
     {
-        return year;
-    }
-
-    public void setYear(Date year)
-    {
-        this.year = year;
+        this.termPK = termPK;
     }
 
     public boolean getIsActive()
@@ -103,32 +83,21 @@ public class Term implements Serializable
         this.isActive = isActive;
     }
 
-    public Session getSessionId()
+    public Session getSession()
     {
-        return sessionId;
+        return session;
     }
 
-    public void setSessionId(Session sessionId)
+    public void setSession(Session session)
     {
-        this.sessionId = sessionId;
-    }
-
-    @XmlTransient
-    public Collection<Section> getSectionCollection()
-    {
-        return sectionCollection;
-    }
-
-    public void setSectionCollection(Collection<Section> sectionCollection)
-    {
-        this.sectionCollection = sectionCollection;
+        this.session = session;
     }
 
     @Override
     public int hashCode()
     {
         int hash = 0;
-        hash += (termId != null ? termId.hashCode() : 0);
+        hash += (termPK != null ? termPK.hashCode() : 0);
         return hash;
     }
 
@@ -141,7 +110,7 @@ public class Term implements Serializable
             return false;
         }
         Term other = (Term) object;
-        if ((this.termId == null && other.termId != null) || (this.termId != null && !this.termId.equals(other.termId)))
+        if ((this.termPK == null && other.termPK != null) || (this.termPK != null && !this.termPK.equals(other.termPK)))
         {
             return false;
         }
@@ -151,6 +120,6 @@ public class Term implements Serializable
     @Override
     public String toString()
     {
-        return "adg.red.models.Term[ termId=" + termId + " ]";
+        return "adg.red.models.Term[ termPK=" + termPK + " ]";
     }
 }

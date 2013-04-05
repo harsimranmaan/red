@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package adg.red.controllers;
+package adg.red.controllers.student;
 
 import adg.red.models.Address;
 import adg.red.models.User;
@@ -90,7 +90,7 @@ public class UserProfileController implements Initializable
                 String oldPwd = oldPwdTxt.getText();
                 String newPwd = newPwdTxt.getText();
                 String pwdRe = pwdReTxt.getText();
-                String pwdErrorMsg = "";
+                String pwdErrorMsg;
                 //User user;
                 try
                 {

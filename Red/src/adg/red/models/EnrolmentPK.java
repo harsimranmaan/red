@@ -16,6 +16,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class EnrolmentPK implements Serializable
 {
+
     @Basic(optional = false)
     @Column(name = "studentId")
     private int studentId;
@@ -29,20 +30,28 @@ public class EnrolmentPK implements Serializable
     @Column(name = "departmentId")
     private String departmentId;
     @Basic(optional = false)
-    @Column(name = "termId")
-    private String termId;
+    @Column(name = "termYear")
+    private int termYear;
+    @Basic(optional = false)
+    @Column(name = "sessionId")
+    private int sessionId;
+    @Basic(optional = false)
+    @Column(name = "sectionTypeId")
+    private int sectionTypeId;
 
     public EnrolmentPK()
     {
     }
 
-    public EnrolmentPK(int studentId, int sectionId, int courseNumber, String departmentId, String termId)
+    public EnrolmentPK(int studentId, int sectionId, int courseNumber, String departmentId, int termYear, int sessionId, int sectionTypeId)
     {
         this.studentId = studentId;
         this.sectionId = sectionId;
         this.courseNumber = courseNumber;
         this.departmentId = departmentId;
-        this.termId = termId;
+        this.termYear = termYear;
+        this.sessionId = sessionId;
+        this.sectionTypeId = sectionTypeId;
     }
 
     public int getStudentId()
@@ -85,14 +94,34 @@ public class EnrolmentPK implements Serializable
         this.departmentId = departmentId;
     }
 
-    public String getTermId()
+    public int getTermYear()
     {
-        return termId;
+        return termYear;
     }
 
-    public void setTermId(String termId)
+    public void setTermYear(int termYear)
     {
-        this.termId = termId;
+        this.termYear = termYear;
+    }
+
+    public int getSessionId()
+    {
+        return sessionId;
+    }
+
+    public void setSessionId(int sessionId)
+    {
+        this.sessionId = sessionId;
+    }
+
+    public int getSectionTypeId()
+    {
+        return sectionTypeId;
+    }
+
+    public void setSectionTypeId(int sectionTypeId)
+    {
+        this.sectionTypeId = sectionTypeId;
     }
 
     @Override
@@ -103,7 +132,9 @@ public class EnrolmentPK implements Serializable
         hash += (int) sectionId;
         hash += (int) courseNumber;
         hash += (departmentId != null ? departmentId.hashCode() : 0);
-        hash += (termId != null ? termId.hashCode() : 0);
+        hash += termYear;
+        hash += (int) sessionId;
+        hash += (int) sectionTypeId;
         return hash;
     }
 
@@ -132,7 +163,15 @@ public class EnrolmentPK implements Serializable
         {
             return false;
         }
-        if ((this.termId == null && other.termId != null) || (this.termId != null && !this.termId.equals(other.termId)))
+        if (this.termYear != other.termYear)
+        {
+            return false;
+        }
+        if (this.sessionId != other.sessionId)
+        {
+            return false;
+        }
+        if (this.sectionTypeId != other.sectionTypeId)
         {
             return false;
         }
@@ -142,6 +181,6 @@ public class EnrolmentPK implements Serializable
     @Override
     public String toString()
     {
-        return "adg.red.models.EnrolmentPK[ studentId=" + studentId + ", sectionId=" + sectionId + ", courseNumber=" + courseNumber + ", departmentId=" + departmentId + ", termId=" + termId + " ]";
+        return "adg.red.models.EnrolmentPK[ studentId=" + studentId + ", sectionId=" + sectionId + ", courseNumber=" + courseNumber + ", departmentId=" + departmentId + ", termYear=" + termYear + ", sessionId=" + sessionId + ", sectionTypeId=" + sectionTypeId + " ]";
     }
 }

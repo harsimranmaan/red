@@ -6,7 +6,6 @@ package adg.red.models;
 
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,10 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -62,15 +59,7 @@ public class Address implements Serializable
     @Basic(optional = false)
     @Column(name = "country")
     private String country;
-    @OneToMany(mappedBy = "addressId")
-    private Collection<User> userCollection;
-    @OneToMany(mappedBy = "addressId")
-    private Collection<Program> programCollection;
-    @OneToMany(mappedBy = "addressId")
-    private Collection<Department> departmentCollection;
-    @OneToMany(mappedBy = "addressId")
-    private Collection<Faculty> facultyCollection;
-
+   
     public Address()
     {
     }
@@ -158,51 +147,7 @@ public class Address implements Serializable
     {
         this.country = country;
     }
-
-    @XmlTransient
-    public Collection<User> getUserCollection()
-    {
-        return userCollection;
-    }
-
-    public void setUserCollection(Collection<User> userCollection)
-    {
-        this.userCollection = userCollection;
-    }
-
-    @XmlTransient
-    public Collection<Program> getProgramCollection()
-    {
-        return programCollection;
-    }
-
-    public void setProgramCollection(Collection<Program> programCollection)
-    {
-        this.programCollection = programCollection;
-    }
-
-    @XmlTransient
-    public Collection<Department> getDepartmentCollection()
-    {
-        return departmentCollection;
-    }
-
-    public void setDepartmentCollection(Collection<Department> departmentCollection)
-    {
-        this.departmentCollection = departmentCollection;
-    }
-
-    @XmlTransient
-    public Collection<Faculty> getFacultyCollection()
-    {
-        return facultyCollection;
-    }
-
-    public void setFacultyCollection(Collection<Faculty> facultyCollection)
-    {
-        this.facultyCollection = facultyCollection;
-    }
-
+ 
     @Override
     public int hashCode()
     {
