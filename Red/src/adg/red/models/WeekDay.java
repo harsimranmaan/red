@@ -5,58 +5,56 @@
 package adg.red.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author harsimran.maan
  */
 @Entity
-@Table(name = "Day")
+@Table(name = "WeekDay")
 @XmlRootElement
 @NamedQueries(
-{
-    @NamedQuery(name = "Day.findAll", query = "SELECT d FROM Day d"),
-    @NamedQuery(name = "Day.findByDayId", query = "SELECT d FROM Day d WHERE d.dayId = :dayId"),
-    @NamedQuery(name = "Day.findByDay", query = "SELECT d FROM Day d WHERE d.day = :day")
+        {
+    @NamedQuery(name = "WeekDay.findAll", query = "SELECT w FROM WeekDay w"),
+    @NamedQuery(name = "WeekDay.findByDayId", query = "SELECT w FROM WeekDay w WHERE w.dayId = :dayId"),
+    @NamedQuery(name = "WeekDay.findByWeekDay", query = "SELECT w FROM WeekDay w WHERE w.weekDay = :weekDay")
 })
-public class Day implements Serializable
+public class WeekDay implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "dayId")
     private Integer dayId;
     @Basic(optional = false)
-    @Column(name = "day")
-    private String day;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "day")
-    private Collection<SectionTimeTable> sectionTimeTableCollection;
+    @Column(name = "weekDay")
+    private String weekDay;
 
-    public Day()
+    public WeekDay()
     {
     }
 
-    public Day(Integer dayId)
+    public WeekDay(Integer dayId)
     {
         this.dayId = dayId;
     }
 
-    public Day(Integer dayId, String day)
+    public WeekDay(Integer dayId, String weekDay)
     {
         this.dayId = dayId;
-        this.day = day;
+        this.weekDay = weekDay;
     }
 
     public Integer getDayId()
@@ -69,25 +67,14 @@ public class Day implements Serializable
         this.dayId = dayId;
     }
 
-    public String getDay()
+    public String getWeekDay()
     {
-        return day;
+        return weekDay;
     }
 
-    public void setDay(String day)
+    public void setWeekDay(String weekDay)
     {
-        this.day = day;
-    }
-
-    @XmlTransient
-    public Collection<SectionTimeTable> getSectionTimeTableCollection()
-    {
-        return sectionTimeTableCollection;
-    }
-
-    public void setSectionTimeTableCollection(Collection<SectionTimeTable> sectionTimeTableCollection)
-    {
-        this.sectionTimeTableCollection = sectionTimeTableCollection;
+        this.weekDay = weekDay;
     }
 
     @Override
@@ -102,11 +89,11 @@ public class Day implements Serializable
     public boolean equals(Object object)
     {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Day))
+        if (!(object instanceof WeekDay))
         {
             return false;
         }
-        Day other = (Day) object;
+        WeekDay other = (WeekDay) object;
         if ((this.dayId == null && other.dayId != null) || (this.dayId != null && !this.dayId.equals(other.dayId)))
         {
             return false;
@@ -117,6 +104,6 @@ public class Day implements Serializable
     @Override
     public String toString()
     {
-        return "adg.red.models.Day[ dayId=" + dayId + " ]";
+        return "adg.red.models.WeekDay[ dayId=" + dayId + " ]";
     }
 }

@@ -6,10 +6,8 @@ package adg.red.models;
 
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -17,10 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Course")
 @XmlRootElement
 @NamedQueries(
-        {
+{
     @NamedQuery(name = "Course.findAll", query = "SELECT c FROM Course c"),
     @NamedQuery(name = "Course.findByCourseNumber", query = "SELECT c FROM Course c WHERE c.coursePK.courseNumber = :courseNumber"),
     @NamedQuery(name = "Course.findByDepartmentId", query = "SELECT c FROM Course c WHERE c.coursePK.departmentId = :departmentId"),
@@ -42,7 +38,6 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class Course implements Serializable
 {
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CoursePK coursePK;
@@ -61,22 +56,13 @@ public class Course implements Serializable
     @Basic(optional = false)
     @Column(name = "isActive")
     private boolean isActive;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
-    private Collection<CoRequisite> coRequisiteCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course1")
-    private Collection<CoRequisite> coRequisiteCollection1;
+   
     @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Department department;
     @JoinColumn(name = "gradingSchemeId", referencedColumnName = "gradingSchemeId")
     @ManyToOne(optional = false)
     private GradingScheme gradingSchemeId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
-    private Collection<Prerequisite> prerequisiteCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course1")
-    private Collection<Prerequisite> prerequisiteCollection1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
-    private Collection<Section> sectionCollection;
 
     public Course()
     {
@@ -162,28 +148,6 @@ public class Course implements Serializable
         this.isActive = isActive;
     }
 
-    @XmlTransient
-    public Collection<CoRequisite> getCoRequisiteCollection()
-    {
-        return coRequisiteCollection;
-    }
-
-    public void setCoRequisiteCollection(Collection<CoRequisite> coRequisiteCollection)
-    {
-        this.coRequisiteCollection = coRequisiteCollection;
-    }
-
-    @XmlTransient
-    public Collection<CoRequisite> getCoRequisiteCollection1()
-    {
-        return coRequisiteCollection1;
-    }
-
-    public void setCoRequisiteCollection1(Collection<CoRequisite> coRequisiteCollection1)
-    {
-        this.coRequisiteCollection1 = coRequisiteCollection1;
-    }
-
     public Department getDepartment()
     {
         return department;
@@ -207,39 +171,6 @@ public class Course implements Serializable
     public String getDepartmentIdAndCourseNumber()
     {
         return this.coursePK.getDepartmentId() + " " + this.coursePK.getCourseNumber();
-    }
-
-    @XmlTransient
-    public Collection<Prerequisite> getPrerequisiteCollection()
-    {
-        return prerequisiteCollection;
-    }
-
-    public void setPrerequisiteCollection(Collection<Prerequisite> prerequisiteCollection)
-    {
-        this.prerequisiteCollection = prerequisiteCollection;
-    }
-
-    @XmlTransient
-    public Collection<Prerequisite> getPrerequisiteCollection1()
-    {
-        return prerequisiteCollection1;
-    }
-
-    public void setPrerequisiteCollection1(Collection<Prerequisite> prerequisiteCollection1)
-    {
-        this.prerequisiteCollection1 = prerequisiteCollection1;
-    }
-
-    @XmlTransient
-    public Collection<Section> getSectionCollection()
-    {
-        return sectionCollection;
-    }
-
-    public void setSectionCollection(Collection<Section> sectionCollection)
-    {
-        this.sectionCollection = sectionCollection;
     }
 
     @Override

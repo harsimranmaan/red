@@ -5,18 +5,16 @@
 package adg.red.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,23 +24,23 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "GradingScheme")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "GradingScheme.findAll", query = "SELECT g FROM GradingScheme g"),
     @NamedQuery(name = "GradingScheme.findByGradingSchemeId", query = "SELECT g FROM GradingScheme g WHERE g.gradingSchemeId = :gradingSchemeId"),
     @NamedQuery(name = "GradingScheme.findByName", query = "SELECT g FROM GradingScheme g WHERE g.name = :name")
 })
 public class GradingScheme implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "gradingSchemeId")
     private Integer gradingSchemeId;
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gradingSchemeId")
-    private Collection<Course> courseCollection;
 
     public GradingScheme()
     {
@@ -77,17 +75,6 @@ public class GradingScheme implements Serializable
     public void setName(String name)
     {
         this.name = name;
-    }
-
-    @XmlTransient
-    public Collection<Course> getCourseCollection()
-    {
-        return courseCollection;
-    }
-
-    public void setCourseCollection(Collection<Course> courseCollection)
-    {
-        this.courseCollection = courseCollection;
     }
 
     @Override

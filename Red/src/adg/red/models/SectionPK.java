@@ -5,9 +5,12 @@
 package adg.red.models;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -16,9 +19,13 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class SectionPK implements Serializable
 {
+
     @Basic(optional = false)
     @Column(name = "sectionId")
     private int sectionId;
+    @Basic(optional = false)
+    @Column(name = "sectionTypeId")
+    private int sectionTypeId;
     @Basic(optional = false)
     @Column(name = "courseNumber")
     private int courseNumber;
@@ -26,19 +33,24 @@ public class SectionPK implements Serializable
     @Column(name = "departmentId")
     private String departmentId;
     @Basic(optional = false)
-    @Column(name = "termId")
-    private String termId;
+    @Column(name = "termYear")
+    private int termYear;
+    @Basic(optional = false)
+    @Column(name = "sessionId")
+    private int sessionId;
 
     public SectionPK()
     {
     }
 
-    public SectionPK(int sectionId, int courseNumber, String departmentId, String termId)
+    public SectionPK(int sectionId, int sectionTypeId, int courseNumber, String departmentId, int termYear, int sessionId)
     {
         this.sectionId = sectionId;
+        this.sectionTypeId = sectionTypeId;
         this.courseNumber = courseNumber;
         this.departmentId = departmentId;
-        this.termId = termId;
+        this.termYear = termYear;
+        this.sessionId = sessionId;
     }
 
     public int getSectionId()
@@ -49,6 +61,16 @@ public class SectionPK implements Serializable
     public void setSectionId(int sectionId)
     {
         this.sectionId = sectionId;
+    }
+
+    public int getSectionTypeId()
+    {
+        return sectionTypeId;
+    }
+
+    public void setSectionTypeId(int sectionTypeId)
+    {
+        this.sectionTypeId = sectionTypeId;
     }
 
     public int getCourseNumber()
@@ -71,14 +93,24 @@ public class SectionPK implements Serializable
         this.departmentId = departmentId;
     }
 
-    public String getTermId()
+    public int getTermYear()
     {
-        return termId;
+        return termYear;
     }
 
-    public void setTermId(String termId)
+    public void setTermYear(int termYear)
     {
-        this.termId = termId;
+        this.termYear = termYear;
+    }
+
+    public int getSessionId()
+    {
+        return sessionId;
+    }
+
+    public void setSessionId(int sessionId)
+    {
+        this.sessionId = sessionId;
     }
 
     @Override
@@ -86,9 +118,11 @@ public class SectionPK implements Serializable
     {
         int hash = 0;
         hash += (int) sectionId;
+        hash += (int) sectionTypeId;
         hash += (int) courseNumber;
         hash += (departmentId != null ? departmentId.hashCode() : 0);
-        hash += (termId != null ? termId.hashCode() : 0);
+        hash += termYear;
+        hash += (int) sessionId;
         return hash;
     }
 
@@ -105,6 +139,10 @@ public class SectionPK implements Serializable
         {
             return false;
         }
+        if (this.sectionTypeId != other.sectionTypeId)
+        {
+            return false;
+        }
         if (this.courseNumber != other.courseNumber)
         {
             return false;
@@ -113,7 +151,11 @@ public class SectionPK implements Serializable
         {
             return false;
         }
-        if ((this.termId == null && other.termId != null) || (this.termId != null && !this.termId.equals(other.termId)))
+        if (this.termYear != other.termYear)
+        {
+            return false;
+        }
+        if (this.sessionId != other.sessionId)
         {
             return false;
         }
@@ -123,6 +165,6 @@ public class SectionPK implements Serializable
     @Override
     public String toString()
     {
-        return "adg.red.models.SectionPK[ sectionId=" + sectionId + ", courseNumber=" + courseNumber + ", departmentId=" + departmentId + ", termId=" + termId + " ]";
+        return "adg.red.models.SectionPK[ sectionId=" + sectionId + ", sectionTypeId=" + sectionTypeId + ", courseNumber=" + courseNumber + ", departmentId=" + departmentId + ", termYear=" + termYear + ", sessionId=" + sessionId + " ]";
     }
 }

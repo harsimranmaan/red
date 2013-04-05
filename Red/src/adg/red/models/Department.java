@@ -6,10 +6,8 @@ package adg.red.models;
 
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,10 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -65,12 +61,6 @@ public class Department implements Serializable
     @Basic(optional = false)
     @Column(name = "isActive")
     private boolean isActive;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "department")
-    private Collection<Course> courseCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "departmentId")
-    private Collection<FacultyMember> facultyMemberCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "department")
-    private Collection<Program> programCollection;
     @JoinColumn(name = "facultyId", referencedColumnName = "facultyId")
     @ManyToOne(optional = false)
     private Faculty facultyId;
@@ -166,40 +156,7 @@ public class Department implements Serializable
     {
         this.isActive = isActive;
     }
-
-    @XmlTransient
-    public Collection<Course> getCourseCollection()
-    {
-        return courseCollection;
-    }
-
-    public void setCourseCollection(Collection<Course> courseCollection)
-    {
-        this.courseCollection = courseCollection;
-    }
-
-    @XmlTransient
-    public Collection<FacultyMember> getFacultyMemberCollection()
-    {
-        return facultyMemberCollection;
-    }
-
-    public void setFacultyMemberCollection(Collection<FacultyMember> facultyMemberCollection)
-    {
-        this.facultyMemberCollection = facultyMemberCollection;
-    }
-
-    @XmlTransient
-    public Collection<Program> getProgramCollection()
-    {
-        return programCollection;
-    }
-
-    public void setProgramCollection(Collection<Program> programCollection)
-    {
-        this.programCollection = programCollection;
-    }
-
+    
     public Faculty getFacultyId()
     {
         return facultyId;
@@ -264,4 +221,5 @@ public class Department implements Serializable
     {
         return ((List<Department>) RedEntityManager.getEntityManager().createNamedQuery("Department.findByDepartmentId").setParameter("departmentId", departmentId).getResultList()).get(0);
     }
+
 }

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package adg.red.controllers;
+package adg.red.controllers.student;
 
 import adg.red.utils.Context;
 import adg.red.utils.ViewLoader;
@@ -49,7 +49,7 @@ public class CourseListViewController implements Initializable
     {
         // TODO
         populateCourseTable(Context.getInstance().getSelectedDepartment());
-        HomeViewController.getDeptLk().setText(Context.getInstance().getSelectedDepartment().getDepartmentId());
+        HomeViewController.getDeptLk().setText(Context.getInstance().getSelectedDepartment().getDepartmentId() + ":");
         HomeViewController.getDeptLk().setVisible(true);
 
         // action when user clicked on the table
@@ -64,7 +64,7 @@ public class CourseListViewController implements Initializable
                     // Context.getInstance().setUserSelectCourseNumer(key);
                     Context.getInstance().setSelectedCourse(disTable.getSelectionModel().getSelectedItem());
                     ViewLoader view = new ViewLoader(disView);
-                    view.loadView("CourseView");
+                    view.loadView("student/CourseView");
 
                 }
                 catch (Exception ex)

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="464.0" prefWidth="642.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.student.SectionViewController">
+  <children>
+    <Label id="loginErrMsg" fx:id="lblResponse" alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="359.0" text="You have successfully enrolled to the section" textFill="#cc0000" visible="false">
+      <font>
+        <Font name="System Bold" size="12.0" />
+      </font>
+    </Label>
+    <HBox id="HBox" alignment="CENTER" layoutX="15.0" layoutY="7.0" spacing="5.0">
+      <children>
+        <Label fx:id="deptIdAndCourseNoLbl" text="Label">
+          <font>
+            <Font name="System Bold" size="14.0" fx:id="x1" />
+          </font>
+        </Label>
+        <Label fx:id="courseNameLbl" font="$x1" text="Label" />
+        <Label id="courseNameLbl" fx:id="secLbl" font="$x1" text="Label" />
+        <Label id="courseNameLbl" fx:id="lblSecType" font="$x1" text="Label" />
+      </children>
+    </HBox>
+    <ScrollPane id="ScrollPane" layoutX="15.0" layoutY="30.0" prefHeight="80.0" prefViewportHeight="124.0" prefViewportWidth="607.0">
+      <content>
+        <TextArea fx:id="courseDesTxt" editable="false" prefHeight="78.0" prefWidth="607.0" wrapText="true" />
+      </content>
+    </ScrollPane>
+    <VBox id="VBox" alignment="CENTER" layoutX="14.0" layoutY="121.0">
+      <children>
+        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+          <children>
+            <Label text="Credit:" />
+            <Label fx:id="creditLbl" text="3" />
+          </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+          <children>
+            <Label text="Grading Scheme:" />
+            <Label fx:id="gradingSchmLbl" text="Label" />
+          </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+          <children>
+            <Label text="Passing Requirement:" />
+            <Label fx:id="passRqLbl" text="Label" />
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+    <Button fx:id="btnRegister" layoutX="253.0" layoutY="390.0" mnemonicParsing="false" prefHeight="32.0" text="Register" />
+    <Button fx:id="btnDrop" disable="true" layoutX="343.0" layoutY="390.0" mnemonicParsing="false" prefHeight="32.0" text="Drop" />
+    <HBox id="HBox" alignment="CENTER" layoutX="14.0" layoutY="171.0" spacing="5.0">
+      <children>
+        <VBox id="VBox" alignment="CENTER" spacing="5.0">
+          <children>
+            <Label id="lblPrereq" text="Outstanding Prerequisite Course" />
+            <ListView id="lsvPrereq" prefHeight="110.0" prefWidth="100.0" />
+          </children>
+        </VBox>
+        <VBox id="VBox" alignment="CENTER" spacing="5.0">
+          <children>
+            <Label id="lblCoReq" text="Outstanding Co-requisite Course" />
+            <ListView id="lsvCoReq" prefHeight="110.0" prefWidth="100.0" />
+          </children>
+        </VBox>
+      </children>
+    </HBox>
+  </children>
+  <stylesheets>
+    <URL value="@../css/mainForm.css" />
+  </stylesheets>
+</AnchorPane>

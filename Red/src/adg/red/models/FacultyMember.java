@@ -5,7 +5,6 @@
 package adg.red.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -18,13 +17,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "FacultyMember")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "FacultyMember.findAll", query = "SELECT f FROM FacultyMember f"),
     @NamedQuery(name = "FacultyMember.findByFacultyMemberId", query = "SELECT f FROM FacultyMember f WHERE f.facultyMemberId = :facultyMemberId"),
     @NamedQuery(name = "FacultyMember.findByTitle", query = "SELECT f FROM FacultyMember f WHERE f.title = :title"),
@@ -44,6 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class FacultyMember implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,8 +68,6 @@ public class FacultyMember implements Serializable
     private Department departmentId;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "facultyMember")
     private Faculty faculty;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "facultyMemberId")
-    private Collection<Section> sectionCollection;
 
     public FacultyMember()
     {
@@ -168,17 +164,6 @@ public class FacultyMember implements Serializable
     public void setFaculty(Faculty faculty)
     {
         this.faculty = faculty;
-    }
-
-    @XmlTransient
-    public Collection<Section> getSectionCollection()
-    {
-        return sectionCollection;
-    }
-
-    public void setSectionCollection(Collection<Section> sectionCollection)
-    {
-        this.sectionCollection = sectionCollection;
     }
 
     @Override
