@@ -26,7 +26,7 @@
         <TextArea fx:id="txtCourseDescription" editable="false" prefHeight="78.0" prefWidth="607.0" wrapText="true" />
       </content>
     </ScrollPane>
-    <VBox id="VBox" alignment="CENTER_LEFT" layoutX="14.0" layoutY="121.0">
+    <VBox id="VBox" alignment="CENTER" layoutX="24.0" layoutY="121.0" spacing="5.0">
       <children>
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
           <children>
@@ -34,16 +34,20 @@
             <Label fx:id="lblCredit" text="3" />
           </children>
         </HBox>
-        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+        <HBox id="HBox" fx:id="hbxPreAndCoReq" alignment="CENTER" spacing="15.0">
           <children>
-            <Label text="Grading Scheme:" />
-            <Label fx:id="lblGradingScheme" text="Label" />
-          </children>
-        </HBox>
-        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
-          <children>
-            <Label text="Passing Requirement:" />
-            <Label fx:id="passRqLbl" text="Label" />
+            <VBox id="VBox" alignment="CENTER" spacing="5.0">
+              <children>
+                <Label fx:id="lblPrereq" text="All Prerequisite Course" />
+                <ListView fx:id="lsvPrereq" prefHeight="110.0" prefWidth="100.0" />
+              </children>
+            </VBox>
+            <VBox id="VBox" alignment="CENTER" spacing="5.0">
+              <children>
+                <Label fx:id="lblCoReq" text="All Co-requisite Course" />
+                <ListView fx:id="lsvCoReq" prefHeight="110.0" prefWidth="100.0" />
+              </children>
+            </VBox>
           </children>
         </HBox>
       </children>
@@ -58,22 +62,6 @@
         <TableColumn minWidth="20.0" prefWidth="150.0" text="Teaching Assistant" fx:id="colTa" />
       </columns>
     </TableView>
-    <HBox id="HBox" fx:id="hbxPreAndCoReq" alignment="CENTER" layoutX="14.0" layoutY="171.0" spacing="5.0">
-      <children>
-        <VBox id="VBox" alignment="CENTER" spacing="5.0">
-          <children>
-            <Label fx:id="lblPrereq" text="All Prerequisite Course" />
-            <ListView fx:id="lsvPrereq" prefHeight="110.0" prefWidth="100.0" />
-          </children>
-        </VBox>
-        <VBox id="VBox" alignment="CENTER" spacing="5.0">
-          <children>
-            <Label fx:id="lblCoReq" text="All Co-requisite Course" />
-            <ListView fx:id="lsvCoReq" prefHeight="110.0" prefWidth="100.0" />
-          </children>
-        </VBox>
-      </children>
-    </HBox>
   </children>
   <stylesheets>
     <URL value="@../css/mainForm.css" />

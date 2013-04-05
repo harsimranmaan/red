@@ -55,12 +55,8 @@ public class CourseViewController implements Initializable
     private TableView<Section> tabCourse; // Value injected by FXMLLoader
     @FXML //  fx:id="endDateColmn"
     private TableColumn<Section, Date> colEndDate; // Value injected by FXMLLoader
-    @FXML //  fx:id="gradingSchmLbl"
-    private Label lblGradingScheme; // Value injected by FXMLLoader
     @FXML //  fx:id="instructorColmn"
     private TableColumn<Section, String> instructorColmn; // Value injected by FXMLLoader
-    @FXML //  fx:id="passRqLbl"
-    private Label passRqLbl; // Value injected by FXMLLoader
     @FXML //  fx:id="secColmn"
     private TableColumn<Section, Integer> secColmn; // Value injected by FXMLLoader
     @FXML //  fx:id="startDateColmn"
@@ -73,8 +69,6 @@ public class CourseViewController implements Initializable
     private ListView<CoRequisite> lsvCoReq; // Value injected by FXMLLoader
     @FXML //  fx:id="lsvPrereq"
     private ListView<Prerequisite> lsvPrereq; // Value injected by FXMLLoader
-    @FXML //  fx:id="hbxPreAndCoReq"
-    private HBox hbxPreAndCoReq; // Value injected by FXMLLoader
     @FXML //  fx:id="disView"
     private AnchorPane disView; // Value injected by FXMLLoader
 
@@ -87,11 +81,9 @@ public class CourseViewController implements Initializable
         // TODO
 
         lblCredit.setText(Integer.toString(Context.getInstance().getSelectedCourse().getCredits()));
-        passRqLbl.setText(Context.getInstance().getSelectedCourse().getPassingRequirement());
         txtCourseDescription.setText(Context.getInstance().getSelectedCourse().getDescription());
         lblCourseName.setText(Context.getInstance().getSelectedCourse().getName());
         lblDeptIdAndCourseNo.setText(Context.getInstance().getSelectedCourse().getDepartmentIdAndCourseNumber());
-        lblGradingScheme.setText(Context.getInstance().getSelectedCourse().getGradingSchemeId().getName());
         HomeViewController.getDeptLk().setText(Context.getInstance().getSelectedDepartment().getDepartmentId() + ":");
         HomeViewController.getCourseLk().setText(Integer.toString(Context.getInstance().getSelectedCourse().getCoursePK().getCourseNumber()) + ":");
         HomeViewController.getCourseLk().setVisible(true);
