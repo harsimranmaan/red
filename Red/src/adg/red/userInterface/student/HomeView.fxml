@@ -8,7 +8,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-
 <AnchorPane fx:id="homeView" prefHeight="510.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.student.HomeViewController">
     <SplitPane id="homeView" dividerPositions="0.19172932330827067" focusTraversable="true" prefHeight="510.0" prefWidth="800.0">
         <items>
@@ -32,7 +31,7 @@
                     </VBox>
                     <ImageView id="ADG-Logo3.jpg" fitHeight="75.0" fitWidth="150.0" preserveRatio="true" AnchorPane.bottomAnchor="-9.0">
                         <image>
-                            <Image url="@images/ADG-Logo3.jpg" preserveRatio="true" smooth="true" />
+                            <Image url="@../images/ADG-Logo3.jpg" preserveRatio="true" smooth="true" />
                         </image>
                     </ImageView>
                 </children>

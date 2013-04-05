@@ -92,8 +92,8 @@ public class CommonButtonsController implements Initializable
     {
         try
         {
-//            ViewLoader view = new ViewLoader(Context.getInstance().getDisplayView());
-//            view.loadView("Glossary");
+            ViewLoader view = new ViewLoader(Context.getInstance().getDisplayView());
+            view.loadView("Glossary");
         }
         catch (Exception ex)
         {

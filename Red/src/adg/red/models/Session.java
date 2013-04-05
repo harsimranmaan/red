@@ -4,6 +4,7 @@
  */
 package adg.red.models;
 
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -105,5 +106,10 @@ public class Session implements Serializable
     public String toString()
     {
         return "adg.red.models.Session[ sessionId=" + sessionId + " ]";
+    }
+
+    public static Session getBySessionId(int id)
+    {
+        return (Session) RedEntityManager.getEntityManager().createNamedQuery("Session.findBySessionId").setParameter("sessionId", id).getSingleResult();
     }
 }

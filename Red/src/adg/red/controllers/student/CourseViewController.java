@@ -43,40 +43,34 @@ import javafx.util.Callback;
 public class CourseViewController implements Initializable
 {
 
-    @FXML 
-    private TextArea txtCourseDescription; 
-    @FXML 
-    private Label lblCourseName; 
-    @FXML 
-    private Label lblCredit; 
-    @FXML 
-    private Label lblDeptIdAndCourseNo; 
-    @FXML 
-    private TableView<Section> tabCourse; 
-    @FXML 
-    private TableColumn<Section, Date> colEndDate; 
-    @FXML 
-    private Label lblGradingScheme; 
-    @FXML 
-    private TableColumn<Section, String> instructorColmn; 
-    @FXML 
-    private Label passRqLbl; 
-    @FXML 
-    private TableColumn<Section, Integer> secColmn; 
-    @FXML 
-    private TableColumn<Section, Date> startDateColmn; 
-    @FXML 
-    private TableColumn<Section, String> typeColmn; 
-    @FXML 
-    private TableColumn<Section, String> colTa; 
-    @FXML 
-    private ListView<CoRequisite> lsvCoReq; 
-    @FXML 
-    private ListView<Prerequisite> lsvPrereq; 
-    @FXML 
-    private HBox hbxPreAndCoReq; 
-    @FXML 
-    private AnchorPane disView; 
+    @FXML
+    private TextArea txtCourseDescription;
+    @FXML
+    private Label lblCourseName;
+    @FXML
+    private Label lblCredit;
+    @FXML
+    private Label lblDeptIdAndCourseNo;
+    @FXML
+    private TableView<Section> tabCourse;
+    @FXML
+    private TableColumn<Section, Date> colEndDate;
+    @FXML
+    private TableColumn<Section, String> instructorColmn;
+    @FXML
+    private TableColumn<Section, Integer> secColmn;
+    @FXML
+    private TableColumn<Section, Date> startDateColmn;
+    @FXML
+    private TableColumn<Section, String> typeColmn;
+    @FXML
+    private TableColumn<Section, String> colTa;
+    @FXML
+    private ListView<CoRequisite> lsvCoReq;
+    @FXML
+    private ListView<Prerequisite> lsvPrereq;
+    @FXML
+    private AnchorPane disView;
 
     /**
      * Initializes the controller class.
@@ -87,11 +81,9 @@ public class CourseViewController implements Initializable
         // TODO
 
         lblCredit.setText(Integer.toString(Context.getInstance().getSelectedCourse().getCredits()));
-        passRqLbl.setText(Context.getInstance().getSelectedCourse().getPassingRequirement());
         txtCourseDescription.setText(Context.getInstance().getSelectedCourse().getDescription());
         lblCourseName.setText(Context.getInstance().getSelectedCourse().getName());
         lblDeptIdAndCourseNo.setText(Context.getInstance().getSelectedCourse().getDepartmentIdAndCourseNumber());
-        lblGradingScheme.setText(Context.getInstance().getSelectedCourse().getGradingSchemeId().getName());
         HomeViewController.getDeptLk().setText(Context.getInstance().getSelectedDepartment().getDepartmentId() + ":");
         HomeViewController.getCourseLk().setText(Integer.toString(Context.getInstance().getSelectedCourse().getCoursePK().getCourseNumber()) + ":");
         HomeViewController.getCourseLk().setVisible(true);
