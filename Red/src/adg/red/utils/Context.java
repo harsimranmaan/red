@@ -8,6 +8,7 @@ import adg.red.models.Course;
 import adg.red.models.Department;
 import adg.red.models.Section;
 import adg.red.models.User;
+import javafx.scene.layout.Pane;
 
 /**
  *
@@ -37,6 +38,8 @@ public class Context
     private Department userSelectDepartment;
     private Section userSelectSection;
     private User currentUser;
+    private Pane mainView;
+    private Pane displayView;
 
     public void setCurrentUser(User user)
     {
@@ -86,5 +89,25 @@ public class Context
     public boolean WasLoggedIn()
     {
         return loggedIn;
+    }
+
+    public Pane getDisplayView()
+    {
+        return displayView;
+    }
+
+    public Pane getHomeView()
+    {
+        return mainView;
+    }
+
+    public void setDisplayView(Pane displayView)
+    {
+        this.displayView = displayView;
+    }
+
+    public void setMainView(Pane mainView)
+    {
+        this.mainView = mainView;
     }
 }
