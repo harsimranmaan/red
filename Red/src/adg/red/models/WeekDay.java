@@ -5,9 +5,7 @@
 package adg.red.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,10 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,13 +24,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "WeekDay")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "WeekDay.findAll", query = "SELECT w FROM WeekDay w"),
     @NamedQuery(name = "WeekDay.findByDayId", query = "SELECT w FROM WeekDay w WHERE w.dayId = :dayId"),
     @NamedQuery(name = "WeekDay.findByWeekDay", query = "SELECT w FROM WeekDay w WHERE w.weekDay = :weekDay")
 })
 public class WeekDay implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,8 +41,6 @@ public class WeekDay implements Serializable
     @Basic(optional = false)
     @Column(name = "weekDay")
     private String weekDay;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "weekDay")
-    private Collection<SectionTimeTable> sectionTimeTableCollection;
 
     public WeekDay()
     {
@@ -80,17 +75,6 @@ public class WeekDay implements Serializable
     public void setWeekDay(String weekDay)
     {
         this.weekDay = weekDay;
-    }
-
-    @XmlTransient
-    public Collection<SectionTimeTable> getSectionTimeTableCollection()
-    {
-        return sectionTimeTableCollection;
-    }
-
-    public void setSectionTimeTableCollection(Collection<SectionTimeTable> sectionTimeTableCollection)
-    {
-        this.sectionTimeTableCollection = sectionTimeTableCollection;
     }
 
     @Override

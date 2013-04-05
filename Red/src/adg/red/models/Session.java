@@ -5,9 +5,7 @@
 package adg.red.models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,10 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,13 +24,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "Session")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "Session.findAll", query = "SELECT s FROM Session s"),
     @NamedQuery(name = "Session.findBySessionId", query = "SELECT s FROM Session s WHERE s.sessionId = :sessionId"),
     @NamedQuery(name = "Session.findByName", query = "SELECT s FROM Session s WHERE s.name = :name")
 })
 public class Session implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,8 +41,6 @@ public class Session implements Serializable
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "session")
-    private Collection<Term> termCollection;
 
     public Session()
     {
@@ -80,17 +75,6 @@ public class Session implements Serializable
     public void setName(String name)
     {
         this.name = name;
-    }
-
-    @XmlTransient
-    public Collection<Term> getTermCollection()
-    {
-        return termCollection;
-    }
-
-    public void setTermCollection(Collection<Term> termCollection)
-    {
-        this.termCollection = termCollection;
     }
 
     @Override
