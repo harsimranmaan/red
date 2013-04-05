@@ -53,6 +53,6 @@
         </TableView>
     </children>
     <stylesheets>
-        <URL value="@css/mainForm.css" />
+        <URL value="@../css/mainForm.css" />
     </stylesheets>
 </AnchorPane>
