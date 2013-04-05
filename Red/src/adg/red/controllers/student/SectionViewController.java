@@ -4,16 +4,18 @@
  */
 package adg.red.controllers.student;
 
+import adg.red.models.CoRequisite;
 import adg.red.models.Course;
 import adg.red.models.Enrolment;
 import adg.red.models.EnrolmentPK;
 import adg.red.models.Prerequisite;
 import adg.red.models.Section;
+import adg.red.models.Session;
 import adg.red.models.Student;
 import adg.red.utils.Context;
 import adg.red.utils.LocaleManager;
+import adg.red.utils.ViewLoader;
 import java.net.URL;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -24,8 +26,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -49,8 +55,6 @@ public class SectionViewController implements Initializable
     private Label gradingSchmLbl; // Value injected by FXMLLoader
     @FXML //  fx:id="passRqLbl"
     private Label passRqLbl; // Value injected by FXMLLoader
-    @FXML //  fx:id="dateLv"
-    private ListView<String> dateLv; // Value injected by FXMLLoader
     @FXML //  fx:id="btnRegister"
     private Button btnRegister; // Value injected by FXMLLoader
     @FXML //  fx:id="btnDrop"
@@ -59,6 +63,16 @@ public class SectionViewController implements Initializable
     private Label lblResponse; // Value injected by FXMLLoader
     @FXML //  fx:id="lblSecType"
     private Label lblSecType; // Value injected by FXMLLoader
+    @FXML //  fx:id="lblSession"
+    private Label lblSession; // Value injected by FXMLLoader
+    @FXML //  fx:id="lblTermYear"
+    private Label lblTermYear; // Value injected by FXMLLoader
+    @FXML //  fx:id="lsvOutstandPrereq"
+    private ListView<Prerequisite> lsvOutstandPrereq; // Value injected by FXMLLoader
+    @FXML //  fx:id="lsvOutstandCoReq"
+    private ListView<CoRequisite> lsvOutstandCoReq; // Value injected by FXMLLoader
+    @FXML //  fx:id="disView"
+    private AnchorPane disView; // Value injected by FXMLLoader
     private Enrolment enrolment = null;
     private EnrolmentPK enrolmentPk;
 
@@ -99,7 +113,7 @@ public class SectionViewController implements Initializable
             {
                 toggleRegDropButtons();
             }
-            else if (!checkStudentPrereq(section.getCourse()))
+            else if (!checkStudentPrereq(section.getCourse()).isEmpty())
             {
                 btnRegister.setDisable(true);
                 lblResponse.setText(LocaleManager.get(35));
@@ -119,6 +133,10 @@ public class SectionViewController implements Initializable
         deptIdAndCourseNoLbl.setText(Context.getInstance().getSelectedCourse().getDepartmentIdAndCourseNumber());
         gradingSchmLbl.setText(Context.getInstance().getSelectedCourse().getGradingSchemeId().getName());
         lblSecType.setText("(" + Context.getInstance().getSelectedSection().getSectionType().getName() + ")");
+        lblSession.setText(Session.getBySessionId(Context.getInstance().getSelectedSection().getSectionPK().getSessionId()).getName());
+        lblTermYear.setText(Integer.toString(Context.getInstance().getSelectedSection().getTerm().getTermPK().getTermYear()));
+        populatePrereqListView(Context.getInstance().getSelectedCourse());
+        populateCoReqListView(Context.getInstance().getSelectedCourse());
 
         // setOnAction when register button is pressed
         btnRegister.setOnAction(new EventHandler<ActionEvent>()
@@ -169,29 +187,84 @@ public class SectionViewController implements Initializable
                 }
             }
         });
+
+        // action when user clicked on coreq list view
+        lsvOutstandCoReq.setOnMousePressed(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent event)
+            {
+                try
+                {
+                    //handle no records click
+                    if (lsvOutstandCoReq.getSelectionModel().getSelectedItem() != null)
+                    {
+                        Context.getInstance().setSelectedCourse(lsvOutstandCoReq.getSelectionModel().getSelectedItem().getCourse1());
+                        Context.getInstance().setSelectedDepartment(lsvOutstandCoReq.getSelectionModel().getSelectedItem().getCourse1().getDepartment());
+                        ViewLoader view = new ViewLoader(disView);
+                        view.loadView("student/CourseView");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.getLogger(CourseViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        // action when user clicked on prereq list view
+        lsvOutstandPrereq.setOnMousePressed(new EventHandler<MouseEvent>()
+        {
+            @Override
+            public void handle(MouseEvent event)
+            {
+                try
+                {
+                    //handle no records click
+                    if (lsvOutstandPrereq.getSelectionModel().getSelectedItem() != null)
+                    {
+                        Context.getInstance().setSelectedCourse(lsvOutstandPrereq.getSelectionModel().getSelectedItem().getCourse());
+                        Context.getInstance().setSelectedDepartment(lsvOutstandPrereq.getSelectionModel().getSelectedItem().getCourse().getDepartment());
+                        ViewLoader view = new ViewLoader(disView);
+                        view.loadView("student/CourseView");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.getLogger(CourseViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }
 
-    private boolean checkStudentPrereq(Course course)
+    private List<Prerequisite> checkStudentPrereq(Course course)
     {
-        boolean hasAllPrereq = true;
+        List<Prerequisite> prereqList = null;
+
         try
         {
             List<Enrolment> enrolList = Enrolment.getEnrolmentsByStudentId(Context.getInstance().getCurrentUser().getStudent().getStudentId());
-            List<Prerequisite> prereqList = Prerequisite.getByCourse(course);
+            prereqList = Prerequisite.getByCourse(course);
             if (prereqList.isEmpty())
             {
-                return true;
+                return prereqList;
             }
-            for (Prerequisite prereq : prereqList)
+
+            for (int i = 0; i < prereqList.size(); i++)
             {
                 for (Enrolment enrol : enrolList)
                 {
-                    if ((enrol.getEnrolmentPK().getCourseNumber() == prereq.getPrerequisitePK().getPreRequisiteNumber())
-                            && (enrol.getEnrolmentPK().getDepartmentId().equals(prereq.getPrerequisitePK().getPreRequisiteDeptId())))
+                    if (prereqList.get(i).getCourse().equals(enrol.getSection().getCourse()))
                     {
-                        if (!enrol.getResultId().getName().equalsIgnoreCase("pass"))
+                        if (enrol.getResultId() != null)
                         {
-                            hasAllPrereq = false;
+                            if (enrol.getResultId().getName().equalsIgnoreCase("pass"))
+                            {
+                                prereqList.remove(i);
+                                if (prereqList.isEmpty())
+                                {
+                                    return prereqList;
+                                }
+                            }
                         }
                     }
                 }
@@ -202,8 +275,49 @@ public class SectionViewController implements Initializable
             Logger.getLogger(SectionViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return hasAllPrereq;
+        return prereqList;
+    }
 
+    private List<CoRequisite> checkStudentCoReq(Course course)
+    {
+        List<CoRequisite> coReqList = null;
+
+        try
+        {
+            List<Enrolment> enrolList = Enrolment.getEnrolmentsByStudentId(Context.getInstance().getCurrentUser().getStudent().getStudentId());
+            coReqList = CoRequisite.getByCourse(course);
+            if (coReqList.isEmpty())
+            {
+                return coReqList;
+            }
+            for (int i = 0; i < coReqList.size(); i++)
+            {
+                for (Enrolment enrol : enrolList)
+                {
+                    if (coReqList.get(i).getCourse().equals(enrol.getSection().getCourse()))
+                    {
+                        if (enrol.getResultId() != null)
+                        {
+
+                            if (enrol.getResultId().getName().equalsIgnoreCase("pass"))
+                            {
+                                coReqList.remove(i);
+                                if (coReqList.isEmpty())
+                                {
+                                    return coReqList;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.getLogger(SectionViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return coReqList;
     }
 
     private boolean checkStudentAlreadyEnrolled(EnrolmentPK enrolPk)
@@ -220,8 +334,57 @@ public class SectionViewController implements Initializable
         }
     }
 
-    private void populateList()
+    public void populatePrereqListView(Course selectedCourse)
     {
-        dateLv.setItems(null);
+        final List<Prerequisite> prereq = checkStudentPrereq(selectedCourse);
+
+        lsvOutstandPrereq.setCellFactory(new Callback<ListView<Prerequisite>, ListCell<Prerequisite>>()
+        {
+            @Override
+            public ListCell<Prerequisite> call(ListView<Prerequisite> param)
+            {
+                ListCell<Prerequisite> cell = new ListCell<Prerequisite>()
+                {
+                    @Override
+                    public void updateItem(Prerequisite pre, boolean bln)
+                    {
+                        super.updateItem(pre, bln);
+                        if (pre != null)
+                        {
+                            this.setText(pre.getPrerequisitePK().getPreRequisiteDeptId() + " " + pre.getPrerequisitePK().getPreRequisiteNumber());
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+        lsvOutstandPrereq.getItems().setAll(prereq);
+    }
+
+    public void populateCoReqListView(Course selectedCourse)
+    {
+        final List<CoRequisite> correq = checkStudentCoReq(selectedCourse);
+
+        lsvOutstandCoReq.setCellFactory(new Callback<ListView<CoRequisite>, ListCell<CoRequisite>>()
+        {
+            @Override
+            public ListCell<CoRequisite> call(ListView<CoRequisite> param)
+            {
+                ListCell<CoRequisite> cell = new ListCell<CoRequisite>()
+                {
+                    @Override
+                    public void updateItem(CoRequisite co, boolean bln)
+                    {
+                        super.updateItem(co, bln);
+                        if (co != null)
+                        {
+                            this.setText(co.getCoRequisitePK().getDepartmentId() + " " + co.getCoRequisitePK().getCoRequisiteNumber());
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
+        lsvOutstandCoReq.getItems().setAll(correq);
     }
 }
