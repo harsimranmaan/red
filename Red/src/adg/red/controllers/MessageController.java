@@ -6,9 +6,9 @@ package adg.red.controllers;
 
 import adg.red.models.Message;
 import adg.red.models.MessageReceiver;
+import adg.red.models.MessageStatus;
 import adg.red.models.User;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -18,8 +18,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -44,7 +45,7 @@ public class MessageController implements Initializable
     @FXML
     private TableColumn<MessageReceiver, String> colStatus;
     @FXML
-    private TextArea txtMessageBody;
+    private Text txtMessageBody;
     @FXML
     private TableView<MessageReceiver> tblMessages;
     private User currentUser;
@@ -52,16 +53,39 @@ public class MessageController implements Initializable
     @FXML
     private void deleteMessage(ActionEvent event)
     {
+        MessageReceiver receiver = tblMessages.getSelectionModel().getSelectedItem();
+        receiver.setStatusId(MessageStatus.getByStatusName("Deleted"));
+        receiver.save();
     }
 
     @FXML
     private void markMessageRead(ActionEvent event)
     {
+        MessageReceiver receiver = tblMessages.getSelectionModel().getSelectedItem();
+        receiver.setStatusId(MessageStatus.getByStatusName("Read"));
+        receiver.save();
     }
 
     @FXML
     private void markMessageUnread(ActionEvent event)
     {
+        MessageReceiver receiver = tblMessages.getSelectionModel().getSelectedItem();
+        receiver.setStatusId(MessageStatus.getByStatusName("Unread"));
+        receiver.save();
+    }
+
+    @FXML
+    private void displayMessage(MouseEvent event)
+    {
+        if (tblMessages.getSelectionModel().getSelectedItem() != null)
+        {
+            displayMessageText(tblMessages.getSelectionModel().getSelectedItem().getMessage());
+        }
+    }
+
+    private void displayMessageText(Message message)
+    {
+        txtMessageBody.setText(message.getMessageBody());
     }
 
     /**
@@ -74,7 +98,10 @@ public class MessageController implements Initializable
         String userId = currentUser.getUsername();
         List<MessageReceiver> messagesReceived = MessageReceiver.findMessagesReceivedByReceiverId(userId);
         populateMessageList(messagesReceived);
-
+        if (messagesReceived.size() > 0)
+        {
+            displayMessageText(messagesReceived.get(0).getMessage());
+        }
     }
 
     public void populateMessageList(List<MessageReceiver> messages)
@@ -84,6 +111,6 @@ public class MessageController implements Initializable
         colSender.setCellValueFactory(new PropertyValueFactory<MessageReceiver, String>("senderName"));
         colStatus.setCellValueFactory(new PropertyValueFactory<MessageReceiver, String>("statusName"));
         tblMessages.getItems().setAll(messages);
-
+        tblMessages.getSelectionModel().selectFirst();
     }
 }

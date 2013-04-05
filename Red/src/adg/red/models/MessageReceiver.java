@@ -192,4 +192,9 @@ public class MessageReceiver implements Serializable
     {
         RedEntityManager.getEntityManager().refresh(RedEntityManager.getEntityByName("MessageReceiver"));
     }
+
+    public void save()
+    {
+        RedEntityManager.save(this);
+    }
 }
