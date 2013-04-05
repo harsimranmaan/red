@@ -64,7 +64,14 @@ public class Enrolment implements Serializable
     @JoinColumn(name = "studentId", referencedColumnName = "studentId", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Student student;
-
+   @Column(name = "score")
+    private Integer score;
+    @JoinColumn(name = "resultId", referencedColumnName = "resultId")
+    @ManyToOne
+    private Result resultId;
+    @JoinColumn(name = "gradeId", referencedColumnName = "gradeId")
+    @ManyToOne
+    private Grade gradeId;
     public Enrolment()
     {
     }
@@ -183,5 +190,29 @@ public class Enrolment implements Serializable
                 .setParameter("studentId", studentId)
                 .getResultList();
 
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+    public Result getResultId() {
+        return resultId;
+    }
+
+    public void setResultId(Result resultId) {
+        this.resultId = resultId;
+    }
+
+    public Grade getGradeId() {
+        return gradeId;
+    }
+
+    public void setGradeId(Grade gradeId) {
+        this.gradeId = gradeId;
     }
 }

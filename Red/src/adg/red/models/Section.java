@@ -6,11 +6,9 @@ package adg.red.models;
 
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -19,12 +17,10 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -67,8 +63,6 @@ public class Section implements Serializable
     @Basic(optional = false)
     @Column(name = "isActive")
     private boolean isActive;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "section")
-    private Collection<Enrolment> enrolmentCollection;
     @JoinColumn(name = "sectionTypeId", referencedColumnName = "sectionTypeId", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private SectionType sectionType;
@@ -89,8 +83,6 @@ public class Section implements Serializable
     })
     @ManyToOne(optional = false)
     private Course course;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "section")
-    private Collection<SectionTimeTable> sectionTimeTableCollection;
 
     public Section()
     {
@@ -169,17 +161,6 @@ public class Section implements Serializable
         this.isActive = isActive;
     }
 
-    @XmlTransient
-    public Collection<Enrolment> getEnrolmentCollection()
-    {
-        return enrolmentCollection;
-    }
-
-    public void setEnrolmentCollection(Collection<Enrolment> enrolmentCollection)
-    {
-        this.enrolmentCollection = enrolmentCollection;
-    }
-
     public String getSectionTypeName()
     {
         return sectionType.getName();
@@ -223,17 +204,6 @@ public class Section implements Serializable
     public void setCourse(Course course)
     {
         this.course = course;
-    }
-
-    @XmlTransient
-    public Collection<SectionTimeTable> getSectionTimeTableCollection()
-    {
-        return sectionTimeTableCollection;
-    }
-
-    public void setSectionTimeTableCollection(Collection<SectionTimeTable> sectionTimeTableCollection)
-    {
-        this.sectionTimeTableCollection = sectionTimeTableCollection;
     }
 
     @Override
