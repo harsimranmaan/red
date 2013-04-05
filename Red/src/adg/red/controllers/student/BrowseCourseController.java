@@ -34,16 +34,16 @@ import javafx.scene.layout.HBox;
 public class BrowseCourseController implements Initializable
 {
 
-    @FXML //  fx:id="disTable"
-    private TableView<Department> tabDisplayDepartment; // Value injected by FXMLLoader
-    @FXML //  fx:id="deptIdColmn"
-    private TableColumn<Department, String> colDeptId; // Value injected by FXMLLoader
-    @FXML //  fx:id="deptNameColm"
-    private TableColumn<Department, String> colDeptName; // Value injected by FXMLLoader
-    @FXML //  fx:id="disView"
-    private AnchorPane disView; // Value injected by FXMLLoader
-    @FXML //  fx:id="hBox"
-    private HBox hBox; // Value injected by FXMLLoader
+    @FXML 
+    private TableView<Department> tabDisplayDepartment; 
+    @FXML 
+    private TableColumn<Department, String> colDeptId; 
+    @FXML 
+    private TableColumn<Department, String> colDeptName; 
+    @FXML 
+    private AnchorPane disView; 
+    @FXML 
+    private HBox hBox; 
 
     /**
      * Initializes the controller class.

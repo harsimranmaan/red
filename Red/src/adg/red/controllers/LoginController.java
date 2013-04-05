@@ -9,7 +9,6 @@ import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -29,22 +28,22 @@ import javafx.scene.control.TextField;
 public class LoginController implements Initializable
 {
 
-    @FXML //  fx:id="loginBtn"
-    private Button btnLogin; // Value injected by FXMLLoader
-    @FXML //  fx:id="viewArea"
-    private AnchorPane loginViewArea; // Value injected by FXMLLoader
-    @FXML //  fx:id="loginErrLbl"
-    private Label loginErrLbl; // Value injected by FXMLLoader
-    @FXML //  fx:id="forgotPassBtn"
-    private Button btnExit; // Value injected by FXMLLoader
+    @FXML
+    private Button btnLogin;
+    @FXML
+    private AnchorPane loginViewArea;
+    @FXML
+    private Label loginErrLbl;
+    @FXML
+    private Button btnExit;
     @FXML
     private TextField usernameTxt; // created by J. Yu
     @FXML
     private PasswordField passwordTxt; // created by J. Yu
-    @FXML //  fx:id="passLbl"
-    private Label passLbl; // Value injected by FXMLLoader
-    @FXML //  fx:id="userLbl"
-    private Label userLbl; // Value injected by FXMLLoader
+    @FXML
+    private Label passLbl;
+    @FXML
+    private Label userLbl;
     @FXML
     private Hyperlink hpForgotPassword;
 
@@ -70,42 +69,36 @@ public class LoginController implements Initializable
             loginErrLbl.setText(LocaleManager.get(9));
             loginErrLbl.setVisible(true);
         }
+    }
 
+    public void exit(ActionEvent event)
+    {
+        Platform.exit();
+    }
 
+    public void forgotPassword(ActionEvent event)
+    {
+    }
 
-        // setOnAction when login button is pressed
-        btnLogin.setOnAction(new EventHandler<ActionEvent>()
+    public void login(ActionEvent event)
+    {
+        Context.getInstance().setWasLoggedIn(false);
+        // get userid and password input from gui by J. Yu
+        String uid = usernameTxt.getText().toString();
+        String pwd = passwordTxt.getText().toString();
+
+        //LOGIN
+        try
         {
-            @Override
-            public void handle(ActionEvent event)
-            {
-                Context.getInstance().setWasLoggedIn(false);
-                // get userid and password input from gui by J. Yu
-                String uid = usernameTxt.getText().toString();
-                String pwd = passwordTxt.getText().toString();
-
-                //LOGIN
-                try
-                {
-                    User user = User.login(uid, pwd);
-                    Context.getInstance().setCurrentUser(user);
-                    ViewLoader view = new ViewLoader((AnchorPane) loginViewArea.getParent());
-                    view.loadView(user.getUserTypeId().getName().toLowerCase() + "/HomeView");
-                }
-                catch (Exception ex)
-                {
-                    loginErrLbl.setText(ex.getMessage());
-                    loginErrLbl.setVisible(true);
-                }
-            }
-        });
-        btnExit.setOnAction(new EventHandler<ActionEvent>()
+            User user = User.login(uid, pwd);
+            Context.getInstance().setCurrentUser(user);
+            ViewLoader view = new ViewLoader((AnchorPane) loginViewArea.getParent());
+            view.loadView(user.getUserTypeId().getName().toLowerCase() + "/HomeView");
+        }
+        catch (Exception ex)
         {
-            @Override
-            public void handle(ActionEvent event)
-            {
-                Platform.exit();
-            }
-        });
+            loginErrLbl.setText(ex.getMessage());
+            loginErrLbl.setVisible(true);
+        }
     }
 }
