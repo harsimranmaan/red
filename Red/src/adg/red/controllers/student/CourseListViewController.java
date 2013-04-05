@@ -8,6 +8,7 @@ import adg.red.utils.Context;
 import adg.red.utils.ViewLoader;
 import adg.red.models.Course;
 import adg.red.models.Department;
+import adg.red.utils.LocaleManager;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -30,16 +31,16 @@ import javafx.scene.layout.AnchorPane;
 public class CourseListViewController implements Initializable
 {
 
-    @FXML 
-    private TableColumn<Course, String> courseNumberColmn; 
-    @FXML 
-    private TableColumn<Course, String> courseNameColmn; 
-    @FXML 
-    private TableView<Course> disTable; 
-    @FXML 
-    private AnchorPane disView; 
-//    @FXML 
-//    private Hyperlink deptLbl; 
+    @FXML
+    private TableColumn<Course, String> courseNumberColmn;
+    @FXML
+    private TableColumn<Course, String> courseNameColmn;
+    @FXML
+    private TableView<Course> disTable;
+    @FXML
+    private AnchorPane disView;
+//    @FXML
+//    private Hyperlink deptLbl;
 
     /**
      * Initializes the controller class.
@@ -48,6 +49,7 @@ public class CourseListViewController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
+        initializeComponentsByLocale();
         populateCourseTable(Context.getInstance().getSelectedDepartment());
         HomeViewController.getDeptLk().setText(Context.getInstance().getSelectedDepartment().getDepartmentId() + ":");
         HomeViewController.getDeptLk().setVisible(true);
@@ -91,5 +93,11 @@ public class CourseListViewController implements Initializable
         courseNumberColmn.setCellValueFactory(new PropertyValueFactory<Course, String>("departmentIdAndCourseNumber"));
         courseNameColmn.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));
         disTable.getItems().setAll(courses);
+    }
+
+    private void initializeComponentsByLocale()
+    {
+        courseNumberColmn.setText(LocaleManager.get(50));
+        courseNameColmn.setText(LocaleManager.get(51));
     }
 }

@@ -123,7 +123,7 @@ public class HomeViewController implements Initializable
                 try
                 {
                     ViewLoader view = new ViewLoader(homeView);
-                    view.loadView("HomeView");
+                    view.loadView("student/HomeView");
                 }
                 catch (Exception ex)
                 {

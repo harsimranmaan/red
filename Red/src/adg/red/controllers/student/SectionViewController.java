@@ -16,9 +16,6 @@ import adg.red.utils.Context;
 import adg.red.utils.LocaleManager;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -60,7 +57,21 @@ public class SectionViewController implements Initializable
     @FXML
     private Label passRqLbl;
     @FXML
-    private ListView<String> dateLv;
+    private Label lblCreditName;
+    @FXML
+    private Label lblGrading;
+    @FXML
+    private Label lblPassReq;
+    @FXML
+    private Label lblTerm;
+    @FXML
+    private Label lblEnd;
+    @FXML
+    private Label lblStart;
+    @FXML
+    private Label lblOutPrereq;
+    @FXML
+    private Label lblOutCoReq;
     @FXML
     private Button btnRegister;
     @FXML
@@ -77,6 +88,8 @@ public class SectionViewController implements Initializable
     private Label lblTermYear;
     @FXML
     private Label lblStartDate;
+    @FXML
+    private Label lblEndDate;
     @FXML
     private ListView<Prerequisite> lsvOutstandPrereq;
     @FXML
@@ -132,7 +145,7 @@ public class SectionViewController implements Initializable
         {
             Logger.getLogger(SectionViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        lblCreditName.setText(LocaleManager.get(42));
         secLbl.setText("Section " + Context.getInstance().getSelectedSection().getSectionPK().getSectionId());
         creditLbl.setText(Integer.toString(Context.getInstance().getSelectedCourse().getCredits()));
         passRqLbl.setText(Context.getInstance().getSelectedCourse().getPassingRequirement());
@@ -146,6 +159,7 @@ public class SectionViewController implements Initializable
         populatePrereqListView(Context.getInstance().getSelectedCourse());
         populateCoReqListView(Context.getInstance().getSelectedCourse());
         lblStartDate.setText(DateFormatter.formatDate(Context.getInstance().getSelectedSection().getStartDate()));
+        lblEndDate.setText(DateFormatter.formatDate(Context.getInstance().getSelectedSection().getEndDate()));
 
         // setOnAction when register button is pressed
         btnRegister.setOnAction(new EventHandler<ActionEvent>()

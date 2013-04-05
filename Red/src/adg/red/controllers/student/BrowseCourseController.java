@@ -7,6 +7,7 @@ package adg.red.controllers.student;
 import adg.red.utils.Context;
 import adg.red.utils.ViewLoader;
 import adg.red.models.Department;
+import adg.red.utils.LocaleManager;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
@@ -34,16 +35,16 @@ import javafx.scene.layout.HBox;
 public class BrowseCourseController implements Initializable
 {
 
-    @FXML 
-    private TableView<Department> tabDisplayDepartment; 
-    @FXML 
-    private TableColumn<Department, String> colDeptId; 
-    @FXML 
-    private TableColumn<Department, String> colDeptName; 
-    @FXML 
-    private AnchorPane disView; 
-    @FXML 
-    private HBox hBox; 
+    @FXML
+    private TableView<Department> tabDisplayDepartment;
+    @FXML
+    private TableColumn<Department, String> colDeptId;
+    @FXML
+    private TableColumn<Department, String> colDeptName;
+    @FXML
+    private AnchorPane disView;
+    @FXML
+    private HBox hBox;
 
     /**
      * Initializes the controller class.
@@ -52,6 +53,7 @@ public class BrowseCourseController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
+        initializeComponentsByLocale();
         populateDeptTable("All");
 
         // action when user clicked on the table
@@ -110,5 +112,11 @@ public class BrowseCourseController implements Initializable
         colDeptId.setCellValueFactory(new PropertyValueFactory<Department, String>("departmentId"));
         colDeptName.setCellValueFactory(new PropertyValueFactory<Department, String>("name"));
         tabDisplayDepartment.getItems().setAll(departments);
+    }
+
+    private void initializeComponentsByLocale()
+    {
+        colDeptId.setText(LocaleManager.get(41));
+        colDeptName.setText(LocaleManager.get(52));
     }
 }
