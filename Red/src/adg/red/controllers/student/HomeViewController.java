@@ -30,8 +30,6 @@ public class HomeViewController implements Initializable
 
     @FXML //  fx:id="btnBrowseCourse"
     private Button btnBrowseCourse; // Value injected by FXMLLoader
-    @FXML //  fx:id="btnManageCourse"
-    private Button btnManageCourse; // Value injected by FXMLLoader
     @FXML //  fx:id="btnMessage"
     private Button btnMessage; // Value injected by FXMLLoader
     @FXML //  fx:id="btnViewDegreeInfo"
@@ -324,7 +322,6 @@ public class HomeViewController implements Initializable
     {
         // TODO
         btnBrowseCourse.setText(LocaleManager.get(7));
-        btnManageCourse.setText(LocaleManager.get(17));
         btnViewTimetable.setText(LocaleManager.get(18));
         btnViewEnrolment.setText(LocaleManager.get(19));
         btnViewDegreeInfo.setText(LocaleManager.get(20));
