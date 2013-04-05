@@ -4,7 +4,6 @@
  */
 package adg.red.controllers;
 
-import adg.red.models.Course;
 import adg.red.models.Message;
 import adg.red.models.MessageReceiver;
 import adg.red.models.User;
@@ -17,7 +16,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -38,17 +36,17 @@ public class MessageController implements Initializable
     @FXML
     private MenuItem btnMarkUnread;
     @FXML
-    private TableColumn<Message, String> colSubject;
+    private TableColumn<MessageReceiver, String> colSubject;
     @FXML
-    private TableColumn<Message, Date> colDate;
+    private TableColumn<MessageReceiver, Date> colDate;
     @FXML
-    private TableColumn<Message, String> colSender;
+    private TableColumn<MessageReceiver, String> colSender;
     @FXML
-    private TableColumn<Message, String> colStatus;
+    private TableColumn<MessageReceiver, String> colStatus;
     @FXML
     private TextArea txtMessageBody;
     @FXML
-    private TableView<Message> tblMessages;
+    private TableView<MessageReceiver> tblMessages;
     private User currentUser;
 
     @FXML
@@ -74,22 +72,18 @@ public class MessageController implements Initializable
     {
         currentUser = adg.red.utils.Context.getInstance().getCurrentUser();
         String userId = currentUser.getUsername();
-        List<Integer> messageId;
-        messageId = MessageReceiver.findMessageByReceiverId(userId);
-        List<Message> messages = new ArrayList<Message>();
-        for (int i = 0; i < messageId.size(); i++)
-        {
-            messages.add(Message.findMessageByMessageId(messageId.get(i)));
-        }
-        populateMessageList(messages);
+        List<MessageReceiver> messagesReceived = MessageReceiver.findMessagesReceivedByReceiverId(userId);
+        populateMessageList(messagesReceived);
 
     }
 
-    public void populateMessageList(List<Message> messages)
+    public void populateMessageList(List<MessageReceiver> messages)
     {
-        colSubject.setCellValueFactory(new PropertyValueFactory<Message, String>("subject"));
-        colDate.setCellValueFactory(new PropertyValueFactory<Message, Date>("dateTime"));
-        colSender.setCellValueFactory(new PropertyValueFactory<Message, String>("senderName"));
+        colSubject.setCellValueFactory(new PropertyValueFactory<MessageReceiver, String>("subject"));
+        colDate.setCellValueFactory(new PropertyValueFactory<MessageReceiver, Date>("dateTime"));
+        colSender.setCellValueFactory(new PropertyValueFactory<MessageReceiver, String>("senderName"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<MessageReceiver, String>("statusName"));
         tblMessages.getItems().setAll(messages);
+
     }
 }
