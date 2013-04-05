@@ -16,6 +16,9 @@ import adg.red.utils.Context;
 import adg.red.utils.LocaleManager;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -32,6 +35,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
+import adg.red.utils.DateFormatter;
 
 /**
  * FXML Controller class
@@ -71,6 +75,8 @@ public class SectionViewController implements Initializable
     private Label lblSession;
     @FXML
     private Label lblTermYear;
+    @FXML
+    private Label lblStartDate;
     @FXML
     private ListView<Prerequisite> lsvOutstandPrereq;
     @FXML
@@ -139,6 +145,7 @@ public class SectionViewController implements Initializable
         lblTermYear.setText(Integer.toString(Context.getInstance().getSelectedSection().getTerm().getTermPK().getTermYear()));
         populatePrereqListView(Context.getInstance().getSelectedCourse());
         populateCoReqListView(Context.getInstance().getSelectedCourse());
+        lblStartDate.setText(DateFormatter.formatDate(Context.getInstance().getSelectedSection().getStartDate()));
 
         // setOnAction when register button is pressed
         btnRegister.setOnAction(new EventHandler<ActionEvent>()
