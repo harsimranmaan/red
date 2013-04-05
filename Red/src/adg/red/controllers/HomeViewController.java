@@ -143,6 +143,28 @@ public class HomeViewController implements Initializable
             }
         });
 
+        btnMessage.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                try
+                {
+                    ViewLoader view = new ViewLoader(disBrwCourseArea);
+                    view.loadView("Message");
+                    hplBrowseCourse.setVisible(true);
+                    hplBrowseCourse.setText(LocaleManager.get(22));
+                    hplDept.setVisible(false);
+                    hplCourse.setVisible(false);
+                }
+                catch (Exception ex)
+                {
+                    Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        });
+
         // setOnAction when personal info button is pressed added by Jingbo Yu
         btnUserProfile.setOnAction(new EventHandler<ActionEvent>()
         {
