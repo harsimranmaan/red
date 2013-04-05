@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package adg.red.controllers;
+package adg.red.controllers.student;
 
 import adg.red.utils.Context;
 import adg.red.utils.LocaleManager;
