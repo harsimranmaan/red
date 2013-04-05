@@ -43,34 +43,34 @@ import javafx.util.Callback;
 public class CourseViewController implements Initializable
 {
 
-    @FXML //  fx:id="txtCourseArea"
-    private TextArea txtCourseDescription; // Value injected by FXMLLoader
-    @FXML //  fx:id="courseNameLbl"
-    private Label lblCourseName; // Value injected by FXMLLoader
-    @FXML //  fx:id="creditLbl"
-    private Label lblCredit; // Value injected by FXMLLoader
-    @FXML //  fx:id="deptIdAndCourseNoLbl"
-    private Label lblDeptIdAndCourseNo; // Value injected by FXMLLoader
-    @FXML //  fx:id="disTable"
-    private TableView<Section> tabCourse; // Value injected by FXMLLoader
-    @FXML //  fx:id="endDateColmn"
-    private TableColumn<Section, Date> colEndDate; // Value injected by FXMLLoader
-    @FXML //  fx:id="instructorColmn"
-    private TableColumn<Section, String> instructorColmn; // Value injected by FXMLLoader
-    @FXML //  fx:id="secColmn"
-    private TableColumn<Section, Integer> secColmn; // Value injected by FXMLLoader
-    @FXML //  fx:id="startDateColmn"
-    private TableColumn<Section, Date> startDateColmn; // Value injected by FXMLLoader
-    @FXML //  fx:id="typeColmn"
-    private TableColumn<Section, String> typeColmn; // Value injected by FXMLLoader
-    @FXML //  fx:id="colTa"
-    private TableColumn<Section, String> colTa; // Value injected by FXMLLoader
-    @FXML //  fx:id="lsvCoReq"
-    private ListView<CoRequisite> lsvCoReq; // Value injected by FXMLLoader
-    @FXML //  fx:id="lsvPrereq"
-    private ListView<Prerequisite> lsvPrereq; // Value injected by FXMLLoader
-    @FXML //  fx:id="disView"
-    private AnchorPane disView; // Value injected by FXMLLoader
+    @FXML
+    private TextArea txtCourseDescription;
+    @FXML
+    private Label lblCourseName;
+    @FXML
+    private Label lblCredit;
+    @FXML
+    private Label lblDeptIdAndCourseNo;
+    @FXML
+    private TableView<Section> tabCourse;
+    @FXML
+    private TableColumn<Section, Date> colEndDate;
+    @FXML
+    private TableColumn<Section, String> instructorColmn;
+    @FXML
+    private TableColumn<Section, Integer> secColmn;
+    @FXML
+    private TableColumn<Section, Date> startDateColmn;
+    @FXML
+    private TableColumn<Section, String> typeColmn;
+    @FXML
+    private TableColumn<Section, String> colTa;
+    @FXML
+    private ListView<CoRequisite> lsvCoReq;
+    @FXML
+    private ListView<Prerequisite> lsvPrereq;
+    @FXML
+    private AnchorPane disView;
 
     /**
      * Initializes the controller class.

@@ -30,16 +30,16 @@ import javafx.scene.layout.AnchorPane;
 public class CourseListViewController implements Initializable
 {
 
-    @FXML //  fx:id="courseIdColmn"
-    private TableColumn<Course, String> courseNumberColmn; // Value injected by FXMLLoader
-    @FXML //  fx:id="courseNameColmn"
-    private TableColumn<Course, String> courseNameColmn; // Value injected by FXMLLoader
-    @FXML //  fx:id="disTable"
-    private TableView<Course> disTable; // Value injected by FXMLLoader
-    @FXML //  fx:id="disView"
-    private AnchorPane disView; // Value injected by FXMLLoader
-//    @FXML //  fx:id="deptLbl"
-//    private Hyperlink deptLbl; // Value injected by FXMLLoader
+    @FXML 
+    private TableColumn<Course, String> courseNumberColmn; 
+    @FXML 
+    private TableColumn<Course, String> courseNameColmn; 
+    @FXML 
+    private TableView<Course> disTable; 
+    @FXML 
+    private AnchorPane disView; 
+//    @FXML 
+//    private Hyperlink deptLbl; 
 
     /**
      * Initializes the controller class.
