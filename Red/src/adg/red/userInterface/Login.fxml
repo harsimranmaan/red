@@ -10,29 +10,29 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="loginViewArea" prefHeight="510.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.LoginController">
-  <AnchorPane id="AnchorPane" minWidth="352.0" prefHeight="173.0" prefWidth="352.0" AnchorPane.bottomAnchor="181.5" AnchorPane.leftAnchor="231.5" AnchorPane.rightAnchor="216.5" AnchorPane.topAnchor="155.5">
-    <children>
-      <Label fx:id="userLbl" layoutY="3.0" text="Username:">
-        <font>
-          <Font name="System Bold" size="12.0" fx:id="x1" />
-        </font>
-      </Label>
-      <Label fx:id="passLbl" font="$x1" layoutY="46.0" text="Password:" />
-      <TextField fx:id="usernameTxt" minWidth="-Infinity" prefWidth="199.0" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="69.0" />
-      <PasswordField fx:id="passwordTxt" layoutY="43.0" minWidth="-Infinity" prefWidth="199.0" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="69.0" />
-      <HBox id="HBox" alignment="CENTER" layoutX="60.0" layoutY="84.0" spacing="60.0">
+    <AnchorPane id="AnchorPane" minWidth="352.0" prefHeight="173.0" prefWidth="352.0" AnchorPane.bottomAnchor="181.5" AnchorPane.leftAnchor="231.5" AnchorPane.rightAnchor="216.5" AnchorPane.topAnchor="155.5">
         <children>
-          <Button id="loginBtn" fx:id="btnLogin" mnemonicParsing="false" prefHeight="32.0" text="Login" textAlignment="CENTER" />
-          <Button id="forgotPassBtn" fx:id="btnExit" mnemonicParsing="false" prefHeight="32.0" prefWidth="60.0" text="Exit" textAlignment="CENTER" />
+            <Label fx:id="userLbl" layoutY="3.0" text="Username:">
+                <font>
+                    <Font name="System Bold" size="12.0" fx:id="x1" />
+                </font>
+            </Label>
+            <Label fx:id="passLbl" font="$x1" layoutY="46.0" text="Password:" />
+            <TextField fx:id="usernameTxt" minWidth="-Infinity" prefWidth="199.0" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="69.0" />
+            <PasswordField fx:id="passwordTxt" layoutY="43.0" minWidth="-Infinity" prefWidth="199.0" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="69.0" />
+            <HBox id="HBox" alignment="CENTER" layoutX="60.0" layoutY="84.0" spacing="60.0">
+                <children>
+                    <Button id="loginBtn" fx:id="btnLogin" mnemonicParsing="false" prefHeight="32.0" text="Login" textAlignment="CENTER" onAction="#login"  />
+                    <Button id="forgotPassBtn" fx:id="btnExit" mnemonicParsing="false" prefHeight="32.0" prefWidth="60.0" text="Exit" textAlignment="CENTER" onAction="#exit"  />
+                </children>
+            </HBox>
+            <HBox id="hBMsg" alignment="CENTER" layoutY="151.0" prefWidth="283.0000999999975" spacing="20.0">
+                <Label id="loginErrMsg" fx:id="loginErrLbl" alignment="CENTER" contentDisplay="CENTER" font="$x1" text="label" textFill="#cc0000" visible="false"  />
+            </HBox>
+            <Hyperlink id="forgotPasssword" fx:id="hpForgotPassword" layoutX="61.0" layoutY="121.0" text="Forgot Password?" onAction="#forgotPassword"  />
         </children>
-      </HBox>
-      <HBox id="hBMsg" alignment="CENTER" layoutY="151.0" prefWidth="283.0000999999975" spacing="20.0">
-        <Label id="loginErrMsg" fx:id="loginErrLbl" alignment="CENTER" contentDisplay="CENTER" font="$x1" text="label" textFill="#cc0000" visible="false" />
-      </HBox>
-      <Hyperlink id="forgotPasssword" fx:id="hpForgotPassword" layoutX="61.0" layoutY="121.0" text="Forgot Password?" />
-    </children>
-    <stylesheets>
-      <URL value="@css/mainForm.css" />
-    </stylesheets>
-  </AnchorPane>
+        <stylesheets>
+            <URL value="@css/mainForm.css" />
+        </stylesheets>
+    </AnchorPane>
 </AnchorPane>

@@ -10,85 +10,84 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane fx:id="homeView" prefHeight="510.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.faculty.HomeViewController">
-    <SplitPane id="homeView" dividerPositions="0.19172932330827067" focusTraversable="true" prefHeight="510.0" prefWidth="800.0">
-        <items>
-            <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="150.0">
+  <SplitPane id="homeView" dividerPositions="0.19172932330827067" focusTraversable="true" prefHeight="510.0" prefWidth="800.0">
+    <items>
+      <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="150.0">
+        <children>
+          <VBox id="VBox" alignment="CENTER" layoutX="0.5" prefHeight="442.0" prefWidth="150.0" spacing="2.0" AnchorPane.topAnchor="0.0">
+            <children>
+              <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Monday, March 18, 2013" />
+              <Label maxHeight="-Infinity" maxWidth="-Infinity" text="1:31PM" />
+              <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
+              <VBox id="VBox" alignment="CENTER" spacing="1.0">
                 <children>
-                    <VBox id="VBox" alignment="CENTER" layoutX="0.5" prefHeight="442.0" prefWidth="150.0" spacing="2.0" AnchorPane.topAnchor="0.0">
-                        <children>
-                            <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Monday, March 18, 2013" />
-                            <Label maxHeight="-Infinity" maxWidth="-Infinity" text="1:31PM" />
-                            <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
-                            <VBox id="VBox" alignment="CENTER" spacing="1.0">
-                                <children>
-                                    <Button id="" fx:id="btnBrowseCourse" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Browse Course" />
-                                    <Button fx:id="btnManageCourse" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Manage Course" />
-                                    <Button fx:id="btnViewTimetable" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="View Timetable" />
-                                    <Button fx:id="btnViewEnrolment" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="View Enrolment" />
-                                    <Button fx:id="btnViewDegreeInfo" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="View Degree Info" />
-                                </children>
-                            </VBox>
-                            <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
-                            <VBox id="VBox" alignment="CENTER" spacing="1.0">
-                                <children>
-                                    <Button id="userProfileBtn" fx:id="btnUserProfile" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Personal Info" />
-                                    <Button fx:id="btnMessage" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Messages" />
-                                </children>
-                            </VBox>
-                            <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
-                            <VBox id="VBox" alignment="CENTER" spacing="1.0">
-                                <children>
-                                    <Button id="glossaryBtn" fx:id="btnGlossary" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Glossary" />
-                                    <Button id="faqBtn" fx:id="btnFaq" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="FAQ" />
-                                </children>
-                            </VBox>
-                            <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
-                            <Button id="logOut" fx:id="btnLogout" mnemonicParsing="false" prefHeight="30.0" prefWidth="77.0" text="Log Out" />
-                        </children>
-                    </VBox>
-                    <ImageView id="ADG-Logo3.jpg" fitHeight="75.0" fitWidth="150.0" preserveRatio="true" AnchorPane.bottomAnchor="-9.0">
-                        <image>
-                            <Image url="@images/ADG-Logo3.jpg" preserveRatio="true" smooth="true" />
-                        </image>
-                    </ImageView>
+                  <Button id="" fx:id="btnBrowseCourse" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Browse Course" />
+                  <Button fx:id="btnManageCourse" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Manage Course" />
+                  <Button fx:id="btnViewTimetable" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="View Timetable" />
+                  <Button fx:id="btnViewEnrolment" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="View Enrolment" />
+                  <Button fx:id="btnViewDegreeInfo" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="View Degree Info" />
                 </children>
-            </AnchorPane>
-            <AnchorPane id="disBrwCourseArea" minHeight="0.0" minWidth="0.0" prefHeight="308.0" prefWidth="456.9999000000025">
+              </VBox>
+              <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
+              <VBox id="VBox" alignment="CENTER" spacing="1.0">
                 <children>
-                    <AnchorPane id="AnchorPane" prefWidth="454.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                    <AnchorPane fx:id="disBrwCourseArea" prefHeight="464.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.5" AnchorPane.rightAnchor="-0.5" AnchorPane.topAnchor="44.0">
-                        <children>
-                            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="281.0" layoutY="224.0" text="Displaying area" />
-                        </children>
-                    </AnchorPane>
-                    <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="642.0">
-                        <children>
-                            <HBox id="HBox" alignment="CENTER" layoutY="10.0" spacing="5.0" AnchorPane.rightAnchor="6.0">
-                                <children>
-                                    <Label fx:id="lblSearch" text="Search:" HBox.hgrow="NEVER" />
-                                    <TextField prefWidth="131.0" HBox.hgrow="ALWAYS" />
-                                    <Button fx:id="btnGo" mnemonicParsing="false" text="Go" HBox.hgrow="NEVER" />
-                                </children>
-                                <padding>
-                                    <Insets bottom="1.0" top="1.0" />
-                                </padding>
-                            </HBox>
-                            <HBox id="HBox" alignment="CENTER" layoutX="14.0" layoutY="11.0">
-                                <children>
-                                    <Label id="menuLk" fx:id="lblUserType" text="Student:" />
-                                    <Hyperlink id="homeLk" fx:id="hplHome" text="Home:" />
-                                    <Hyperlink id="browseCourseLk" fx:id="hplBrowseCourse" text="Browse Course:" visible="false" />
-                                    <Hyperlink id="deptLk" fx:id="hplDept" visible="false" />
-                                    <Hyperlink id="courseLk" fx:id="hplCourse" visible="false" />
-                                </children>
-                            </HBox>
-                        </children>
-                    </AnchorPane>
+                  <Button id="userProfileBtn" fx:id="btnUserProfile" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Personal Info" />
+                  <Button fx:id="btnMessage" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Messages" />
                 </children>
-            </AnchorPane>
-        </items>
-        <stylesheets>
-            <URL value="@../css/mainForm.css" />
-        </stylesheets>
-    </SplitPane>
+              </VBox>
+              <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
+              <VBox id="VBox" alignment="CENTER" spacing="1.0">
+                <children>
+                  <Button id="glossaryBtn" fx:id="btnGlossary" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Glossary" />
+                  <Button id="faqBtn" fx:id="btnFaq" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="FAQ" />
+                </children>
+              </VBox>
+              <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
+              <Button id="logOut" fx:id="btnLogout" mnemonicParsing="false" prefHeight="30.0" prefWidth="77.0" text="Log Out" />
+            </children>
+          </VBox>
+          <ImageView id="ADG-Logo3.jpg" fitHeight="75.0" fitWidth="150.0" preserveRatio="true" AnchorPane.bottomAnchor="-9.0">
+            <image>
+              <Image url="@images/ADG-Logo3.jpg" preserveRatio="true" smooth="true" />
+            </image>
+          </ImageView>
+        </children>
+      </AnchorPane>
+      <AnchorPane id="disBrwCourseArea" minHeight="0.0" minWidth="0.0" prefHeight="308.0" prefWidth="456.9999000000025">
+        <children>
+          <AnchorPane id="AnchorPane" prefWidth="454.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+          <AnchorPane fx:id="disBrwCourseArea" prefHeight="464.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.5" AnchorPane.rightAnchor="-0.5" AnchorPane.topAnchor="44.0">
+            <children>
+              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="281.0" layoutY="224.0" text="Displaying area" />
+            </children>
+          </AnchorPane>
+          <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="642.0">
+            <children>
+              <HBox id="HBox" alignment="CENTER" layoutY="10.0" spacing="5.0" AnchorPane.rightAnchor="6.0">
+                <children>
+                  <Label fx:id="lblSearch" text="Search:" HBox.hgrow="NEVER" />
+                  <TextField prefWidth="131.0" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="btnGo" mnemonicParsing="false" text="Go" HBox.hgrow="NEVER" />
+                </children>
+                <padding>
+                  <Insets bottom="1.0" top="1.0" />
+                </padding>
+              </HBox>
+              <HBox id="HBox" alignment="CENTER" layoutX="14.0" layoutY="11.0">
+                <children>
+                  <Hyperlink id="homeLk" fx:id="hplHome" text="Home:" />
+                  <Hyperlink id="browseCourseLk" fx:id="hplBrowseCourse" text="Browse Course:" visible="false" />
+                  <Hyperlink id="deptLk" fx:id="hplDept" visible="false" />
+                  <Hyperlink id="courseLk" fx:id="hplCourse" visible="false" />
+                </children>
+              </HBox>
+            </children>
+          </AnchorPane>
+        </children>
+      </AnchorPane>
+    </items>
+    <stylesheets>
+      <URL value="@../css/mainForm.css" />
+    </stylesheets>
+  </SplitPane>
 </AnchorPane>
