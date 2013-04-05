@@ -89,7 +89,7 @@ public class MessageController implements Initializable
     {
         colSubject.setCellValueFactory(new PropertyValueFactory<Message, String>("subject"));
         colDate.setCellValueFactory(new PropertyValueFactory<Message, Date>("dateTime"));
-        colSender.setCellValueFactory(new PropertyValueFactory<Message, String>("senderId"));
+        colSender.setCellValueFactory(new PropertyValueFactory<Message, String>("senderName"));
         tblMessages.getItems().setAll(messages);
     }
 }

@@ -143,6 +143,11 @@ public class Message implements Serializable
         return (Message) RedEntityManager.getEntityManager().createNamedQuery("Message.findByMessageId").setParameter("messageId", messageId).getSingleResult();
     }
 
+    public String getSenderName()
+    {
+        return (senderId.getLastName() + ", " + senderId.getFirstName());
+    }
+
     @Override
     public int hashCode()
     {
