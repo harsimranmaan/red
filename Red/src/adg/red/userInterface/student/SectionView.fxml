@@ -39,33 +39,39 @@
           <children>
             <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
               <children>
-                <Label text="Credit:" />
+                <Label id="lblCredit" fx:id="lblCreditName" text="Credit:" />
                 <Label fx:id="creditLbl" text="3" />
               </children>
             </HBox>
             <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
               <children>
-                <Label text="Grading Scheme:" />
+                <Label fx:id="lblGrading" text="Grading Scheme:" />
                 <Label fx:id="gradingSchmLbl" text="Label" />
               </children>
             </HBox>
             <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
               <children>
-                <Label text="Passing Requirement:" />
+                <Label fx:id="lblPassReq" text="Passing Requirement:" />
                 <Label fx:id="passRqLbl" text="Label" />
               </children>
             </HBox>
             <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
               <children>
-                <Label text="Term:" />
+                <Label fx:id="lblTerm" text="Term:" />
                 <Label id="creditLbl" fx:id="lblSession" text="Label" />
                 <Label id="creditLbl" fx:id="lblTermYear" text="Label" />
               </children>
             </HBox>
             <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
               <children>
-                <Label text="Start Date:" />
+                <Label id="lblStartdate" fx:id="lblStart" text="Start Date:" />
                 <Label id="passRqLbl" fx:id="lblStartDate" text="Label" />
+              </children>
+            </HBox>
+            <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+              <children>
+                <Label fx:id="lblEnd" text="End Date:" />
+                <Label id="passRqLbl" fx:id="lblEndDate" text="Label" />
               </children>
             </HBox>
           </children>
@@ -74,13 +80,13 @@
           <children>
             <VBox id="VBox" alignment="CENTER" spacing="5.0">
               <children>
-                <Label id="lblPrereq" text="Outstanding Prerequisite Course" />
+                <Label id="lblPrereq" fx:id="lblOutPrereq" text="Outstanding Prerequisite Course" />
                 <ListView id="lsvPrereq" fx:id="lsvOutstandPrereq" prefHeight="110.0" prefWidth="100.0" />
               </children>
             </VBox>
             <VBox id="VBox" alignment="CENTER" spacing="5.0">
               <children>
-                <Label id="lblCoReq" text="Outstanding Co-requisite Course" />
+                <Label id="lblCoReq" fx:id="lblOutCoReq" text="Outstanding Co-requisite Course" />
                 <ListView id="lsvCoReq" fx:id="lsvOutstandCoReq" prefHeight="110.0" prefWidth="100.0" />
               </children>
             </VBox>

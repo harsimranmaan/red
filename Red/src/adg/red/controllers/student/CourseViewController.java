@@ -10,6 +10,7 @@ import adg.red.utils.ViewLoader;
 import adg.red.models.Course;
 import adg.red.models.Prerequisite;
 import adg.red.models.Section;
+import adg.red.utils.LocaleManager;
 import java.net.URL;
 import java.util.Date;
 import java.util.Iterator;
@@ -52,15 +53,21 @@ public class CourseViewController implements Initializable
     @FXML
     private Label lblDeptIdAndCourseNo;
     @FXML
+    private Label lblCreditName;
+    @FXML
+    private Label lblPrereq;
+    @FXML
+    private Label lblCoReq;
+    @FXML
     private TableView<Section> tabCourse;
     @FXML
-    private TableColumn<Section, Date> colEndDate;
+    private TableColumn<Section, String> colEndDate;
     @FXML
     private TableColumn<Section, String> instructorColmn;
     @FXML
     private TableColumn<Section, Integer> secColmn;
     @FXML
-    private TableColumn<Section, Date> startDateColmn;
+    private TableColumn<Section, String> startDateColmn;
     @FXML
     private TableColumn<Section, String> typeColmn;
     @FXML
@@ -79,6 +86,7 @@ public class CourseViewController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
+        initializeComponentsByLocale();
 
         lblCredit.setText(Integer.toString(Context.getInstance().getSelectedCourse().getCredits()));
         txtCourseDescription.setText(Context.getInstance().getSelectedCourse().getDescription());
@@ -232,12 +240,25 @@ public class CourseViewController implements Initializable
     private void populate(List<Section> sections)
     {
         secColmn.setCellValueFactory(new PropertyValueFactory<Section, Integer>("sectionId"));
-        colEndDate.setCellValueFactory(new PropertyValueFactory<Section, Date>("endDate"));
-        startDateColmn.setCellValueFactory(new PropertyValueFactory<Section, Date>("startDate"));
+        colEndDate.setCellValueFactory(new PropertyValueFactory<Section, String>("formattedEndDate"));
+        startDateColmn.setCellValueFactory(new PropertyValueFactory<Section, String>("formattedStartDate"));
         typeColmn.setCellValueFactory(new PropertyValueFactory<Section, String>("sectionTypeName"));
         instructorColmn.setCellValueFactory(new PropertyValueFactory<Section, String>("facultyMemberName"));
         colTa.setCellValueFactory(new PropertyValueFactory<Section, String>("teachingAssistant"));
         tabCourse.getItems().setAll(sections);
 
+    }
+
+    private void initializeComponentsByLocale()
+    {
+        lblCreditName.setText(LocaleManager.get(42));
+        lblPrereq.setText(LocaleManager.get(43));
+        lblCoReq.setText(LocaleManager.get(44));
+        secColmn.setText(LocaleManager.get(39));
+        colEndDate.setText(LocaleManager.get(45));
+        startDateColmn.setText(LocaleManager.get(46));
+        typeColmn.setText(LocaleManager.get(47));
+        instructorColmn.setText(LocaleManager.get(48));
+        colTa.setText(LocaleManager.get(49));
     }
 }

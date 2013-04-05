@@ -4,6 +4,7 @@
  */
 package adg.red.models;
 
+import adg.red.utils.DateFormatter;
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 import java.util.Date;
@@ -124,6 +125,16 @@ public class Section implements Serializable
     public Date getStartDate()
     {
         return startDate;
+    }
+
+    public String getFormattedEndDate()
+    {
+        return DateFormatter.formatDate(this.endDate);
+    }
+
+    public String getFormattedStartDate()
+    {
+        return DateFormatter.formatDate(this.startDate);
     }
 
     public void setStartDate(Date startDate)
