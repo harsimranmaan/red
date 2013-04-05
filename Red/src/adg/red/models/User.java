@@ -51,6 +51,10 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class User implements Serializable
 {
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "username")
+    private FacultyMember facultyMember;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "username")
+    private Administrator administrator;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -86,14 +90,6 @@ public class User implements Serializable
     @JoinColumn(name = "userTypeId", referencedColumnName = "userTypeId")
     @ManyToOne(optional = false)
     private UserType userTypeId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
-    private Collection<FacultyMember> facultyMemberCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "senderId")
-    private Collection<Message> messageCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
-    private Collection<Administrator> administratorCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Collection<MessageReceiver> messageReceiverCollection;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "username")
     private Student student;
 
@@ -222,50 +218,6 @@ public class User implements Serializable
         this.userTypeId = userTypeId;
     }
 
-    @XmlTransient
-    public Collection<FacultyMember> getFacultyMemberCollection()
-    {
-        return facultyMemberCollection;
-    }
-
-    public void setFacultyMemberCollection(Collection<FacultyMember> facultyMemberCollection)
-    {
-        this.facultyMemberCollection = facultyMemberCollection;
-    }
-
-    @XmlTransient
-    public Collection<Message> getMessageCollection()
-    {
-        return messageCollection;
-    }
-
-    public void setMessageCollection(Collection<Message> messageCollection)
-    {
-        this.messageCollection = messageCollection;
-    }
-
-    @XmlTransient
-    public Collection<Administrator> getAdministratorCollection()
-    {
-        return administratorCollection;
-    }
-
-    public void setAdministratorCollection(Collection<Administrator> administratorCollection)
-    {
-        this.administratorCollection = administratorCollection;
-    }
-
-    @XmlTransient
-    public Collection<MessageReceiver> getMessageReceiverCollection()
-    {
-        return messageReceiverCollection;
-    }
-
-    public void setMessageReceiverCollection(Collection<MessageReceiver> messageReceiverCollection)
-    {
-        this.messageReceiverCollection = messageReceiverCollection;
-    }
-
     public Student getStudent()
     {
         return student;
@@ -345,5 +297,21 @@ public class User implements Serializable
         {
             throw new Exception(LocaleManager.get(5));
         }
+    }
+
+    public FacultyMember getFacultyMember() {
+        return facultyMember;
+    }
+
+    public void setFacultyMember(FacultyMember facultyMember) {
+        this.facultyMember = facultyMember;
+    }
+
+    public Administrator getAdministrator() {
+        return administrator;
+    }
+
+    public void setAdministrator(Administrator administrator) {
+        this.administrator = administrator;
     }
 }

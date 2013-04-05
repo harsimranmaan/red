@@ -106,7 +106,7 @@ public class HomeViewController implements Initializable
                 try
                 {
                     ViewLoader view = new ViewLoader(disBrwCourseArea);
-                    view.loadView("BrowseCourse");
+                    view.loadView("student/BrowseCourse");
                     hplBrowseCourse.setVisible(true);
                     hplBrowseCourse.setText(LocaleManager.get(7) + ":");
                     hplDept.setVisible(false);
@@ -152,7 +152,7 @@ public class HomeViewController implements Initializable
                 try
                 {
                     ViewLoader view = new ViewLoader(disBrwCourseArea);
-                    view.loadView("UserProfile");
+                    view.loadView("student/UserProfile");
                     hplBrowseCourse.setVisible(true);
                     hplBrowseCourse.setText(LocaleManager.get(15));
                     hplDept.setVisible(false);
@@ -218,7 +218,7 @@ public class HomeViewController implements Initializable
                     if (((Hyperlink) event.getSource()).getText().contains("Browse"))
                     {
                         ViewLoader view = new ViewLoader(disBrwCourseArea);
-                        view.loadView("BrowseCourse");
+                        view.loadView("student/BrowseCourse");
                         hplDept.setVisible(false);
                         hplCourse.setVisible(false);
                         hplDept.setVisited(false);
@@ -247,7 +247,7 @@ public class HomeViewController implements Initializable
                 try
                 {
                     ViewLoader view = new ViewLoader(disBrwCourseArea);
-                    view.loadView("CourseListView");
+                    view.loadView("student/CourseListView");
                     hplCourse.setVisible(false);
                     hplDept.setVisited(false);
                 }
@@ -267,7 +267,7 @@ public class HomeViewController implements Initializable
                 try
                 {
                     ViewLoader view = new ViewLoader(disBrwCourseArea);
-                    view.loadView("CourseView");
+                    view.loadView("student/CourseView");
                     hplCourse.setVisited(false);
                 }
                 catch (Exception ex)

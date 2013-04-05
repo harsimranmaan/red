@@ -32,6 +32,8 @@
     <class>adg.red.models.MessageReceiver</class>
     <class>adg.red.models.WeekDay</class>
     <class>adg.red.models.Prerequisite</class>
+    <class>adg.red.models.Result</class>
+    <class>adg.red.models.Grade</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://ec2-50-18-66-213.us-west-1.compute.amazonaws.com:3306/AdgDevelopment?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value="red"/>

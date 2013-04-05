@@ -6,6 +6,7 @@
 *.jar
 *.war
 *.ear
+*.bak
 *~
 .DS_Store
 /Red/nbproject/private/

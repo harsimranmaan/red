@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package adg.red.controllers;
+package adg.red.controllers.student;
 
 import adg.red.models.Enrolment;
 import adg.red.models.EnrolmentPK;
@@ -87,7 +87,7 @@ public class SectionViewController implements Initializable
                     section.getCourse().getCoursePK().getDepartmentId(),
                     section.getTerm().getTermPK().getTermYear(),
                     section.getTerm().getTermPK().getSessionId(),
-                    Context.getInstance().getSelectedSection().getSectionType().getSectionTypeId());
+                    section.getSectionType().getSectionTypeId());
 
             if (checkUserAlreadyEnrolled(enrolmentPk))
             {
@@ -176,7 +176,6 @@ public class SectionViewController implements Initializable
 
     private void populateList()
     {
-
         dateLv.setItems(null);
     }
 }
