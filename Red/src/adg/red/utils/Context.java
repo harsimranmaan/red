@@ -4,7 +4,6 @@
  */
 package adg.red.utils;
 
-import adg.red.controllers.student.HomeViewController;
 import adg.red.models.Course;
 import adg.red.models.Department;
 import adg.red.models.Section;

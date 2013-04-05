@@ -113,6 +113,7 @@ public class HomeViewController implements Initializable
 
 
 
+
 //        // setOnAction when home link is clicked
         hplHome.setOnAction(new EventHandler<ActionEvent>()
         {
@@ -211,7 +212,6 @@ public class HomeViewController implements Initializable
         btnViewTimetable.setText(LocaleManager.get(18));
         btnViewEnrolment.setText(LocaleManager.get(19));
         btnViewDegreeInfo.setText(LocaleManager.get(20));
-
         hplHome.setText(LocaleManager.get(24) + ":");
         lblSearch.setText(LocaleManager.get(25) + ":");
         btnGo.setText(LocaleManager.get(26));

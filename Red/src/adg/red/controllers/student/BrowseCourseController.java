@@ -62,14 +62,12 @@ public class BrowseCourseController implements Initializable
             {
                 try
                 {
-
                     if (tabDisplayDepartment.getSelectionModel().getSelectedItem() != null)
                     {
                         Context.getInstance().setSelectedDepartment(tabDisplayDepartment.getSelectionModel().getSelectedItem());
                         ViewLoader view = new ViewLoader(disView);
                         view.loadView("student/CourseListView");
                     }
-
                 }
                 catch (Exception ex)
                 {
