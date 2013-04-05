@@ -47,7 +47,7 @@
           </VBox>
           <ImageView id="ADG-Logo3.jpg" fitHeight="75.0" fitWidth="150.0" preserveRatio="true" AnchorPane.bottomAnchor="-9.0">
             <image>
-              <Image url="@images/ADG-Logo3.jpg" preserveRatio="true" smooth="true" />
+              <Image url="@../images/ADG-Logo3.jpg" preserveRatio="true" smooth="true" />
             </image>
           </ImageView>
         </children>
