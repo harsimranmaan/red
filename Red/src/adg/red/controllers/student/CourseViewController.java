@@ -4,7 +4,6 @@
  */
 package adg.red.controllers.student;
 
-import adg.red.controllers.HomeViewController;
 import adg.red.models.CoRequisite;
 import adg.red.utils.Context;
 import adg.red.utils.ViewLoader;

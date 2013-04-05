@@ -85,7 +85,7 @@ public class LoginController implements Initializable
                     User user = User.login(uid, pwd);
                     Context.getInstance().setCurrentUser(user);
                     ViewLoader view = new ViewLoader((AnchorPane) loginViewArea.getParent());
-                    view.loadView("HomeView");
+                    view.loadView(user.getUserTypeId().getName().toLowerCase() + "/HomeView");
                 }
                 catch (Exception ex)
                 {
