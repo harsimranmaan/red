@@ -62,9 +62,12 @@ public class CourseListViewController implements Initializable
                 {
                     //int key = disTable.getSelectionModel().getSelectedItem().
                     // Context.getInstance().setUserSelectCourseNumer(key);
-                    Context.getInstance().setSelectedCourse(disTable.getSelectionModel().getSelectedItem());
-                    ViewLoader view = new ViewLoader(disView);
-                    view.loadView("student/CourseView");
+                    if (disTable.getSelectionModel().getSelectedItem() != null)
+                    {
+                        Context.getInstance().setSelectedCourse(disTable.getSelectionModel().getSelectedItem());
+                        ViewLoader view = new ViewLoader(disView);
+                        view.loadView("student/CourseView");
+                    }
 
                 }
                 catch (Exception ex)
