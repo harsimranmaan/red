@@ -29,22 +29,22 @@ import javafx.scene.control.TextField;
 public class LoginController implements Initializable
 {
 
-    @FXML //  fx:id="loginBtn"
-    private Button btnLogin; // Value injected by FXMLLoader
-    @FXML //  fx:id="viewArea"
-    private AnchorPane loginViewArea; // Value injected by FXMLLoader
-    @FXML //  fx:id="loginErrLbl"
-    private Label loginErrLbl; // Value injected by FXMLLoader
-    @FXML //  fx:id="forgotPassBtn"
-    private Button btnExit; // Value injected by FXMLLoader
+    @FXML 
+    private Button btnLogin; 
+    @FXML 
+    private AnchorPane loginViewArea; 
+    @FXML 
+    private Label loginErrLbl; 
+    @FXML 
+    private Button btnExit; 
     @FXML
     private TextField usernameTxt; // created by J. Yu
     @FXML
     private PasswordField passwordTxt; // created by J. Yu
-    @FXML //  fx:id="passLbl"
-    private Label passLbl; // Value injected by FXMLLoader
-    @FXML //  fx:id="userLbl"
-    private Label userLbl; // Value injected by FXMLLoader
+    @FXML 
+    private Label passLbl; 
+    @FXML 
+    private Label userLbl; 
     @FXML
     private Hyperlink hpForgotPassword;
 

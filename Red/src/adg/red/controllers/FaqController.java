@@ -26,10 +26,10 @@ import javafx.scene.control.TextArea;
  */
 public class FaqController implements Initializable {
 
-    @FXML //  fx:id="accordion"
-    private Accordion accordion; // Value injected by FXMLLoader
+    @FXML 
+    private Accordion accordion; 
     
-    private ListView<Text> faqLv; // Value injected by FXMLLoader
+    private ListView<Text> faqLv; 
     
     /**
      * Initializes the controller class.

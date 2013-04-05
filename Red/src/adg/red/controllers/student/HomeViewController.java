@@ -28,42 +28,40 @@ import javafx.scene.layout.AnchorPane;
 public class HomeViewController implements Initializable
 {
 
-    @FXML //  fx:id="btnBrowseCourse"
-    private Button btnBrowseCourse; // Value injected by FXMLLoader
-    @FXML //  fx:id="btnMessage"
-    private Button btnMessage; // Value injected by FXMLLoader
-    @FXML //  fx:id="btnViewDegreeInfo"
-    private Button btnViewDegreeInfo; // Value injected by FXMLLoader
-    @FXML //  fx:id="btnViewEnrolment"
-    private Button btnViewEnrolment; // Value injected by FXMLLoader
-    @FXML //  fx:id="btnViewTimetable"
-    private Button btnViewTimetable; // Value injected by FXMLLoader
-    @FXML //  fx:id="btnFaq"
-    private Button btnFaq; // Value injected by FXMLLoader
-    @FXML //  fx:id="btnGlossary"
-    private Button btnGlossary; // Value injected by FXMLLoader
-    @FXML //  fx:id="btnGo"
-    private Button btnGo; // Value injected by FXMLLoader
-    @FXML //  fx:id="lblSearch"
-    private Label lblSearch; // Value injected by FXMLLoader
-    @FXML //  fx:id="lblUserType"
-    private Label lblUserType; // Value injected by FXMLLoader
-    @FXML //  fx:id="disBrwCourseArea"
-    private AnchorPane disBrwCourseArea; // Value injected by FXMLLoader
-    @FXML //  fx:id="homeLk"
-    private Hyperlink hplHome; // Value injected by FXMLLoader
-    @FXML //  fx:id="browseCourseLk"
-    private Hyperlink hplBrowseCourse; // Value injected by FXMLLoader
-    @FXML //  fx:id="homeView"
-    private AnchorPane homeView; // Value injected by FXMLLoader
-    @FXML //  fx:id="deptLk"
-    private static Hyperlink hplDept; // Value injected by FXMLLoader
-    @FXML //  fx:id="courseLk"
-    private static Hyperlink hplCourse; // Value injected by FXMLLoader
-    @FXML //fx:id="btnLogout"
-    private Button btnLogout; // Value injected by FXMLoader
-    @FXML //fx:id="userProfileBtn" // added by Jingbo Yu
-    private Button btnUserProfile; // Value injected by FXMLoader
+    @FXML
+    private Button btnBrowseCourse;
+    @FXML
+    private Button btnMessage;
+    @FXML
+    private Button btnViewDegreeInfo;
+    @FXML
+    private Button btnViewEnrolment;
+    @FXML
+    private Button btnViewTimetable;
+    @FXML
+    private Button btnFaq;
+    @FXML
+    private Button btnGlossary;
+    @FXML
+    private Button btnGo;
+    @FXML
+    private Label lblSearch;
+    @FXML
+    private AnchorPane disBrwCourseArea;
+    @FXML
+    private Hyperlink hplHome;
+    @FXML
+    private Hyperlink hplBrowseCourse;
+    @FXML
+    private AnchorPane homeView;
+    @FXML
+    private static Hyperlink hplDept;
+    @FXML
+    private static Hyperlink hplCourse;
+    @FXML
+    private Button btnLogout;
+    @FXML  // added by Jingbo Yu
+    private Button btnUserProfile;
 
     public static Hyperlink getCourseLk()
     {
@@ -330,7 +328,6 @@ public class HomeViewController implements Initializable
         btnGlossary.setText(LocaleManager.get(14));
         btnFaq.setText(LocaleManager.get(16));
         btnLogout.setText(LocaleManager.get(8));
-        lblUserType.setText(LocaleManager.get(23) + ":");
         hplHome.setText(LocaleManager.get(24) + ":");
         lblSearch.setText(LocaleManager.get(25) + ":");
         btnGo.setText(LocaleManager.get(26));
