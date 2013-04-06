@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="464.0" prefWidth="642.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.student.UserProfileController">
+<AnchorPane id="AnchorPane" prefHeight="464.0" prefWidth="642.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.UserProfileController">
     <children>
         <TabPane layoutX="14.0" layoutY="14.0" prefHeight="436.0" prefWidth="614.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -68,6 +68,6 @@
         </TabPane>
     </children>
     <stylesheets>
-        <URL value="@../css/mainForm.css" />
+        <URL value="@css/mainForm.css" />
     </stylesheets>
 </AnchorPane>
