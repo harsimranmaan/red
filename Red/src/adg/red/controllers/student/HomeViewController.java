@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -37,23 +38,19 @@ public class HomeViewController implements Initializable
     @FXML
     private Button btnViewTimetable;
     @FXML
-    private Button btnGo;
-    @FXML
-    private Label lblSearch;
-    @FXML
     private AnchorPane disBrwCourseArea;
     @FXML
     private Hyperlink hplHome;
     @FXML
     private Hyperlink hplBrowseCourse;
     @FXML
-    private AnchorPane homeView;
-    @FXML
     private static Hyperlink hplDept;
     @FXML
     private static Hyperlink hplCourse;
     @FXML
     private AnchorPane commonButtonArea;
+    @FXML
+    private AnchorPane homeView;
 
     public static Hyperlink getCourseLk()
     {
@@ -75,8 +72,6 @@ public class HomeViewController implements Initializable
     {
         HomeViewController.hplDept = deptLk;
     }
-    @FXML
-    private Label menuLk;
 
     /**
      * Initializes the controller class.
@@ -86,6 +81,8 @@ public class HomeViewController implements Initializable
     {
         ViewLoader view = new ViewLoader(commonButtonArea);
         view.loadView("CommonButtons");
+        view = new ViewLoader(Context.getInstance().getSearchView());
+        view.loadView("SearchBox");
         initializeComponentsByLocale();
         Context.getInstance().setDisplayView(disBrwCourseArea);
         // setOnAction when browse course button is pressed
@@ -143,7 +140,7 @@ public class HomeViewController implements Initializable
             {
                 try
                 {
-                    ViewLoader view = new ViewLoader(homeView);
+                    ViewLoader view = new ViewLoader(Context.getInstance().getHomeView());
                     view.loadView("student/HomeView");
                 }
                 catch (Exception ex)
@@ -234,7 +231,6 @@ public class HomeViewController implements Initializable
         btnViewEnrolment.setText(LocaleManager.get(19));
         btnViewDegreeInfo.setText(LocaleManager.get(20));
         hplHome.setText(LocaleManager.get(24) + ":");
-        lblSearch.setText(LocaleManager.get(25) + ":");
-        btnGo.setText(LocaleManager.get(26));
+
     }
 }

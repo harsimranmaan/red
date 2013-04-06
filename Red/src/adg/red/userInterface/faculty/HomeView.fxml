@@ -21,11 +21,10 @@
                             <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
                             <VBox id="VBox" alignment="CENTER" spacing="1.0">
                                 <children>
-                                    <Button id="" fx:id="btnBrowseCourse" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Browse Course" />
-                                    <Button fx:id="btnManageCourse" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Manage Course" />
-                                    <Button fx:id="btnViewTimetable" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="View Timetable" />
-                                    <Button fx:id="btnViewEnrolment" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="View Enrolment" />
-                                    <Button fx:id="btnViewDegreeInfo" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="View Degree Info" />
+                                    <Button id="" fx:id="btnUpdateScores" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" onAction="#uploadScore"  text="Upload Score" />
+                                    <Button fx:id="btnSpecialApproval" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" onAction="#specialRequest" text="Special Approval" />
+                                    <Button fx:id="btnViewTimetable" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" onAction="#viewTimeTable" text="View Timetable" />
+                                    <Button fx:id="btnReports" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" onAction="#generateReport" text="Generate Reports" />
                                 </children>
                             </VBox>
                             <AnchorPane fx:id="commonButtonArea"></AnchorPane>
@@ -48,16 +47,7 @@
                     </AnchorPane>
                     <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="642.0">
                         <children>
-                            <HBox id="HBox" alignment="CENTER" layoutY="10.0" spacing="5.0" AnchorPane.rightAnchor="6.0">
-                                <children>
-                                    <Label fx:id="lblSearch" text="Search:" HBox.hgrow="NEVER" />
-                                    <TextField prefWidth="131.0" HBox.hgrow="ALWAYS" />
-                                    <Button fx:id="btnGo" mnemonicParsing="false" text="Go" HBox.hgrow="NEVER" />
-                                </children>
-                                <padding>
-                                    <Insets bottom="1.0" top="1.0" />
-                                </padding>
-                            </HBox>
+                           
                             <HBox id="HBox" alignment="CENTER" layoutX="14.0" layoutY="11.0">
                                 <children>
                                     <Hyperlink id="homeLk" fx:id="hplHome" text="Home:" />

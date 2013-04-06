@@ -9,15 +9,11 @@ import adg.red.utils.LocaleManager;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -29,19 +25,7 @@ public class HomeViewController implements Initializable
 {
 
     @FXML
-    private Button btnBrowseCourse;
-    @FXML
-    private Button btnManageCourse;
-    @FXML
-    private Button btnViewDegreeInfo;
-    @FXML
-    private Button btnViewEnrolment;
-    @FXML
     private Button btnViewTimetable;
-    @FXML
-    private Button btnGo;
-    @FXML
-    private Label lblSearch;
     @FXML
     private AnchorPane disBrwCourseArea;
     @FXML
@@ -56,6 +40,12 @@ public class HomeViewController implements Initializable
     private static Hyperlink hplCourse;
     @FXML
     private AnchorPane commonButtonArea;
+    @FXML
+    private Button btnUpdateScores;
+    @FXML
+    private Button btnSpecialApproval;
+    @FXML
+    private Button btnReports;
 
     public static Hyperlink getCourseLk()
     {
@@ -77,8 +67,26 @@ public class HomeViewController implements Initializable
     {
         HomeViewController.hplDept = deptLk;
     }
+
     @FXML
-    private Label menuLk;
+    private void uploadScore(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void specialRequest(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void viewTimeTable(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void generateReport(ActionEvent event)
+    {
+    }
 
     /**
      * Initializes the controller class.
@@ -88,132 +96,19 @@ public class HomeViewController implements Initializable
     {
         ViewLoader view = new ViewLoader(commonButtonArea);
         view.loadView("CommonButtons");
+        view = new ViewLoader(Context.getInstance().getSearchView());
+        view.loadView("SearchBox");
         initializeComponentsByLocale();
         Context.getInstance().setDisplayView(disBrwCourseArea);
-        // setOnAction when browse course button is pressed
-        btnBrowseCourse.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent event)
-            {
-                try
-                {
-                    ViewLoader view = new ViewLoader(disBrwCourseArea);
-                    view.loadView("student/BrowseCourse");
-                    hplBrowseCourse.setVisible(true);
-                    hplBrowseCourse.setText(LocaleManager.get(7) + ":");
-                    hplDept.setVisible(false);
-                    hplCourse.setVisible(false);
-                }
-                catch (Exception ex)
-                {
-                    Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-        });
-
-        // setOnAction when home link is clicked
-        hplHome.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent event)
-            {
-                try
-                {
-                    ViewLoader view = new ViewLoader(homeView);
-                    view.loadView("HomeView");
-                }
-                catch (Exception ex)
-                {
-                    Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-
-        // setOnAction when browse course link is clicked
-        hplBrowseCourse.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent event)
-            {
-                try
-                {
-                    if (((Hyperlink) event.getSource()).getText().contains("Browse"))
-                    {
-                        ViewLoader view = new ViewLoader(disBrwCourseArea);
-                        view.loadView("student/BrowseCourse");
-                        hplDept.setVisible(false);
-                        hplCourse.setVisible(false);
-                        hplDept.setVisited(false);
-                        hplCourse.setVisited(false);
-                    }
-                    if (((Hyperlink) event.getSource()).getText().contains("faq"))
-                    {
-                        ViewLoader view = new ViewLoader(disBrwCourseArea);
-                        view.loadView("FaqView");
-                    }
-                    hplBrowseCourse.setVisited(false);
-                }
-                catch (Exception ex)
-                {
-                    Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-
-        // setOnAction when dept link is clicked
-        hplDept.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent event)
-            {
-                try
-                {
-                    ViewLoader view = new ViewLoader(disBrwCourseArea);
-                    view.loadView("student/CourseListView");
-                    hplCourse.setVisible(false);
-                    hplDept.setVisited(false);
-                }
-                catch (Exception ex)
-                {
-                    Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-
-        // setOnAction when course link is clicked
-        hplCourse.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent event)
-            {
-                try
-                {
-                    ViewLoader view = new ViewLoader(disBrwCourseArea);
-                    view.loadView("student/CourseView");
-                    hplCourse.setVisited(false);
-                }
-                catch (Exception ex)
-                {
-                    Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-
-
     }
 
     private void initializeComponentsByLocale()
     {
         // TODO
-        btnBrowseCourse.setText(LocaleManager.get(7));
-        btnManageCourse.setText(LocaleManager.get(17));
+        btnUpdateScores.setText(LocaleManager.get(56));
+        btnSpecialApproval.setText(LocaleManager.get(58));
         btnViewTimetable.setText(LocaleManager.get(18));
-        btnViewEnrolment.setText(LocaleManager.get(19));
-        btnViewDegreeInfo.setText(LocaleManager.get(20));
+        btnReports.setText(LocaleManager.get(57));
         hplHome.setText(LocaleManager.get(24) + ":");
-        lblSearch.setText(LocaleManager.get(25) + ":");
-        btnGo.setText(LocaleManager.get(26));
     }
 }

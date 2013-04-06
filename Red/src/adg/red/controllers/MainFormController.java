@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -35,6 +36,8 @@ public class MainFormController implements Initializable
     private Menu menHelp;
     @FXML
     private MenuItem mniAbout;
+    @FXML
+    private Pane searchPane;
 
     /**
      * Initializes the controller class.
@@ -44,10 +47,12 @@ public class MainFormController implements Initializable
     {
         initializeComponentsByLocale();
         Context.getInstance().setMainView(viewArea);
+        Context.getInstance().setSearchView(searchPane);
         ViewLoader view = new ViewLoader(viewArea);
         view.loadView("Login");
     }
 
+    @FXML
     public void close(ActionEvent event)
     {
         Platform.exit();

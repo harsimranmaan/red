@@ -10,7 +10,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="homeView" prefHeight="510.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.admin.HomeViewController">
+<AnchorPane fx:id="homeView" prefHeight="510.0" prefWidth="800.0"  xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.admin.HomeViewController">
     <SplitPane id="homeView" dividerPositions="0.19172932330827067" focusTraversable="true" prefHeight="510.0" prefWidth="800.0">
         <items>
             <AnchorPane maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="150.0">
@@ -22,11 +22,11 @@
                             <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
                             <VBox id="VBox" alignment="CENTER" spacing="1.0">
                                 <children>
-                                    <Button id="" fx:id="btnDepartments" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Departments" />
-                                    <Button id="btnManageCourse" fx:id="btnPrograms" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Programs" />
-                                    <Button id="btnViewTimetable" fx:id="btnCourses" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Courses" />
-                                    <Button id="btnViewEnrolment" fx:id="btnSections" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Sections" />
-                                    <Button id="btnViewDegreeInfo" fx:id="btnUsers" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Users" />
+                                    <Button id="" fx:id="btnDepartments" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Departments" onAction="#showDepartments"  />
+                                    <Button id="btnManageCourse" fx:id="btnPrograms" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Programs" onAction="#showPrograms" />
+                                    <Button id="btnViewTimetable" fx:id="btnCourses" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Courses" onAction="#showCourses" />
+                                    <Button id="btnViewEnrolment" fx:id="btnSections" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Sections" onAction="#showSections" />
+                                    <Button id="btnViewDegreeInfo" fx:id="btnUsers" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Users" onAction="#showUsers" />
                                 </children>
                             </VBox>
                             <AnchorPane fx:id="commonButtonArea"></AnchorPane>
@@ -42,7 +42,7 @@
             <AnchorPane id="disBrwCourseArea" minHeight="0.0" minWidth="0.0" prefHeight="308.0" prefWidth="456.9999000000025">
                 <children>
                     <AnchorPane id="AnchorPane" prefWidth="454.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                    <AnchorPane fx:id="disBrwCourseArea" prefHeight="464.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.5" AnchorPane.rightAnchor="-0.5" AnchorPane.topAnchor="44.0">
+                    <AnchorPane fx:id="disViewArea" prefHeight="464.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.5" AnchorPane.rightAnchor="-0.5" AnchorPane.topAnchor="44.0">
                         <children>
                             <Text layoutX="281.0" layoutY="224.0" text="Displaying area" />
                         </children>

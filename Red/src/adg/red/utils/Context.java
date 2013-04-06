@@ -40,6 +40,7 @@ public class Context
     private User currentUser;
     private Pane mainView;
     private Pane displayView;
+    private Pane searchView;
 
     public void setCurrentUser(User user)
     {
@@ -109,5 +110,15 @@ public class Context
     public void setMainView(Pane mainView)
     {
         this.mainView = mainView;
+    }
+
+    public Pane getSearchView()
+    {
+        return searchView;
+    }
+
+    public void setSearchView(Pane searchPane)
+    {
+        this.searchView = searchPane;
     }
 }
