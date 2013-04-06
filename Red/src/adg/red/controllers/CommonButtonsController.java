@@ -51,6 +51,7 @@ public class CommonButtonsController implements Initializable
         {
             ViewLoader view = new ViewLoader(Context.getInstance().getHomeView());
             Context.getInstance().setWasLoggedIn(true);
+            Context.getInstance().getSearchView().setVisible(false);
             view.loadView("Login");
         }
         catch (Exception ex)
