@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
         {
     @NamedQuery(name = "MessageReceiver.findAll", query = "SELECT m FROM MessageReceiver m"),
     @NamedQuery(name = "MessageReceiver.findByMessageId", query = "SELECT m FROM MessageReceiver m WHERE m.messageReceiverPK.messageId = :messageId"),
-    @NamedQuery(name = "MessageReceiver.findByReceiverId", query = "SELECT m FROM MessageReceiver m WHERE m.messageReceiverPK.receiverId = :receiverId AND m.statusId.name!='Deleted' ORDER BY m.statusId.statusId DESC, m.message.dateTime DESC"),
+    @NamedQuery(name = "MessageReceiver.findByReceiverId", query = "SELECT m FROM MessageReceiver m WHERE m.messageReceiverPK.receiverId = :receiverId AND m.statusId.name <> 'Delete' ORDER BY m.message.dateTime DESC"),
     @NamedQuery(name = "MessageReceiver.findByModifiedAt", query = "SELECT m FROM MessageReceiver m WHERE m.modifiedAt = :modifiedAt")
 })
 public class MessageReceiver implements Serializable
