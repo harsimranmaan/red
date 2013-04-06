@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package adg.red.controllers.student;
+package adg.red.controllers;
 
 import adg.red.models.Address;
 import adg.red.models.User;
