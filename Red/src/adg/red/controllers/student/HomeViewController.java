@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -232,6 +233,15 @@ public class HomeViewController implements Initializable
         btnViewEnrolment.setText(LocaleManager.get(19));
         btnViewDegreeInfo.setText(LocaleManager.get(20));
         hplHome.setText(LocaleManager.get(24) + ":");
+
+        Platform.runLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                hplHome.requestFocus();
+            }
+        });
 
     }
 }
