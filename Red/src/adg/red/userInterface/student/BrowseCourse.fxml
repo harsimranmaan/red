@@ -45,7 +45,7 @@
                 </HBox>
             </children>
         </AnchorPane>
-        <TableView fx:id="tabDisplayDepartment" prefHeight="424.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+        <TableView fx:id="tabDisplayDepartment" onMouseClicked="#selectDepartment"  prefHeight="424.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
             <columns>
                 <TableColumn minWidth="151.0" prefWidth="151.0" text="Department Id" fx:id="colDeptId" />
                 <TableColumn minWidth="489.0" prefWidth="489.0" text="Department Name" fx:id="colDeptName" />

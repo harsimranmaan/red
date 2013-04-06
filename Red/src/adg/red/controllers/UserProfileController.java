@@ -7,6 +7,7 @@ package adg.red.controllers;
 import adg.red.models.Address;
 import adg.red.models.User;
 import adg.red.utils.Context;
+import adg.red.utils.LocaleManager;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -63,6 +64,8 @@ public class UserProfileController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         currentUser = Context.getInstance().getCurrentUser();
+        Context.getInstance().setTitle(LocaleManager.get(15));
+        BreadCrumbController.renderBreadCrumb("student/HomeView|UserProfile");
         ViewLoader view = new ViewLoader(paneChangePassword);
         view.loadView("ChangePassword");
         showUserProfile();

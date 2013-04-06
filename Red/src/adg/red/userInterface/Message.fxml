@@ -10,12 +10,7 @@
 
 <AnchorPane id="AnchorPane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.MessageController">
     <children>
-        <Label layoutX="13.0" layoutY="5.0" text="Message Centre">
-            <font>
-                <Font name="System Bold" size="18.0" />
-            </font>
-        </Label>
-        <SplitPane dividerPositions="0.3490566037735849" focusTraversable="true" layoutY="38.0" AnchorPane.topAnchor="32.0" orientation="VERTICAL" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"  AnchorPane.bottomAnchor="0">
+        <SplitPane dividerPositions="0.3490566037735849" focusTraversable="true" layoutY="38.0" AnchorPane.topAnchor="20.0" orientation="VERTICAL" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"  AnchorPane.bottomAnchor="0">
             <items>
                 <AnchorPane AnchorPane.leftAnchor="0.0" minHeight="200"  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>

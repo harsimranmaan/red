@@ -8,6 +8,7 @@ import adg.red.models.Course;
 import adg.red.models.Department;
 import adg.red.models.Section;
 import adg.red.models.User;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 /**
@@ -19,8 +20,17 @@ public class Context
 
     private final static Context instance;
     private boolean loggedIn;
-
+    private Label lblTitle;
+    private Course userSelectCourse;
+    private Department userSelectDepartment;
+    private Section userSelectSection;
+    private User currentUser;
+    private Pane mainView;
+    private Pane displayView;
+    private Pane searchView;
+    private Pane breadCrumb;
     //Singleton
+
     private Context()
     {
     }
@@ -34,13 +44,6 @@ public class Context
     {
         return instance;
     }
-    private Course userSelectCourse;
-    private Department userSelectDepartment;
-    private Section userSelectSection;
-    private User currentUser;
-    private Pane mainView;
-    private Pane displayView;
-    private Pane searchView;
 
     public void setCurrentUser(User user)
     {
@@ -80,6 +83,8 @@ public class Context
     public void setSelectedCourse(Course userSelectCourse)
     {
         this.userSelectCourse = userSelectCourse;
+        // also update the deparment
+        this.userSelectDepartment = userSelectCourse.getDepartment();
     }
 
     public void setWasLoggedIn(boolean loggedIn)
@@ -120,5 +125,25 @@ public class Context
     public void setSearchView(Pane searchPane)
     {
         this.searchView = searchPane;
+    }
+
+    public void setBreadCrumb(Pane breadCrumbArea)
+    {
+        this.breadCrumb = breadCrumbArea;
+    }
+
+    public Pane getBreadCrumb()
+    {
+        return this.breadCrumb;
+    }
+
+    public void setTitleLabel(Label lblTitle)
+    {
+        this.lblTitle = lblTitle;
+    }
+
+    public void setTitle(String title)
+    {
+        this.lblTitle.setText(title);
     }
 }

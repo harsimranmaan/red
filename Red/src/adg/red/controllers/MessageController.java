@@ -8,6 +8,7 @@ import adg.red.models.Message;
 import adg.red.models.MessageReceiver;
 import adg.red.models.MessageStatus;
 import adg.red.models.User;
+import adg.red.utils.Context;
 import adg.red.utils.LocaleManager;
 import java.net.URL;
 import java.util.ArrayList;
@@ -25,7 +26,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -104,6 +104,8 @@ public class MessageController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        Context.getInstance().setTitle(LocaleManager.get(22));
+        BreadCrumbController.renderBreadCrumb("student/HomeView|Message");
         List<MessageStatus> statusList = MessageStatus.getAll();
         List<MenuItem> menuItems = new ArrayList<>();
         for (MessageStatus status : statusList)

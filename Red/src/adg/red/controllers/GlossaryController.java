@@ -6,6 +6,8 @@
 package adg.red.controllers;
 
 import adg.red.models.Glossary;
+import adg.red.utils.Context;
+import adg.red.utils.LocaleManager;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
@@ -42,7 +44,8 @@ public class GlossaryController implements Initializable
     {
         // TODO
         populateGlossary("All");
-
+        Context.getInstance().setTitle(LocaleManager.get(14));
+        BreadCrumbController.renderBreadCrumb("student/HomeView|Glossary");
         Iterator<Node> nodes = alphabetHbox.getChildren().iterator();
         while (nodes.hasNext())
         {

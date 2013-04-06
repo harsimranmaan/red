@@ -4,6 +4,7 @@
  */
 package adg.red.controllers.student;
 
+import adg.red.controllers.BreadCrumbController;
 import adg.red.models.CoRequisite;
 import adg.red.utils.Context;
 import adg.red.utils.ViewLoader;
@@ -12,12 +13,8 @@ import adg.red.models.Prerequisite;
 import adg.red.models.Section;
 import adg.red.utils.LocaleManager;
 import java.net.URL;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -28,7 +25,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
 /**
@@ -71,8 +67,45 @@ public class CourseViewController implements Initializable
     private ListView<CoRequisite> lsvCoReq;
     @FXML
     private ListView<Prerequisite> lsvPrereq;
+
     @FXML
-    private AnchorPane disView;
+    private void selectSection(MouseEvent event)
+    {
+        if (tabCourse.getSelectionModel().getSelectedItem() != null)
+        {
+            Context.getInstance().setSelectedSection(tabCourse.getSelectionModel().getSelectedItem());
+            ViewLoader view = new ViewLoader(Context.getInstance().getDisplayView());
+            view.loadView("student/SectionView");
+        }
+    }
+
+    @FXML
+    private void showPreq(MouseEvent event)
+    {
+        if (lsvPrereq.getSelectionModel().getSelectedItem() != null)
+        {
+            Course course = lsvPrereq.getSelectionModel().getSelectedItem().getCourse();
+            selectCourse(course);
+        }
+    }
+
+    @FXML
+    private void showCoReq(MouseEvent event)
+    {
+
+        if (lsvCoReq.getSelectionModel().getSelectedItem() != null)
+        {
+            Course course = lsvCoReq.getSelectionModel().getSelectedItem().getCourse1();
+            selectCourse(course);
+        }
+    }
+
+    private void selectCourse(Course course)
+    {
+        Context.getInstance().setSelectedCourse(course);
+        ViewLoader view = new ViewLoader(Context.getInstance().getDisplayView());
+        view.loadView("student/CourseView");
+    }
 
     /**
      * Initializes the controller class.
@@ -80,92 +113,17 @@ public class CourseViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        Context.getInstance().setTitle(LocaleManager.get(61));
+        BreadCrumbController.renderBreadCrumb("student/HomeView|student/BrowseCourse|student/CourseListView|student/CourseView");
         initializeComponentsByLocale();
 
         lblCredit.setText(Integer.toString(Context.getInstance().getSelectedCourse().getCredits()));
         txtCourseDescription.setText(Context.getInstance().getSelectedCourse().getDescription());
         lblCourseName.setText(Context.getInstance().getSelectedCourse().getName());
         lblDeptIdAndCourseNo.setText(Context.getInstance().getSelectedCourse().getDepartmentIdAndCourseNumber());
-        HomeViewController.getDeptLk().setText(Context.getInstance().getSelectedDepartment().getDepartmentId() + ":");
-        HomeViewController.getCourseLk().setText(Integer.toString(Context.getInstance().getSelectedCourse().getCoursePK().getCourseNumber()) + ":");
-        HomeViewController.getCourseLk().setVisible(true);
         populatePrereqListView(Context.getInstance().getSelectedCourse());
         populateCoreqListView(Context.getInstance().getSelectedCourse());
         populateSectionTable(Context.getInstance().getSelectedCourse());
-
-
-        // action when user clicked on the table
-        tabCourse.setOnMousePressed(new EventHandler<MouseEvent>()
-        {
-            @Override
-            public void handle(MouseEvent event)
-            {
-                try
-                {
-                    //handle no records click
-                    if (tabCourse.getSelectionModel().getSelectedItem() != null)
-                    {
-                        Context.getInstance().setSelectedSection(tabCourse.getSelectionModel().getSelectedItem());
-
-                        ViewLoader view = new ViewLoader(disView);
-                        view.loadView("student/SectionView");
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    Logger.getLogger(CourseViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-
-        // action when user clicked on coreq list view
-        lsvCoReq.setOnMousePressed(new EventHandler<MouseEvent>()
-        {
-            @Override
-            public void handle(MouseEvent event)
-            {
-                try
-                {
-                    //handle no records click
-                    if (lsvCoReq.getSelectionModel().getSelectedItem() != null)
-                    {
-                        Context.getInstance().setSelectedCourse(lsvCoReq.getSelectionModel().getSelectedItem().getCourse1());
-                        Context.getInstance().setSelectedDepartment(lsvCoReq.getSelectionModel().getSelectedItem().getCourse1().getDepartment());
-                        ViewLoader view = new ViewLoader(disView);
-                        view.loadView("student/CourseView");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logger.getLogger(CourseViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        // action when user clicked on prereq list view
-        lsvPrereq.setOnMousePressed(new EventHandler<MouseEvent>()
-        {
-            @Override
-            public void handle(MouseEvent event)
-            {
-                try
-                {
-                    //handle no records click
-                    if (lsvPrereq.getSelectionModel().getSelectedItem() != null)
-                    {
-                        Context.getInstance().setSelectedCourse(lsvPrereq.getSelectionModel().getSelectedItem().getCourse());
-                        Context.getInstance().setSelectedDepartment(lsvPrereq.getSelectionModel().getSelectedItem().getCourse().getDepartment());
-                        ViewLoader view = new ViewLoader(disView);
-                        view.loadView("student/CourseView");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logger.getLogger(CourseViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
     }
 
     public void populatePrereqListView(Course selectedCourse)
@@ -246,6 +204,7 @@ public class CourseViewController implements Initializable
 
     private void initializeComponentsByLocale()
     {
+
         lblCreditName.setText(LocaleManager.get(42));
         lblPrereq.setText(LocaleManager.get(43));
         lblCoReq.setText(LocaleManager.get(44));
