@@ -22,6 +22,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -43,12 +44,12 @@ public class MessageController implements Initializable
     @FXML
     private TableColumn<MessageReceiver, String> colStatus;
     @FXML
-    private Text txtMessageBody;
+    private TextArea txtMessageBody;
     @FXML
     private TableView<MessageReceiver> tblMessages;
     private User currentUser;
     @FXML
-    private Text txtSubject;
+    private TextArea txtSubject;
     @FXML
     private SplitMenuButton btnMessageAction;
 
