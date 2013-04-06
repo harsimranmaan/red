@@ -38,6 +38,19 @@ public class DateFormatter
         }
     }
 
+    public static String formatTime(Date date)
+    {
+        if (date != null)
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            return sdf.format(date);
+        }
+        else
+        {
+            return "";
+        }
+    }
+
     public static String formatDateTime(Date date)
     {
         if (date != null)
