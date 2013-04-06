@@ -83,6 +83,7 @@ public class HomeViewController implements Initializable
         view.loadView("CommonButtons");
         view = new ViewLoader(Context.getInstance().getSearchView());
         view.loadView("SearchBox");
+        Context.getInstance().getSearchView().setVisible(true);
         initializeComponentsByLocale();
         Context.getInstance().setDisplayView(disBrwCourseArea);
         // setOnAction when browse course button is pressed
