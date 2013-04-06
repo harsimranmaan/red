@@ -4,8 +4,10 @@
  */
 package adg.red.models;
 
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -26,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "SectionTimeTable")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "SectionTimeTable.findAll", query = "SELECT s FROM SectionTimeTable s"),
     @NamedQuery(name = "SectionTimeTable.findBySectionId", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.sectionId = :sectionId"),
     @NamedQuery(name = "SectionTimeTable.findByCourseNumber", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.courseNumber = :courseNumber"),
@@ -36,10 +38,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "SectionTimeTable.findBySectionTypeId", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.sectionTypeId = :sectionTypeId"),
     @NamedQuery(name = "SectionTimeTable.findByDayId", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.dayId = :dayId"),
     @NamedQuery(name = "SectionTimeTable.findByStartTime", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.startTime = :startTime"),
-    @NamedQuery(name = "SectionTimeTable.findByLengthInMinutes", query = "SELECT s FROM SectionTimeTable s WHERE s.lengthInMinutes = :lengthInMinutes")
+    @NamedQuery(name = "SectionTimeTable.findByLengthInMinutes", query = "SELECT s FROM SectionTimeTable s WHERE s.lengthInMinutes = :lengthInMinutes"),
+    @NamedQuery(name = "SectionTimeTable.findBySecionPK", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.sectionId = :sectionId AND s.sectionTimeTablePK.courseNumber = :courseNumber AND s.sectionTimeTablePK.departmentId = :departmentId AND s.sectionTimeTablePK.termYear = :termYear AND s.sectionTimeTablePK.sessionId = :sessionId AND s.sectionTimeTablePK.sectionTypeId = :sectionTypeId ORDER BY s.sectionTimeTablePK.dayId ASC")
 })
 public class SectionTimeTable implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected SectionTimeTablePK sectionTimeTablePK;
@@ -50,7 +54,7 @@ public class SectionTimeTable implements Serializable
     @ManyToOne(optional = false)
     private WeekDay weekDay;
     @JoinColumns(
-    {
+            {
         @JoinColumn(name = "sectionId", referencedColumnName = "sectionId", insertable = false, updatable = false),
         @JoinColumn(name = "courseNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false),
         @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false),
@@ -76,7 +80,7 @@ public class SectionTimeTable implements Serializable
         this.lengthInMinutes = lengthInMinutes;
     }
 
-    public SectionTimeTable(int sectionId, int courseNumber, String departmentId, Date termYear, int sessionId, int sectionTypeId, int dayId, Date startTime)
+    public SectionTimeTable(int sectionId, int courseNumber, String departmentId, int termYear, int sessionId, int sectionTypeId, int dayId, Date startTime)
     {
         this.sectionTimeTablePK = new SectionTimeTablePK(sectionId, courseNumber, departmentId, termYear, sessionId, sectionTypeId, dayId, startTime);
     }
@@ -149,5 +153,17 @@ public class SectionTimeTable implements Serializable
     public String toString()
     {
         return "adg.red.models.SectionTimeTable[ sectionTimeTablePK=" + sectionTimeTablePK + " ]";
+    }
+
+    public static List<SectionTimeTable> getBySectionPK(SectionPK sectionPK)
+    {
+        return RedEntityManager.getEntityManager().createNamedQuery("SectionTimeTable.findBySecionPK")
+                .setParameter("sectionId", sectionPK.getSectionId())
+                .setParameter("courseNumber", sectionPK.getCourseNumber())
+                .setParameter("departmentId", sectionPK.getDepartmentId())
+                .setParameter("termYear", sectionPK.getTermYear())
+                .setParameter("sessionId", sectionPK.getSessionId())
+                .setParameter("sectionTypeId", sectionPK.getSectionTypeId())
+                .getResultList();
     }
 }

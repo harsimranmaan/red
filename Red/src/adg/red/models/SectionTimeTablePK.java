@@ -19,6 +19,7 @@ import javax.persistence.TemporalType;
 @Embeddable
 public class SectionTimeTablePK implements Serializable
 {
+
     @Basic(optional = false)
     @Column(name = "sectionId")
     private int sectionId;
@@ -30,8 +31,7 @@ public class SectionTimeTablePK implements Serializable
     private String departmentId;
     @Basic(optional = false)
     @Column(name = "termYear")
-    @Temporal(TemporalType.DATE)
-    private Date termYear;
+    private int termYear;
     @Basic(optional = false)
     @Column(name = "sessionId")
     private int sessionId;
@@ -50,7 +50,7 @@ public class SectionTimeTablePK implements Serializable
     {
     }
 
-    public SectionTimeTablePK(int sectionId, int courseNumber, String departmentId, Date termYear, int sessionId, int sectionTypeId, int dayId, Date startTime)
+    public SectionTimeTablePK(int sectionId, int courseNumber, String departmentId, int termYear, int sessionId, int sectionTypeId, int dayId, Date startTime)
     {
         this.sectionId = sectionId;
         this.courseNumber = courseNumber;
@@ -92,12 +92,12 @@ public class SectionTimeTablePK implements Serializable
         this.departmentId = departmentId;
     }
 
-    public Date getTermYear()
+    public int getTermYear()
     {
         return termYear;
     }
 
-    public void setTermYear(Date termYear)
+    public void setTermYear(int termYear)
     {
         this.termYear = termYear;
     }
@@ -149,7 +149,7 @@ public class SectionTimeTablePK implements Serializable
         hash += (int) sectionId;
         hash += (int) courseNumber;
         hash += (departmentId != null ? departmentId.hashCode() : 0);
-        hash += (termYear != null ? termYear.hashCode() : 0);
+        hash += (int) termYear;
         hash += (int) sessionId;
         hash += (int) sectionTypeId;
         hash += (int) dayId;
@@ -178,7 +178,7 @@ public class SectionTimeTablePK implements Serializable
         {
             return false;
         }
-        if ((this.termYear == null && other.termYear != null) || (this.termYear != null && !this.termYear.equals(other.termYear)))
+        if ((this.termYear != other.termYear))
         {
             return false;
         }

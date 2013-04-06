@@ -111,7 +111,28 @@ public class HomeViewController implements Initializable
             }
         });
 
+        // setOnAction when browse course button is pressed
+        btnViewTimetable.setOnAction(new EventHandler<ActionEvent>()
+        {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                try
+                {
+                    ViewLoader view = new ViewLoader(disBrwCourseArea);
+                    view.loadView("student/TimeTableView");
+                    hplBrowseCourse.setVisible(true);
+                    hplBrowseCourse.setText(LocaleManager.get(7) + ":");
+                    hplDept.setVisible(false);
+                    hplCourse.setVisible(false);
+                }
+                catch (Exception ex)
+                {
+                    Logger.getLogger(HomeViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
+            }
+        });
 
 
 //        // setOnAction when home link is clicked
