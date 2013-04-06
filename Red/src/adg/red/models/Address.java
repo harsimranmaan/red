@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Address")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a"),
     @NamedQuery(name = "Address.findByAddressId", query = "SELECT a FROM Address a WHERE a.addressId = :addressId"),
     @NamedQuery(name = "Address.findByAddressLineFirst", query = "SELECT a FROM Address a WHERE a.addressLineFirst = :addressLineFirst"),
@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 })
 public class Address implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,7 +60,7 @@ public class Address implements Serializable
     @Basic(optional = false)
     @Column(name = "country")
     private String country;
-   
+
     public Address()
     {
     }
@@ -147,7 +148,7 @@ public class Address implements Serializable
     {
         this.country = country;
     }
- 
+
     @Override
     public int hashCode()
     {
@@ -177,7 +178,7 @@ public class Address implements Serializable
     {
         return "adg.red.models.Address[ addressId=" + addressId + " ]";
     }
-    
+
     public void save()
     {
         RedEntityManager.save(this);

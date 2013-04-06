@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="464.0" prefWidth="642.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.GlossaryController">
+<AnchorPane id="AnchorPane"   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.GlossaryController">
     <children>
-        <HBox id="HBox" fx:id="alphabetHbox"  alignment="CENTER" layoutX="4.0" layoutY="36.0" prefWidth="640.0" spacing="5.0">
+        <HBox id="HBox" fx:id="alphabetHbox"  alignment="CENTER"  layoutX="4.0" layoutY="36.0" spacing="5.0">
             <children>
                 <Hyperlink text="All" />
                 <Hyperlink text="A" />
@@ -41,11 +41,12 @@
                 <Hyperlink text="Z" />
             </children>
         </HBox>
-        <Accordion fx:id="glossaryAccordion" layoutX="20.0" layoutY="69.0" prefHeight="381.0" prefWidth="608.0" />
+
         <Label layoutX="14.0" layoutY="14.0" text="Glossary">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
         </Label>
+        <Accordion fx:id="glossaryAccordion"  layoutX="20.0" layoutY="69.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
     </children>
 </AnchorPane>

@@ -9,6 +9,7 @@ import adg.red.utils.LocaleManager;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -39,13 +40,9 @@ public class HomeViewController implements Initializable
     @FXML
     private Label lblSearch;
     @FXML
-    private AnchorPane disBrwCourseArea;
+    private AnchorPane disViewArea;
     @FXML
     private Hyperlink hplHome;
-    @FXML
-    private Hyperlink hplBrowseCourse;
-    @FXML
-    private AnchorPane homeView;
     @FXML
     private static Hyperlink hplDept;
     @FXML
@@ -73,8 +70,31 @@ public class HomeViewController implements Initializable
     {
         HomeViewController.hplDept = deptLk;
     }
+
     @FXML
-    private Label menuLk;
+    private void showDepartments(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void showPrograms(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void showCourses(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void showSections(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void showUsers(ActionEvent event)
+    {
+    }
 
     /**
      * Initializes the controller class.
@@ -85,7 +105,7 @@ public class HomeViewController implements Initializable
         ViewLoader view = new ViewLoader(commonButtonArea);
         view.loadView("CommonButtons");
         initializeComponentsByLocale();
-        Context.getInstance().setDisplayView(disBrwCourseArea);
+        Context.getInstance().setDisplayView(disViewArea);
     }
 
     private void initializeComponentsByLocale()

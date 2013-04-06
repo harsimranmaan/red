@@ -22,6 +22,8 @@ public class BootStrap extends Application
     {
         Parent root = FXMLLoader.load(getClass().getResource(getUserInterfaceUrl("MainForm")));
         Scene scene = new Scene(root);
+        stage.setMinHeight(600);
+        stage.setMinWidth(800);
         stage.setScene(scene);
         stage.show();
     }
