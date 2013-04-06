@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox id="VBox" alignment="CENTER" spacing="3.0" AnchorPane.bottomAnchor="0"   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.student.SpecificButtonsController">
+    <children>
+        <Button id="" fx:id="btnBrowseCourse" onAction="#browseCourse"  mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Browse Course" />
+        <Button fx:id="btnViewTimetable" onAction="#viewTimeTable" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="View Timetable" />
+        <Button fx:id="btnViewEnrolment" onAction="#viewEnrolment" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="View Enrolment" />
+        <Button fx:id="btnViewDegreeInfo" onAction="#viewDegreeInfo" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="View Degree Info" />
+    </children>
+</VBox>
+

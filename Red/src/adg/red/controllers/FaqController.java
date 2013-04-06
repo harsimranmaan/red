@@ -5,6 +5,8 @@
 package adg.red.controllers;
 
 import adg.red.models.Faq;
+import adg.red.utils.Context;
+import adg.red.utils.LocaleManager;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -34,7 +36,8 @@ public class FaqController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        Context.getInstance().setTitle(LocaleManager.get(16));
+        BreadCrumbController.renderBreadCrumb("student/HomeView|FaqView");
         populateListView();
     }
 

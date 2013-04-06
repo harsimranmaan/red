@@ -50,4 +50,12 @@ public class DateFormatter
             return "";
         }
     }
+
+    public static String getCurrentDayDate()
+    {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("E, MMM dd, yyyy");
+        return sdf.format(date);
+
+    }
 }

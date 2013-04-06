@@ -4,6 +4,7 @@
  */
 package adg.red.controllers.student;
 
+import adg.red.controllers.BreadCrumbController;
 import adg.red.models.CoRequisite;
 import adg.red.models.Course;
 import adg.red.models.Enrolment;
@@ -21,7 +22,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -30,9 +30,9 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import adg.red.utils.DateFormatter;
+import javafx.scene.text.Font;
 
 /**
  * FXML Controller class
@@ -81,8 +81,6 @@ public class SectionViewController implements Initializable
     @FXML
     private Label lblSecType;
     @FXML
-    private AnchorPane disView;
-    @FXML
     private Label lblSession;
     @FXML
     private Label lblTermYear;
@@ -96,6 +94,8 @@ public class SectionViewController implements Initializable
     private ListView<CoRequisite> lsvOutstandCoReq;
     private Enrolment enrolment = null;
     private EnrolmentPK enrolmentPk;
+    @FXML
+    private Font x1;
 
     private void toggleRegDropButtons()
     {
@@ -112,13 +112,61 @@ public class SectionViewController implements Initializable
         }
     }
 
+    @FXML
+    private void showPreReq(MouseEvent event)
+    {
+        if (lsvOutstandPrereq.getSelectionModel().getSelectedItem() != null)
+        {
+            Context.getInstance().setSelectedCourse(lsvOutstandPrereq.getSelectionModel().getSelectedItem().getCourse());
+            ViewLoader view = new ViewLoader(Context.getInstance().getDisplayView());
+            view.loadView("student/CourseView");
+        }
+    }
+
+    @FXML
+    private void showCoReq(MouseEvent event)
+    {
+        if (lsvOutstandCoReq.getSelectionModel().getSelectedItem() != null)
+        {
+            Context.getInstance().setSelectedCourse(lsvOutstandCoReq.getSelectionModel().getSelectedItem().getCourse1());
+            ViewLoader view = new ViewLoader(Context.getInstance().getDisplayView());
+            view.loadView("student/CourseView");
+        }
+    }
+
+    @FXML
+    private void register(ActionEvent event)
+    {
+        if (enrolment == null)
+        {
+            //first time
+            enrolment = new Enrolment(enrolmentPk);
+        }
+        enrolment.setIsActive(true);
+        enrolment.save();
+        lblResponse.setText(LocaleManager.get(10));
+        lblResponse.setVisible(true);
+        toggleRegDropButtons();
+    }
+
+    @FXML
+    private void drop(ActionEvent event)
+    {
+        enrolment.setIsActive(false);
+        enrolment.save();
+        lblResponse.setText(LocaleManager.get(32));
+        lblResponse.setVisible(true);
+        toggleRegDropButtons();
+    }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        Context.getInstance().setTitle(LocaleManager.get(62));
+        BreadCrumbController.renderBreadCrumb("student/HomeView|student/BrowseCourse|student/CourseListView|student/CourseView|student/SectionView");
         try
         {
             Section section = Context.getInstance().getSelectedSection();
@@ -160,103 +208,6 @@ public class SectionViewController implements Initializable
         populateCoReqListView(Context.getInstance().getSelectedCourse());
         lblStartDate.setText(DateFormatter.formatDate(Context.getInstance().getSelectedSection().getStartDate()));
         lblEndDate.setText(DateFormatter.formatDate(Context.getInstance().getSelectedSection().getEndDate()));
-
-        // setOnAction when register button is pressed
-        btnRegister.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent event)
-            {
-                try
-                {
-
-                    if (enrolment == null)
-                    {
-                        //first time
-                        enrolment = new Enrolment(enrolmentPk);
-                    }
-                    enrolment.setIsActive(true);
-                    enrolment.save();
-                    lblResponse.setText(LocaleManager.get(10));
-                    lblResponse.setVisible(true);
-                    toggleRegDropButtons();
-                }
-                catch (Exception ex)
-                {
-                    Logger.getLogger(SectionViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-        });
-
-        // setOnAction when drop button is pressed
-        //should fire only when we have an enrolment selected
-        btnDrop.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent event)
-            {
-                try
-                {
-                    enrolment.setIsActive(false);
-                    enrolment.save();
-                    lblResponse.setText(LocaleManager.get(32));
-                    lblResponse.setVisible(true);
-                    toggleRegDropButtons();
-                }
-                catch (Exception ex)
-                {
-                    Logger.getLogger(SectionViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-
-        // action when user clicked on coreq list view
-        lsvOutstandCoReq.setOnMousePressed(new EventHandler<MouseEvent>()
-        {
-            @Override
-            public void handle(MouseEvent event)
-            {
-                try
-                {
-                    //handle no records click
-                    if (lsvOutstandCoReq.getSelectionModel().getSelectedItem() != null)
-                    {
-                        Context.getInstance().setSelectedCourse(lsvOutstandCoReq.getSelectionModel().getSelectedItem().getCourse1());
-                        Context.getInstance().setSelectedDepartment(lsvOutstandCoReq.getSelectionModel().getSelectedItem().getCourse1().getDepartment());
-                        ViewLoader view = new ViewLoader(disView);
-                        view.loadView("student/CourseView");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logger.getLogger(CourseViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-        // action when user clicked on prereq list view
-        lsvOutstandPrereq.setOnMousePressed(new EventHandler<MouseEvent>()
-        {
-            @Override
-            public void handle(MouseEvent event)
-            {
-                try
-                {
-                    //handle no records click
-                    if (lsvOutstandPrereq.getSelectionModel().getSelectedItem() != null)
-                    {
-                        Context.getInstance().setSelectedCourse(lsvOutstandPrereq.getSelectionModel().getSelectedItem().getCourse());
-                        Context.getInstance().setSelectedDepartment(lsvOutstandPrereq.getSelectionModel().getSelectedItem().getCourse().getDepartment());
-                        ViewLoader view = new ViewLoader(disView);
-                        view.loadView("student/CourseView");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logger.getLogger(CourseViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
     }
 
     private List<Prerequisite> checkStudentPrereq(Course course)

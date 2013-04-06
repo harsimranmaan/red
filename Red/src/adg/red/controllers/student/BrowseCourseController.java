@@ -4,6 +4,7 @@
  */
 package adg.red.controllers.student;
 
+import adg.red.controllers.BreadCrumbController;
 import adg.red.utils.Context;
 import adg.red.utils.ViewLoader;
 import adg.red.models.Department;
@@ -12,8 +13,6 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -46,37 +45,30 @@ public class BrowseCourseController implements Initializable
     @FXML
     private HBox hBox;
 
+    @FXML
+    private void selectDepartment(MouseEvent event)
+    {
+        if (tabDisplayDepartment.getSelectionModel().getSelectedItem() != null)
+        {
+            Context.getInstance().setSelectedDepartment(tabDisplayDepartment.getSelectionModel().getSelectedItem());
+            ViewLoader view = new ViewLoader(disView);
+            view.loadView("student/CourseListView");
+        }
+    }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        Context.getInstance().setTitle(LocaleManager.get(59));
+        BreadCrumbController.renderBreadCrumb("student/HomeView|student/BrowseCourse");
         initializeComponentsByLocale();
         populateDeptTable("All");
 
         // action when user clicked on the table
-        tabDisplayDepartment.setOnMousePressed(new EventHandler<MouseEvent>()
-        {
-            @Override
-            public void handle(MouseEvent event)
-            {
-                try
-                {
-                    if (tabDisplayDepartment.getSelectionModel().getSelectedItem() != null)
-                    {
-                        Context.getInstance().setSelectedDepartment(tabDisplayDepartment.getSelectionModel().getSelectedItem());
-                        ViewLoader view = new ViewLoader(disView);
-                        view.loadView("student/CourseListView");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logger.getLogger(BrowseCourseController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
+
 
         Iterator<Node> nodes = hBox.getChildren().iterator();
         while (nodes.hasNext())

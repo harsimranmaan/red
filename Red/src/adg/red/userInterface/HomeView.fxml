@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane AnchorPane.bottomAnchor="0"   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.HomeViewController">
+    <SplitPane  AnchorPane.bottomAnchor="0"   AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" dividerPositions="0.2" focusTraversable="false" >
+        <items>
+            <AnchorPane prefWidth="150.0" minWidth="150" maxWidth="150"   AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0" >
+                <children>
+                    <VBox id="VBox" alignment="CENTER" layoutX="0.5" spacing="2.0" AnchorPane.topAnchor="0.0">
+                        <children>
+                            <Label fx:id="lblDay"  text="Monday, March 18, 2013" />
+                            <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
+                            <AnchorPane fx:id="specificButtonArea"></AnchorPane>
+                            <AnchorPane fx:id="commonButtonArea"></AnchorPane>
+                        </children>
+
+                    </VBox>
+                    <ImageView id="ADG-Logo3.jpg" fitHeight="75.0" fitWidth="150.0" preserveRatio="true" AnchorPane.bottomAnchor="0.0">
+                        <image>
+                            <Image url="@images/ADG-Logo3.jpg" preserveRatio="true" smooth="true" />
+                        </image>
+                    </ImageView>
+                </children>
+            </AnchorPane>
+            <AnchorPane   AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+                <children>
+                    <AnchorPane fx:id="breadCrumbArea"  AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+                        
+                    </AnchorPane>
+                    <Label fx:id="lblPageTitle"  layoutX="13.0" AnchorPane.topAnchor="25.0" text="Home">
+                        <font>
+                            <Font name="System Bold" size="18.0" />
+                        </font>
+                    </Label>
+                    <AnchorPane fx:id="paneMain"  AnchorPane.leftAnchor="0.5" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="50.0" AnchorPane.bottomAnchor="0.0">
+                    </AnchorPane>
+                </children>
+            </AnchorPane>
+        </items>
+        <stylesheets>
+            <URL value="@css/mainForm.css" />
+        </stylesheets>
+    </SplitPane>
+</AnchorPane>
