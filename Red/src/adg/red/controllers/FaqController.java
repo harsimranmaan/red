@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
 
 /**
@@ -43,7 +44,10 @@ public class FaqController implements Initializable
         List<Faq> faqList = Faq.getAllFaq();
         for (Faq faq : faqList)
         {
-            accordion.getPanes().add(new TitledPane(faq.getQuestion(), new Text(faq.getAnswer())));
+            TextArea text = new TextArea(faq.getAnswer());
+            text.setEditable(false);
+            text.setWrapText(true);
+            accordion.getPanes().add(new TitledPane(faq.getQuestion(), text));
         }
     }
 }

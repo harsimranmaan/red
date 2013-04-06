@@ -8,16 +8,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="464.0" prefWidth="642.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.FaqController">
-  <children>
-    <Accordion fx:id="accordion" layoutX="20.0" layoutY="38.0" prefHeight="412.0" prefWidth="607.9999000000025" />
-    <Label layoutX="20.0" layoutY="14.0" text="FAQ">
-      <font>
-        <Font name="System Bold" size="18.0" />
-      </font>
-    </Label>
-  </children>
-  <stylesheets>
-    <URL value="@css/mainForm.css" />
-  </stylesheets>
+<AnchorPane id="AnchorPane"  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.FaqController">
+    <children>
+        <Accordion fx:id="accordion" layoutX="20.0" layoutY="38.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+        <Label layoutX="20.0" layoutY="14.0" text="FAQ">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+    </children>
+    <stylesheets>
+        <URL value="@css/mainForm.css" />
+    </stylesheets>
 </AnchorPane>

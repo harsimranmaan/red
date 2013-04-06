@@ -17,9 +17,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -75,9 +75,13 @@ public class GlossaryController implements Initializable
     public void populate(List<Glossary> glossaryList)
     {
         glossaryAccordion.getPanes().clear();
+
         for (Glossary glossary : glossaryList)
         {
-            glossaryAccordion.getPanes().add(new TitledPane(glossary.getTerm(), new Text(glossary.getDefinition())));
+            TextArea text = new TextArea(glossary.getDefinition());
+            text.setEditable(false);
+            text.setWrapText(true);
+            glossaryAccordion.getPanes().add(new TitledPane(glossary.getTerm(), text));
         }
     }
 }
