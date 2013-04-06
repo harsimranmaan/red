@@ -8,14 +8,14 @@
 
 <VBox id="AnchorPane" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.CommonButtonsController">
     <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
-    <VBox id="VBox" alignment="CENTER" spacing="1.0">
+    <VBox id="VBox" alignment="CENTER" spacing="3.0">
         <children>
             <Button id="btnUserProfile" fx:id="btnUserProfile" mnemonicParsing="false" onAction="#userProfile"  prefHeight="30.0" prefWidth="120.0" text="Personal Info" />
             <Button fx:id="btnMessage" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" onAction="#message"  text="Messages" />
         </children>
     </VBox>
     <Separator minHeight="0.0" prefHeight="10.0" prefWidth="137.0" />
-    <VBox id="VBox" alignment="CENTER" spacing="1.0">
+    <VBox id="VBox" alignment="CENTER" spacing="3.0">
         <children>
             <Button id="btnGlossary" fx:id="btnGlossary" mnemonicParsing="false" onAction="#glossary"  prefHeight="30.0" prefWidth="120.0" text="Glossary" />
             <Button id="btnFaq" fx:id="btnFaq" mnemonicParsing="false" prefHeight="30.0" onAction="#faq"  prefWidth="120.0" text="FAQ" />

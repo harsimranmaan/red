@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package adg.red.controllers.student;
+package adg.red.controllers;
 
 import adg.red.models.Address;
 import adg.red.models.User;
 import adg.red.utils.Context;
-import adg.red.utils.LocaleManager;
+import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -19,8 +19,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -53,17 +53,7 @@ public class UserProfileController implements Initializable
     @FXML
     private Label errorLabel;
     @FXML
-    private Button pwdSaveBtn;
-    @FXML
-    private Button pwdCancelBtn;
-    @FXML
-    private Label pwdErrorLabel;
-    @FXML
-    private PasswordField oldPwdTxt;
-    @FXML
-    private PasswordField newPwdTxt;
-    @FXML
-    private PasswordField pwdReTxt;
+    private Pane paneChangePassword;
     private User currentUser;
 
     /**
@@ -73,62 +63,11 @@ public class UserProfileController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         currentUser = Context.getInstance().getCurrentUser();
+        ViewLoader view = new ViewLoader(paneChangePassword);
+        view.loadView("ChangePassword");
         showUserProfile();
 
-        pwdSaveBtn.setOnAction(new EventHandler<ActionEvent>()
-        {
-            private void showPasswordMessage(String pwdErrorMsg)
-            {
-                pwdErrorLabel.setVisible(true);
-                pwdErrorLabel.setText(pwdErrorMsg);
-            }
 
-            @Override
-            public void handle(ActionEvent event)
-            {
-                pwdErrorLabel.setVisible(false);
-                String oldPwd = oldPwdTxt.getText();
-                String newPwd = newPwdTxt.getText();
-                String pwdRe = pwdReTxt.getText();
-                String pwdErrorMsg;
-                //User user;
-                try
-                {
-                    //check if old password is valid
-                    User.login(currentUser.getUsername(), oldPwd);
-
-                    if (newPwd.equals(pwdRe))
-                    {
-                        currentUser.setPassword(newPwd);
-                        currentUser.save();
-                        pwdErrorMsg = LocaleManager.get(11);
-                    }
-                    else
-                    {
-                        pwdErrorMsg = LocaleManager.get(12);
-                    }
-                    showPasswordMessage(pwdErrorMsg);
-                }
-                catch (Exception ex)
-                {
-                    pwdErrorMsg = LocaleManager.get(13);
-                    showPasswordMessage(pwdErrorMsg);
-                    // Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-
-        pwdCancelBtn.setOnAction(new EventHandler<ActionEvent>()
-        {
-            @Override
-            public void handle(ActionEvent event)
-            {
-                oldPwdTxt.setText("");
-                newPwdTxt.setText("");
-                pwdReTxt.setText("");
-                pwdErrorLabel.setVisible(false);
-            }
-        });
 
         contactCancelBtn.setOnAction(new EventHandler<ActionEvent>()
         {

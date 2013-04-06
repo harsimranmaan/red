@@ -79,7 +79,7 @@ public class CommonButtonsController implements Initializable
         try
         {
             ViewLoader view = new ViewLoader(Context.getInstance().getDisplayView());
-            view.loadView(Context.getInstance().getCurrentUser().getUserTypeId().getName().toLowerCase() + "/UserProfile");
+            view.loadView("UserProfile");
         }
         catch (Exception ex)
         {
