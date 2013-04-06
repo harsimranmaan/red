@@ -6,6 +6,7 @@ package adg.red.models;
 
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -108,5 +109,10 @@ public class MessageStatus implements Serializable
     public static MessageStatus getByStatusName(String name)
     {
         return (MessageStatus) RedEntityManager.getEntityManager().createNamedQuery("MessageStatus.findByName").setParameter("name", name).getSingleResult();
+    }
+
+    public static List<MessageStatus> getAll()
+    {
+        return RedEntityManager.getEntityManager().createNamedQuery("MessageStatus.findAll").getResultList();
     }
 }

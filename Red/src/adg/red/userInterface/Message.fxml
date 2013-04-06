@@ -9,51 +9,42 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="464.0" prefWidth="640.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.MessageController">
-  <children>
-    <Label layoutX="13.0" layoutY="11.0" text="Message Centre">
-      <font>
-        <Font name="System Bold" size="18.0" />
-      </font>
-    </Label>
-    <SplitPane dividerPositions="0.3490566037735849" focusTraversable="true" layoutY="38.0" orientation="VERTICAL" prefHeight="426.0" prefWidth="642.0">
-      <items>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="208.99990000000253" prefWidth="640.0">
-          <children>
-            <TableView fx:id="tblMessages" onMouseClicked="#displayMessage" prefHeight="209.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <columns>
-                <TableColumn minWidth="235.0" prefWidth="75.0" text="Subject" fx:id="colSubject" />
-                <TableColumn maxWidth="500.0" minWidth="150.0" prefWidth="75.0" text="Date Sent" fx:id="colDate" />
-                <TableColumn minWidth="150.0" prefWidth="75.0" text="Sender" fx:id="colSender" />
-                <TableColumn minWidth="100.0" prefWidth="75.0" text="Status" fx:id="colStatus" />
-              </columns>
-            </TableView>
-          </children>
-        </AnchorPane>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-          <children>
-            <Text id="txtMessageBody" text="SUBJECT:" AnchorPane.bottomAnchor="25.48" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="-14.0" AnchorPane.topAnchor="16.52" />
-            <Text fx:id="txtMessageBody" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="-14.0" AnchorPane.topAnchor="42.0" />
-            <Text id="txtMessageBody" fx:id="txtSubject" AnchorPane.bottomAnchor="25.48" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="-69.0" AnchorPane.topAnchor="16.52">
-              <font>
-                <Font name="System Bold" size="12.0" />
-              </font>
-            </Text>
-            <SplitMenuButton id="btnMessageAction" layoutX="545.0" layoutY="14.0" mnemonicParsing="false" text="Action">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#deleteMessage" text="Delete" fx:id="btnDelete" />
-                <MenuItem mnemonicParsing="false" onAction="#markMessageRead" text="Mark as Read" fx:id="btnMarkRead" />
-                <MenuItem mnemonicParsing="false" onAction="#markMessageUnread" text="Mark as Unread" fx:id="btnMarkUnread" />
-              </items>
-              <stylesheets>
-                <URL value="@css/mainForm.css" />
-              </stylesheets>
-            </SplitMenuButton>
-          </children>
-        </AnchorPane>
-      </items>
-    </SplitPane>
-  </children>
-  <stylesheets>
-    <URL value="@css/mainForm.css" />
-  </stylesheets>
+    <children>
+        <Label layoutX="13.0" layoutY="11.0" text="Message Centre">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <SplitPane dividerPositions="0.3490566037735849" focusTraversable="true" layoutY="38.0" orientation="VERTICAL" prefHeight="426.0" prefWidth="642.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="208.99990000000253" prefWidth="640.0">
+                    <children>
+                        <TableView fx:id="tblMessages" onMouseClicked="#displayMessage" prefHeight="209.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <columns>
+                                <TableColumn minWidth="235.0" prefWidth="75.0" text="Subject" fx:id="colSubject" />
+                                <TableColumn maxWidth="500.0" minWidth="150.0" prefWidth="75.0" text="Date Received" fx:id="colDate" />
+                                <TableColumn minWidth="150.0" prefWidth="75.0" text="Sender" fx:id="colSender" />
+                                <TableColumn minWidth="100.0" prefWidth="75.0" text="Status" fx:id="colStatus" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                    <children>
+                        <Text id="txtMessageSubject" fx:id="txtSubject"  AnchorPane.bottomAnchor="240.52" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="618.0" AnchorPane.topAnchor="16.52">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Text>
+                        <Text fx:id="txtMessageBody" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="-14.0" AnchorPane.topAnchor="42.0" />
+
+                        <SplitMenuButton fx:id="btnMessageAction" layoutX="545.0" layoutY="14.0" mnemonicParsing="false" text="Action" />
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+    <stylesheets>
+        <URL value="@css/mainForm.css" />
+    </stylesheets>
 </AnchorPane>
