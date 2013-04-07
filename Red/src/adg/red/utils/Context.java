@@ -7,7 +7,9 @@ package adg.red.utils;
 import adg.red.models.Course;
 import adg.red.models.Department;
 import adg.red.models.Section;
+import adg.red.models.SectionTimeTable;
 import adg.red.models.User;
+import java.util.List;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
@@ -30,6 +32,7 @@ public class Context
     private Pane searchView;
     private Pane breadCrumb;
     //Singleton
+    private List<SectionTimeTable> sectionTimeTableList;
 
     private Context()
     {
@@ -146,4 +149,13 @@ public class Context
     {
         this.lblTitle.setText(title);
     }
+
+    public void setTimeTable(List<SectionTimeTable> sectionTimeTableList) {
+        this.sectionTimeTableList = sectionTimeTableList;
+    }
+    
+    public List<SectionTimeTable> getTimeTable() {
+        return sectionTimeTableList;
+    }
+    
 }
