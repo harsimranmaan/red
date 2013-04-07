@@ -72,24 +72,18 @@ public class TimeTableController implements Initializable
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb)
+    private void initHeader(List<WeekDay> dayList)
     {
-        BreadCrumbController.renderBreadCrumb("student/HomeView|TimeTable");
-        Context.getInstance().setTitle(LocaleManager.get(68));
-        List<SectionTimeTable> timeTableList = Context.getInstance().getTimeTable();
-
-        List<WeekDay> dayList = WeekDay.getAllWeekDay();
-        int dayListSize = dayList.size();
-        initGrid(dayListSize);
-
         int col = 1;
         for (WeekDay weekDay : dayList)
         {
             Label label = new Label(weekDay.getWeekDay());
             gdpTimeTable.add(label, col++, 0);
         }
+    }
 
+    private void initTimeLabels()
+    {
         int hrs = 8;
         for (int row = 1; row < 25; hrs++)
         {
@@ -97,7 +91,10 @@ public class TimeTableController implements Initializable
             gdpTimeTable.add(label, 0, row++);
             row++;
         }
+    }
 
+    private void populateTimeTable(List<SectionTimeTable> timeTableList) throws NumberFormatException
+    {
         if (timeTableList != null)
         {
             int cols;
@@ -134,6 +131,21 @@ public class TimeTableController implements Initializable
                 }
             }
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb)
+    {
+        BreadCrumbController.renderBreadCrumb(Context.getInstance().getCurrentUser().getUserTypeId().getName().toLowerCase() + "/HomeView|TimeTable");
+        Context.getInstance().setTitle(LocaleManager.get(68));
+        List<SectionTimeTable> timeTableList = Context.getInstance().getTimeTable();
+
+        List<WeekDay> dayList = WeekDay.getAllWeekDay();
+        int dayListSize = dayList.size();
+        initGrid(dayListSize);
+        initHeader(dayList);
+        initTimeLabels();
+        populateTimeTable(timeTableList);
 
 
     }
