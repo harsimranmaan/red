@@ -12,9 +12,6 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import adg.red.utils.Context;
 import adg.red.utils.DateFormatter;
-import java.awt.Font;
-import java.awt.Transparency;
-import java.util.ArrayList;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
@@ -25,7 +22,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 /**
  * FXML Controller class
@@ -79,7 +75,6 @@ public class TimeTableController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        Context.getInstance().setTitle(LocaleManager.get(24));
         BreadCrumbController.renderBreadCrumb("student/HomeView|TimeTable");
         Context.getInstance().setTitle(LocaleManager.get(68));
         List<SectionTimeTable> timeTableList = Context.getInstance().getTimeTable();
@@ -137,7 +132,6 @@ public class TimeTableController implements Initializable
                         row++;
                     }
                 }
-//                System.out.println("" + table.getSectionTimeTablePK().getDayId() + " " + DateFormatter.formatTime(table.getSectionTimeTablePK().getStartTime()) + " " + table.getLengthInMinutes());
             }
         }
 
