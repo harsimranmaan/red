@@ -8,44 +8,7 @@
 
 <AnchorPane id="AnchorPane" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.TimeTableController">
     <children>
-        <GridPane fx:id="gdpTimeTable" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0">
-            <columnConstraints>
-                <ColumnConstraints hgrow="ALWAYS" percentWidth="12.5" />
-                <ColumnConstraints hgrow="ALWAYS" percentWidth="12.5" />
-                <ColumnConstraints hgrow="ALWAYS" percentWidth="12.5" />
-                <ColumnConstraints hgrow="ALWAYS" percentWidth="12.5" />
-                <ColumnConstraints hgrow="ALWAYS" percentWidth="12.5" />
-                <ColumnConstraints hgrow="ALWAYS" percentWidth="12.5" />
-                <ColumnConstraints hgrow="ALWAYS" percentWidth="12.5" />
-                <ColumnConstraints hgrow="ALWAYS" percentWidth="12.5" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-                <RowConstraints percentHeight="4.0" vgrow="ALWAYS" />
-            </rowConstraints>
+        <GridPane fx:id="gdpTimeTable" gridLinesVisible="true"  AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         </GridPane>
     </children>
 </AnchorPane>
