@@ -153,6 +153,7 @@ public class UploadScoreController implements Initializable
 
     public void browseFile(ActionEvent event)
     {
+        btnBrowseFile.setDisable(true);
         FileChooser fileChooser = new FileChooser();
 
         // set filter
@@ -161,6 +162,7 @@ public class UploadScoreController implements Initializable
 
         file = fileChooser.showOpenDialog(new Stage());
         toggleLabels();
+        btnBrowseFile.setDisable(false);
 
     }
 
