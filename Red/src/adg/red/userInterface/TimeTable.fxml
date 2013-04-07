@@ -6,6 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane"   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.TimeTableController">
-    
+<AnchorPane id="AnchorPane" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.TimeTableController">
+    <children>
+        <GridPane fx:id="gdpTimeTable" gridLinesVisible="true"  AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        </GridPane>
+    </children>
 </AnchorPane>

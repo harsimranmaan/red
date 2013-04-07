@@ -51,6 +51,45 @@ public class DateFormatter
         }
     }
 
+    public static String formatTime(Date date)
+    {
+        if (date != null)
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            return sdf.format(date);
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+    public static String formatHour(Date date)
+    {
+        if (date != null)
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat("HH");
+            return sdf.format(date);
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+    public static String formatMins(Date date)
+    {
+        if (date != null)
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat("mm");
+            return sdf.format(date);
+        }
+        else
+        {
+            return "";
+        }
+    }
+
     public static String getCurrentDayDate()
     {
         Date date = new Date();

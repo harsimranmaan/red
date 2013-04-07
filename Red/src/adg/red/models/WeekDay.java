@@ -4,7 +4,9 @@
  */
 package adg.red.models;
 
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -105,5 +107,11 @@ public class WeekDay implements Serializable
     public String toString()
     {
         return "adg.red.models.WeekDay[ dayId=" + dayId + " ]";
+    }
+    
+    public static List<WeekDay> getAllWeekDay()
+    {
+        return RedEntityManager.getEntityManager().createNamedQuery("WeekDay.findAll")
+                .getResultList();
     }
 }
