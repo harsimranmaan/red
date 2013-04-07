@@ -159,6 +159,18 @@ public class SectionViewController implements Initializable
         toggleRegDropButtons();
     }
 
+    private void initializeComponentsByLocale()
+    {
+        lblCreditName.setText(LocaleManager.get(42) + ":");
+        lblGrading.setText(LocaleManager.get(63) + ":");
+        lblPassReq.setText(LocaleManager.get(64) + ":");
+        lblTerm.setText(LocaleManager.get(65) + ":");
+        lblStart.setText(LocaleManager.get(46) + ":");
+        lblEnd.setText(LocaleManager.get(45) + ":");
+        lblOutPrereq.setText(LocaleManager.get(66));
+        lblOutCoReq.setText(LocaleManager.get(67));
+    }
+
     /**
      * Initializes the controller class.
      */
@@ -193,7 +205,7 @@ public class SectionViewController implements Initializable
         {
             Logger.getLogger(SectionViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        lblCreditName.setText(LocaleManager.get(42));
+        initializeComponentsByLocale();
         secLbl.setText("Section " + Context.getInstance().getSelectedSection().getSectionPK().getSectionId());
         creditLbl.setText(Integer.toString(Context.getInstance().getSelectedCourse().getCredits()));
         passRqLbl.setText(Context.getInstance().getSelectedCourse().getPassingRequirement());

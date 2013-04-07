@@ -205,7 +205,7 @@ public class CourseViewController implements Initializable
     private void initializeComponentsByLocale()
     {
 
-        lblCreditName.setText(LocaleManager.get(42));
+        lblCreditName.setText(LocaleManager.get(42) + ":");
         lblPrereq.setText(LocaleManager.get(43));
         lblCoReq.setText(LocaleManager.get(44));
         secColmn.setText(LocaleManager.get(39));
