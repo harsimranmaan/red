@@ -25,7 +25,7 @@ public class TimeTableController implements Initializable
 {
 
     @FXML
-    private GridPane gdp;
+    private GridPane gdpTimeTable;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -40,14 +40,14 @@ public class TimeTableController implements Initializable
         for (WeekDay weekDay : dayList)
         {
             Label label = new Label(weekDay.getWeekDay());
-            gdp.add(label, col++, 0);
+            gdpTimeTable.add(label, col++, 0);
         }
 
         int hrs = 8;
         for (int rows = 1; rows < 25; hrs++)
         {
             Label label = new Label(hrs + ":00");
-            gdp.add(label, 0, rows++);
+            gdpTimeTable.add(label, 0, rows++);
             rows++;
 //            Label label1 = new Label(hrs + ":30");
 //            gdp.add(label1, 0, rows++);
