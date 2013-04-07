@@ -4,6 +4,7 @@
  */
 package adg.red.utils;
 
+import adg.red.config.FacultyAction;
 import adg.red.models.Course;
 import adg.red.models.Department;
 import adg.red.models.Section;
@@ -33,6 +34,7 @@ public class Context
     private Pane breadCrumb;
     //Singleton
     private List<SectionTimeTable> sectionTimeTableList;
+    private FacultyAction facultyAction;
 
     private Context()
     {
@@ -150,12 +152,23 @@ public class Context
         this.lblTitle.setText(title);
     }
 
-    public void setTimeTable(List<SectionTimeTable> sectionTimeTableList) {
+    public void setTimeTable(List<SectionTimeTable> sectionTimeTableList)
+    {
         this.sectionTimeTableList = sectionTimeTableList;
     }
-    
-    public List<SectionTimeTable> getTimeTable() {
+
+    public List<SectionTimeTable> getTimeTable()
+    {
         return sectionTimeTableList;
     }
-    
+
+    public void setFacultyAction(FacultyAction facultyAction)
+    {
+        this.facultyAction = facultyAction;
+    }
+
+    public FacultyAction getFacultyAction()
+    {
+        return this.facultyAction;
+    }
 }
