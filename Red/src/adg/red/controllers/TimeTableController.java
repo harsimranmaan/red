@@ -12,6 +12,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import adg.red.utils.Context;
 import adg.red.utils.DateFormatter;
+import java.awt.Font;
+import java.awt.Transparency;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.fxml.FXML;
@@ -22,6 +24,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 /**
@@ -62,6 +65,17 @@ public class TimeTableController implements Initializable
         gdpTimeTable.setSnapToPixel(false);
     }
 
+    private void pasteLabels(int length, SectionTimeTable table, int cols, int row)
+    {
+        for (int rowLength = 0; rowLength < length / 30; rowLength++)
+        {
+            Label label = new Label(table.getSectionTimeTablePK().getDepartmentId() + " " + table.getSectionTimeTablePK().getCourseNumber());
+            label.setTextFill(Color.RED);
+            label.setStyle("-fx-background-color: #FFE4E4;");
+            gdpTimeTable.add(label, cols, row++);
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -89,27 +103,41 @@ public class TimeTableController implements Initializable
             row++;
         }
 
-        int cols = 1;
-        int rows = 1;
         if (timeTableList != null)
         {
+            int cols;
+
             for (SectionTimeTable table : timeTableList)
             {
                 cols = table.getSectionTimeTablePK().getDayId() % 100 + 1;
                 int hour = Integer.parseInt(DateFormatter.formatHour(table.getSectionTimeTablePK().getStartTime()));
                 int mins = Integer.parseInt(DateFormatter.formatMins(table.getSectionTimeTablePK().getStartTime()));
+                int length = table.getLengthInMinutes();
 
-//                int baseHr = 8;
-//                for (int row = 1; row < 25; baseHr++)
-//                {
-//                    Label label = new Label(hrs + ":00");
-//                    gdpTimeTable.add(label, 0, row++);
-//                    row++;
-//                }
+                int baseHr = 8;
+                for (int row = 1; row < 25; baseHr++)
+                {
+                    if (hour == baseHr && mins < 30)
+                    {
+                        pasteLabels(length, table, cols, row);
+                        break;
+                    }
+                    else
+                    {
+                        row++;
+                    }
 
-                Label label = new Label(table.getSectionTimeTablePK().getDepartmentId() + " " + table.getSectionTimeTablePK().getCourseNumber());
-                gdpTimeTable.add(label, cols, rows++);
-                System.out.println("" + table.getSectionTimeTablePK().getDayId() + " " + DateFormatter.formatTime(table.getSectionTimeTablePK().getStartTime()) + " " + table.getLengthInMinutes());
+                    if (hour == baseHr && mins >= 30)
+                    {
+                        pasteLabels(length, table, cols, row);
+                        break;
+                    }
+                    else
+                    {
+                        row++;
+                    }
+                }
+//                System.out.println("" + table.getSectionTimeTablePK().getDayId() + " " + DateFormatter.formatTime(table.getSectionTimeTablePK().getStartTime()) + " " + table.getLengthInMinutes());
             }
         }
 
