@@ -18,38 +18,42 @@ import javafx.scene.layout.GridPane;
 
 /**
  * FXML Controller class
- *
+ * <p/>
  * @author jayzt_000
  */
-public class TimeTableController implements Initializable {
+public class TimeTableController implements Initializable
+{
 
     @FXML
     private GridPane gdp;
-    
+
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
         Context.getInstance().setTitle(LocaleManager.get(24));
         BreadCrumbController.renderBreadCrumb("student/HomeView|TimeTable");
         Context.getInstance().setTitle(LocaleManager.get(68));
         List<SectionTimeTable> timeTableList = Context.getInstance().getTimeTable();
-        
-            List<WeekDay> dayList = WeekDay.getAllWeekDay();
-            int col=1;
-            for(WeekDay weekDay : dayList){
-                Label label = new Label(weekDay.getWeekDay());
-                gdp.add(label, col++, 0);                
-            }
 
-            int hrs = 8;
-            for(int rows = 1; rows<25 ; hrs++){
-                Label label = new Label(hrs+":00");
-                gdp.add(label, 0, rows++);
+        List<WeekDay> dayList = WeekDay.getAllWeekDay();
+        int col = 1;
+        for (WeekDay weekDay : dayList)
+        {
+            Label label = new Label(weekDay.getWeekDay());
+            gdp.add(label, col++, 0);
+        }
 
-                Label label1 = new Label(hrs+":30");
-                gdp.add(label1, 0, rows++);
-            }
-                      
-            
+        int hrs = 8;
+        for (int rows = 1; rows < 25; hrs++)
+        {
+            Label label = new Label(hrs + ":00");
+            gdp.add(label, 0, rows++);
+            rows++;
+//            Label label1 = new Label(hrs + ":30");
+//            gdp.add(label1, 0, rows++);
+        }
+
+
 //            if (SectionTimeTable.getBySectionPK() != null){
 //                List<SectionTimeTable> list = SectionTimeTable.getBySectionPK();//enrol.getSection().getSectionPK());
 //                for (SectionTimeTable table : list)
@@ -61,8 +65,7 @@ public class TimeTableController implements Initializable {
 //                    System.out.println("" + table.getSectionTimeTablePK().getDayId() + " " + DateFormatter.formatTime(table.getSectionTimeTablePK().getStartTime()) + " " + table.getLengthInMinutes());
 //                }
 //            }
-        
-        
+
+
     }
-    
 }
