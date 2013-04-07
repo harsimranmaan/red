@@ -83,7 +83,7 @@ public class UploadScoreController implements Initializable
     @FXML
     private ListView<String> lsvResult;
     private File file;
-    private String data[];
+    private ArrayList<String> data;
 
     /**
      * Initializes the controller class.
@@ -91,6 +91,7 @@ public class UploadScoreController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        data = new ArrayList();
         BreadCrumbController.renderBreadCrumb("faculty/HomeView|faculty/UploadScore");
         Context.getInstance().setTitle(LocaleManager.get(56));
         populateSectionTable();
@@ -178,12 +179,17 @@ public class UploadScoreController implements Initializable
             String text = "";
             while ((text = reader.readLine()) != null)
             {
-                data = text.split(",");
+                text = text.trim();
+                String tempData[] = text.split(",");
+                for (int i = 0; i < tempData.length; i++)
+                {
+                    data.add(tempData[i].trim());
+                }
             }
-            for (int i = 0; i < data.length; i++)
+            for (int i = 0; i < data.size(); i++)
             {
-                String studentId = data[i].trim();
-                String score = data[++i].trim();
+                String studentId = data.get(i).trim();
+                String score = data.get(++i).trim();
                 String result = "Student Id: " + studentId + " Score: " + score;
 
                 EnrolmentPK enPK = new EnrolmentPK(Integer.parseInt(studentId),
