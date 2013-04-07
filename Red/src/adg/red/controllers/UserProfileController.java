@@ -65,7 +65,7 @@ public class UserProfileController implements Initializable
     {
         currentUser = Context.getInstance().getCurrentUser();
         Context.getInstance().setTitle(LocaleManager.get(15));
-        BreadCrumbController.renderBreadCrumb("student/HomeView|UserProfile");
+        BreadCrumbController.renderBreadCrumb(currentUser.getUserTypeId().getName().toLowerCase() + "/HomeView|UserProfile");
         ViewLoader view = new ViewLoader(paneChangePassword);
         view.loadView("ChangePassword");
         showUserProfile();

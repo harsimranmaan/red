@@ -104,8 +104,9 @@ public class MessageController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        currentUser = adg.red.utils.Context.getInstance().getCurrentUser();
         Context.getInstance().setTitle(LocaleManager.get(22));
-        BreadCrumbController.renderBreadCrumb("student/HomeView|Message");
+        BreadCrumbController.renderBreadCrumb(currentUser.getUserTypeId().getName().toLowerCase() + "/HomeView|Message");
         List<MessageStatus> statusList = MessageStatus.getAll();
         List<MenuItem> menuItems = new ArrayList<>();
         for (MessageStatus status : statusList)
@@ -123,7 +124,7 @@ public class MessageController implements Initializable
         }
         btnMessageAction.setText(LocaleManager.get(53));
         btnMessageAction.getItems().setAll(menuItems);
-        currentUser = adg.red.utils.Context.getInstance().getCurrentUser();
+
         initTable();
     }
 

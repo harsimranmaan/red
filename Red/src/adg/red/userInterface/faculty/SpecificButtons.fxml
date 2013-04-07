@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox id="VBox" alignment="CENTER" spacing="3.0" AnchorPane.bottomAnchor="0"   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.faculty.SpecificButtonsController">
+    <children>
+        <Button id="" fx:id="btnUpdateScores" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" onAction="#uploadScore"  text="Upload Score" />
+        <Button fx:id="btnSpecialApproval" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" onAction="#specialRequest" text="Special Approval" />
+        <Button fx:id="btnViewTimetable" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" onAction="#viewTimeTable" text="View Timetable" />
+        <Button fx:id="btnReports" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" onAction="#generateReport" text="Generate Reports" />
+    </children>
+</VBox>
+

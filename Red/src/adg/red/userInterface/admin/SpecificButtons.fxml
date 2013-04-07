@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<VBox id="VBox" alignment="CENTER" spacing="3.0" AnchorPane.bottomAnchor="0"   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.admin.SpecificButtonsController">
+    <children>
+        <Button id="" fx:id="btnDepartments" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Departments" onAction="#showDepartments"  />
+        <Button id="btnManageCourse" fx:id="btnPrograms" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Programs" onAction="#showPrograms" />
+        <Button id="btnViewTimetable" fx:id="btnCourses" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Courses" onAction="#showCourses" />
+        <Button id="btnViewEnrolment" fx:id="btnSections" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Sections" onAction="#showSections" />
+        <Button id="btnViewDegreeInfo" fx:id="btnUsers" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Users" onAction="#showUsers" />
+    </children>
+</VBox>
+
