@@ -52,3 +52,18 @@
     -fx-font-weight: bold;
     -fx-text-fill: grey;
 }
+.accordion .titled-pane > .title{
+    -fx-background-color: transparent;
+}
+
+.accordion .titled-pane:focused{
+    -fx-text-fill: black;
+}
+
+.accordion .titled-pane:hover{
+    -fx-text-fill: grey;
+}
+
+.accordion .titled-pane:focused > .title > .arrow-button .arrow {
+    -fx-background-color: black;
+}
