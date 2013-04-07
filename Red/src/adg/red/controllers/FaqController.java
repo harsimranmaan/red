@@ -37,7 +37,7 @@ public class FaqController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         Context.getInstance().setTitle(LocaleManager.get(16));
-        BreadCrumbController.renderBreadCrumb("student/HomeView|FaqView");
+        BreadCrumbController.renderBreadCrumb(Context.getInstance().getCurrentUser().getUserTypeId().getName().toLowerCase() + "/HomeView|FaqView");
         populateListView();
     }
 

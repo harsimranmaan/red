@@ -45,7 +45,7 @@ public class GlossaryController implements Initializable
         // TODO
         populateGlossary("All");
         Context.getInstance().setTitle(LocaleManager.get(14));
-        BreadCrumbController.renderBreadCrumb("student/HomeView|Glossary");
+        BreadCrumbController.renderBreadCrumb(Context.getInstance().getCurrentUser().getUserTypeId().getName().toLowerCase() + "/HomeView|Glossary");
         Iterator<Node> nodes = alphabetHbox.getChildren().iterator();
         while (nodes.hasNext())
         {
