@@ -4,7 +4,10 @@
  */
 package adg.red.controllers.faculty;
 
+import adg.red.models.SectionTimeTable;
+import adg.red.utils.Context;
 import adg.red.utils.LocaleManager;
+import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -42,6 +45,9 @@ public class SpecificButtonsController implements Initializable
     @FXML
     private void viewTimeTable(ActionEvent event)
     {
+        Context.getInstance().setTimeTable(SectionTimeTable.getByFacultyMember(Context.getInstance().getCurrentUser().getFacultyMember()));
+        ViewLoader view = new ViewLoader(Context.getInstance().getDisplayView());
+        view.loadView("TimeTable");
     }
 
     @FXML
