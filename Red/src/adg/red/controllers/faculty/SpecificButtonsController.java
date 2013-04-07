@@ -4,6 +4,7 @@
  */
 package adg.red.controllers.faculty;
 
+import adg.red.config.FacultyAction;
 import adg.red.models.SectionTimeTable;
 import adg.red.utils.Context;
 import adg.red.utils.LocaleManager;
@@ -35,11 +36,15 @@ public class SpecificButtonsController implements Initializable
     @FXML
     private void uploadScore(ActionEvent event)
     {
+        Context.getInstance().setFacultyAction(FacultyAction.UploadScore);
+        renderSectionView();
     }
 
     @FXML
     private void specialRequest(ActionEvent event)
     {
+        Context.getInstance().setFacultyAction(FacultyAction.SpecialApproval);
+        renderSectionView();
     }
 
     @FXML
@@ -53,6 +58,14 @@ public class SpecificButtonsController implements Initializable
     @FXML
     private void generateReport(ActionEvent event)
     {
+        Context.getInstance().setFacultyAction(FacultyAction.Reports);
+        renderSectionView();
+    }
+
+    private void renderSectionView()
+    {
+        ViewLoader view = new ViewLoader(Context.getInstance().getDisplayView());
+        view.loadView("faculty/SectionView");
     }
 
     /**
