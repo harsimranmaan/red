@@ -206,7 +206,7 @@ public class SectionViewController implements Initializable
             Logger.getLogger(SectionViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         initializeComponentsByLocale();
-        secLbl.setText("Section " + Context.getInstance().getSelectedSection().getSectionPK().getSectionId());
+        secLbl.setText(LocaleManager.get(74) + " " + Context.getInstance().getSelectedSection().getSectionPK().getSectionId());
         creditLbl.setText(Integer.toString(Context.getInstance().getSelectedCourse().getCredits()));
         passRqLbl.setText(Context.getInstance().getSelectedCourse().getPassingRequirement());
         courseDesTxt.setText(Context.getInstance().getSelectedCourse().getDescription());
