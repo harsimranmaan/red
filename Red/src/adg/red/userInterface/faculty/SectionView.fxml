@@ -7,5 +7,16 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane AnchorPane.bottomAnchor="0"   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.faculty.SectionViewController">
-
+    <TableView id="tabCourse" fx:id="tabSection" prefHeight="200"  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" onMouseClicked="#selectSection" >
+        <columns>
+            <TableColumn minWidth="100.0" prefWidth="100.0" text="Department Id" fx:id="colDept" />
+            <TableColumn prefWidth="55.0" text="Sections" fx:id="colSection" />
+            <TableColumn minWidth="5.0" prefWidth="50.0" text="Type" fx:id="colType" />
+            <TableColumn prefWidth="75.0" text="Start Date" fx:id="colStart" />
+            <TableColumn prefWidth="75.0" text="End Date" fx:id="colEnd" />
+            <TableColumn minWidth="20.0" prefWidth="150.0" text="Teaching Assistant" fx:id="colTA" />
+        </columns>
+    </TableView>
+    <AnchorPane fx:id="actionView" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="220" ></AnchorPane>
 </AnchorPane>
+
