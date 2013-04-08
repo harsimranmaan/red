@@ -65,7 +65,7 @@ public class SpecificButtonsController implements Initializable
     private void renderSectionView()
     {
         ViewLoader view = new ViewLoader(Context.getInstance().getDisplayView());
-        view.loadView("faculty/UploadScore");
+        view.loadView("faculty/SectionView");
     }
 
     /**

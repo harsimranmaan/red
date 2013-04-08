@@ -264,6 +264,11 @@ public class Section implements Serializable
         return RedEntityManager.getEntityManager().createNamedQuery("Section.findByDepartmentAndCourseNumber").setParameter("departmentId", course.getCoursePK().getDepartmentId()).setParameter("courseNumber", course.getCoursePK().getCourseNumber()).getResultList();
     }
 
+    /**
+     * Get faculty member name and last name
+     * <p/>
+     * @return the full name of faculty
+     */
     public String getFacultyMemberName()
     {
         return facultyMemberId.getUsername().getFirstName() + " " + facultyMemberId.getUsername().getLastName();
