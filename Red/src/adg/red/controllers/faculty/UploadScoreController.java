@@ -53,8 +53,6 @@ public class UploadScoreController implements Initializable
     @FXML
     private Label lblSecNumber;
     @FXML
-    private Label lblResponse;
-    @FXML
     private Label lblSection;
     @FXML
     private Label lblSession;
@@ -79,6 +77,7 @@ public class UploadScoreController implements Initializable
         BreadCrumbController.renderBreadCrumb("faculty/HomeView|faculty/UploadScore");
         Context.getInstance().setTitle(LocaleManager.get(56));
         initializeComponentsByLocale();
+        selectSection();
         toggleLabels();
     }
 
@@ -190,7 +189,7 @@ public class UploadScoreController implements Initializable
 
     }
 
-    public void selectSection(MouseEvent event)
+    public void selectSection()
     {
         Section sec = Context.getInstance().getSelectedSection();
         lblDeptCoureNumber.setText(sec.getSectionPK().getDepartmentId() + " " + sec.getSectionPK().getCourseNumber());
