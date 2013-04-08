@@ -1,11 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane AnchorPane.bottomAnchor="0"   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.faculty.SpecialApprovalController">
+<!--<AnchorPane AnchorPane.bottomAnchor="0"   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.faculty.SpecialApprovalController">-->
 
-</AnchorPane>
+<!--</AnchorPane>-->
+
+<VBox id="VBox" alignment="CENTER" spacing="5.0" AnchorPane.bottomAnchor="0"   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.faculty.SpecialApprovalController">
+    <children>
+        <HBox id="HBox" alignment="CENTER_LEFT" spacing="30.0">
+            <children>
+                <Label fx:id="lblHeading2" text="Enter Student Number:" />
+                <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                    <children>
+                        <Label fx:id="lblDeptCoureNumber" text="CICS 520" />
+                        <Label fx:id="lblSection" text="Secion" />
+                        <Label fx:id="lblSecNumber" text="sectionNumber" />
+                        <Label id="lblTerm" fx:id="lblSession" text="Winter" />
+                        <Label fx:id="lblYear" text="2013" />
+                    </children>
+                </HBox>
+            </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER_LEFT" spacing="30.0">
+        </HBox>
+        <TextField fx:id="studentNumber" />
+        <Label id="loginErrMsg" fx:id="lblResponse" alignment="CENTER" contentDisplay="CENTER" layoutX="228.0" layoutY="382.0" text="You have not selected a section" textFill="#cc0000">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+        <Button fx:id="submitStudentNum" mnemonicParsing="false" onAction="#submitStudentNum" text="Browse File" />
+        <HBox id="HBox" alignment="CENTER" spacing="5.0">
+            <children>
+                <Button fx:id="btnBrowseFile" mnemonicParsing="false" onAction="#browseFile" text="Browse File" />
+                <Button fx:id="btnUpload" mnemonicParsing="false" onAction="#uploadScore" text="Upload Score" />
+            </children>
+        </HBox>
+
+
+    </children>
+</VBox>
