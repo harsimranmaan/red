@@ -170,54 +170,54 @@ SET foreign_key_checks = 1;
 LOCK TABLES `Department` WRITE;
 
 INSERT INTO `Department` 
-(`departmentId`, `name`, `addressId`, `facultyId`, `phone`, `email`, `website`) 
+(`departmentId`, `name`, `facultyId`) 
 VALUES
-('ARCS', 'Alternative Routes to Computing', '108', '100', '98308', 'arcs@ubc.ca', 'www.arcs.ubc.ca'),
-('ANAT', 'Anatomy', '109', '101', '98309', 'anat@ubc.ca', 'www.anat.ubc.ca'),
-('BIOF', 'Bioinformatics', '110', '100', '98310', 'biof@ubc.ca', 'www.biof.ubc.ca'),
-('BIOC', 'Biochemistry', '111', '101', '98311', 'bioc@ubc.ca', 'www.bioc.ubc.ca'),
-('CICS', 'Computing Information and Cognitive Systems', '112', '100', '98312', 'gradsec@mss.icics.ubc.ca', 'www.icics.ubc.ca'),
-('CELL', 'Cell and Developmental Biology', '113', '101', '98313', 'cell@ubc.ca', 'www.cell.ubc.ca'),
-('DMED', 'Digital Media', '114', '100', '98314', 'dmed@ubc.ca', 'www.dmed.ubc.ca'),
-('DERM', 'Clinical Dermatology', '115', '101', '98315', 'derm@ubc.ca', 'www.derm.ubc.ca'),
-('EECE', 'Electrical and Computer Engineering', '116', '100', '78216', 'esec@ece.ubc.ca', 'www.ece.ubc.ca'),
-('EMER', 'Emergency Medicine', '117', '101', '43217', 'emer@ubc.ca', 'www.emer.ubc.ca'),
-('FEBC', 'Forest Engineering British Columbia', '118', '100', '98318', 'febc@ubc.ca', 'www.febc.ubc.ca'),
-('FMED', 'Foundations of Medicine', '119', '101', '98319', 'fmed@ubc.ca', 'www.fmed.ubc.ca'),
-('GSAT', 'Genome Science and Technology', '120', '100', '98320', 'gsat@ubc.ca', 'www.gsat.ubc.ca'),
-('HXPH', 'Herstmonceux Physics', '121', '100', '98321', 'hxph@ubc.ca', 'www.hxph.ubc.ca'),
-('HUNU', 'Human Nutrition', '122', '101', '98322', 'hunu@ubc.ca', 'www.hunu.ubc.ca'),
-('INDS', 'Interdisciplinary Studies', '123', '100', '98323', 'inds@ubc.ca', 'www.inds.ubc.ca'),
-('ISCI', 'Integrated Sciences', '124', '101', '98324', 'isci@ubc.ca', 'www.isci.ubc.ca'),
-('JAPN', 'Japanese', '125', '100', '98325', 'japn@ubc.ca', 'www.japn.ubc.ca'),
-('JRNL', 'Journalism', '126', '101', '98326', 'jrnl@ubc.ca', 'www.jrnl.ubc.ca'),
-('KORN', 'Korean', '127', '100', '98327', 'korn@ubc.ca', 'www.korn.ubc.ca'),
-('KNSL', 'Kinesiology', '128', '101', '98328', 'knsl@ubc.ca', 'www.knsl.ubc.ca'),
-('LLED', 'Language and Literacy Education', '129', '100', '98329', 'lled@ubc.ca', 'www.lled.ubc.ca'),
-('LAFS', 'Land & Food Systems', '130', '101', '98330', 'lafs@ubc.ca', 'www.lafs.ubc.ca'),
-('MATH', 'Mathematics', '131', '100', '98331', 'math@ubc.ca', 'www.math.ubc.ca'),
-('MEDG', 'Medical Genetics', '132', '101', '98332', 'medg@ubc.ca', 'www.medg.ubc.ca'),
-('NRSC', 'Neuroscience', '133', '101', '98333', 'nrsc@ubc.ca', 'www.nrsc.ubc.ca'),
-('NURS', 'Nursing', '134', '101', '98334', 'nurs@ubc.ca', 'www.nurs.ubc.ca'),
-('ONCO', 'Oncology', '135', '100', '98335', 'onco@ubc.ca', 'www.onco.ubc.ca'),
-('OPTH', 'Ophthalmology', '136', '101', '98336', 'opth@ubc.ca', 'www.opth.ubc.ca'),
-('PAED', 'Paediatrics', '137', '101', '98337', 'paed@ubc.ca', 'www.paed.ubc.ca'),
-('PLNT', 'Plant Science', '138', '100', '98338', 'plnt@ubc.ca', 'www.plnt.ubc.ca'),
-('RMES', 'Resource Management and Environmental Studies', '139', '100', '98339', 'rmes@ubc.ca', 'www.rmes.ubc.ca'),
-('RADI', 'Radiology', '140', '101', '98340', 'radi@ubc.ca', 'www.radi.ubc.ca'),
-('SATS', 'Science and Technology Studies', '141', '100', '98341', 'sats@ubc.ca', 'www.sats.ubc.ca'),
-('SURG', 'Surgery', '142', '101', '98342', 'surg@ubc.ca', 'www.surg.ubc.ca'),
-('TECS', 'Teacher Librarianship', '143', '100', '98343', 'tecs@ubc.ca', 'www.tecs.ubc.ca'),
-('TIBT', 'Tibetan Languages', '144', '101', '98344', 'tibt@ubc.ca', 'www.tibt.ubc.ca'),
-('UROL', 'Urological Surgery', '145', '100', '98345', 'urol@ubc.ca', 'www.urol.ubc.ca'),
-('URBN', 'Urban Studies', '146', '101', '98346', 'urbn@ubc.ca', 'www.urbn.ubc.ca'),
-('VRHS', 'Vocational Rehabilitation Counselling', '147', '100', '98347', 'vrhs@ubc.ca', 'www.vrhs.ubc.ca'),
-('VISA', 'Visual Arts', '148', '101', '98348', 'visa@ubc.ca', 'www.visa.ubc.ca'),
-('WRIT', 'University Writing Centre Courses', '149', '100', '98349', 'writ@ubc.ca', 'www.writ.ubc.ca'),
-('WOOD', 'Wood Products Processing', '150', '101', '98350', 'wood@ubc.ca', 'www.wood.ubc.ca'),
-('COGS', 'Cognitive Systems Program', '151', '100', '98351', 'cogs@ubc.ca', 'www.cogs.ubc.ca'),
-('ZOOL', 'Zoology', '152', '101', '98352', 'zool@ubc.ca', 'www.zool.ubc.ca'),
-('CPSC', 'Computer Science', '153', '100', '98353', '@ubc.ca', 'www.cpsc.ubc.ca');
+('ARCS', 'Alternative Routes to Computing', '100'),
+('ANAT', 'Anatomy', '101'),
+('BIOF', 'Bioinformatics', '100'),
+('BIOC', 'Biochemistry', '101'),
+('CICS', 'Computing Information and Cognitive Systems', '100'),
+('CELL', 'Cell and Developmental Biology', '101'),
+('DMED', 'Digital Media', '100'),
+('DERM', 'Clinical Dermatology', '101'),
+('EECE', 'Electrical and Computer Engineering', '100'),
+('EMER', 'Emergency Medicine', '101'),
+('FEBC', 'Forest Engineering British Columbia', '100'),
+('FMED', 'Foundations of Medicine', '101'),
+('GSAT', 'Genome Science and Technology', '100'),
+('HXPH', 'Herstmonceux Physics', '100'),
+('HUNU', 'Human Nutrition', '101'),
+('INDS', 'Interdisciplinary Studies', '100'),
+('ISCI', 'Integrated Sciences', '101'),
+('JAPN', 'Japanese', '100'),
+('JRNL', 'Journalism', '101'),
+('KORN', 'Korean', '100'),
+('KNSL', 'Kinesiology', '101'),
+('LLED', 'Language and Literacy Education', '100'),
+('LAFS', 'Land & Food Systems', '101'),
+('MATH', 'Mathematics', '100'),
+('MEDG', 'Medical Genetics', '101'),
+('NRSC', 'Neuroscience', '101'),
+('NURS', 'Nursing', '101'),
+('ONCO', 'Oncology', '100'),
+('OPTH', 'Ophthalmology', '101'),
+('PAED', 'Paediatrics', '101'),
+('PLNT', 'Plant Science', '100'),
+('RMES', 'Resource Management and Environmental Studies', '100'),
+('RADI', 'Radiology', '101'),
+('SATS', 'Science and Technology Studies', '100'),
+('SURG', 'Surgery', '101'),
+('TECS', 'Teacher Librarianship', '100'),
+('TIBT', 'Tibetan Languages', '101'),
+('UROL', 'Urological Surgery', '100'),
+('URBN', 'Urban Studies', '101'),
+('VRHS', 'Vocational Rehabilitation Counselling', '100'),
+('VISA', 'Visual Arts', '101'),
+('WRIT', 'University Writing Centre Courses', '100'),
+('WOOD', 'Wood Products Processing', '101'),
+('COGS', 'Cognitive Systems Program', '100'),
+('ZOOL', 'Zoology', '101'),
+('CPSC', 'Computer Science', '100');
 
 UNLOCK TABLES;
 
@@ -259,30 +259,30 @@ UNLOCK TABLES;
 LOCK TABLES `Program` WRITE;
 
 INSERT INTO `Program` 
-(`programName`, `departmentId`, `addressId`, `email`, `phone`) 
+(`programName`, `departmentId`, `creditsRequired`) 
 VALUES 
-('Bachelor of Engineering', 'ARCS', '154', 'bearcs@ubc.ca', '98354'),
-('Master of Medicine', 'ANAT', '155', 'mmanat@ubc.ca', '98355'),
-('Bachelor of Engineering', 'BIOF', '156', 'bebiof@ubc.ca', '98356'),
-('Bachelor of Medicine', 'BIOC', '157', 'bmbioc@ubc.ca', '98357'),
-('Bachelor of Engineering', 'CICS', '158', 'becics@ubc.ca', '98358'),
-('Master of Software Systems', 'CICS', '159', 'msscics@ubc.ca', '98359'),
-('Bachelor of Engineering', 'EECE', '163', 'beeece@ubc.ca', '98363'),
-('Master of Medicine', 'CELL', '160', 'mmcell@ubc.ca', '98360'),
-('Bachelor of Engineering', 'DMED', '161', 'bedmed@ubc.ca', '98361'),
-('Bachelor of Medicine', 'DERM', '162', 'bmderm@ubc.ca', '98362'),
-('Bachelor of Medicine', 'EMER', '164', 'bmemer@ubc.ca', '98364'),
-('Bachelor of Engineering', 'FEBC', '165', 'befebc@ubc.ca', '98365'),
-('Master of Medicine', 'FMED', '166', 'bmfmed@ubc.ca', '98366'),
-('Bachelor of Engineering', 'GSAT', '167', 'begsat@ubc.ca', '98367'),
-('Bachelor of Engineering', 'HXPH', '168', 'behxph@ubc.ca', '98368'),
-('Bachelor of Medicine', 'HUNU', '169', 'bmhunu@ubc.ca', '98369'),
-('Bachelor of Engineering', 'INDS', '170', 'beinds@ubc.ca', '98370'),
-('Master of Medicine', 'ISCI', '171', 'bmisci@ubc.ca', '98371'),
-('Bachelor of Engineering', 'JAPN', '172', 'bejapn@ubc.ca', '98372'),
-('Bachelor of Medicine', 'JRNL', '173', 'bmjrnl@ubc.ca', '98373'),
-('Bachelor of Engineering', 'KORN', '174', 'bekorn@ubc.ca', '98374'),
-('Bachelor of Medicine', 'KNSL', '175', 'bmknsl@ubc.ca', '98375');
+('Bachelor of Engineering', 'ARCS', '20' ),
+('Master of Medicine', 'ANAT', '23' ),
+('Bachelor of Engineering', 'BIOF', '22' ),
+('Bachelor of Medicine', 'BIOC', '20' ),
+('Bachelor of Engineering', 'CICS', '23' ),
+('Master of Software Systems', 'CICS', '20' ),
+('Bachelor of Engineering', 'EECE', '22' ),
+('Master of Medicine', 'CELL', '20' ),
+('Bachelor of Engineering', 'DMED', '21' ),
+('Bachelor of Medicine', 'DERM', '20' ),
+('Bachelor of Medicine', 'EMER', '26' ),
+('Bachelor of Engineering', 'FEBC', '20' ),
+('Master of Medicine', 'FMED', '27' ),
+('Bachelor of Engineering', 'GSAT', '23' ),
+('Bachelor of Engineering', 'HXPH', '27' ),
+('Bachelor of Medicine', 'HUNU', '22' ),
+('Bachelor of Engineering', 'INDS', '28' ),
+('Master of Medicine', 'ISCI', '23' ),
+('Bachelor of Engineering', 'JAPN', '22' ),
+('Bachelor of Medicine', 'JRNL', '21' ),
+('Bachelor of Engineering', 'KORN', '20' ),
+('Bachelor of Medicine', 'KNSL', '28' );
 
 UNLOCK TABLES;
 
@@ -500,14 +500,20 @@ UNLOCK TABLES;
 LOCK TABLES `Section` WRITE;
 
 INSERT INTO `Section` 
-(`sectionId`, `sectionTypeId`, `courseNumber`, `departmentId`, `termYear`, `sessionId`, `startDate`, `endDate`, `facultyMemberId`, `teachingAssistant`) 
+(`sectionId`, `sectionTypeId`, `courseNumber`, `departmentId`, `termYear`, `sessionId`, `startDate`, `endDate`, `registerDeadline`, `dropDeadline`, `totalSeats`, `facultyMemberId`, `teachingAssistant`) 
 VALUES 
-('01', '100', '505', 'CICS', '2013', '101', '2013-01-01', '2013-04-31', '100', null),
-('01', '102', '505', 'CICS', '2013', '101', '2013-01-01', '2013-04-31', '100', 'Iliya'),
-('01', '100', '520', 'CICS', '2013', '101', '2013-01-01', '2013-04-31', '101', null),
-('01', '101', '520', 'CICS', '2013', '101', '2013-01-01', '2013-04-31', '101', 'Hootan'),
-('02', '100', '520', 'CICS', '2013', '101', '2013-01-01', '2013-04-31', '100', null),
-('02', '101', '520', 'CICS', '2013', '101', '2013-01-01', '2013-04-31', '100', 'Hootan');
+('01', '100', '505', 'CICS', '2013', '101', '2013-01-01', '2013-04-31', '2013-01-10', '2013-01-20', '22', '100', null),
+('01', '102', '505', 'CICS', '2013', '101', '2013-01-01', '2013-04-31', '2013-01-11', '2013-01-21', '20', '100', 'Iliya'),
+('01', '100', '520', 'CICS', '2013', '101', '2013-01-01', '2013-04-31', '2013-01-10', '2013-01-22', '21', '101', null),
+('01', '101', '520', 'CICS', '2013', '101', '2013-01-01', '2013-04-31', '2013-01-12', '2013-01-20', '20', '101', 'Hootan'),
+('02', '100', '520', 'CICS', '2013', '101', '2013-01-01', '2013-04-31', '2013-01-11', '2013-01-22', '22', '100', null),
+('02', '101', '520', 'CICS', '2013', '101', '2013-01-01', '2013-04-31', '2013-01-10', '2013-01-20', '21', '100', 'Hootan'),
+('01', '100', '505', 'CICS', '2013', '102', '2013-05-01', '2013-08-31', '2013-05-10', '2013-05-20', '22', '100', null),
+('01', '102', '505', 'CICS', '2013', '102', '2013-05-01', '2013-08-31', '2013-05-11', '2013-05-21', '20', '100', 'Iliya'),
+('01', '100', '520', 'CICS', '2013', '102', '2013-05-01', '2013-08-31', '2013-05-10', '2013-05-22', '21', '101', null),
+('01', '101', '520', 'CICS', '2013', '102', '2013-05-01', '2013-08-31', '2013-05-12', '2013-05-20', '20', '101', 'Hootan'),
+('02', '100', '520', 'CICS', '2013', '102', '2013-05-01', '2013-08-31', '2013-05-11', '2013-05-22', '22', '100', null),
+('02', '101', '520', 'CICS', '2013', '102', '2013-05-01', '2013-08-31', '2013-05-10', '2013-05-20', '21', '100', 'Hootan');
 
 UNLOCK TABLES;
 
@@ -794,8 +800,17 @@ VALUES
 
 UNLOCK TABLES;
 
+/* insert data into 'ProgramCourseList' table */
+LOCK TABLES `ProgramCourseList` WRITE;
 
+INSERT INTO `ProgramCourseList` (`programName`, `programDepartmentId`, `courseNumber`, `courseDepartmentId`) 
+VALUES 
+('Master of Software Systems', 'CICS', '500', 'CICS'),
+('Master of Software Systems', 'CICS', '505', 'CICS'),
+('Master of Software Systems', 'CICS', '511', 'CICS'),
+('Master of Software Systems', 'CICS', '520', 'CICS');
 
+UNLOCK TABLES;
 
 /* insert data into '' table 
 LOCK TABLES `` WRITE;
