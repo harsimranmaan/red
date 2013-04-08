@@ -168,4 +168,17 @@ public class Student implements Serializable
             throw new Exception(LocaleManager.get(34));
         }
     }
+
+    public static Student getStudentByUserId(int userId) throws Exception
+    {
+        List<Student> studentList = RedEntityManager.getEntityManager().createNamedQuery("Student.findByUserId").setParameter("userId", userId).getResultList();
+        if (studentList.size() == 1)
+        {
+            return studentList.get(0);
+        }
+        else
+        {
+            throw new Exception(LocaleManager.get(34));
+        }
+    }
 }

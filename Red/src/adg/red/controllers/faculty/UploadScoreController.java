@@ -74,7 +74,6 @@ public class UploadScoreController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         data = new ArrayList();
-        BreadCrumbController.renderBreadCrumb("faculty/HomeView|faculty/UploadScore");
         Context.getInstance().setTitle(LocaleManager.get(56));
         initializeComponentsByLocale();
         selectSection();
