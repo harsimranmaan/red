@@ -24,31 +24,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Program")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "Program.findAll", query = "SELECT p FROM Program p"),
     @NamedQuery(name = "Program.findByProgramName", query = "SELECT p FROM Program p WHERE p.programPK.programName = :programName"),
     @NamedQuery(name = "Program.findByDepartmentId", query = "SELECT p FROM Program p WHERE p.programPK.departmentId = :departmentId"),
-    @NamedQuery(name = "Program.findByEmail", query = "SELECT p FROM Program p WHERE p.email = :email"),
-    @NamedQuery(name = "Program.findByPhone", query = "SELECT p FROM Program p WHERE p.phone = :phone"),
     @NamedQuery(name = "Program.findByIsActive", query = "SELECT p FROM Program p WHERE p.isActive = :isActive")
 })
 public class Program implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ProgramPK programPK;
     @Basic(optional = false)
-    @Column(name = "email")
-    private String email;
-    @Basic(optional = false)
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "creditsRequired")
+    private int creditsRequired;
     @Basic(optional = false)
     @Column(name = "isActive")
     private boolean isActive;
-    @JoinColumn(name = "addressId", referencedColumnName = "addressId")
-    @ManyToOne
-    private Address addressId;
     @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Department department;
@@ -62,11 +55,9 @@ public class Program implements Serializable
         this.programPK = programPK;
     }
 
-    public Program(ProgramPK programPK, String email, String phone, boolean isActive)
+    public Program(ProgramPK programPK, boolean isActive)
     {
         this.programPK = programPK;
-        this.email = email;
-        this.phone = phone;
         this.isActive = isActive;
     }
 
@@ -85,26 +76,6 @@ public class Program implements Serializable
         this.programPK = programPK;
     }
 
-    public String getEmail()
-    {
-        return email;
-    }
-
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-
-    public String getPhone()
-    {
-        return phone;
-    }
-
-    public void setPhone(String phone)
-    {
-        this.phone = phone;
-    }
-
     public boolean getIsActive()
     {
         return isActive;
@@ -113,16 +84,6 @@ public class Program implements Serializable
     public void setIsActive(boolean isActive)
     {
         this.isActive = isActive;
-    }
-
-    public Address getAddressId()
-    {
-        return addressId;
-    }
-
-    public void setAddressId(Address addressId)
-    {
-        this.addressId = addressId;
     }
 
     public Department getDepartment()
@@ -163,5 +124,15 @@ public class Program implements Serializable
     public String toString()
     {
         return "adg.red.models.Program[ programPK=" + programPK + " ]";
+    }
+
+    public int getCreditsRequired()
+    {
+        return creditsRequired;
+    }
+
+    public void setCreditsRequired(int creditsRequired)
+    {
+        this.creditsRequired = creditsRequired;
     }
 }
