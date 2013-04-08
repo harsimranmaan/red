@@ -26,19 +26,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Department")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "Department.findAll", query = "SELECT d FROM Department d"),
     @NamedQuery(name = "Department.findByDepartmentId", query = "SELECT d FROM Department d WHERE d.departmentId = :departmentId"),
     @NamedQuery(name = "Department.findByName", query = "SELECT d FROM Department d WHERE d.name = :name"),
-    @NamedQuery(name = "Department.findByDirectorId", query = "SELECT d FROM Department d WHERE d.directorId = :directorId"),
-    @NamedQuery(name = "Department.findByPhone", query = "SELECT d FROM Department d WHERE d.phone = :phone"),
-    @NamedQuery(name = "Department.findByEmail", query = "SELECT d FROM Department d WHERE d.email = :email"),
-    @NamedQuery(name = "Department.findByWebsite", query = "SELECT d FROM Department d WHERE d.website = :website"),
     @NamedQuery(name = "Department.findByIsActive", query = "SELECT d FROM Department d WHERE d.isActive = :isActive"),
     @NamedQuery(name = "Department.findByDepartmentIdBeginsWith", query = "SELECT d FROM Department d WHERE d.departmentId LIKE  :keyWord")
 })
 public class Department implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -47,26 +44,12 @@ public class Department implements Serializable
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
-    @Column(name = "directorId")
-    private Integer directorId;
-    @Basic(optional = false)
-    @Column(name = "phone")
-    private String phone;
-    @Basic(optional = false)
-    @Column(name = "email")
-    private String email;
-    @Basic(optional = false)
-    @Column(name = "website")
-    private String website;
     @Basic(optional = false)
     @Column(name = "isActive")
     private boolean isActive;
     @JoinColumn(name = "facultyId", referencedColumnName = "facultyId")
     @ManyToOne(optional = false)
     private Faculty facultyId;
-    @JoinColumn(name = "addressId", referencedColumnName = "addressId")
-    @ManyToOne
-    private Address addressId;
 
     public Department()
     {
@@ -77,13 +60,10 @@ public class Department implements Serializable
         this.departmentId = departmentId;
     }
 
-    public Department(String departmentId, String name, String phone, String email, String website, boolean isActive)
+    public Department(String departmentId, String name, boolean isActive)
     {
         this.departmentId = departmentId;
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.website = website;
         this.isActive = isActive;
     }
 
@@ -107,46 +87,6 @@ public class Department implements Serializable
         this.name = name;
     }
 
-    public Integer getDirectorId()
-    {
-        return directorId;
-    }
-
-    public void setDirectorId(Integer directorId)
-    {
-        this.directorId = directorId;
-    }
-
-    public String getPhone()
-    {
-        return phone;
-    }
-
-    public void setPhone(String phone)
-    {
-        this.phone = phone;
-    }
-
-    public String getEmail()
-    {
-        return email;
-    }
-
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-
-    public String getWebsite()
-    {
-        return website;
-    }
-
-    public void setWebsite(String website)
-    {
-        this.website = website;
-    }
-
     public boolean getIsActive()
     {
         return isActive;
@@ -156,7 +96,7 @@ public class Department implements Serializable
     {
         this.isActive = isActive;
     }
-    
+
     public Faculty getFacultyId()
     {
         return facultyId;
@@ -165,16 +105,6 @@ public class Department implements Serializable
     public void setFacultyId(Faculty facultyId)
     {
         this.facultyId = facultyId;
-    }
-
-    public Address getAddressId()
-    {
-        return addressId;
-    }
-
-    public void setAddressId(Address addressId)
-    {
-        this.addressId = addressId;
     }
 
     @Override
@@ -221,5 +151,4 @@ public class Department implements Serializable
     {
         return ((List<Department>) RedEntityManager.getEntityManager().createNamedQuery("Department.findByDepartmentId").setParameter("departmentId", departmentId).getResultList()).get(0);
     }
-
 }

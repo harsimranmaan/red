@@ -85,6 +85,17 @@ public class Section implements Serializable
     })
     @ManyToOne(optional = false)
     private Course course;
+    @Basic(optional = false)
+    @Column(name = "registerDeadline")
+    @Temporal(TemporalType.DATE)
+    private Date registerDeadline;
+    @Basic(optional = false)
+    @Column(name = "dropDeadline")
+    @Temporal(TemporalType.DATE)
+    private Date dropDeadline;
+    @Basic(optional = false)
+    @Column(name = "totalSeats")
+    private int totalSeats;
 
     public Section()
     {
@@ -272,5 +283,35 @@ public class Section implements Serializable
     public String getFacultyMemberName()
     {
         return facultyMemberId.getUsername().getFirstName() + " " + facultyMemberId.getUsername().getLastName();
+    }
+
+    public Date getRegisterDeadline()
+    {
+        return registerDeadline;
+    }
+
+    public void setRegisterDeadline(Date registerDeadline)
+    {
+        this.registerDeadline = registerDeadline;
+    }
+
+    public Date getDropDeadline()
+    {
+        return dropDeadline;
+    }
+
+    public void setDropDeadline(Date dropDeadline)
+    {
+        this.dropDeadline = dropDeadline;
+    }
+
+    public int getTotalSeats()
+    {
+        return totalSeats;
+    }
+
+    public void setTotalSeats(int totalSeats)
+    {
+        this.totalSeats = totalSeats;
     }
 }
