@@ -235,4 +235,39 @@ public class Enrolment implements Serializable
     {
         this.gradeId = gradeId;
     }
+    
+    public String getDepartmentAndCourseAndSection()
+    {
+        return this.getEnrolmentPK().getDepartmentId() + " " + 
+                String.valueOf(this.getEnrolmentPK().getCourseNumber()) + " " +
+                String.valueOf(this.getEnrolmentPK().getSectionId());
+    }
+    
+    public String getActivity()
+    {
+        List<SectionType> sectionTypeList = RedEntityManager.getEntityManager()
+                .createNamedQuery("SectionType.findBySectionTypeId")
+                .setParameter("sectionTypeId", this.getEnrolmentPK().getSectionTypeId())
+                .getResultList();
+        return sectionTypeList.get(0).getName();
+    }
+            
+    public String getTerm()
+    {
+        List<Session> sessionList = RedEntityManager.getEntityManager()
+                .createNamedQuery("Session.findBySessionId")
+                .setParameter("sessionId", this.getEnrolmentPK().getSessionId())
+                .getResultList();
+        return sessionList.get(0).getName() + " " + String.valueOf(this.getEnrolmentPK().getTermYear());
+    }
+    
+    public String getCredit()
+    {
+        List<Course> courseList = RedEntityManager.getEntityManager()
+                .createNamedQuery("Course.findByDepartmentAndCourseNumber")
+                .setParameter("courseNumber", this.getEnrolmentPK().getCourseNumber())
+                .setParameter("departmentId", this.getEnrolmentPK().getDepartmentId())
+                .getResultList();
+        return String.valueOf(courseList.get(0).getCredits());
+    }
 }
