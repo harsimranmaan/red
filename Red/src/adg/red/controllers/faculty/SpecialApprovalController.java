@@ -20,7 +20,9 @@ import javafx.scene.control.TextField;
 import adg.red.models.Student;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.scene.paint.Color;
+import javafx.animation.FadeTransition;
+import javafx.scene.Node;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -64,23 +66,32 @@ public class SpecialApprovalController implements Initializable
     @FXML
     private void pullStudentInfo(ActionEvent event)
     {
+        transitionEffect(lblnotification, "OFF");
+        transitionEffect(lblErrMsg, "OFF");
+
         if (studentNumber.getText().length() == 0)
         {
-            lblErrMsg.setText("Please enter valid student number!");  //store label in database
+            lblErrMsg.setText(LocaleManager.get(78));
+            transitionEffect(lblErrMsg, "ON");
+            btnEnrol.setDisable(true);
         }
         else
         {
             try
             {
+                transitionEffect(lblErrMsg, "OFF");
                 int studentNum = Integer.parseInt(studentNumber.getText());
                 student = Student.getStudentByStudentId(studentNum);
                 lblName.setDisable(false);
+                transitionEffect(lblName, "ON");
                 lblStudentInfo.setText(student.getUsername().getLastName() + ", " + student.getUsername().getFirstName());
+                transitionEffect(lblStudentInfo, "ON");
                 btnEnrol.setDisable(false);
             }
             catch (Exception ex)
             {
-                lblErrMsg.setText("Student not found!"); //store label in database
+                lblErrMsg.setText(LocaleManager.get(34));
+                transitionEffect(lblErrMsg, "ON");
                 Logger.getLogger(SpecialApprovalController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -91,14 +102,21 @@ public class SpecialApprovalController implements Initializable
     {
         try
         {
+            transitionEffect(lblnotification, "OFF");
             Enrolment enrolment = new Enrolment(student.getStudentId(), sec.getSectionId(), sec.getSectionPK().getCourseNumber(), sec.getSectionPK().getDepartmentId(), sec.getSectionPK().getTermYear(), sec.getSectionPK().getSessionId(), sec.getSectionPK().getSectionTypeId());
             enrolment.save();
-            lblnotification.setText("Student enroled successfully!"); //store label in database
+            lblnotification.setText(LocaleManager.get(79));
+            transitionEffect(lblnotification, "ON");
             btnEnrol.setDisable(true);
         }
         catch (Exception ex)
         {
-            lblnotification.setText("Student already registered !"); // store label in database
+            lblnotification.setText(LocaleManager.get(80));
+            transitionEffect(lblnotification, "ON");
+            btnEnrol.setDisable(true);
+            transitionEffect(btnEnrol, "ON");
+            lblName.setDisable(true);
+            transitionEffect(lblName, "ON");
             Logger.getLogger(SpecialApprovalController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -109,8 +127,8 @@ public class SpecialApprovalController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-//        Context.getInstance().setTitle(LocaleManager.get(56));
-        Context.getInstance().setTitle("Special Approval"); //store label in database
+
+        Context.getInstance().setTitle(LocaleManager.get(58));
         initializeComponentsByLocale();
         btnEnrol.setDisable(true);
         lblName.setDisable(true);
@@ -118,15 +136,10 @@ public class SpecialApprovalController implements Initializable
 
     private void initializeComponentsByLocale()
     {
-//        btnApprove.setText(LocaleManager.get(70));
-//        btnSubmitNumber.setText(LocaleManager.get(71));
-//        lblHeading.setText(LocaleManager.get(73));
-//        lblName.setText(LocaleManager.get(74));
-//        lblStudentInfo.setText(LocaleManager.get(28));
-        btnEnrol.setText("Enrol");
-        btnSubmitNumber.setText("Submit");
-        lblHeading.setText("Please enter student number: ");
-        lblName.setText("Student Name:");
+        btnEnrol.setText(LocaleManager.get(81));
+        btnSubmitNumber.setText(LocaleManager.get(82));
+        lblHeading.setText(LocaleManager.get(83));
+        lblName.setText(LocaleManager.get(84));
         selectSection();
     }
 
@@ -136,5 +149,22 @@ public class SpecialApprovalController implements Initializable
         lblDeptCoureNumber.setText(sec.getSectionPK().getDepartmentId() + " " + sec.getSectionPK().getCourseNumber());
         lblSecNumber.setText(Integer.toString(sec.getSectionId()));
         lblSession.setText(Session.getBySessionId(sec.getSectionPK().getSessionId()).getName());
+    }
+
+    public void transitionEffect(Node objectName, String action)
+    {
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), objectName);
+        if ("ON".equals(action))
+        {
+            fadeTransition.setFromValue(0.0);
+            fadeTransition.setToValue(1.0);
+            fadeTransition.play();
+        }
+        else if ("OFF".equals(action))
+        {
+            fadeTransition.setFromValue(1.0);
+            fadeTransition.setToValue(0.0);
+            fadeTransition.play();
+        }
     }
 }
