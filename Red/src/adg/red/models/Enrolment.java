@@ -39,7 +39,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Enrolment.findBySessionId", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.sessionId = :sessionId"),
     @NamedQuery(name = "Enrolment.findBySectionTypeId", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.sectionTypeId = :sectionTypeId"),
     @NamedQuery(name = "Enrolment.findByIsActive", query = "SELECT e FROM Enrolment e WHERE e.isActive = :isActive"),
-    @NamedQuery(name = "Enrolment.findByEnrolmentPK", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK=:enrolmentPK")
+    @NamedQuery(name = "Enrolment.findByEnrolmentPK", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK=:enrolmentPK"),
+    @NamedQuery(name = "Enrolment.findBySectionPK", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.courseNumber = :courseNumber AND e.enrolmentPK.departmentId = :departmentId AND e.enrolmentPK.sectionId = :sectionId AND e.enrolmentPK.sectionTypeId = :sectionTypeId AND e.enrolmentPK.sessionId = :sessionId AND e.enrolmentPK.termYear = :termYear")
 })
 public class Enrolment implements Serializable
 {
@@ -64,7 +65,7 @@ public class Enrolment implements Serializable
     @JoinColumn(name = "studentId", referencedColumnName = "studentId", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Student student;
-   @Column(name = "score")
+    @Column(name = "score")
     private Integer score;
     @JoinColumn(name = "resultId", referencedColumnName = "resultId")
     @ManyToOne
@@ -72,6 +73,7 @@ public class Enrolment implements Serializable
     @JoinColumn(name = "gradeId", referencedColumnName = "gradeId")
     @ManyToOne
     private Grade gradeId;
+
     public Enrolment()
     {
     }
@@ -167,6 +169,18 @@ public class Enrolment implements Serializable
         RedEntityManager.save(this);
     }
 
+    public static List<Enrolment> getEnrolmentBySectionPK(SectionPK sec)
+    {
+        return RedEntityManager.getEntityManager().createNamedQuery("Enrolment.findBySectionPK")
+                .setParameter("sectionId", sec.getSectionId())
+                .setParameter("courseNumber", sec.getCourseNumber())
+                .setParameter("departmentId", sec.getDepartmentId())
+                .setParameter("sessionId", sec.getSessionId())
+                .setParameter("termYear", sec.getTermYear())
+                .setParameter("sectionTypeId", sec.getSectionTypeId())
+                .getResultList();
+    }
+
     public static Enrolment getEnrolmentByEnrolmentPK(EnrolmentPK enrolmentPK) throws Exception
     {
         List<Enrolment> enrolList = RedEntityManager.getEntityManager()
@@ -192,27 +206,33 @@ public class Enrolment implements Serializable
 
     }
 
-    public Integer getScore() {
+    public Integer getScore()
+    {
         return score;
     }
 
-    public void setScore(Integer score) {
+    public void setScore(Integer score)
+    {
         this.score = score;
     }
 
-    public Result getResultId() {
+    public Result getResultId()
+    {
         return resultId;
     }
 
-    public void setResultId(Result resultId) {
+    public void setResultId(Result resultId)
+    {
         this.resultId = resultId;
     }
 
-    public Grade getGradeId() {
+    public Grade getGradeId()
+    {
         return gradeId;
     }
 
-    public void setGradeId(Grade gradeId) {
+    public void setGradeId(Grade gradeId)
+    {
         this.gradeId = gradeId;
     }
 }

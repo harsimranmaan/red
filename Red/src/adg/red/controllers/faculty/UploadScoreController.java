@@ -5,6 +5,7 @@
 package adg.red.controllers.faculty;
 
 import adg.red.controllers.BreadCrumbController;
+import adg.red.controllers.DownloadFileController;
 import adg.red.models.Enrolment;
 import adg.red.models.EnrolmentPK;
 import adg.red.models.Section;
@@ -66,6 +67,34 @@ public class UploadScoreController implements Initializable
     private ListView<String> lsvResult;
     private File file;
     private ArrayList<String> data;
+    @FXML
+    private Button btnDownloadTemp;
+
+    @FXML
+    private void downloadTemplate(ActionEvent event)
+    {
+        String content = createTemplateHeader();
+        List<Enrolment> enrolList = Enrolment.getEnrolmentBySectionPK(Context.getInstance().getSelectedSection().getSectionPK());
+
+        for (Enrolment enrol : enrolList)
+        {
+            content += Integer.toString(enrol.getStudent().getStudentId());
+            content += ",";
+            content += "\r\n";
+        }
+        DownloadFileController.saveFile(content, "csv");
+    }
+
+    private String createTemplateHeader()
+    {
+        String content = "#Template for ";
+        content += Context.getInstance().getSelectedSection().getDepartmentIdAndCourseName() + " ";
+        content += "Section " + Context.getInstance().getSelectedSection().getSectionId() + " ";
+        content += Context.getInstance().getSelectedSection().getTerm().getSession().getName();
+        content += Integer.toString(Context.getInstance().getSelectedSection().getTerm().getTermPK().getTermYear()) + "\r\n";
+        content += "#Student id, Score, Grade\r\n";
+        return content;
+    }
 
     /**
      * Initializes the controller class.
@@ -99,7 +128,6 @@ public class UploadScoreController implements Initializable
             lblFilePath.setText(file.getPath());
             lblFilePath.setVisible(true);
             btnUpload.setDisable(false);
-
         }
         else
         {
@@ -136,22 +164,28 @@ public class UploadScoreController implements Initializable
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file)))
         {
-
             String text = "";
             while ((text = reader.readLine()) != null)
             {
-                text = text.trim();
-                String tempData[] = text.split(",");
-                for (int i = 0; i < tempData.length; i++)
+                // ignore line that starts with #
+                if (!text.startsWith("#"))
                 {
-                    data.add(tempData[i].trim());
+                    text = text.trim();
+                    String tempData[] = text.split(",");
+                    for (int i = 0; i < tempData.length; i++)
+                    {
+                        data.add(tempData[i].trim());
+                    }
                 }
             }
             for (int i = 0; i < data.size(); i++)
             {
                 String studentId = data.get(i).trim();
                 String score = data.get(++i).trim();
+                //String grade = data.get(++i).trim();
+
                 String result = "Student Id: " + studentId + " Score: " + score;
+
 
                 EnrolmentPK enPK = new EnrolmentPK(Integer.parseInt(studentId),
                         Context.getInstance().getSelectedSection().getSectionId(),
