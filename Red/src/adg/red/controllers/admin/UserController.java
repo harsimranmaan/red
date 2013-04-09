@@ -25,9 +25,5 @@ public class UserController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        User currentUser = Context.getInstance().getCurrentUser();
-        EmailSender emailSender = new EmailSender(currentUser.getEmail(), "Did you really forget the password? LOL", currentUser.toString());
-        emailSender.send();
-
     }
 }
