@@ -1,11 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane AnchorPane.bottomAnchor="0"   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.faculty.ReportsController">
-
-</AnchorPane>
+<VBox id="VBox" alignment="CENTER" spacing="5.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.faculty.ReportsController">
+  <children>
+    <HBox id="HBox" alignment="CENTER_LEFT" spacing="30.0">
+      <children>
+        <Label fx:id="lblHeading2" text="Section you are generating a report for:" />
+        <HBox id="HBox" alignment="CENTER" spacing="5.0">
+          <children>
+            <Label fx:id="lblDeptCoureNumber" text="CICS 520" />
+            <Label fx:id="lblSection" text="Secion" />
+            <Label fx:id="lblSecNumber" text="sectionNumber" />
+            <Label id="lblTerm" fx:id="lblSession" text="Winter" />
+            <Label fx:id="lblYear" text="2013" />
+          </children>
+        </HBox>
+      </children>
+    </HBox>
+    <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="486.0" spacing="30.0">
+      <children>
+        <Label fx:id="lblHeading" text="Select which items you want in the report:" />
+      </children>
+    </HBox>
+    <HBox id="HBox" alignment="CENTER" prefHeight="34.0" prefWidth="486.0" spacing="30.0">
+      <children>
+        <CheckBox fx:id="btnStudentNumber" mnemonicParsing="false" text="Student Number" />
+        <CheckBox fx:id="btnFullName" mnemonicParsing="false" text="Full Name" />
+        <CheckBox fx:id="btnEmail" mnemonicParsing="false" text="Email" />
+        <CheckBox fx:id="btnScores" mnemonicParsing="false" text="Scores" />
+      </children>
+    </HBox>
+    <HBox id="HBox" alignment="CENTER" spacing="5.0">
+      <children>
+        <Button id="btnEnrol" fx:id="btnGenerate" mnemonicParsing="false" onAction="#generateReport" text="Generate" />
+      </children>
+    </HBox>
+    <HBox id="HBox" alignment="CENTER" spacing="30.0">
+      <children>
+        <Label fx:id="lblnotification" alignment="CENTER" style="-fx-font-color: red;" />
+      </children>
+    </HBox>
+  </children>
+</VBox>
