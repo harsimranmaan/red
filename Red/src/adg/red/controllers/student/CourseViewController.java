@@ -185,7 +185,7 @@ public class CourseViewController implements Initializable
     public void populateSectionTable(Course selectedCourse)
     {
 
-        List<Section> sections = Section.getByCourse(selectedCourse);
+        List<Section> sections = Section.getByCourseAndTermYear(selectedCourse);
         populate(sections);
 
     }

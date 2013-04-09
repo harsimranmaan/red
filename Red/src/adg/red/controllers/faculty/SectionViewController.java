@@ -95,6 +95,7 @@ public class SectionViewController implements Initializable
         List<Section> sections = null;
         if (action.toString().equalsIgnoreCase("UploadScore"))
         {
+            // only display section of lecture for upload score action
             sections = Section.getByFacultyMemberIdAndSectionTypeId100(Context.getInstance().getCurrentUser().getFacultyMember());
         }
         else

@@ -32,6 +32,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import adg.red.utils.DateFormatter;
+import java.util.Date;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 /**
@@ -89,6 +91,14 @@ public class SectionViewController implements Initializable
     @FXML
     private Label lblEndDate;
     @FXML
+    private Label lblRegisDL;
+    @FXML
+    private Label lblRegisDLDate;
+    @FXML
+    private Label lblDropDL;
+    @FXML
+    private Label lblDropDLDate;
+    @FXML
     private ListView<Prerequisite> lsvOutstandPrereq;
     @FXML
     private ListView<CoRequisite> lsvOutstandCoReq;
@@ -96,6 +106,14 @@ public class SectionViewController implements Initializable
     private EnrolmentPK enrolmentPk;
     @FXML
     private Font x1;
+    @FXML
+    private Font x2;
+    @FXML
+    private Color x3;
+    @FXML
+    private Label lblRegDLResponse;
+    @FXML
+    private Label lblDropDLResponse;
 
     private void toggleRegDropButtons()
     {
@@ -110,6 +128,7 @@ public class SectionViewController implements Initializable
             btnRegister.setDisable(true);
             btnDrop.setDisable(true);
         }
+
     }
 
     @FXML
@@ -169,6 +188,8 @@ public class SectionViewController implements Initializable
         lblEnd.setText(LocaleManager.get(45) + ":");
         lblOutPrereq.setText(LocaleManager.get(66));
         lblOutCoReq.setText(LocaleManager.get(67));
+        lblRegisDL.setText(LocaleManager.get(101) + ":");
+        lblDropDL.setText(LocaleManager.get(102) + ":");
     }
 
     /**
@@ -193,12 +214,17 @@ public class SectionViewController implements Initializable
             if (checkStudentAlreadyEnrolled(enrolmentPk))
             {
                 toggleRegDropButtons();
+                checkAllDeadlines();
             }
             else if (!checkStudentPrereq(section.getCourse()).isEmpty())
             {
                 btnRegister.setDisable(true);
                 lblResponse.setText(LocaleManager.get(35));
                 lblResponse.setVisible(true);
+            }
+            else
+            {
+                checkAllDeadlines();
             }
         }
         catch (Exception ex)
@@ -220,6 +246,22 @@ public class SectionViewController implements Initializable
         populateCoReqListView(Context.getInstance().getSelectedCourse());
         lblStartDate.setText(DateFormatter.formatDate(Context.getInstance().getSelectedSection().getStartDate()));
         lblEndDate.setText(DateFormatter.formatDate(Context.getInstance().getSelectedSection().getEndDate()));
+        lblRegisDLDate.setText(DateFormatter.formatDate(Context.getInstance().getSelectedSection().getRegisterDeadline()));
+        lblDropDLDate.setText(DateFormatter.formatDate(Context.getInstance().getSelectedSection().getDropDeadline()));
+    }
+
+    private boolean checkDeadLinePassed(Date deadline)
+    {
+        Date current = new Date();
+        // after a deadline
+        if (current.compareTo(deadline) > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private List<Prerequisite> checkStudentPrereq(Course course)
@@ -246,10 +288,12 @@ public class SectionViewController implements Initializable
                             if (enrol.getResultId().getName().equalsIgnoreCase("pass"))
                             {
                                 prereqList.remove(i);
+                                i--;
                                 if (prereqList.isEmpty())
                                 {
                                     return prereqList;
                                 }
+                                break;
                             }
                         }
                     }
@@ -288,10 +332,12 @@ public class SectionViewController implements Initializable
                             if (enrol.getResultId().getName().equalsIgnoreCase("pass"))
                             {
                                 coReqList.remove(i);
+                                i--;
                                 if (coReqList.isEmpty())
                                 {
                                     return coReqList;
                                 }
+                                break;
                             }
                         }
                     }
@@ -304,6 +350,26 @@ public class SectionViewController implements Initializable
         }
 
         return coReqList;
+    }
+
+    private boolean checkAllDeadlines()
+    {
+        boolean result = true;
+        if (checkDeadLinePassed(Context.getInstance().getSelectedSection().getRegisterDeadline()))
+        {
+            btnRegister.setDisable(true);
+            lblRegDLResponse.setText(LocaleManager.get(104));
+            lblRegDLResponse.setVisible(true);
+            result = false;
+        }
+        if (checkDeadLinePassed(Context.getInstance().getSelectedSection().getDropDeadline()))
+        {
+            btnDrop.setDisable(true);
+            lblDropDLResponse.setText(LocaleManager.get(104));
+            lblDropDLResponse.setVisible(true);
+            result = false;
+        }
+        return result;
     }
 
     private boolean checkStudentAlreadyEnrolled(EnrolmentPK enrolPk)
