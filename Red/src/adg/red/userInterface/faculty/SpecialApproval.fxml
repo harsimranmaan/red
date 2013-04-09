@@ -8,22 +8,32 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<!--<AnchorPane AnchorPane.bottomAnchor="0"   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.faculty.SpecialApprovalController">-->
-
-<!--</AnchorPane>-->
-
-<VBox id="VBox" alignment="CENTER" spacing="5.0" AnchorPane.bottomAnchor="0"   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.faculty.SpecialApprovalController">
+<VBox id="VBox" alignment="CENTER" spacing="5.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.faculty.SpecialApprovalController">
     <children>
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="30.0">
             <children>
-                <Label fx:id="lblHeading" text="Please enter student number: " />
-                <TextField fx:id="studentNumber" editable="true" />
-                <Button fx:id="btnSubmitNumber"  mnemonicParsing="false" onAction="#pullStudentInfo" text="Submit" />
+                <Label fx:id="lblHeading2" text="Section you are approving a rquest for:" />
+                <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                    <children>
+                        <Label fx:id="lblDeptCoureNumber" text="CICS 520" />
+                        <Label fx:id="lblSection" text="Secion" />
+                        <Label fx:id="lblSecNumber" text="sectionNumber" />
+                        <Label id="lblTerm" fx:id="lblSession" text="Winter" />
+                        <Label fx:id="lblYear" text="2013" />
+                    </children>
+                </HBox>
             </children>
         </HBox>
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="30.0">
             <children>
-                <Label fx:id="lblErrMsg"/>
+                <Label fx:id="lblHeading" text="Please enter student number: " />
+                <TextField fx:id="studentNumber" />
+                <Button fx:id="btnSubmitNumber" mnemonicParsing="false" onAction="#pullStudentInfo" text="Submit" />
+            </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER" spacing="30.0">
+            <children>
+                <Label fx:id="lblErrMsg" alignment="CENTER" style="-fx-font-color: red;" />
             </children>
         </HBox>
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="30.0">
@@ -34,10 +44,13 @@
         </HBox>
         <HBox id="HBox" alignment="CENTER" spacing="5.0">
             <children>
-                <Button fx:id="btnApprove" mnemonicParsing="false" onAction="#approveRequest" text="Approve" />
+                <Button fx:id="btnEnrol" mnemonicParsing="false" onAction="#approveRequest" text="Enrol" />
             </children>
         </HBox>
-
-
+        <HBox id="HBox" alignment="CENTER" spacing="30.0">
+            <children>
+                <Label fx:id="lblnotification" alignment="CENTER" style="-fx-font-color: red;" />
+            </children>
+        </HBox>
     </children>
 </VBox>
