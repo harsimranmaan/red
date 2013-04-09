@@ -23,7 +23,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -49,14 +52,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class User implements Serializable
 {
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "username")
-    private FacultyMember facultyMember;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "username")
-    private Administrator administrator;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "username")
+    @NotNull
+    @Size(min = 3, max = 15)
     private String username;
     @Basic(optional = false)
     @Column(name = "password")
@@ -89,6 +90,10 @@ public class User implements Serializable
     private UserType userTypeId;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "username")
     private Student student;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "username")
+    private FacultyMember facultyMember;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "username")
+    private Administrator administrator;
 
     public User()
     {

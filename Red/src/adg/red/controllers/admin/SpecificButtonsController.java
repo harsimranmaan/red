@@ -4,7 +4,9 @@
  */
 package adg.red.controllers.admin;
 
+import adg.red.utils.Context;
 import adg.red.utils.LocaleManager;
+import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -54,6 +56,8 @@ public class SpecificButtonsController implements Initializable
     @FXML
     private void showUsers(ActionEvent event)
     {
+        ViewLoader view = new ViewLoader(Context.getInstance().getDisplayView());
+        view.loadView("admin/User");
     }
 
     /**
