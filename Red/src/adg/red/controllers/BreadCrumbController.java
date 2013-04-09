@@ -113,6 +113,10 @@ public class BreadCrumbController implements Initializable
             case "TimeTable":
                 name = LocaleManager.get(68);
                 break;
+            case "student/ViewDegreeInfo":
+                name = LocaleManager.get(85);
+                break;
+
             default:
                 break;
         }
