@@ -44,7 +44,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Section.findByTeachingAssistant", query = "SELECT s FROM Section s WHERE s.teachingAssistant = :teachingAssistant"),
     @NamedQuery(name = "Section.findByIsActive", query = "SELECT s FROM Section s WHERE s.isActive = :isActive"),
     @NamedQuery(name = "Section.findByDepartmentAndCourseNumber", query = "SELECT s FROM Section s WHERE s.sectionPK.departmentId = :departmentId AND s.sectionPK.courseNumber = :courseNumber"),
-    @NamedQuery(name = "Section.findByFacultyMemberId", query = "SELECT s FROM Section s WHERE s.sectionPK.sectionTypeId = 100 AND s.facultyMemberId = :facultyMemberId")
+    @NamedQuery(name = "Section.findByFacultyMemberIdAndSectionTypeId100", query = "SELECT s FROM Section s WHERE s.sectionPK.sectionTypeId = 100 AND s.facultyMemberId = :facultyMemberId"),
+    @NamedQuery(name = "Section.findByFacultyMemberId", query = "SELECT s FROM Section s WHERE s.facultyMemberId = :facultyMemberId")
 })
 public class Section implements Serializable
 {
@@ -267,6 +268,11 @@ public class Section implements Serializable
     public static List<Section> getByFacultyMemberId(FacultyMember fac)
     {
         return RedEntityManager.getEntityManager().createNamedQuery("Section.findByFacultyMemberId").setParameter("facultyMemberId", fac).getResultList();
+    }
+
+    public static List<Section> getByFacultyMemberIdAndSectionTypeId100(FacultyMember fac)
+    {
+        return RedEntityManager.getEntityManager().createNamedQuery("Section.findByFacultyMemberIdAndSectionTypeId100").setParameter("facultyMemberId", fac).getResultList();
     }
 
     public static List<Section> getByCourse(Course course)

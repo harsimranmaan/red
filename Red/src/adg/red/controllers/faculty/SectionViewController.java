@@ -92,8 +92,16 @@ public class SectionViewController implements Initializable
 
     public void populateSectionTable()
     {
+        List<Section> sections = null;
+        if (action.toString().equalsIgnoreCase("UploadScore"))
+        {
+            sections = Section.getByFacultyMemberIdAndSectionTypeId100(Context.getInstance().getCurrentUser().getFacultyMember());
+        }
+        else
+        {
+            sections = Section.getByFacultyMemberId(Context.getInstance().getCurrentUser().getFacultyMember());
+        }
 
-        List<Section> sections = Section.getByFacultyMemberId(Context.getInstance().getCurrentUser().getFacultyMember());
         populate(sections);
 
     }

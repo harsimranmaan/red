@@ -7,6 +7,7 @@ package adg.red.controllers.faculty;
 import adg.red.controllers.DownloadFileController;
 import adg.red.models.Enrolment;
 import adg.red.models.EnrolmentPK;
+import adg.red.models.Grade;
 import adg.red.models.Section;
 import adg.red.models.Session;
 import adg.red.utils.Context;
@@ -60,10 +61,9 @@ public class UploadScoreController implements Initializable
     private Label lblFilePath;
     @FXML
     private ListView<String> lsvResult;
-    private File file;
-    private ArrayList<String> data;
     @FXML
     private Button btnDownloadTemp;
+    private File file;
 
     @FXML
     private void downloadTemplate(ActionEvent event)
@@ -97,10 +97,13 @@ public class UploadScoreController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        data = new ArrayList();
+        // data = new ArrayList();
         Context.getInstance().setTitle(LocaleManager.get(56));
         initializeComponentsByLocale();
-        selectSection();
+        lblDeptCoureNumber.setText(Context.getInstance().getSelectedSection().getSectionPK().getDepartmentId() + " " + Context.getInstance().getSelectedSection().getSectionPK().getCourseNumber());
+        lblSecNumber.setText(Integer.toString(Context.getInstance().getSelectedSection().getSectionId()));
+        lblSession.setText(Session.getBySessionId(Context.getInstance().getSelectedSection().getSectionPK().getSessionId()).getName());
+        lblYear.setText(Integer.toString(Context.getInstance().getSelectedSection().getSectionPK().getTermYear()));
         toggleLabels();
     }
 
@@ -108,7 +111,7 @@ public class UploadScoreController implements Initializable
     {
         btnBrowseFile.setText(LocaleManager.get(70));
         btnUpload.setText(LocaleManager.get(71));
-
+        btnDownloadTemp.setText(LocaleManager.get(99));
         lblHeading2.setText(LocaleManager.get(73) + ":");
         lblSection.setText(LocaleManager.get(74));
         lblFile.setText(LocaleManager.get(28) + ":");
@@ -155,30 +158,55 @@ public class UploadScoreController implements Initializable
     private void upload(File file)
     {
         ArrayList<String> resultList = new ArrayList();
-
+        ArrayList<String> studentList = new ArrayList();
+        ArrayList<String> scoreList = new ArrayList();
+        ArrayList<String> gradeList = new ArrayList();
+        boolean hasThird = true;
         try (BufferedReader reader = new BufferedReader(new FileReader(file)))
         {
             String text = "";
             while ((text = reader.readLine()) != null)
             {
+                hasThird = true;
                 // ignore line that starts with #
                 if (!text.startsWith("#"))
                 {
                     text = text.trim();
                     String tempData[] = text.split(",");
+                    // check that there are three values in a line
+                    if (tempData.length < 3)
+                    {
+                        hasThird = false;
+                    }
                     for (int i = 0; i < tempData.length; i++)
                     {
-                        data.add(tempData[i].trim());
+                        switch (i)
+                        {
+                            case 0:
+                                studentList.add(tempData[i].trim());
+                                break;
+                            case 1:
+                                scoreList.add(tempData[i].trim());
+                                // there is not third value, add blank
+                                if (!hasThird)
+                                {
+                                    gradeList.add("");
+                                }
+                                break;
+                            case 2:
+                                gradeList.add(tempData[i].trim());
+                                break;
+                        }
                     }
                 }
             }
-            for (int i = 0; i < data.size(); i++)
+            for (int i = 0; i < studentList.size(); i++)
             {
-                String studentId = data.get(i).trim();
-                String score = data.get(++i).trim();
-                //String grade = data.get(++i).trim();
+                String studentId = studentList.get(i).trim();
+                String score = scoreList.get(i).trim();
+                String grade = gradeList.get(i).trim();
 
-                String result = "Student Id: " + studentId + " Score: " + score;
+                String result = "Student Id: " + studentId + " Score: " + score + " Grade: " + grade;
 
 
                 EnrolmentPK enPK = new EnrolmentPK(Integer.parseInt(studentId),
@@ -196,6 +224,11 @@ public class UploadScoreController implements Initializable
                         throw new Exception(LocaleManager.get(77));
                     }
                     enrol.setScore(Integer.parseInt(score));
+                    if (hasThird)
+                    {
+                        enrol.setGradeId(Grade.getByName(grade));
+                    }
+                    // get enrolment to not active
                     enrol.setIsActive(false);
                     enrol.save();
                     result += " <uploaded>";
@@ -214,16 +247,5 @@ public class UploadScoreController implements Initializable
         {
             Logger.getLogger(UploadScoreController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    }
-
-    public void selectSection()
-    {
-        Section sec = Context.getInstance().getSelectedSection();
-        lblDeptCoureNumber.setText(sec.getSectionPK().getDepartmentId() + " " + sec.getSectionPK().getCourseNumber());
-        lblSecNumber.setText(Integer.toString(sec.getSectionId()));
-        lblSession.setText(Session.getBySessionId(sec.getSectionPK().getSessionId()).getName());
-        toggleLabels();
-
     }
 }
