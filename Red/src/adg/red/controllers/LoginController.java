@@ -80,6 +80,8 @@ public class LoginController implements Initializable
 
     public void forgotPassword(ActionEvent event)
     {
+        ViewLoader view = new ViewLoader(Context.getInstance().getHomeView());
+        view.loadView("ForgotPassword");
     }
 
     public void login(ActionEvent event)

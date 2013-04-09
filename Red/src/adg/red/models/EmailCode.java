@@ -4,6 +4,7 @@
  */
 package adg.red.models;
 
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -45,12 +46,7 @@ public class EmailCode implements Serializable
     public EmailCode(String username)
     {
         this.username = username;
-    }
-
-    public EmailCode(String username, String code)
-    {
-        this.username = username;
-        this.code = code;
+        this.code = Integer.toString(100000 + (int) (Math.random() * 999999));
     }
 
     public String getUsername()
@@ -101,5 +97,10 @@ public class EmailCode implements Serializable
     public String toString()
     {
         return "adg.red.models.EmailCode[ username=" + username + " ]";
+    }
+
+    public void save()
+    {
+        RedEntityManager.save(this);
     }
 }
