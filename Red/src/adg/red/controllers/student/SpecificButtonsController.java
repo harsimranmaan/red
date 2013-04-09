@@ -57,6 +57,8 @@ public class SpecificButtonsController implements Initializable
     @FXML
     private void viewDegreeInfo(ActionEvent event)
     {
+        ViewLoader view = new ViewLoader(Context.getInstance().getDisplayView());
+        view.loadView("student/ViewDegreeInfo");
     }
 
     private void initializeComponentsByLocale()
