@@ -19,11 +19,12 @@
             </HBox>
             <TableView fx:id="tabViewDegree" prefHeight="466.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <columns>
-                    <TableColumn minWidth="20.0" prefWidth="200.0" resizable="true" fx:id="colCourse" />
-                    <TableColumn minWidth="20.0" prefWidth="100" resizable="true" fx:id="colTerm" />
-                    <TableColumn minWidth="20.0" prefWidth="100" resizable="true" fx:id="colScore" />
-                    <TableColumn minWidth="20.0" prefWidth="100" resizable="true" fx:id="colGrade" />
-                    <TableColumn minWidth="20.0" prefWidth="100" resizable="true" fx:id="colResult" />
+                    <TableColumn minWidth="20.0" prefWidth="102" resizable="true" fx:id="colCourse" />
+                    <TableColumn minWidth="20.0" prefWidth="102" resizable="true" fx:id="colCourseCredit" />
+                    <TableColumn minWidth="20.0" prefWidth="102" resizable="true" fx:id="colTerm" />
+                    <TableColumn minWidth="20.0" prefWidth="102" resizable="true" fx:id="colScore" />
+                    <TableColumn minWidth="20.0" prefWidth="102" resizable="true" fx:id="colGrade" />
+                    <TableColumn minWidth="20.0" prefWidth="102" resizable="true" fx:id="colResult" />
                 </columns>
             </TableView>
         </children>
