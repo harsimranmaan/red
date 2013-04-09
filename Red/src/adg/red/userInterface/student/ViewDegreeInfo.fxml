@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="10" AnchorPane.bottomAnchor="10" AnchorPane.rightAnchor="10" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.student.ViewDegreeInfoController">
+    <VBox spacing="5" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="10" AnchorPane.bottomAnchor="10" AnchorPane.rightAnchor="10" >
+        <children>
+            <Label fx:id="lblProgramName" style="-fx-font-weight : bold;"  />
+            <Label text="Credits Earned :" />
+            <HBox spacing="10"  AnchorPane.topAnchor="5" alignment="CENTER_LEFT" >
+                <ProgressBar fx:id="pbCreditProgress" prefWidth="200" />
+                <Label fx:id="lblCredits"  />
+            </HBox>
+            <TableView fx:id="tabViewDegree" prefHeight="466.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <columns>
+                    <TableColumn minWidth="20.0" prefWidth="200.0" resizable="true" fx:id="colCourse" />
+                    <TableColumn minWidth="20.0" prefWidth="100" resizable="true" fx:id="colTerm" />
+                    <TableColumn minWidth="20.0" prefWidth="100" resizable="true" fx:id="colScore" />
+                    <TableColumn minWidth="20.0" prefWidth="100" resizable="true" fx:id="colGrade" />
+                    <TableColumn minWidth="20.0" prefWidth="100" resizable="true" fx:id="colResult" />
+                </columns>
+            </TableView>
+        </children>
+    </VBox>
+</AnchorPane>

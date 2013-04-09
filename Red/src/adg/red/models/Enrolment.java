@@ -7,6 +7,7 @@ package adg.red.models;
 import adg.red.utils.LocaleManager;
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import java.util.List;
 import javax.persistence.Basic;
@@ -40,7 +41,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Enrolment.findBySectionTypeId", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.sectionTypeId = :sectionTypeId"),
     @NamedQuery(name = "Enrolment.findByIsActive", query = "SELECT e FROM Enrolment e WHERE e.isActive = :isActive"),
     @NamedQuery(name = "Enrolment.findByEnrolmentPK", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK=:enrolmentPK"),
-    @NamedQuery(name = "Enrolment.findBySectionPK", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.courseNumber = :courseNumber AND e.enrolmentPK.departmentId = :departmentId AND e.enrolmentPK.sectionId = :sectionId AND e.enrolmentPK.sectionTypeId = :sectionTypeId AND e.enrolmentPK.sessionId = :sessionId AND e.enrolmentPK.termYear = :termYear")
+    @NamedQuery(name = "Enrolment.findBySectionPK", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.courseNumber = :courseNumber AND e.enrolmentPK.departmentId = :departmentId AND e.enrolmentPK.sectionId = :sectionId AND e.enrolmentPK.sectionTypeId = :sectionTypeId AND e.enrolmentPK.sessionId = :sessionId AND e.enrolmentPK.termYear = :termYear"),
+    @NamedQuery(name = "Enrolment.findSumCreditsByStudentId", query = "SELECT CASE WHEN SUM(c.credits) IS NULL THEN 0 ELSE SUM(c.credits) END FROM Course c, Enrolment e WHERE c.coursePK.courseNumber = e.enrolmentPK.courseNumber AND c.coursePK.departmentId = e.enrolmentPK.departmentId AND e.enrolmentPK.studentId = :studentId AND e.resultId.resultId = 100 AND e.enrolmentPK.sectionTypeId = 100 AND e.isActive = 1 "),
+    @NamedQuery(name = "Enrolment.findActiveEnrolmentsByStudentId", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.studentId = :studentId  AND e.resultId.resultId = 100 AND e.enrolmentPK.sectionTypeId = 100 AND e.isActive = 1 ")
 })
 public class Enrolment implements Serializable
 {
@@ -203,12 +206,42 @@ public class Enrolment implements Serializable
                 .createNamedQuery("Enrolment.findByStudentId")
                 .setParameter("studentId", studentId)
                 .getResultList();
+    }
 
+    public static List<Enrolment> getActiveEnrolmentsByStudentId(int studentId)
+    {
+        return RedEntityManager.getEntityManager()
+                .createNamedQuery("Enrolment.findActiveEnrolmentsByStudentId")
+                .setParameter("studentId", studentId)
+                .getResultList();
+    }
+
+    public static int getSumCreditsByStudentId(int studentId)
+    {
+        return ((BigDecimal) RedEntityManager.getEntityManager()
+                .createNamedQuery("Enrolment.findSumCreditsByStudentId")
+                .setParameter("studentId", studentId)
+                .getSingleResult()).intValue();
+    }
+
+    public String getDepartmentIdAndCourseNumber()
+    {
+        return this.enrolmentPK.getDepartmentId() + " " + this.enrolmentPK.getCourseNumber();
+    }
+
+    public String getTermYearAndSession()
+    {
+        return this.enrolmentPK.getTermYear() + " " + Session.getBySessionId(this.enrolmentPK.getSessionId()).getName();
     }
 
     public Integer getScore()
     {
         return score;
+    }
+
+    public String getScoreAsString()
+    {
+        return score == null ? "" : score.toString();
     }
 
     public void setScore(Integer score)
@@ -221,6 +254,11 @@ public class Enrolment implements Serializable
         return resultId;
     }
 
+    public String getResult()
+    {
+        return resultId == null ? "" : resultId.getName();
+    }
+
     public void setResultId(Result resultId)
     {
         this.resultId = resultId;
@@ -231,8 +269,48 @@ public class Enrolment implements Serializable
         return gradeId;
     }
 
+    public String getGrade()
+    {
+        return gradeId == null ? "" : gradeId.getName();
+    }
+
     public void setGradeId(Grade gradeId)
     {
         this.gradeId = gradeId;
+    }
+    
+    public String getDepartmentAndCourseAndSection()
+    {
+        return this.getEnrolmentPK().getDepartmentId() + " " + 
+                String.valueOf(this.getEnrolmentPK().getCourseNumber()) + " " +
+                String.valueOf(this.getEnrolmentPK().getSectionId());
+    }
+    
+    public String getActivity()
+    {
+        List<SectionType> sectionTypeList = RedEntityManager.getEntityManager()
+                .createNamedQuery("SectionType.findBySectionTypeId")
+                .setParameter("sectionTypeId", this.getEnrolmentPK().getSectionTypeId())
+                .getResultList();
+        return sectionTypeList.get(0).getName();
+    }
+            
+    public String getTerm()
+    {
+        List<Session> sessionList = RedEntityManager.getEntityManager()
+                .createNamedQuery("Session.findBySessionId")
+                .setParameter("sessionId", this.getEnrolmentPK().getSessionId())
+                .getResultList();
+        return sessionList.get(0).getName() + " " + String.valueOf(this.getEnrolmentPK().getTermYear());
+    }
+    
+    public String getCredit()
+    {
+        List<Course> courseList = RedEntityManager.getEntityManager()
+                .createNamedQuery("Course.findByDepartmentAndCourseNumber")
+                .setParameter("courseNumber", this.getEnrolmentPK().getCourseNumber())
+                .setParameter("departmentId", this.getEnrolmentPK().getDepartmentId())
+                .getResultList();
+        return String.valueOf(courseList.get(0).getCredits());
     }
 }
