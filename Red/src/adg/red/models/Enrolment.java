@@ -287,7 +287,7 @@ public class Enrolment implements Serializable
     public String getDepartmentAndCourseAndSection()
     {
         return this.getEnrolmentPK().getDepartmentId() + " "
-                + String.valueOf(this.getEnrolmentPK().getCourseNumber()) + " "
+                + String.valueOf(this.getEnrolmentPK().getCourseNumber()) + " Section "
                 + String.valueOf(this.getEnrolmentPK().getSectionId());
     }
 
