@@ -169,9 +169,9 @@ public class Student implements Serializable
         }
     }
 
-    public static Student getStudentByUserId(int userId) throws Exception
+    public static Student getStudentByStudentId(int studentId) throws Exception
     {
-        List<Student> studentList = RedEntityManager.getEntityManager().createNamedQuery("Student.findByUserId").setParameter("userId", userId).getResultList();
+        List<Student> studentList = RedEntityManager.getEntityManager().createNamedQuery("Student.findByStudentId").setParameter("studentId", studentId).getResultList();
         if (studentList.size() == 1)
         {
             return studentList.get(0);
