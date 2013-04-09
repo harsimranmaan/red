@@ -94,6 +94,7 @@ public class SpecialApprovalController implements Initializable
             Enrolment enrolment = new Enrolment(student.getStudentId(), sec.getSectionId(), sec.getSectionPK().getCourseNumber(), sec.getSectionPK().getDepartmentId(), sec.getSectionPK().getTermYear(), sec.getSectionPK().getSessionId(), sec.getSectionPK().getSectionTypeId());
             enrolment.save();
             lblnotification.setText("Student enroled successfully!"); //store label in database
+            btnEnrol.setDisable(true);
         }
         catch (Exception ex)
         {
@@ -109,7 +110,7 @@ public class SpecialApprovalController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
 //        Context.getInstance().setTitle(LocaleManager.get(56));
-        Context.getInstance().setTitle("Special Approval");
+        Context.getInstance().setTitle("Special Approval"); //store label in database
         initializeComponentsByLocale();
         btnEnrol.setDisable(true);
         lblName.setDisable(true);
