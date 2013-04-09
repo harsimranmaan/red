@@ -6,7 +6,6 @@ package adg.red.controllers.student;
 
 import adg.red.controllers.BreadCrumbController;
 import adg.red.models.Course;
-import adg.red.models.Department;
 import adg.red.models.Enrolment;
 import adg.red.models.Program;
 import adg.red.models.Registration;
@@ -23,7 +22,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
+import javax.swing.GroupLayout;
 
 /**
  * FXML Controller class
@@ -51,6 +50,8 @@ public class ViewDegreeInfoController implements Initializable
     private ProgressBar pbCreditProgress;
     @FXML
     private Label lblCredits;
+    @FXML
+    private TableColumn<Enrolment, Integer> colCourseCredit;
 
     /**
      * Initializes the controller class.
@@ -81,6 +82,7 @@ public class ViewDegreeInfoController implements Initializable
     private void populate(List<Enrolment> enrolments)
     {
         colCourse.setCellValueFactory(new PropertyValueFactory<Enrolment, String>("departmentIdAndCourseNumber"));
+        colCourseCredit.setCellValueFactory(new PropertyValueFactory<Enrolment, Integer>("credits"));
         colTerm.setCellValueFactory(new PropertyValueFactory<Enrolment, String>("termYearAndSession"));
         colScore.setCellValueFactory(new PropertyValueFactory<Enrolment, String>("scoreAsString"));
         colGrade.setCellValueFactory(new PropertyValueFactory<Enrolment, String>("grade"));
@@ -91,6 +93,7 @@ public class ViewDegreeInfoController implements Initializable
     private void initializeComponentsByLocale()
     {
         colCourse.setText(LocaleManager.get(93));
+        colCourseCredit.setText(LocaleManager.get(103));
         colTerm.setText(LocaleManager.get(94));
         colScore.setText(LocaleManager.get(95));
         colGrade.setText(LocaleManager.get(96));
