@@ -33,8 +33,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import adg.red.utils.DateFormatter;
 import java.util.Date;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 /**
  * FXML Controller class
@@ -104,12 +102,6 @@ public class SectionViewController implements Initializable
     private ListView<CoRequisite> lsvOutstandCoReq;
     private Enrolment enrolment = null;
     private EnrolmentPK enrolmentPk;
-    @FXML
-    private Font x1;
-    @FXML
-    private Font x2;
-    @FXML
-    private Color x3;
     @FXML
     private Label lblRegDLResponse;
     @FXML
@@ -214,6 +206,8 @@ public class SectionViewController implements Initializable
             if (checkStudentAlreadyEnrolled(enrolmentPk))
             {
                 toggleRegDropButtons();
+                lblResponse.setText(LocaleManager.get(105));
+                lblResponse.setVisible(true);
                 checkAllDeadlines();
             }
             else if (!checkStudentPrereq(section.getCourse()).isEmpty())
