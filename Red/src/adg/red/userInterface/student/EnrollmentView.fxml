@@ -8,16 +8,12 @@
 
 <AnchorPane id="AnchorPane" prefHeight="466.0" prefWidth="642.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.student.EnrollmentViewController">
   <children>
-    <TableView layoutX="0.0" layoutY="0.0" prefHeight="466.0" prefWidth="642.0">
+    <TableView fx:id="tabDisplay" layoutX="0.0" layoutY="0.0" prefHeight="466.0" prefWidth="642.0">
       <columns>
-        <TableColumn fx:id="colProgram" prefWidth="75.0" text="Program" />
-        <TableColumn fx:id="colSection" prefWidth="75.0" text="Section" />
-        <TableColumn fx:id="colActivity" prefWidth="75.0" text="Activity" />
-        <TableColumn fx:id="colTerm" prefWidth="75.0" text="Term" />
-        <TableColumn fx:id="colDays" prefWidth="75.0" text="Days" />
-        <TableColumn fx:id="colStartTime" maxWidth="5000.0" minWidth="10.0" prefWidth="94.0" text="Start Time" />
-        <TableColumn fx:id="colEndTime" maxWidth="5000.0" minWidth="10.0" prefWidth="98.0" text="End Time" />
-        <TableColumn fx:id="colCredits" prefWidth="75.0" text="Credits" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="169.0" text="Section" fx:id="colSection" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="153.0" text="Activity" fx:id="colActivity" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Term" fx:id="colTerm" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="206.0" text="Credits" fx:id="colCredits" />
       </columns>
     </TableView>
   </children>

@@ -4,6 +4,7 @@
  */
 package adg.red.models;
 
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -30,7 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries(
 {
     @NamedQuery(name = "Registration.findAll", query = "SELECT r FROM Registration r"),
-    @NamedQuery(name = "Registration.findByStudentId", query = "SELECT r FROM Registration r WHERE r.registrationPK.studentId = :studentId"),
+    @NamedQuery(name = "Registration.findByStudentId", query = "SELECT r FROM Registration r WHERE r.registrationPK.studentId = :studentId AND r.isActive = 1"),
     @NamedQuery(name = "Registration.findByProgramName", query = "SELECT r FROM Registration r WHERE r.registrationPK.programName = :programName"),
     @NamedQuery(name = "Registration.findByDepartmentId", query = "SELECT r FROM Registration r WHERE r.registrationPK.departmentId = :departmentId"),
     @NamedQuery(name = "Registration.findByStartDate", query = "SELECT r FROM Registration r WHERE r.startDate = :startDate"),
@@ -174,5 +175,12 @@ public class Registration implements Serializable
     public String toString()
     {
         return "adg.red.models.Registration[ registrationPK=" + registrationPK + " ]";
+    }
+
+    public static Registration getCurrentRegistration(Student student)
+    {
+        return (Registration) RedEntityManager.getEntityManager().createNamedQuery("Registration.findByStudentId")
+                .setParameter("studentId", student.getStudentId())
+                .getSingleResult();
     }
 }
