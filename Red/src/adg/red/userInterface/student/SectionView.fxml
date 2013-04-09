@@ -7,97 +7,125 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="464.0" prefWidth="642.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.student.SectionViewController">
-    <children>
-        <Label id="loginErrMsg" fx:id="lblResponse" alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="359.0" text="You have successfully enrolled to the section" textFill="#cc0000" visible="false">
-            <font>
-                <Font name="System Bold" size="12.0" />
-            </font>
+  <children>
+    <Label id="loginErrMsg" fx:id="lblResponse" alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="359.0" text="You have successfully enrolled to the section" visible="false">
+      <font>
+        <Font name="System Bold" size="12.0" fx:id="x2" />
+      </font>
+      <textFill>
+        <Color blue="0.000" green="0.000" red="0.800" fx:id="x3" />
+      </textFill>
+    </Label>
+    <HBox id="HBox" alignment="CENTER" layoutX="15.0" layoutY="7.0" spacing="5.0">
+      <children>
+        <Label fx:id="deptIdAndCourseNoLbl" text="Label">
+          <font>
+            <Font name="System Bold" size="14.0" fx:id="x1" />
+          </font>
         </Label>
-        <HBox id="HBox" alignment="CENTER" layoutX="15.0" layoutY="7.0" spacing="5.0">
-            <children>
-                <Label fx:id="deptIdAndCourseNoLbl" text="Label">
-                    <font>
-                        <Font name="System Bold" size="14.0" fx:id="x1" />
-                    </font>
-                </Label>
-                <Label fx:id="courseNameLbl" font="$x1" text="Label" />
-                <Label id="courseNameLbl" fx:id="secLbl" font="$x1" text="Label" />
-                <Label id="courseNameLbl" fx:id="lblSecType" font="$x1" text="Label" />
-            </children>
-        </HBox>
-        <ScrollPane id="ScrollPane" layoutX="15.0" layoutY="30.0" prefHeight="80.0" prefViewportHeight="124.0" prefViewportWidth="607.0">
-            <content>
-                <TextArea fx:id="courseDesTxt" editable="false" prefHeight="78.0" prefWidth="607.0" wrapText="true" />
-            </content>
-        </ScrollPane>
-        <VBox id="VBox" alignment="CENTER" layoutX="24.0" layoutY="121.0" spacing="5.0">
-            <children>
-                <VBox id="VBox" alignment="CENTER">
-                    <children>
-                        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
-                            <children>
-                                <Label id="lblCredit" fx:id="lblCreditName" text="Credit:" />
-                                <Label fx:id="creditLbl" text="3" />
-                            </children>
-                        </HBox>
-                        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
-                            <children>
-                                <Label fx:id="lblGrading" text="Grading Scheme:" />
-                                <Label fx:id="gradingSchmLbl" text="Label" />
-                            </children>
-                        </HBox>
-                        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
-                            <children>
-                                <Label fx:id="lblPassReq" text="Passing Requirement:" />
-                                <Label fx:id="passRqLbl" text="Label" />
-                            </children>
-                        </HBox>
-                        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
-                            <children>
-                                <Label fx:id="lblTerm" text="Term:" />
-                                <Label id="creditLbl" fx:id="lblSession" text="Label" />
-                                <Label id="creditLbl" fx:id="lblTermYear" text="Label" />
-                            </children>
-                        </HBox>
-                        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
-                            <children>
-                                <Label id="lblStartdate" fx:id="lblStart" text="Start Date:" />
-                                <Label id="passRqLbl" fx:id="lblStartDate" text="Label" />
-                            </children>
-                        </HBox>
-                        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
-                            <children>
-                                <Label fx:id="lblEnd" text="End Date:" />
-                                <Label id="passRqLbl" fx:id="lblEndDate" text="Label" />
-                            </children>
-                        </HBox>
-                    </children>
+        <Label fx:id="courseNameLbl" font="$x1" text="Label" />
+        <Label id="courseNameLbl" fx:id="secLbl" font="$x1" text="Label" />
+        <Label id="courseNameLbl" fx:id="lblSecType" font="$x1" text="Label" />
+      </children>
+    </HBox>
+    <ScrollPane id="ScrollPane" layoutX="15.0" layoutY="30.0" prefHeight="80.0" prefViewportHeight="124.0" prefViewportWidth="607.0">
+      <content>
+        <TextArea fx:id="courseDesTxt" editable="false" prefHeight="78.0" prefWidth="607.0" wrapText="true" />
+      </content>
+    </ScrollPane>
+    <VBox id="VBox" alignment="CENTER" layoutX="24.0" layoutY="121.0" spacing="10.0">
+      <children>
+        <HBox id="HBox" alignment="CENTER" spacing="50.0">
+          <children>
+            <VBox id="VBox" alignment="CENTER_LEFT" spacing="10.0">
+              <children>
+                <VBox id="VBox" alignment="CENTER_LEFT" spacing="2.0">
+                  <children>
+                    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+                      <children>
+                        <Label id="lblCredit" fx:id="lblCreditName" text="Credit:" />
+                        <Label fx:id="creditLbl" text="3" />
+                      </children>
+                    </HBox>
+                    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+                      <children>
+                        <Label fx:id="lblGrading" text="Grading Scheme:" />
+                        <Label fx:id="gradingSchmLbl" text="Label" />
+                      </children>
+                    </HBox>
+                    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+                      <children>
+                        <Label fx:id="lblPassReq" text="Passing Requirement:" />
+                        <Label fx:id="passRqLbl" text="Label" />
+                      </children>
+                    </HBox>
+                    <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+                      <children>
+                        <Label fx:id="lblTerm" text="Term:" />
+                        <Label id="creditLbl" fx:id="lblSession" text="Label" />
+                        <Label id="creditLbl" fx:id="lblTermYear" text="Label" />
+                      </children>
+                    </HBox>
+                  </children>
                 </VBox>
-                <HBox id="HBox" alignment="CENTER" spacing="15.0">
+                <VBox id="VBox" alignment="CENTER_LEFT" spacing="5.0">
+                  <children>
+                    <Label id="lblPrereq" fx:id="lblOutPrereq" text="Outstanding Prerequisite Course" />
+                    <ListView id="lsvPrereq" fx:id="lsvOutstandPrereq" onMouseClicked="#showPreReq" prefHeight="110.0" prefWidth="100.0" />
+                  </children>
+                </VBox>
+              </children>
+            </VBox>
+            <VBox id="VBox" alignment="CENTER_LEFT" spacing="10.0">
+              <children>
+                <VBox id="VBox1" alignment="CENTER_LEFT" spacing="2.0">
+                  <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
                     <children>
-                        <VBox id="VBox" alignment="CENTER" spacing="5.0">
-                            <children>
-                                <Label id="lblPrereq" fx:id="lblOutPrereq" text="Outstanding Prerequisite Course" />
-                                <ListView id="lsvPrereq" onMouseClicked="#showPreReq"  fx:id="lsvOutstandPrereq" prefHeight="110.0" prefWidth="100.0" />
-                            </children>
-                        </VBox>
-                        <VBox id="VBox" alignment="CENTER" spacing="5.0">
-                            <children>
-                                <Label id="lblCoReq" fx:id="lblOutCoReq" text="Outstanding Co-requisite Course" />
-                                <ListView id="lsvCoReq" onMouseClicked="#showCoReq"  fx:id="lsvOutstandCoReq" prefHeight="110.0" prefWidth="100.0" />
-                            </children>
-                        </VBox>
+                      <Label id="lblStartdate" fx:id="lblStart" text="Start Date:" />
+                      <Label id="passRqLbl" fx:id="lblStartDate" text="Label" />
                     </children>
-                </HBox>
-            </children>
-        </VBox>
-        <Button fx:id="btnRegister" onAction="#register"  layoutX="253.0" layoutY="390.0" mnemonicParsing="false" prefHeight="32.0" text="Register" />
-        <Button fx:id="btnDrop" onAction="#drop"  disable="true" layoutX="343.0" layoutY="390.0" mnemonicParsing="false" prefHeight="32.0" text="Drop" />
-    </children>
-    <stylesheets>
-        <URL value="@../css/mainForm.css" />
-    </stylesheets>
+                  </HBox>
+                  <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+                    <children>
+                      <Label fx:id="lblEnd" text="End Date:" />
+                      <Label id="passRqLbl" fx:id="lblEndDate" text="Label" />
+                    </children>
+                  </HBox>
+                  <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+                    <children>
+                      <Label fx:id="lblRegisDL" text="Register Deadline:" />
+                      <Label fx:id="lblRegisDLDate" text="Label" />
+                      <Label id="lblRegisDLDate" fx:id="lblRegDLResponse" font="$x2" text="Label" textFill="$x3" visible="false" />
+                    </children>
+                  </HBox>
+                  <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+                    <children>
+                      <Label fx:id="lblDropDL" text="Drop Deadline:" />
+                      <Label fx:id="lblDropDLDate" text="Label" />
+                      <Label id="lblDropDLDate" fx:id="lblDropDLResponse" font="$x2" text="Label" textFill="$x3" visible="false" />
+                    </children>
+                  </HBox>
+                </VBox>
+                <VBox id="VBox" alignment="CENTER_LEFT" spacing="5.0">
+                  <children>
+                    <Label id="lblCoReq" fx:id="lblOutCoReq" text="Outstanding Co-requisite Course" />
+                    <ListView id="lsvCoReq" fx:id="lsvOutstandCoReq" onMouseClicked="#showCoReq" prefHeight="110.0" prefWidth="100.0" />
+                  </children>
+                </VBox>
+              </children>
+            </VBox>
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+    <Button fx:id="btnRegister" layoutX="253.0" layoutY="390.0" mnemonicParsing="false" onAction="#register" prefHeight="32.0" text="Register" />
+    <Button fx:id="btnDrop" disable="true" layoutX="343.0" layoutY="390.0" mnemonicParsing="false" onAction="#drop" prefHeight="32.0" text="Drop" />
+  </children>
+  <stylesheets>
+    <URL value="@../css/mainForm.css" />
+  </stylesheets>
 </AnchorPane>

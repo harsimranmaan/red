@@ -7,6 +7,7 @@ package adg.red.models;
 import adg.red.utils.DateFormatter;
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -45,7 +46,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Section.findByIsActive", query = "SELECT s FROM Section s WHERE s.isActive = :isActive"),
     @NamedQuery(name = "Section.findByDepartmentAndCourseNumber", query = "SELECT s FROM Section s WHERE s.sectionPK.departmentId = :departmentId AND s.sectionPK.courseNumber = :courseNumber"),
     @NamedQuery(name = "Section.findByFacultyMemberIdAndSectionTypeId100", query = "SELECT s FROM Section s WHERE s.sectionPK.sectionTypeId = 100 AND s.facultyMemberId = :facultyMemberId"),
-    @NamedQuery(name = "Section.findByFacultyMemberId", query = "SELECT s FROM Section s WHERE s.facultyMemberId = :facultyMemberId")
+    @NamedQuery(name = "Section.findByFacultyMemberId", query = "SELECT s FROM Section s WHERE s.facultyMemberId = :facultyMemberId"),
+    @NamedQuery(name = "Section.findByDepartmentAndCourseNumberAndTermYear", query = "SELECT s FROM Section s WHERE s.sectionPK.departmentId = :departmentId AND s.sectionPK.courseNumber = :courseNumber AND s.term.termPK.termYear = :termYear"),
 })
 public class Section implements Serializable
 {
@@ -279,6 +281,12 @@ public class Section implements Serializable
     {
 
         return RedEntityManager.getEntityManager().createNamedQuery("Section.findByDepartmentAndCourseNumber").setParameter("departmentId", course.getCoursePK().getDepartmentId()).setParameter("courseNumber", course.getCoursePK().getCourseNumber()).getResultList();
+    }
+
+    public static List<Section> getByCourseAndTermYear(Course course)
+    {
+
+        return RedEntityManager.getEntityManager().createNamedQuery("Section.findByDepartmentAndCourseNumberAndTermYear").setParameter("departmentId", course.getCoursePK().getDepartmentId()).setParameter("courseNumber", course.getCoursePK().getCourseNumber()).setParameter("termYear", Calendar.getInstance().get(Calendar.YEAR)).getResultList();
     }
 
     /**
