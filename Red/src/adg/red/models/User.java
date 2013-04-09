@@ -44,7 +44,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u WHERE u.lastName = :lastName"),
     @NamedQuery(name = "User.findByIsOnline", query = "SELECT u FROM User u WHERE u.isOnline = :isOnline"),
     @NamedQuery(name = "User.findByPhoneNumber", query = "SELECT u FROM User u WHERE u.phoneNumber = :phoneNumber"),
-    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
+    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email AND u.isActive = 1"),
     @NamedQuery(name = "User.findByDateOfBirth", query = "SELECT u FROM User u WHERE u.dateOfBirth = :dateOfBirth"),
     @NamedQuery(name = "User.findByIsActive", query = "SELECT u FROM User u WHERE u.isActive = :isActive"),
     @NamedQuery(name = "User.login", query = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password AND u.isActive=1")
@@ -288,7 +288,7 @@ public class User implements Serializable
     }
 
     // get user profile query added by Jingbo Yu
-    public static User getUserProfileByName(String username) throws Exception
+    public static User getUserByUsername(String username) throws Exception
     {
         List<User> userList = RedEntityManager.getEntityManager().createNamedQuery("User.findByUsername").setParameter("username", username).getResultList();
         if (userList.size() == 1)
@@ -319,5 +319,18 @@ public class User implements Serializable
     public void setAdministrator(Administrator administrator)
     {
         this.administrator = administrator;
+    }
+
+    public static User getUserByEmailId(String emailId) throws Exception
+    {
+        List<User> userList = RedEntityManager.getEntityManager().createNamedQuery("User.findByEmail").setParameter("email", emailId).getResultList();
+        if (userList.size() == 1)
+        {
+            return userList.get(0);
+        }
+        else
+        {
+            throw new Exception("Invalid email Id");
+        }
     }
 }
