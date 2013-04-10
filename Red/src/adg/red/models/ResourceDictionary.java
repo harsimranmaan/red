@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "ResourceDictionary")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "ResourceDictionary.findAll", query = "SELECT r FROM ResourceDictionary r"),
     @NamedQuery(name = "ResourceDictionary.findByResourceId", query = "SELECT r FROM ResourceDictionary r WHERE r.resourceDictionaryPK.resourceId = :resourceId"),
     @NamedQuery(name = "ResourceDictionary.findByLocaleId", query = "SELECT r FROM ResourceDictionary r WHERE r.resourceDictionaryPK.localeId = :localeId"),
@@ -34,7 +34,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 })
 public class ResourceDictionary implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
     @EmbeddedId
     protected ResourceDictionaryPK resourceDictionaryPK;
     @Basic(optional = false)
@@ -44,51 +48,92 @@ public class ResourceDictionary implements Serializable
     @ManyToOne(optional = false)
     private Locale locale;
 
+    /**
+     *
+     */
     public ResourceDictionary()
     {
     }
 
+    /**
+     *
+     * @param resourceDictionaryPK
+     */
     public ResourceDictionary(ResourceDictionaryPK resourceDictionaryPK)
     {
         this.resourceDictionaryPK = resourceDictionaryPK;
     }
 
+    /**
+     *
+     * @param resourceDictionaryPK
+     * @param textString
+     */
     public ResourceDictionary(ResourceDictionaryPK resourceDictionaryPK, String textString)
     {
         this.resourceDictionaryPK = resourceDictionaryPK;
         this.textString = textString;
     }
 
+    /**
+     *
+     * @param resourceId
+     * @param localeId
+     */
     public ResourceDictionary(int resourceId, int localeId)
     {
         this.resourceDictionaryPK = new ResourceDictionaryPK(resourceId, localeId);
     }
 
+    /**
+     *
+     * @return
+     */
     public ResourceDictionaryPK getResourceDictionaryPK()
     {
         return resourceDictionaryPK;
     }
 
+    /**
+     *
+     * @param resourceDictionaryPK
+     */
     public void setResourceDictionaryPK(ResourceDictionaryPK resourceDictionaryPK)
     {
         this.resourceDictionaryPK = resourceDictionaryPK;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTextString()
     {
         return textString;
     }
 
+    /**
+     *
+     * @param textString
+     */
     public void setTextString(String textString)
     {
         this.textString = textString;
     }
 
+    /**
+     *
+     * @return
+     */
     public Locale getLocale()
     {
         return locale;
     }
 
+    /**
+     *
+     * @param locale
+     */
     public void setLocale(Locale locale)
     {
         this.locale = locale;
@@ -124,6 +169,12 @@ public class ResourceDictionary implements Serializable
         return "adg.red.models.ResourceDictionary[ resourceDictionaryPK=" + resourceDictionaryPK + " ]";
     }
 
+    /**
+     *
+     * @param localeId
+     * <p/>
+     * @return
+     */
     public static List<ResourceDictionary> getResourceByLocaleId(int localeId)
     {
         return RedEntityManager.getEntityManager().createNamedQuery("ResourceDictionary.findByLocaleId").setParameter("localeId", localeId).getResultList();

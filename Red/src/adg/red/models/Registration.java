@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Registration")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "Registration.findAll", query = "SELECT r FROM Registration r"),
     @NamedQuery(name = "Registration.findByStudentId", query = "SELECT r FROM Registration r WHERE r.registrationPK.studentId = :studentId AND r.isActive = 1"),
     @NamedQuery(name = "Registration.findByProgramName", query = "SELECT r FROM Registration r WHERE r.registrationPK.programName = :programName"),
@@ -40,7 +40,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 })
 public class Registration implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
     @EmbeddedId
     protected RegistrationPK registrationPK;
     @Basic(optional = false)
@@ -58,22 +62,36 @@ public class Registration implements Serializable
     @ManyToOne(optional = false)
     private Student student;
     @JoinColumns(
-    {
+            {
         @JoinColumn(name = "programName", referencedColumnName = "programName", insertable = false, updatable = false),
         @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false)
     })
     @ManyToOne(optional = false)
     private Program program;
 
+    /**
+     *
+     */
     public Registration()
     {
     }
 
+    /**
+     *
+     * @param registrationPK
+     */
     public Registration(RegistrationPK registrationPK)
     {
         this.registrationPK = registrationPK;
     }
 
+    /**
+     *
+     * @param registrationPK
+     * @param startDate
+     * @param graduationDate
+     * @param isActive
+     */
     public Registration(RegistrationPK registrationPK, Date startDate, Date graduationDate, boolean isActive)
     {
         this.registrationPK = registrationPK;
@@ -82,66 +100,120 @@ public class Registration implements Serializable
         this.isActive = isActive;
     }
 
+    /**
+     *
+     * @param studentId
+     * @param programName
+     * @param departmentId
+     */
     public Registration(int studentId, String programName, String departmentId)
     {
         this.registrationPK = new RegistrationPK(studentId, programName, departmentId);
     }
 
+    /**
+     *
+     * @return
+     */
     public RegistrationPK getRegistrationPK()
     {
         return registrationPK;
     }
 
+    /**
+     *
+     * @param registrationPK
+     */
     public void setRegistrationPK(RegistrationPK registrationPK)
     {
         this.registrationPK = registrationPK;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getStartDate()
     {
         return startDate;
     }
 
+    /**
+     *
+     * @param startDate
+     */
     public void setStartDate(Date startDate)
     {
         this.startDate = startDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getGraduationDate()
     {
         return graduationDate;
     }
 
+    /**
+     *
+     * @param graduationDate
+     */
     public void setGraduationDate(Date graduationDate)
     {
         this.graduationDate = graduationDate;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean getIsActive()
     {
         return isActive;
     }
 
+    /**
+     *
+     * @param isActive
+     */
     public void setIsActive(boolean isActive)
     {
         this.isActive = isActive;
     }
 
+    /**
+     *
+     * @return
+     */
     public Student getStudent()
     {
         return student;
     }
 
+    /**
+     *
+     * @param student
+     */
     public void setStudent(Student student)
     {
         this.student = student;
     }
 
+    /**
+     *
+     * @return
+     */
     public Program getProgram()
     {
         return program;
     }
 
+    /**
+     *
+     * @param program
+     */
     public void setProgram(Program program)
     {
         this.program = program;
@@ -177,6 +249,12 @@ public class Registration implements Serializable
         return "adg.red.models.Registration[ registrationPK=" + registrationPK + " ]";
     }
 
+    /**
+     *
+     * @param student
+     * <p/>
+     * @return
+     */
     public static Registration getCurrentRegistration(Student student)
     {
         return (Registration) RedEntityManager.getEntityManager().createNamedQuery("Registration.findByStudentId")

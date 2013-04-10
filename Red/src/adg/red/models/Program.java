@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -34,6 +34,9 @@ public class Program implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
     @EmbeddedId
     protected ProgramPK programPK;
     @Basic(optional = false)
@@ -46,51 +49,92 @@ public class Program implements Serializable
     @ManyToOne(optional = false)
     private Department department;
 
+    /**
+     *
+     */
     public Program()
     {
     }
 
+    /**
+     *
+     * @param programPK
+     */
     public Program(ProgramPK programPK)
     {
         this.programPK = programPK;
     }
 
+    /**
+     *
+     * @param programPK
+     * @param isActive
+     */
     public Program(ProgramPK programPK, boolean isActive)
     {
         this.programPK = programPK;
         this.isActive = isActive;
     }
 
+    /**
+     *
+     * @param programName
+     * @param departmentId
+     */
     public Program(String programName, String departmentId)
     {
         this.programPK = new ProgramPK(programName, departmentId);
     }
 
+    /**
+     *
+     * @return
+     */
     public ProgramPK getProgramPK()
     {
         return programPK;
     }
 
+    /**
+     *
+     * @param programPK
+     */
     public void setProgramPK(ProgramPK programPK)
     {
         this.programPK = programPK;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean getIsActive()
     {
         return isActive;
     }
 
+    /**
+     *
+     * @param isActive
+     */
     public void setIsActive(boolean isActive)
     {
         this.isActive = isActive;
     }
 
+    /**
+     *
+     * @return
+     */
     public Department getDepartment()
     {
         return department;
     }
 
+    /**
+     *
+     * @param department
+     */
     public void setDepartment(Department department)
     {
         this.department = department;
@@ -126,11 +170,19 @@ public class Program implements Serializable
         return "adg.red.models.Program[ programPK=" + programPK + " ]";
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCreditsRequired()
     {
         return creditsRequired;
     }
 
+    /**
+     *
+     * @param creditsRequired
+     */
     public void setCreditsRequired(int creditsRequired)
     {
         this.creditsRequired = creditsRequired;

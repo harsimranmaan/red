@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -19,6 +19,7 @@ import javax.persistence.TemporalType;
 @Embeddable
 public class SectionTimeTablePK implements Serializable
 {
+
     @Basic(optional = false)
     @Column(name = "sectionId")
     private int sectionId;
@@ -45,10 +46,24 @@ public class SectionTimeTablePK implements Serializable
     @Temporal(TemporalType.TIME)
     private Date startTime;
 
+    /**
+     *
+     */
     public SectionTimeTablePK()
     {
     }
 
+    /**
+     *
+     * @param sectionId
+     * @param courseNumber
+     * @param departmentId
+     * @param termYear
+     * @param sessionId
+     * @param sectionTypeId
+     * @param dayId
+     * @param startTime
+     */
     public SectionTimeTablePK(int sectionId, int courseNumber, String departmentId, int termYear, int sessionId, int sectionTypeId, int dayId, Date startTime)
     {
         this.sectionId = sectionId;
@@ -61,81 +76,145 @@ public class SectionTimeTablePK implements Serializable
         this.startTime = startTime;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSectionId()
     {
         return sectionId;
     }
 
+    /**
+     *
+     * @param sectionId
+     */
     public void setSectionId(int sectionId)
     {
         this.sectionId = sectionId;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCourseNumber()
     {
         return courseNumber;
     }
 
+    /**
+     *
+     * @param courseNumber
+     */
     public void setCourseNumber(int courseNumber)
     {
         this.courseNumber = courseNumber;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDepartmentId()
     {
         return departmentId;
     }
 
+    /**
+     *
+     * @param departmentId
+     */
     public void setDepartmentId(String departmentId)
     {
         this.departmentId = departmentId;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getTermYear()
     {
         return termYear;
     }
 
+    /**
+     *
+     * @param termYear
+     */
     public void setTermYear(int termYear)
     {
         this.termYear = termYear;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSessionId()
     {
         return sessionId;
     }
 
+    /**
+     *
+     * @param sessionId
+     */
     public void setSessionId(int sessionId)
     {
         this.sessionId = sessionId;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSectionTypeId()
     {
         return sectionTypeId;
     }
 
+    /**
+     *
+     * @param sectionTypeId
+     */
     public void setSectionTypeId(int sectionTypeId)
     {
         this.sectionTypeId = sectionTypeId;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getDayId()
     {
         return dayId;
     }
 
+    /**
+     *
+     * @param dayId
+     */
     public void setDayId(int dayId)
     {
         this.dayId = dayId;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getStartTime()
     {
         return startTime;
     }
 
+    /**
+     *
+     * @param startTime
+     */
     public void setStartTime(Date startTime)
     {
         this.startTime = startTime;
@@ -148,7 +227,7 @@ public class SectionTimeTablePK implements Serializable
         hash += (int) sectionId;
         hash += (int) courseNumber;
         hash += (departmentId != null ? departmentId.hashCode() : 0);
-        hash += (int)termYear;
+        hash += (int) termYear;
         hash += (int) sessionId;
         hash += (int) sectionTypeId;
         hash += (int) dayId;
@@ -177,7 +256,7 @@ public class SectionTimeTablePK implements Serializable
         {
             return false;
         }
-        if (this.termYear !=other.termYear)
+        if (this.termYear != other.termYear)
         {
             return false;
         }
