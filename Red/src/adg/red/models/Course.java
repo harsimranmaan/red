@@ -28,14 +28,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries(
         {
     @NamedQuery(name = "Course.findAll", query = "SELECT c FROM Course c"),
-    @NamedQuery(name = "Course.findByDepartmentAndCourseNumber", query = "SELECT c FROM Course c WHERE c.coursePK.courseNumber = :courseNumber AND c.coursePK.departmentId = :departmentId"),
-    @NamedQuery(name = "Course.findByCourseNumber", query = "SELECT c FROM Course c WHERE c.coursePK.courseNumber = :courseNumber"),
-    @NamedQuery(name = "Course.findByDepartmentId", query = "SELECT c FROM Course c WHERE c.coursePK.departmentId = :departmentId"),
-    @NamedQuery(name = "Course.findByName", query = "SELECT c FROM Course c WHERE c.name = :name"),
-    @NamedQuery(name = "Course.findByDescription", query = "SELECT c FROM Course c WHERE c.description = :description"),
-    @NamedQuery(name = "Course.findByCredits", query = "SELECT c FROM Course c WHERE c.credits = :credits"),
-    @NamedQuery(name = "Course.findByPassingRequirement", query = "SELECT c FROM Course c WHERE c.passingRequirement = :passingRequirement"),
-    @NamedQuery(name = "Course.findByIsActive", query = "SELECT c FROM Course c WHERE c.isActive = :isActive")
+    @NamedQuery(name = "Course.findByDepartmentAndCourseNumber", query = "SELECT c FROM Course c LEFT JOIN FETCH c.gradingSchemeId WHERE c.coursePK.courseNumber = :courseNumber AND c.coursePK.departmentId = :departmentId"),
+    @NamedQuery(name = "Course.findByCourseNumber", query = "SELECT c FROM Course c LEFT JOIN FETCH c.gradingSchemeId  WHERE c.coursePK.courseNumber = :courseNumber"),
+    @NamedQuery(name = "Course.findByDepartmentId", query = "SELECT c FROM Course c LEFT JOIN FETCH c.gradingSchemeId  WHERE c.coursePK.departmentId = :departmentId"),
+    @NamedQuery(name = "Course.findByName", query = "SELECT c FROM Course c LEFT JOIN FETCH c.gradingSchemeId WHERE c.name = :name"),
+    @NamedQuery(name = "Course.findByDescription", query = "SELECT c FROM Course c LEFT JOIN FETCH c.gradingSchemeId WHERE c.description = :description"),
+    @NamedQuery(name = "Course.findByCredits", query = "SELECT c FROM Course c LEFT JOIN FETCH c.gradingSchemeId WHERE c.credits = :credits"),
+    @NamedQuery(name = "Course.findByPassingRequirement", query = "SELECT c FROM Course c LEFT JOIN FETCH c.gradingSchemeId WHERE c.passingRequirement = :passingRequirement"),
+    @NamedQuery(name = "Course.findByIsActive", query = "SELECT c FROM Course c LEFT JOIN FETCH c.gradingSchemeId WHERE c.isActive = :isActive")
 })
 public class Course implements Serializable
 {
