@@ -154,16 +154,16 @@ UNLOCK TABLES;
 
 
 /* insert data into 'Faculty' table */
-SET foreign_key_checks = 0;
+/* SET foreign_key_checks = 0;*/
 LOCK TABLES `Faculty` WRITE;
 
-INSERT INTO `Faculty` (`name`, `addressId`, `headOfFacultyId`, `phone`, `website`) 
+INSERT INTO `Faculty` (`name`, `phone`, `website`) 
 VALUES 
-('Faculty of Engineering', '100', null, '12345', 'www.foengg.com'),
-('Faculty of Medical Sciences', '101', null, '23456', 'www.foms.com');
+('Faculty of Engineering', '12345', 'www.foengg.com'),
+('Faculty of Medical Sciences', '23456', 'www.foms.com');
 
 UNLOCK TABLES;
-SET foreign_key_checks = 1;
+/* SET foreign_key_checks = 1; */
 
 
 /* insert data into 'Department' table */
@@ -233,7 +233,10 @@ VALUES
 
 UNLOCK TABLES;
 
-/*  update headOfFacultyId of Faculty table */
+
+/*  
+update headOfFacultyId of Faculty table
+
 UPDATE Faculty
 SET headOfFacultyId = '100'
 where facultyId = '100';
@@ -241,7 +244,7 @@ where facultyId = '100';
 UPDATE Faculty
 SET headOfFacultyId = '101'
 where facultyId = '101';
-
+*/
 
 /* insert data into 'Administrator' table */
 LOCK TABLES `Administrator` WRITE;

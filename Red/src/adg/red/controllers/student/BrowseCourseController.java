@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ * The controller class for BrowseCourse.fxml.
+ *
  */
 package adg.red.controllers.student;
 
@@ -27,7 +27,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
 /**
- * FXML Controller class
+ * FXML Controller class for BrowseCourse.fxml.
  * <p/>
  * @author Witt
  */
@@ -57,7 +57,19 @@ public class BrowseCourseController implements Initializable
     }
 
     /**
+     * The function initializes all components text by locality.
+     */
+    private void initializeComponentsByLocale()
+    {
+        colDeptId.setText(LocaleManager.get(41));
+        colDeptName.setText(LocaleManager.get(52));
+    }
+
+    /**
      * Initializes the controller class.
+     * <p/>
+     * @param url the URL
+     * @param rb  the ResourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -67,9 +79,7 @@ public class BrowseCourseController implements Initializable
         initializeComponentsByLocale();
         populateDeptTable("All");
 
-        // action when user clicked on the table
-
-
+        // add handle to each component in hbox
         Iterator<Node> nodes = hBox.getChildren().iterator();
         while (nodes.hasNext())
         {
@@ -85,6 +95,12 @@ public class BrowseCourseController implements Initializable
         }
     }
 
+    /**
+     * The function gets the list of department by the input String from
+     * database. It will then populate the department table with that list.
+     * <p/>
+     * @param beginsWith the String at the start of department id
+     */
     public void populateDeptTable(String beginsWith)
     {
         List< Department> departments;
@@ -99,16 +115,15 @@ public class BrowseCourseController implements Initializable
         populate(departments);
     }
 
+    /**
+     * The function populates the list of departments to the department table.
+     * <p/>
+     * @param departments the list of department to be populated
+     */
     private void populate(List<Department> departments)
     {
         colDeptId.setCellValueFactory(new PropertyValueFactory<Department, String>("departmentId"));
         colDeptName.setCellValueFactory(new PropertyValueFactory<Department, String>("name"));
         tabDisplayDepartment.getItems().setAll(departments);
-    }
-
-    private void initializeComponentsByLocale()
-    {
-        colDeptId.setText(LocaleManager.get(41));
-        colDeptName.setText(LocaleManager.get(52));
     }
 }
