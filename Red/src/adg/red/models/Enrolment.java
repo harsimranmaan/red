@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Enrolment.findByEnrolmentPK", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK=:enrolmentPK"),
     @NamedQuery(name = "Enrolment.findBySectionPK", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.courseNumber = :courseNumber AND e.enrolmentPK.departmentId = :departmentId AND e.enrolmentPK.sectionId = :sectionId AND e.enrolmentPK.sectionTypeId = :sectionTypeId AND e.enrolmentPK.sessionId = :sessionId AND e.enrolmentPK.termYear = :termYear"),
     @NamedQuery(name = "Enrolment.findSumCreditsByStudentId", query = "SELECT CASE WHEN SUM(c.credits) IS NULL THEN 0 ELSE SUM(c.credits) END FROM Course c, Enrolment e WHERE c.coursePK.courseNumber = e.enrolmentPK.courseNumber AND c.coursePK.departmentId = e.enrolmentPK.departmentId AND e.enrolmentPK.studentId = :studentId AND e.resultId.resultId = 100 AND e.enrolmentPK.sectionTypeId = 100 AND e.isActive = 1 "),
-    @NamedQuery(name = "Enrolment.findActiveEnrolmentsByStudentId", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.studentId = :studentId  AND e.resultId.resultId IS NOT null  AND e.enrolmentPK.sectionTypeId = 100 AND e.isActive = 1 ")
+    @NamedQuery(name = "Enrolment.findActiveEnrolmentsByStudentId", query = "SELECT e FROM Enrolment e WHERE e.enrolmentPK.studentId = :studentId AND e.resultId.resultId IS NOT null AND e.enrolmentPK.sectionTypeId = 100 AND e.isActive = 1 ")
 })
 public class Enrolment implements Serializable
 {

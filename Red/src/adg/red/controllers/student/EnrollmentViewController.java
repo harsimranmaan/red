@@ -45,9 +45,10 @@ public class EnrollmentViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        Context.getInstance().setTitle(LocaleManager.get(98));
+        Context.getInstance().setTitle(LocaleManager.get(106));
         BreadCrumbController.renderBreadCrumb("student/HomeView|student/EnrollmentView");
-        List<Enrolment> enrolmentList = Enrolment.getEnrolmentsByStudentId(Context.getInstance().getCurrentUser().getStudent().getStudentId());
+        List<Enrolment> enrolmentList = Enrolment.getActiveEnrolmentsByStudentId(Context.getInstance().getCurrentUser().getStudent().getStudentId());
+
         populateEnrolmentTable(enrolmentList);
     }
 
