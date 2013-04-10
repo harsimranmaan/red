@@ -42,41 +42,73 @@ public class SectionType implements Serializable
     @Column(name = "name")
     private String name;
 
+    /**
+     * Default constructor
+     */
     public SectionType()
     {
     }
 
+    /**
+     * Constructor
+     * @param sectionTypeId table attribute sectionTypeId
+     */
     public SectionType(Integer sectionTypeId)
     {
         this.sectionTypeId = sectionTypeId;
     }
 
+    /**
+     * Constructor
+     * @param sectionTypeId table attribute sectionTypeId
+     * @param name table attribute name
+     */
     public SectionType(Integer sectionTypeId, String name)
     {
         this.sectionTypeId = sectionTypeId;
         this.name = name;
     }
 
+    /**
+     * Get table attribute sectionTypeId
+     * @return sectionTypeId
+     */
     public Integer getSectionTypeId()
     {
         return sectionTypeId;
     }
 
+    /**
+     * Set table attribute sectionTypeId
+     * @param sectionTypeId 
+     */
     public void setSectionTypeId(Integer sectionTypeId)
     {
         this.sectionTypeId = sectionTypeId;
     }
 
+    /**
+     * Get table attribute name
+     * @return name
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     * Set table attribute name
+     * @param name 
+     */
     public void setName(String name)
     {
         this.name = name;
     }
 
+    /**
+     * Get record location
+     * @return hash code 
+     */
     @Override
     public int hashCode()
     {
@@ -85,6 +117,11 @@ public class SectionType implements Serializable
         return hash;
     }
 
+    /**
+     * Comparator
+     * @param object object to be compared with
+     * @return true if two object equal to each other, otherwise return false
+     */
     @Override
     public boolean equals(Object object)
     {
@@ -101,6 +138,10 @@ public class SectionType implements Serializable
         return true;
     }
 
+    /**
+     * print sectionTypeId
+     * @return sectionTypeId as a string
+     */
     @Override
     public String toString()
     {

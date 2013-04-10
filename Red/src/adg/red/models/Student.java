@@ -61,71 +61,127 @@ public class Student implements Serializable
     @OneToOne(optional = false)
     private User username;
 
+    /**
+     * Default constructor
+     */
     public Student()
     {
     }
 
+    /**
+     * Constructor
+     * @param studentId table attribute studentId
+     */
     public Student(Integer studentId)
     {
         this.studentId = studentId;
     }
 
+    /**
+     * Constructor
+     * @param studentId table attribute studentId
+     * @param isActive table attribute isActive
+     */
     public Student(Integer studentId, boolean isActive)
     {
         this.studentId = studentId;
         this.isActive = isActive;
     }
 
+    /**
+     * Get table attribute studentId
+     * @return studentId
+     */
     public Integer getStudentId()
     {
         return studentId;
     }
 
+    /**
+     * Set table attribute studentId
+     * @param studentId table attribute studentId
+     */
     public void setStudentId(Integer studentId)
     {
         this.studentId = studentId;
     }
 
+    /**
+     * Get table attribute dataOfRegistration
+     * @return dataOfRegistration
+     */
     public Date getDateOfRegistration()
     {
         return dateOfRegistration;
     }
 
+    /**
+     * Set table attribute dataOfRegistration 
+     * @param dateOfRegistration table attribute
+     */
     public void setDateOfRegistration(Date dateOfRegistration)
     {
         this.dateOfRegistration = dateOfRegistration;
     }
 
+    /**
+     * Get table attribute highestDegree
+     * @return highestDegree
+     */
     public String getHighestDegree()
     {
         return highestDegree;
     }
 
+    /**
+     * Set table attribute highestDegree
+     * @param highestDegree table attribute
+     */
     public void setHighestDegree(String highestDegree)
     {
         this.highestDegree = highestDegree;
     }
 
+    /**
+     * Get table attribute isActive
+     * @return isActive
+     */
     public boolean getIsActive()
     {
         return isActive;
     }
 
+    /**
+     * Set table attribute isActive
+     * @param isActive 
+     */
     public void setIsActive(boolean isActive)
     {
         this.isActive = isActive;
     }
 
+    /**
+     * Get table attribute username
+     * @return username
+     */
     public User getUsername()
     {
         return username;
     }
 
+    /**
+     * Set table attribute username
+     * @param username table attribute username
+     */
     public void setUsername(User username)
     {
         this.username = username;
     }
-
+    
+    /**
+     * Get record location
+     * @return hash code 
+     */
     @Override
     public int hashCode()
     {
@@ -134,6 +190,11 @@ public class Student implements Serializable
         return hash;
     }
 
+     /**
+     * Comparator
+     * @param object object to be compared with
+     * @return true if two object equal to each other, otherwise return false
+     */
     @Override
     public boolean equals(Object object)
     {
@@ -149,13 +210,23 @@ public class Student implements Serializable
         }
         return true;
     }
-
+    
+    /**
+     * print studentId
+     * @return studentId as a string
+     */
     @Override
     public String toString()
     {
         return "adg.red.models.Student[ studentId=" + studentId + " ]";
     }
 
+    /**
+     * Get student list by username
+     * @param username table attribute username
+     * @return student list
+     * @throws Exception 
+     */
     public static Student getStudentByUsername(User username) throws Exception
     {
         List<Student> studentList = RedEntityManager.getEntityManager().createNamedQuery("Student.findByUsername").setParameter("username", username).getResultList();
