@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -31,10 +31,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries(
         {
-    @NamedQuery(name = "MessageReceiver.findAll", query = "SELECT m FROM MessageReceiver m"),
-    @NamedQuery(name = "MessageReceiver.findByMessageId", query = "SELECT m FROM MessageReceiver m WHERE m.messageReceiverPK.messageId = :messageId"),
-    @NamedQuery(name = "MessageReceiver.findByReceiverId", query = "SELECT m FROM MessageReceiver m WHERE m.messageReceiverPK.receiverId = :receiverId AND m.statusId.name <> 'Delete' ORDER BY m.message.dateTime DESC"),
-    @NamedQuery(name = "MessageReceiver.findByModifiedAt", query = "SELECT m FROM MessageReceiver m WHERE m.modifiedAt = :modifiedAt")
+    // @NamedQuery(name = "MessageReceiver.findAll", query = "SELECT m FROM MessageReceiver m"),
+    //@NamedQuery(name = "MessageReceiver.findByMessageId", query = "SELECT m FROM MessageReceiver m LEFT JOIN FETCH m.message WHERE m.messageReceiverPK.messageId = :messageId"),
+    @NamedQuery(name = "MessageReceiver.findByReceiverId", query = "SELECT m FROM MessageReceiver m LEFT JOIN FETCH m.message LEFT JOIN FETCH m.statusId LEFT JOIN FETCH m.user WHERE m.messageReceiverPK.receiverId = :receiverId AND m.statusId.name <> 'Delete' ORDER BY m.message.dateTime DESC")
+//@NamedQuery(name = "MessageReceiver.findByModifiedAt", query = "SELECT m FROM MessageReceiver m WHERE m.modifiedAt = :modifiedAt")
 })
 public class MessageReceiver implements Serializable
 {
