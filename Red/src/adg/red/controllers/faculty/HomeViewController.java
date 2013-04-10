@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ * The controller class for Faculty HomeView.fxml.
+ *
  */
 package adg.red.controllers.faculty;
 

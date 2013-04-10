@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ * The controller class for Faculty SpecialButtons.fxml.
+ *
  */
 package adg.red.controllers.faculty;
 
@@ -33,6 +33,11 @@ public class SpecificButtonsController implements Initializable
     @FXML
     private Button btnReports;
 
+    /**
+     * Handles Upload Score button press event
+     * <p/>
+     * @param event The Action event
+     */
     @FXML
     private void uploadScore(ActionEvent event)
     {
@@ -40,6 +45,11 @@ public class SpecificButtonsController implements Initializable
         renderSectionView();
     }
 
+    /**
+     * Handles Special Request button press event
+     * <p/>
+     * @param event The Action event
+     */
     @FXML
     private void specialRequest(ActionEvent event)
     {
@@ -47,6 +57,11 @@ public class SpecificButtonsController implements Initializable
         renderSectionView();
     }
 
+    /**
+     * Handles View Time Table button press event
+     * <p/>
+     * @param event The Action event
+     */
     @FXML
     private void viewTimeTable(ActionEvent event)
     {
@@ -55,6 +70,11 @@ public class SpecificButtonsController implements Initializable
         view.loadView("TimeTable");
     }
 
+    /**
+     * Handles Generate Report button press event
+     * <p/>
+     * @param event The Action event
+     */
     @FXML
     private void generateReport(ActionEvent event)
     {
@@ -62,6 +82,9 @@ public class SpecificButtonsController implements Initializable
         renderSectionView();
     }
 
+    /**
+     * Renders the section view on all button events
+     */
     private void renderSectionView()
     {
         ViewLoader view = new ViewLoader(Context.getInstance().getDisplayView());
@@ -70,6 +93,9 @@ public class SpecificButtonsController implements Initializable
 
     /**
      * Initializes the controller class.
+     * <p/>
+     * @param url the url
+     * @param rb  the resource bundle
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -77,6 +103,9 @@ public class SpecificButtonsController implements Initializable
         initializeComponentsByLocale();
     }
 
+    /**
+     * The function initializes all the components text by locality.
+     */
     private void initializeComponentsByLocale()
     {
         btnUpdateScores.setText(LocaleManager.get(56));
