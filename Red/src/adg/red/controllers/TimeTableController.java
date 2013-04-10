@@ -26,7 +26,7 @@ import javafx.scene.paint.Color;
 /**
  * FXML Controller class
  * <p/>
- * @author jayzt_000
+ * @author Jaspreet Thind
  */
 public class TimeTableController implements Initializable
 {

@@ -4,6 +4,7 @@
  */
 package adg.red.models;
 
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -134,5 +135,10 @@ public class Faculty implements Serializable
     public String toString()
     {
         return "adg.red.models.Faculty[ facultyId=" + facultyId + " ]";
+    }
+
+    public static Faculty getByFacultyId(Integer facultyId)
+    {
+        return (Faculty) RedEntityManager.getEntityManager().createNamedQuery("Faculty.findByFacultyId").setParameter("facultyId", facultyId).getSingleResult();
     }
 }

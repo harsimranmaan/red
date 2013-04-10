@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ * The controller class for Faculty UploadScore.fxml.
+ *
  */
 package adg.red.controllers.faculty;
 
@@ -65,6 +65,11 @@ public class UploadScoreController implements Initializable
     private Button btnDownloadTemp;
     private File file;
 
+    /**
+     * Function to enable the downloading of upload score template csv
+     * <p/>
+     * @param event the action event
+     */
     @FXML
     private void downloadTemplate(ActionEvent event)
     {
@@ -80,6 +85,11 @@ public class UploadScoreController implements Initializable
         DownloadFileController.saveFile(content, "csv");
     }
 
+    /**
+     * Creates the Header for the template
+     * <p/>
+     * @return The Header
+     */
     private String createTemplateHeader()
     {
         String content = "#Template for ";
@@ -93,6 +103,9 @@ public class UploadScoreController implements Initializable
 
     /**
      * Initializes the controller class.
+     * <p/>
+     * @param url is the url
+     * @param rb  is the resource bundle
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -107,6 +120,9 @@ public class UploadScoreController implements Initializable
         toggleLabels();
     }
 
+    /**
+     * The function initializes all the components text by locality.
+     */
     private void initializeComponentsByLocale()
     {
         btnBrowseFile.setText(LocaleManager.get(70));
@@ -118,6 +134,10 @@ public class UploadScoreController implements Initializable
 
     }
 
+    /**
+     * Toggle the Upload button and label visibility, depending if the upload
+     * file exists or not
+     */
     private void toggleLabels()
     {
         if (file != null)
@@ -133,6 +153,11 @@ public class UploadScoreController implements Initializable
         }
     }
 
+    /**
+     * Browse the upload file
+     * <p/>
+     * @param event the action event
+     */
     @FXML
     public void browseFile(ActionEvent event)
     {
@@ -149,12 +174,22 @@ public class UploadScoreController implements Initializable
 
     }
 
+    /**
+     * Upload the file containing all the scores
+     * <p/>
+     * @param event the action event
+     */
     @FXML
     public void uploadScore(ActionEvent event)
     {
         upload(file);
     }
 
+    /**
+     * Check the contents of the file and upload it
+     * <p/>
+     * @param file the file to be uploaded
+     */
     private void upload(File file)
     {
         ArrayList<String> resultList = new ArrayList();
