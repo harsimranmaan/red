@@ -7,6 +7,10 @@ package adg.red.controllers;
 import adg.red.controls.CustomTextBox;
 import adg.red.controls.TextBoxType;
 import adg.red.models.Address;
+import adg.red.models.Administrator;
+import adg.red.models.Faculty;
+import adg.red.models.FacultyMember;
+import adg.red.models.Student;
 import adg.red.models.User;
 import adg.red.utils.Context;
 import adg.red.utils.LocaleManager;
@@ -20,6 +24,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -34,6 +39,8 @@ public class UserProfileController implements Initializable
     @FXML
     private Pane paneChangePassword;
     private User currentUser;
+    private Label txtFullName;
+    private Label txtUserType;
     private CustomTextBox txtAddressFirst;
     private CustomTextBox txtAddressSecond;
     private CustomTextBox txtCity;
@@ -62,6 +69,38 @@ public class UserProfileController implements Initializable
         BreadCrumbController.renderBreadCrumb(currentUser.getUserTypeId().getName().toLowerCase() + "/HomeView|UserProfile");
         ViewLoader view = new ViewLoader(paneChangePassword);
         view.loadView("ChangePassword");
+        txtFullName = new Label("Full name: " + currentUser.getFirstName() + " " + currentUser.getLastName());
+        if (currentUser.getUserTypeId().getName().equals("Student"))
+        {
+            try {
+                Student student = Student.getStudentByUsername(currentUser);
+                txtUserType = new Label("Student ID: " + student.getStudentId());
+            } catch (Exception ex) {
+                Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else if (currentUser.getUserTypeId().getName().equals("Faculty"))
+        {
+            try {
+                FacultyMember facultyMember = FacultyMember.getFacultMemberByUserName(currentUser);
+                txtUserType = new Label("Faculty ID: " + facultyMember.getFacultyMemberId());
+            } catch (Exception ex) {
+                Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else if (currentUser.getUserTypeId().getName().equals("Admin"))
+        {
+            try {
+                Administrator admin = Administrator.getAdministratorByUserName(currentUser);
+                txtUserType = new Label("Admin ID: " + admin.getAdminId());
+            } catch (Exception ex) {
+                Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else
+        {
+            txtUserType = new Label("Wrong user name");
+        }
         txtAddressFirst = new CustomTextBox(TextBoxType.Any, "Addrees 1:", "");
         txtAddressSecond = new CustomTextBox(TextBoxType.Any, "Addrees 2:", "");
         txtCity = new CustomTextBox(TextBoxType.Alpha, "City:", "Please enter a valid City");
@@ -70,7 +109,7 @@ public class UserProfileController implements Initializable
         txtEmail = new CustomTextBox(TextBoxType.Email, "Email:", "Please enter a valid Email");
         txtPhone = new CustomTextBox(TextBoxType.Phone, "Phone:", "Please enter a valid Phone");
         txtPostalCode = new CustomTextBox(TextBoxType.PostalCode, "Postal Code:", "Please enter a valid Postal Code");
-        vBoxHolder.getChildren().addAll(txtAddressFirst, txtAddressSecond, txtCity, txtProvince, txtCountry, txtPostalCode, txtPhone, txtEmail);
+        vBoxHolder.getChildren().addAll(txtFullName, txtUserType, txtAddressFirst, txtAddressSecond, txtCity, txtProvince, txtCountry, txtPostalCode, txtPhone, txtEmail);
         showUserProfile();
     }
 

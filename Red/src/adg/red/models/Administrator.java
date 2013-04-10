@@ -4,8 +4,10 @@
  */
 package adg.red.models;
 
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Administrator.findAll", query = "SELECT a FROM Administrator a"),
     @NamedQuery(name = "Administrator.findByAdminId", query = "SELECT a FROM Administrator a WHERE a.adminId = :adminId"),
     @NamedQuery(name = "Administrator.findByDateOfJoining", query = "SELECT a FROM Administrator a WHERE a.dateOfJoining = :dateOfJoining"),
-    @NamedQuery(name = "Administrator.findByIsActive", query = "SELECT a FROM Administrator a WHERE a.isActive = :isActive")
+    @NamedQuery(name = "Administrator.findByIsActive", query = "SELECT a FROM Administrator a WHERE a.isActive = :isActive"),
+    @NamedQuery(name = "Administrator.findByUserName", query = "SELECT a FROM Administrator a WHERE a.username = :username")
 })
 public class Administrator implements Serializable
 {
@@ -152,4 +155,17 @@ public class Administrator implements Serializable
     {
         return "adg.red.models.Administrator[ adminId=" + adminId + " ]";
     }
+    
+    public static Administrator getAdministratorByUserName(User userName) throws Exception
+    {
+        List<Administrator> AdministratorList = RedEntityManager.getEntityManager().createNamedQuery("Administrator.findByUserName").setParameter("username", userName).getResultList();
+        if (AdministratorList.size() == 1)
+        {
+            return AdministratorList.get(0);
+        }
+        else
+        {
+            throw new Exception("Invalid user name in administrator");
+        }
+    }    
 }
