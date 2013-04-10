@@ -1,10 +1,9 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
-import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
