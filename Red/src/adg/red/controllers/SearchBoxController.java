@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
- * FXML Controller class
+ * FXML Controller class for SearchBox.fxml
  * <p/>
  * @author harsimran.maan
  */
