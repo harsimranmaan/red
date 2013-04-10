@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "CoRequisite.findByCoRequisiteDeptId", query = "SELECT c FROM CoRequisite c WHERE c.coRequisitePK.coRequisiteDeptId = :coRequisiteDeptId"),
     @NamedQuery(name = "CoRequisite.findByIsActive", query = "SELECT c FROM CoRequisite c WHERE c.isActive = :isActive"),
     @NamedQuery(name = "CoRequisite.findByIsMust", query = "SELECT c FROM CoRequisite c WHERE c.isMust = :isMust"),
-    @NamedQuery(name = "CoRequisite.findByCourseNumberAndDepartmentId", query = "SELECT c FROM CoRequisite c WHERE c.coRequisitePK.courseNumber = :courseNumber AND c.coRequisitePK.departmentId = :departmentId")
+    @NamedQuery(name = "CoRequisite.findByCourseNumberAndDepartmentId", query = "SELECT c FROM CoRequisite c LEFT JOIN FETCH c.course LEFT JOIN FETCH c.course1 WHERE c.coRequisitePK.courseNumber = :courseNumber AND c.coRequisitePK.departmentId = :departmentId")
 })
 public class CoRequisite implements Serializable
 {

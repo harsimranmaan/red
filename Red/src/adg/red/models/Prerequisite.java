@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Prerequisite.findByPreRequisiteDeptId", query = "SELECT p FROM Prerequisite p WHERE p.prerequisitePK.preRequisiteDeptId = :preRequisiteDeptId"),
     @NamedQuery(name = "Prerequisite.findByIsActive", query = "SELECT p FROM Prerequisite p WHERE p.isActive = :isActive"),
     @NamedQuery(name = "Prerequisite.findByIsMust", query = "SELECT p FROM Prerequisite p WHERE p.isMust = :isMust"),
-    @NamedQuery(name = "Prerequisite.findByCourseNumberAndDepartmentId", query = "SELECT p FROM Prerequisite p WHERE p.prerequisitePK.courseNumber = :courseNumber AND p.prerequisitePK.departmentId = :departmentId")
+    @NamedQuery(name = "Prerequisite.findByCourseNumberAndDepartmentId", query = "SELECT p FROM Prerequisite p LEFT JOIN FETCH p.course LEFT JOIN FETCH p.course1 WHERE p.prerequisitePK.courseNumber = :courseNumber AND p.prerequisitePK.departmentId = :departmentId")
 })
 public class Prerequisite implements Serializable
 {
