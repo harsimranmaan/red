@@ -24,7 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**
- * FXML Controller class
+ * FXML Controller class for UserProfile.fxml
  * <p/>
  * @author jingboyu
  */
@@ -72,13 +72,12 @@ public class UserProfileController implements Initializable
         txtPostalCode = new CustomTextBox(TextBoxType.PostalCode, "Postal Code:", "Please enter a valid Postal Code");
         vBoxHolder.getChildren().addAll(txtAddressFirst, txtAddressSecond, txtCity, txtProvince, txtCountry, txtPostalCode, txtPhone, txtEmail);
         showUserProfile();
-
-
-
-
-
     }
 
+    /**
+     * Implement CLEAR button to clear user inputs
+     * @param event user action: click button
+     */
     @FXML
     public void clear(ActionEvent event)
     {
@@ -86,6 +85,10 @@ public class UserProfileController implements Initializable
         lblMessage.setVisible(true);
     }
 
+    /**
+     * Validate user inputs and implement SAVE button to commit user inputs into database
+     * @param event user action: click button
+     */
     @FXML
     public void save(ActionEvent event)
     {
@@ -160,11 +163,18 @@ public class UserProfileController implements Initializable
         }
     }
 
+    /**
+     * Display current user's profile
+     */
     private void showUserProfile()
     {
         displayUserProfile(currentUser);
     }
 
+    /**
+     * Display current user's profile
+     * @param user current user
+     */
     private void displayUserProfile(User user)
     {
         txtAddressFirst.setText(user.getAddressId().getAddressLineFirst());
