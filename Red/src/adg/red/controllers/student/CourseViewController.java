@@ -1,6 +1,5 @@
 /*
- * 
- * 
+ * Controller class for CourseView.fxml.
  */
 package adg.red.controllers.student;
 
@@ -28,7 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 /**
- * FXML Controller class
+ * FXML Controller class for CourseView.fxml
  * <p/>
  * @author Witt
  */
@@ -68,6 +67,11 @@ public class CourseViewController implements Initializable
     @FXML
     private ListView<Prerequisite> lsvPrereq;
 
+    /**
+     * The function to handle selectSection mouse event
+     * <p/>
+     * @param event the mouse event
+     */
     @FXML
     private void selectSection(MouseEvent event)
     {
@@ -79,6 +83,11 @@ public class CourseViewController implements Initializable
         }
     }
 
+    /**
+     * The function to handle showPreq mouse event
+     * <p/>
+     * @param event the mouse event
+     */
     @FXML
     private void showPreq(MouseEvent event)
     {
@@ -89,6 +98,11 @@ public class CourseViewController implements Initializable
         }
     }
 
+    /**
+     * The function to handle showCoReq mouse event
+     * <p/>
+     * @param event the mouse event
+     */
     @FXML
     private void showCoReq(MouseEvent event)
     {
@@ -100,6 +114,11 @@ public class CourseViewController implements Initializable
         }
     }
 
+    /**
+     * The function to load the CourseView of selected course
+     * <p/>
+     * @param course the course to load the CourseView for
+     */
     private void selectCourse(Course course)
     {
         Context.getInstance().setSelectedCourse(course);
@@ -108,7 +127,27 @@ public class CourseViewController implements Initializable
     }
 
     /**
+     * The function initializes all the components text by locality.
+     */
+    private void initializeComponentsByLocale()
+    {
+
+        lblCreditName.setText(LocaleManager.get(42) + ":");
+        lblPrereq.setText(LocaleManager.get(43));
+        lblCoReq.setText(LocaleManager.get(44));
+        secColmn.setText(LocaleManager.get(39));
+        colEndDate.setText(LocaleManager.get(45));
+        startDateColmn.setText(LocaleManager.get(46));
+        typeColmn.setText(LocaleManager.get(47));
+        instructorColmn.setText(LocaleManager.get(48));
+        colTa.setText(LocaleManager.get(49));
+    }
+
+    /**
      * Initializes the controller class.
+     * <p/>
+     * @param url the URL
+     * @param rb  the ResourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -126,6 +165,13 @@ public class CourseViewController implements Initializable
         populateSectionTable(Context.getInstance().getSelectedCourse());
     }
 
+    /**
+     * The function to populate the list of all prerequisite courses for the
+     * selected course on list view.
+     * <p/>
+     * @param selectedCourse the course to populate prerequisite courses on the
+     *                       list view for
+     */
     public void populatePrereqListView(Course selectedCourse)
     {
         final List<Prerequisite> prereq = Prerequisite.getByCourse(selectedCourse);
@@ -155,6 +201,13 @@ public class CourseViewController implements Initializable
 
     }
 
+    /**
+     * The function to populate the list of all corequisite courses for the
+     * selected course on list view.
+     * <p/>
+     * @param selectedCourse the course to populate corequisite courses on the
+     *                       list view for
+     */
     public void populateCoreqListView(Course selectedCourse)
     {
         List<CoRequisite> coReq = CoRequisite.getByCourse(selectedCourse);
@@ -182,6 +235,11 @@ public class CourseViewController implements Initializable
         lsvCoReq.getItems().setAll(coReq);
     }
 
+    /**
+     * The function to populate the section table.
+     * <p/>
+     * @param selectedCourse the course to populate section table for
+     */
     public void populateSectionTable(Course selectedCourse)
     {
 
@@ -190,6 +248,11 @@ public class CourseViewController implements Initializable
 
     }
 
+    /**
+     * The function populate a list of section to the section table.
+     * <p/>
+     * @param sections the list of sections
+     */
     private void populate(List<Section> sections)
     {
         secColmn.setCellValueFactory(new PropertyValueFactory<Section, Integer>("sectionId"));
@@ -200,19 +263,5 @@ public class CourseViewController implements Initializable
         colTa.setCellValueFactory(new PropertyValueFactory<Section, String>("teachingAssistant"));
         tabCourse.getItems().setAll(sections);
 
-    }
-
-    private void initializeComponentsByLocale()
-    {
-
-        lblCreditName.setText(LocaleManager.get(42) + ":");
-        lblPrereq.setText(LocaleManager.get(43));
-        lblCoReq.setText(LocaleManager.get(44));
-        secColmn.setText(LocaleManager.get(39));
-        colEndDate.setText(LocaleManager.get(45));
-        startDateColmn.setText(LocaleManager.get(46));
-        typeColmn.setText(LocaleManager.get(47));
-        instructorColmn.setText(LocaleManager.get(48));
-        colTa.setText(LocaleManager.get(49));
     }
 }

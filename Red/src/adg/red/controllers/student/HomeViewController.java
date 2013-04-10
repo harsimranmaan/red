@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ * The controller class for HomeView.fxml.
+ *
  */
 package adg.red.controllers.student;
 
@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
 /**
- * FXML Controller class
+ * FXML Controller class for HomeView.fxml.
  * <p/>
  * @author Witt
  */
@@ -21,6 +21,9 @@ public class HomeViewController implements Initializable
 
     /**
      * Initializes the controller class.
+     * <p/>
+     * @param url the URL
+     * @param rb  the ResourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
