@@ -24,7 +24,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 
 /**
- * FXML Controller class
+ * FXML Controller class for TimeTable.fxml
  * <p/>
  * @author Jaspreet Thind
  */
@@ -34,6 +34,10 @@ public class TimeTableController implements Initializable
     @FXML
     private GridPane gdpTimeTable;
 
+    /**
+     * Initialize grid pane
+     * @param dayListSize size of the days
+     */
     private void initGrid(int dayListSize)
     {
         int width = 100 / (dayListSize + 1);
@@ -61,6 +65,13 @@ public class TimeTableController implements Initializable
         gdpTimeTable.setSnapToPixel(false);
     }
 
+    /**
+     * Position the time labels
+     * @param length course durations
+     * @param table section timetable
+     * @param cols the column that the time label positioned
+     * @param row the row that the time label positioned
+     */
     private void pasteLabels(int length, SectionTimeTable table, int cols, int row)
     {
         for (int rowLength = 0; rowLength < length / 30; rowLength++)
@@ -72,6 +83,10 @@ public class TimeTableController implements Initializable
         }
     }
 
+    /**
+     * Initialize the weekday headers of the timetable
+     * @param dayList week days
+     */
     private void initHeader(List<WeekDay> dayList)
     {
         int col = 1;
@@ -82,6 +97,9 @@ public class TimeTableController implements Initializable
         }
     }
 
+    /**
+     * Initialize the time labels in grid pane
+     */
     private void initTimeLabels()
     {
         int hrs = 8;
@@ -93,6 +111,11 @@ public class TimeTableController implements Initializable
         }
     }
 
+    /**
+     * Populate section timetable with the input timetable list
+     * @param timeTableList the timetable list that initialized by the context 
+     * @throws NumberFormatException 
+     */
     private void populateTimeTable(List<SectionTimeTable> timeTableList) throws NumberFormatException
     {
         if (timeTableList != null)
@@ -133,6 +156,11 @@ public class TimeTableController implements Initializable
         }
     }
 
+    /**
+     * Initializes the controller class.
+     * @param url the URL
+     * @param rb the ResourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {

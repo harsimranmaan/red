@@ -28,7 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 /**
- * FXML Controller class
+ * FXML Controller class for Message.fxml
  * <p/>
  * @author Bahman
  */
@@ -53,6 +53,10 @@ public class MessageController implements Initializable
     @FXML
     private SplitMenuButton btnMessageAction;
 
+    /**
+     * Handle user selected actions
+     * @param event handle actions that user selected
+     */
     private void handleActionButton(ActionEvent event)
     {
         MessageReceiver receiver = tblMessages.getSelectionModel().getSelectedItem();
@@ -61,6 +65,10 @@ public class MessageController implements Initializable
         initTable();
     }
 
+    /**
+     * Get user selected message items
+     * @param event user action
+     */
     @FXML
     public void displayMessage(MouseEvent event)
     {
@@ -71,6 +79,10 @@ public class MessageController implements Initializable
         }
     }
 
+    /**
+     * Display messages selected by the user
+     * @param message 
+     */
     private void displayMessageText(Message message)
     {
         if (tblMessages.getSelectionModel().getSelectedItem() == null)
@@ -86,6 +98,9 @@ public class MessageController implements Initializable
         }
     }
 
+    /**
+     * Get message items that the current user received.
+     */
     private void initTable()
     {
 
@@ -128,6 +143,10 @@ public class MessageController implements Initializable
         initTable();
     }
 
+    /**
+     * Populate message lists with the message items that current user received.
+     * @param messages 
+     */
     public void populateMessageList(List<MessageReceiver> messages)
     {
         colSubject.setCellValueFactory(new PropertyValueFactory<MessageReceiver, String>("subject"));
