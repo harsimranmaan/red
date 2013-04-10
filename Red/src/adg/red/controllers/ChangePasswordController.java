@@ -17,7 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 
 /**
- * FXML Controller class
+ * FXML Controller class for ChangePassword.fxml
  * <p/>
  * @author harsimran.maan
  */
@@ -71,12 +71,20 @@ public class ChangePasswordController implements Initializable
         }
     }
 
+    /**
+     * display password error messages
+     * @param pwdErrorMsg error message
+     */
     private void showPasswordMessage(String pwdErrorMsg)
     {
         lblError.setVisible(true);
         lblError.setText(pwdErrorMsg);
     }
 
+    /**
+     * Clear old password, new password, re-enter password fields
+     * @param event user action
+     */
     @FXML
     private void clear(ActionEvent event)
     {

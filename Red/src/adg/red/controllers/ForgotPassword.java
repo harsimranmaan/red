@@ -18,7 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
- * FXML Controller class
+ * FXML Controller class for ForgotPassword.fxml
  * <p/>
  * @author harsimran.maan
  */
@@ -32,6 +32,10 @@ public class ForgotPassword implements Initializable
     @FXML
     private TextField txtCode;
 
+    /**
+     * Send validation code to user email address 
+     * @param event user action: click button
+     */
     @FXML
     private void sendEmail(ActionEvent event)
     {
@@ -50,6 +54,10 @@ public class ForgotPassword implements Initializable
         }
     }
 
+    /**
+     * Generate validation code and send to user's email address
+     * @param event user action: click button
+     */
     @FXML
     private void validateCode(ActionEvent event)
     {

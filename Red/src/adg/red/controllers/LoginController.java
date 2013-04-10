@@ -23,7 +23,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 /**
- *
+ * FXML Controller class for Login.fxml
  * @author Witt
  */
 public class LoginController implements Initializable
@@ -51,8 +51,8 @@ public class LoginController implements Initializable
     /**
      * Initialize all the action events.
      * <p/>
-     * @param url
-     * @param rb
+     * @param url the URL
+     * @param rb the ResourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -73,17 +73,30 @@ public class LoginController implements Initializable
         }
     }
 
+    /**
+     * Exit the platform
+     * @param event user action
+     */
     public void exit(ActionEvent event)
     {
         Platform.exit();
     }
 
+    /**
+     * Load ForgotPassword.fxml view
+     * @param event user action: click button
+     */
     public void forgotPassword(ActionEvent event)
     {
         ViewLoader view = new ViewLoader(Context.getInstance().getHomeView());
         view.loadView("ForgotPassword");
     }
 
+    /**
+     * Get the user account id and password to login
+     * Load Login.fxml view
+     * @param event 
+     */
     public void login(ActionEvent event)
     {
         Context.getInstance().setWasLoggedIn(false);

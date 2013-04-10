@@ -24,7 +24,7 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 
 /**
- * FXML Controller class
+ * FXML Controller class for Glossary.fxml
  * <p/>
  * @author jingboyu
  */
@@ -60,6 +60,10 @@ public class GlossaryController implements Initializable
         }
     }
 
+    /**
+     * Get list of glossary that begins with the input character
+     * @param beginsWith the input character that a glossary term begins with  
+     */
     private void populateGlossary(String beginsWith)
     {
         List<Glossary> glossaryList;
@@ -74,6 +78,10 @@ public class GlossaryController implements Initializable
         populate(glossaryList);
     }
 
+    /**
+     * Populate the glossary table
+     * @param glossaryList the list that begins with a specified character or list all
+     */
     public void populate(List<Glossary> glossaryList)
     {
         glossaryAccordion.getPanes().clear();

@@ -19,7 +19,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TitledPane;
 
 /**
- * FXML Controller class
+ * FXML Controller class for FaqView.fxml
  * <p/>
  * @author Witt
  */
@@ -41,6 +41,9 @@ public class FaqController implements Initializable
         populateListView();
     }
 
+    /**
+     *  Gets the faq list and populate the faq table with the list.
+     */
     public void populateListView()
     {
 

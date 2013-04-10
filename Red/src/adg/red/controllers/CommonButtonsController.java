@@ -18,7 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
 /**
- * FXML Controller class
+ * FXML Controller class for buttons shared by roles: Student, Faculty, Admin
  * <p/>
  * @author harsimran.maan
  */
@@ -36,6 +36,9 @@ public class CommonButtonsController implements Initializable
     @FXML
     private Button btnMessage;
 
+    /**
+     * Initializes the controller class
+     */
     private void initializeComponentsByLocale()
     {
         btnUserProfile.setText(LocaleManager.get(21));
@@ -45,6 +48,10 @@ public class CommonButtonsController implements Initializable
         btnLogout.setText(LocaleManager.get(8));
     }
 
+    /**
+     * Implement logout button
+     * @param event user action: click button
+     */
     public void logout(ActionEvent event)
     {
         try
@@ -59,6 +66,10 @@ public class CommonButtonsController implements Initializable
         }
     }
 
+    /**
+     * Implement messages button
+     * @param event user action: click button
+     */
     public void message(ActionEvent event)
     {
         try
@@ -74,6 +85,10 @@ public class CommonButtonsController implements Initializable
 
     }
 
+    /**
+     * Implement user profile button
+     * @param event user action: click button
+     */
     public void userProfile(ActionEvent event)
     {
         try
@@ -88,6 +103,10 @@ public class CommonButtonsController implements Initializable
 
     }
 
+    /**
+     * Implement Glossary button
+     * @param event user action: click button
+     */
     public void glossary(ActionEvent event)
     {
         try
@@ -102,6 +121,10 @@ public class CommonButtonsController implements Initializable
 
     }
 
+    /**
+     * Implement FAQ button
+     * @param event user action: click button
+     */
     public void faq(ActionEvent event)
     {
         try
