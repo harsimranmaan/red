@@ -27,11 +27,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries(
         {
-    @NamedQuery(name = "Department.findAll", query = "SELECT d FROM Department d"),
-    @NamedQuery(name = "Department.findByDepartmentId", query = "SELECT d FROM Department d WHERE d.departmentId = :departmentId"),
-    @NamedQuery(name = "Department.findByName", query = "SELECT d FROM Department d WHERE d.name = :name"),
-    @NamedQuery(name = "Department.findByIsActive", query = "SELECT d FROM Department d WHERE d.isActive = :isActive"),
-    @NamedQuery(name = "Department.findByDepartmentIdBeginsWith", query = "SELECT d FROM Department d WHERE d.departmentId LIKE  :keyWord")
+    @NamedQuery(name = "Department.findAll", query = "SELECT d FROM Department d LEFT JOIN FETCH d.facultyId "),
+    @NamedQuery(name = "Department.findByDepartmentId", query = "SELECT d FROM Department d LEFT JOIN FETCH d.facultyId WHERE d.departmentId = :departmentId"),
+    @NamedQuery(name = "Department.findByName", query = "SELECT d FROM Department d LEFT JOIN FETCH d.facultyId WHERE d.name = :name"),
+    @NamedQuery(name = "Department.findByIsActive", query = "SELECT d FROM Department d LEFT JOIN FETCH d.facultyId WHERE d.isActive = :isActive"),
+    @NamedQuery(name = "Department.findByDepartmentIdBeginsWith", query = "SELECT d FROM Department d LEFT JOIN FETCH d.facultyId WHERE d.departmentId LIKE  :keyWord")
 })
 public class Department implements Serializable
 {
@@ -47,12 +47,9 @@ public class Department implements Serializable
     @Basic(optional = false)
     @Column(name = "isActive")
     private boolean isActive;
-//    @JoinColumn(name = "facultyId", referencedColumnName = "facultyId")
-//    @ManyToOne(optional = false)
-//    private Faculty facultyId;
-    @Basic(optional = false)
-    @Column(name = "facultyId")
-    private Integer facultyId;
+    @JoinColumn(name = "facultyId", referencedColumnName = "facultyId")
+    @ManyToOne(optional = false)
+    private Faculty facultyId;
 
     public Department()
     {
@@ -102,12 +99,12 @@ public class Department implements Serializable
 
     public Faculty getFacultyId()
     {
-        return Faculty.getByFacultyId(this.facultyId);
+        return facultyId;
     }
 
     public void setFacultyId(Faculty facultyId)
     {
-        this.facultyId = facultyId.getFacultyId();
+        this.facultyId = facultyId;
     }
 
     @Override

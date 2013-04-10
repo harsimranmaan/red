@@ -1,6 +1,7 @@
 /*
- * 
- * 
+ * The localeManager class is responsible for managing the locale of the
+ * application. It main functionality is to get the representing String of the
+ * resourceId, according to the locale property value.
  */
 package adg.red.utils;
 
@@ -9,7 +10,10 @@ import adg.red.models.ResourceDictionary;
 import java.util.List;
 
 /**
- *
+ * The localeManager class is responsible for managing the locale of the
+ * application. It main functionality is to get the representing String of the
+ * resourceId, according to the locale property value.
+ * <p/>
  * @author Witt
  */
 public class LocaleManager
@@ -29,9 +33,12 @@ public class LocaleManager
     }
 
     /**
-     *
-     * @param resourceId <p/>
-     * @return
+     * The function to get the String that represent the input resourseId
+     * number.
+     * <p/>
+     * @param resourceId the number that we want to get the represented String
+     * <p/>
+     * @return the String represents the resourceId number
      */
     public static String get(int resourceId)
     {
