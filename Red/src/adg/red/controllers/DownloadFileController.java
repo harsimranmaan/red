@@ -12,12 +12,18 @@ import java.util.logging.Logger;
 import javafx.stage.FileChooser;
 
 /**
- *
+ * Download file implementer: save download contents to the local file, 
+ * specify file name and file format
  * @author Witt
  */
 public class DownloadFileController
 {
 
+    /**
+     * Save file with specified file name and format
+     * @param content contents of file
+     * @param extension file format
+     */
     public static void saveFile(String content, String extension)
     {
         FileChooser fileChooser = new FileChooser();
@@ -34,6 +40,11 @@ public class DownloadFileController
         save(content, filePath);
     }
 
+    /**
+     * write downloaded contents to the specified file
+     * @param content file contents
+     * @param file path of the file
+     */
     private static void save(String content, String file)
     {
         try
