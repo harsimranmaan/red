@@ -4,8 +4,10 @@
  */
 package adg.red.models;
 
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,7 +39,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "FacultyMember.findByTitle", query = "SELECT f FROM FacultyMember f WHERE f.title = :title"),
     @NamedQuery(name = "FacultyMember.findByDateOfJoining", query = "SELECT f FROM FacultyMember f WHERE f.dateOfJoining = :dateOfJoining"),
     @NamedQuery(name = "FacultyMember.findByHighestDegree", query = "SELECT f FROM FacultyMember f WHERE f.highestDegree = :highestDegree"),
-    @NamedQuery(name = "FacultyMember.findByIsActive", query = "SELECT f FROM FacultyMember f WHERE f.isActive = :isActive")
+    @NamedQuery(name = "FacultyMember.findByIsActive", query = "SELECT f FROM FacultyMember f WHERE f.isActive = :isActive"),
+    @NamedQuery(name = "FacultyMember.findByUserName", query = "SELECT f FROM FacultyMember f WHERE f.username = :username")
 })
 public class FacultyMember implements Serializable
 {
@@ -182,5 +185,18 @@ public class FacultyMember implements Serializable
     public String toString()
     {
         return "adg.red.models.FacultyMember[ facultyMemberId=" + facultyMemberId + " ]";
+    }
+    
+    public static FacultyMember getFacultMemberByUserName(User userName) throws Exception
+    {
+        List<FacultyMember> facultyMemberList = RedEntityManager.getEntityManager().createNamedQuery("FacultyMember.findByUserName").setParameter("username", userName).getResultList();
+        if (facultyMemberList.size() == 1)
+        {
+            return facultyMemberList.get(0);
+        }
+        else
+        {
+            throw new Exception("Invalid user name");
+        }
     }
 }
