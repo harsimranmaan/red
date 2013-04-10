@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "SectionTimeTable")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "SectionTimeTable.findAll", query = "SELECT s FROM SectionTimeTable s"),
     @NamedQuery(name = "SectionTimeTable.findBySectionId", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.sectionId = :sectionId"),
     @NamedQuery(name = "SectionTimeTable.findByCourseNumber", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.courseNumber = :courseNumber"),
@@ -42,10 +42,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "SectionTimeTable.findByStudentId", query = "SELECT s FROM SectionTimeTable s, Enrolment e WHERE e.enrolmentPK.studentId = :studentId AND s.sectionTimeTablePK.sectionId = e.enrolmentPK.sectionId AND s.sectionTimeTablePK.courseNumber = e.enrolmentPK.courseNumber AND s.sectionTimeTablePK.departmentId = e.enrolmentPK.departmentId AND s.sectionTimeTablePK.termYear = e.enrolmentPK.termYear AND s.sectionTimeTablePK.sessionId = e.enrolmentPK.sessionId AND s.sectionTimeTablePK.sectionTypeId = e.enrolmentPK.sectionTypeId AND e.isActive = 1 ORDER BY s.sectionTimeTablePK.dayId, s.sectionTimeTablePK.startTime ASC"),
     @NamedQuery(name = "SectionTimeTable.findByFacultyId", query = "SELECT s FROM SectionTimeTable s, Section sc WHERE sc.facultyMemberId = :facultyMemberId AND s.sectionTimeTablePK.sectionId = sc.sectionPK.sectionId AND s.sectionTimeTablePK.courseNumber = sc.sectionPK.courseNumber AND s.sectionTimeTablePK.departmentId = sc.sectionPK.departmentId AND s.sectionTimeTablePK.termYear = sc.sectionPK.termYear AND s.sectionTimeTablePK.sessionId = sc.sectionPK.sessionId AND s.sectionTimeTablePK.sectionTypeId = sc.sectionPK.sectionTypeId AND sc.isActive = 1 ORDER BY s.sectionTimeTablePK.dayId, s.sectionTimeTablePK.startTime ASC")
 })
-
 public class SectionTimeTable implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
     @EmbeddedId
     protected SectionTimeTablePK sectionTimeTablePK;
     @Basic(optional = false)
@@ -55,7 +58,7 @@ public class SectionTimeTable implements Serializable
     @ManyToOne(optional = false)
     private WeekDay weekDay;
     @JoinColumns(
-    {
+            {
         @JoinColumn(name = "sectionId", referencedColumnName = "sectionId", insertable = false, updatable = false),
         @JoinColumn(name = "courseNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false),
         @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false),
@@ -66,61 +69,116 @@ public class SectionTimeTable implements Serializable
     @ManyToOne(optional = false)
     private Section section;
 
+    /**
+     *
+     */
     public SectionTimeTable()
     {
     }
 
+    /**
+     *
+     * @param sectionTimeTablePK
+     */
     public SectionTimeTable(SectionTimeTablePK sectionTimeTablePK)
     {
         this.sectionTimeTablePK = sectionTimeTablePK;
     }
 
+    /**
+     *
+     * @param sectionTimeTablePK
+     * @param lengthInMinutes
+     */
     public SectionTimeTable(SectionTimeTablePK sectionTimeTablePK, int lengthInMinutes)
     {
         this.sectionTimeTablePK = sectionTimeTablePK;
         this.lengthInMinutes = lengthInMinutes;
     }
 
+    /**
+     *
+     * @param sectionId
+     * @param courseNumber
+     * @param departmentId
+     * @param termYear
+     * @param sessionId
+     * @param sectionTypeId
+     * @param dayId
+     * @param startTime
+     */
     public SectionTimeTable(int sectionId, int courseNumber, String departmentId, int termYear, int sessionId, int sectionTypeId, int dayId, Date startTime)
     {
         this.sectionTimeTablePK = new SectionTimeTablePK(sectionId, courseNumber, departmentId, termYear, sessionId, sectionTypeId, dayId, startTime);
     }
 
+    /**
+     *
+     * @return
+     */
     public SectionTimeTablePK getSectionTimeTablePK()
     {
         return sectionTimeTablePK;
     }
 
+    /**
+     *
+     * @param sectionTimeTablePK
+     */
     public void setSectionTimeTablePK(SectionTimeTablePK sectionTimeTablePK)
     {
         this.sectionTimeTablePK = sectionTimeTablePK;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getLengthInMinutes()
     {
         return lengthInMinutes;
     }
 
+    /**
+     *
+     * @param lengthInMinutes
+     */
     public void setLengthInMinutes(int lengthInMinutes)
     {
         this.lengthInMinutes = lengthInMinutes;
     }
 
+    /**
+     *
+     * @return
+     */
     public WeekDay getWeekDay()
     {
         return weekDay;
     }
 
+    /**
+     *
+     * @param weekDay
+     */
     public void setWeekDay(WeekDay weekDay)
     {
         this.weekDay = weekDay;
     }
 
+    /**
+     *
+     * @return
+     */
     public Section getSection()
     {
         return section;
     }
 
+    /**
+     *
+     * @param section
+     */
     public void setSection(Section section)
     {
         this.section = section;
@@ -156,13 +214,25 @@ public class SectionTimeTable implements Serializable
         return "adg.red.models.SectionTimeTable[ sectionTimeTablePK=" + sectionTimeTablePK + " ]";
     }
 
+    /**
+     *
+     * @param student
+     * <p/>
+     * @return
+     */
     public static List<SectionTimeTable> getByStudent(Student student)
     {
         return RedEntityManager.getEntityManager().createNamedQuery("SectionTimeTable.findByStudentId")
                 .setParameter("studentId", student.getStudentId())
                 .getResultList();
     }
-    
+
+    /**
+     *
+     * @param faculty
+     * <p/>
+     * @return
+     */
     public static List<SectionTimeTable> getByFacultyMember(FacultyMember faculty)
     {
         return RedEntityManager.getEntityManager().createNamedQuery("SectionTimeTable.findByFacultyId")

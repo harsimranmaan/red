@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -16,6 +16,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ProgramCourseListPK implements Serializable
 {
+
     @Basic(optional = false)
     @Column(name = "programName")
     private String programName;
@@ -29,10 +30,20 @@ public class ProgramCourseListPK implements Serializable
     @Column(name = "courseDepartmentId")
     private String courseDepartmentId;
 
+    /**
+     *
+     */
     public ProgramCourseListPK()
     {
     }
 
+    /**
+     *
+     * @param programName
+     * @param programDepartmentId
+     * @param courseNumber
+     * @param courseDepartmentId
+     */
     public ProgramCourseListPK(String programName, String programDepartmentId, int courseNumber, String courseDepartmentId)
     {
         this.programName = programName;
@@ -41,41 +52,73 @@ public class ProgramCourseListPK implements Serializable
         this.courseDepartmentId = courseDepartmentId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getProgramName()
     {
         return programName;
     }
 
+    /**
+     *
+     * @param programName
+     */
     public void setProgramName(String programName)
     {
         this.programName = programName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getProgramDepartmentId()
     {
         return programDepartmentId;
     }
 
+    /**
+     *
+     * @param programDepartmentId
+     */
     public void setProgramDepartmentId(String programDepartmentId)
     {
         this.programDepartmentId = programDepartmentId;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCourseNumber()
     {
         return courseNumber;
     }
 
+    /**
+     *
+     * @param courseNumber
+     */
     public void setCourseNumber(int courseNumber)
     {
         this.courseNumber = courseNumber;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCourseDepartmentId()
     {
         return courseDepartmentId;
     }
 
+    /**
+     *
+     * @param courseDepartmentId
+     */
     public void setCourseDepartmentId(String courseDepartmentId)
     {
         this.courseDepartmentId = courseDepartmentId;
