@@ -33,21 +33,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries(
         {
-    @NamedQuery(name = "Section.findAll", query = "SELECT s FROM Section s"),
-    @NamedQuery(name = "Section.findBySectionId", query = "SELECT s FROM Section s WHERE s.sectionPK.sectionId = :sectionId"),
-    @NamedQuery(name = "Section.findBySectionTypeId", query = "SELECT s FROM Section s WHERE s.sectionPK.sectionTypeId = :sectionTypeId"),
-    @NamedQuery(name = "Section.findByCourseNumber", query = "SELECT s FROM Section s WHERE s.sectionPK.courseNumber = :courseNumber"),
-    @NamedQuery(name = "Section.findByDepartmentId", query = "SELECT s FROM Section s WHERE s.sectionPK.departmentId = :departmentId"),
-    @NamedQuery(name = "Section.findByTermYear", query = "SELECT s FROM Section s WHERE s.sectionPK.termYear = :termYear"),
-    @NamedQuery(name = "Section.findBySessionId", query = "SELECT s FROM Section s WHERE s.sectionPK.sessionId = :sessionId"),
-    @NamedQuery(name = "Section.findByStartDate", query = "SELECT s FROM Section s WHERE s.startDate = :startDate"),
-    @NamedQuery(name = "Section.findByEndDate", query = "SELECT s FROM Section s WHERE s.endDate = :endDate"),
-    @NamedQuery(name = "Section.findByTeachingAssistant", query = "SELECT s FROM Section s WHERE s.teachingAssistant = :teachingAssistant"),
-    @NamedQuery(name = "Section.findByIsActive", query = "SELECT s FROM Section s WHERE s.isActive = :isActive"),
-    @NamedQuery(name = "Section.findByDepartmentAndCourseNumber", query = "SELECT s FROM Section s LEFT JOIN FETCH s.course WHERE s.sectionPK.departmentId = :departmentId AND s.sectionPK.courseNumber = :courseNumber"),
-    @NamedQuery(name = "Section.findByFacultyMemberIdAndSectionTypeId100", query = "SELECT s FROM Section s WHERE s.sectionPK.sectionTypeId = 100 AND s.facultyMemberId = :facultyMemberId"),
-    @NamedQuery(name = "Section.findByFacultyMemberId", query = "SELECT s FROM Section s WHERE s.facultyMemberId = :facultyMemberId"),
-    @NamedQuery(name = "Section.findByDepartmentAndCourseNumberAndTermYearAndNextYear", query = "SELECT s FROM Section s WHERE s.sectionPK.departmentId = :departmentId AND s.sectionPK.courseNumber = :courseNumber AND s.term.termPK.termYear >= :termYear"),
+    @NamedQuery(name = "Section.findAll", query = "SELECT s FROM Section s LEFT JOIN FETCH s.course LEFT JOIN FETCH s.sectionType  LEFT JOIN FETCH s.term  LEFT JOIN FETCH s.facultyMemberId "),
+    // @NamedQuery(name = "Section.findBySectionId", query = "SELECT s FROM Section s WHERE s.sectionPK.sectionId = :sectionId"),
+    @NamedQuery(name = "Section.findBySectionTypeId", query = "SELECT s FROM Section s LEFT JOIN FETCH s.course LEFT JOIN FETCH s.sectionType  LEFT JOIN FETCH s.term  LEFT JOIN FETCH s.facultyMemberId WHERE s.sectionPK.sectionTypeId = :sectionTypeId"),
+//    @NamedQuery(name = "Section.findByCourseNumber", query = "SELECT s FROM Section s WHERE s.sectionPK.courseNumber = :courseNumber"),
+//    @NamedQuery(name = "Section.findByDepartmentId", query = "SELECT s FROM Section s WHERE s.sectionPK.departmentId = :departmentId"),
+//    @NamedQuery(name = "Section.findByTermYear", query = "SELECT s FROM Section s WHERE s.sectionPK.termYear = :termYear"),
+//    @NamedQuery(name = "Section.findBySessionId", query = "SELECT s FROM Section s WHERE s.sectionPK.sessionId = :sessionId"),
+//    @NamedQuery(name = "Section.findByStartDate", query = "SELECT s FROM Section s WHERE s.startDate = :startDate"),
+//    @NamedQuery(name = "Section.findByEndDate", query = "SELECT s FROM Section s WHERE s.endDate = :endDate"),
+    //  @NamedQuery(name = "Section.findByTeachingAssistant", query = "SELECT s FROM Section s WHERE s.teachingAssistant = :teachingAssistant"),
+    // @NamedQuery(name = "Section.findByIsActive", query = "SELECT s FROM Section s WHERE s.isActive = :isActive"),
+    @NamedQuery(name = "Section.findByDepartmentAndCourseNumber", query = "SELECT s FROM Section s LEFT JOIN FETCH s.course LEFT JOIN FETCH s.sectionType  LEFT JOIN FETCH s.term  LEFT JOIN FETCH s.facultyMemberId WHERE s.sectionPK.departmentId = :departmentId AND s.sectionPK.courseNumber = :courseNumber"),
+    @NamedQuery(name = "Section.findByFacultyMemberIdAndSectionTypeId100", query = "SELECT s FROM Section s LEFT JOIN FETCH s.course LEFT JOIN FETCH s.sectionType  LEFT JOIN FETCH s.term  LEFT JOIN FETCH s.facultyMemberId  WHERE s.sectionPK.sectionTypeId = 100 AND s.facultyMemberId = :facultyMemberId"),
+    @NamedQuery(name = "Section.findByFacultyMemberId", query = "SELECT s FROM Section s LEFT JOIN FETCH s.course LEFT JOIN FETCH s.sectionType  LEFT JOIN FETCH s.term  LEFT JOIN FETCH s.facultyMemberId  WHERE s.facultyMemberId = :facultyMemberId"),
+    @NamedQuery(name = "Section.findByDepartmentAndCourseNumberAndTermYearAndNextYear", query = "SELECT s FROM Section s LEFT JOIN FETCH s.course LEFT JOIN FETCH s.sectionType  LEFT JOIN FETCH s.term  LEFT JOIN FETCH s.facultyMemberId  WHERE s.sectionPK.departmentId = :departmentId AND s.sectionPK.courseNumber = :courseNumber AND s.term.termPK.termYear >= :termYear"),
 })
 public class Section implements Serializable
 {
