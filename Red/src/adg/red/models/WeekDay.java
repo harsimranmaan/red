@@ -44,41 +44,73 @@ public class WeekDay implements Serializable
     @Column(name = "weekDay")
     private String weekDay;
 
+    /**
+     * Default constructor
+     */
     public WeekDay()
     {
     }
 
+    /**
+     * Constructor
+     * @param dayId table attribute
+     */
     public WeekDay(Integer dayId)
     {
         this.dayId = dayId;
     }
 
+    /**
+     * Constructor
+     * @param dayId table attribute
+     * @param weekDay table attribute
+     */
     public WeekDay(Integer dayId, String weekDay)
     {
         this.dayId = dayId;
         this.weekDay = weekDay;
     }
 
+    /**
+     * Get table attribute dayId
+     * @return dayId
+     */
     public Integer getDayId()
     {
         return dayId;
     }
 
+    /**
+     * Set table attribute dayId
+     * @param dayId table attribute
+     */
     public void setDayId(Integer dayId)
     {
         this.dayId = dayId;
     }
 
+    /**
+     * Get table attribute weekDay
+     * @return weekDay
+     */
     public String getWeekDay()
     {
         return weekDay;
     }
 
+    /**
+     * Set table attribute weekDay
+     * @param weekDay table attribute
+     */
     public void setWeekDay(String weekDay)
     {
         this.weekDay = weekDay;
     }
-
+    
+     /**
+     * Get record location
+     * @return hash code 
+     */
     @Override
     public int hashCode()
     {
@@ -87,6 +119,11 @@ public class WeekDay implements Serializable
         return hash;
     }
 
+     /**
+     * Comparator
+     * @param object object to be compared with
+     * @return true if two object equal to each other, otherwise return false
+     */ 
     @Override
     public boolean equals(Object object)
     {
@@ -103,6 +140,10 @@ public class WeekDay implements Serializable
         return true;
     }
 
+    /**
+     * print weekDay
+     * @return weekDay as a string
+     */
     @Override
     public String toString()
     {

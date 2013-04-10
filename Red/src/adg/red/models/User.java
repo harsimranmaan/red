@@ -89,15 +89,32 @@ public class User implements Serializable
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "username")
     private Administrator administrator;
 
+    /**
+     * Default constructor
+     */
     public User()
     {
     }
 
+    /**
+     * Constructor
+     * @param username table attribute username
+     */
     public User(String username)
     {
         this.username = username;
     }
 
+    /**
+     * Constructor
+     * @param username table attribute
+     * @param password table attribute
+     * @param firstName table attribute
+     * @param lastName table attribute
+     * @param isOnline table attribute
+     * @param email table attribute
+     * @param isActive table attribute
+     */
     public User(String username, String password, String firstName, String lastName, boolean isOnline, String email, boolean isActive)
     {
         this.username = username;
@@ -109,121 +126,217 @@ public class User implements Serializable
         this.isActive = isActive;
     }
 
+    /**
+     * Get table attribute username
+     * @return username
+     */
     public String getUsername()
     {
         return username;
     }
 
+    /**
+     * Set table attribute username
+     * @param username 
+     */
     public void setUsername(String username)
     {
         this.username = username;
     }
 
+    /**
+     * Set table attribute password
+     * @param password table attribute
+     */
     public void setPassword(String password)
     {
         this.password = Encryptor.encryptSHA(password);
     }
 
+    /**
+     * Get table attribute firstName
+     * @return firstName
+     */
     public String getFirstName()
     {
         return firstName;
     }
 
+    /**
+     * Set table attribute firstName
+     * @param firstName table attribute
+     */
     public void setFirstName(String firstName)
     {
         this.firstName = firstName;
     }
 
+    /**
+     * Get table attribute lastName
+     * @return lastName
+     */
     public String getLastName()
     {
         return lastName;
     }
 
+    /**
+     * Set table attribute lastName
+     * @param lastName table attribute
+     */
     public void setLastName(String lastName)
     {
         this.lastName = lastName;
     }
 
+    /**
+     * Get table attribute isOnline
+     * @return isOnline
+     */
     public boolean getIsOnline()
     {
         return isOnline;
     }
 
+    /**
+     * Set table attribute isOnline
+     * @param isOnline table attribute
+     */
     public void setIsOnline(boolean isOnline)
     {
         this.isOnline = isOnline;
     }
 
+    /**
+     * Get table attribute phoneNumber
+     * @return phoneNumber
+     */
     public String getPhoneNumber()
     {
         return phoneNumber;
     }
 
+    /**
+     * Set table attribute phoneNumber
+     * @param phoneNumber table attribute
+     */
     public void setPhoneNumber(String phoneNumber)
     {
         this.phoneNumber = phoneNumber;
     }
 
+    /**
+     * Get table attribute email
+     * @return email
+     */
     public String getEmail()
     {
         return email;
     }
 
+    /**
+     * Set table attribute email
+     * @param email table attribute
+     */
     public void setEmail(String email)
     {
         this.email = email;
     }
 
+    /**
+     * Get table attribute dateOfBirth
+     * @return dateOfBirth
+     */
     public Date getDateOfBirth()
     {
         return dateOfBirth;
     }
 
+    /**
+     * Set table attribute dateOfBirth
+     * @param dateOfBirth table attribute
+     */
     public void setDateOfBirth(Date dateOfBirth)
     {
         this.dateOfBirth = dateOfBirth;
     }
 
+    /**
+     * Get table attribute isActive
+     * @return isActive
+     */
     public boolean getIsActive()
     {
         return isActive;
     }
 
+    /**
+     * Set table attribute isActive
+     * @param isActive table attribute
+     */
     public void setIsActive(boolean isActive)
     {
         this.isActive = isActive;
     }
 
+    /**
+     * Get table attribute addressId
+     * @return addressId
+     */
     public Address getAddressId()
     {
         return addressId;
     }
 
+    /**
+     * Set table attribute addressId
+     * @param addressId table attribute
+     */
     public void setAddressId(Address addressId)
     {
         this.addressId = addressId;
     }
 
+    /**
+     * Get table attribute userTypeId
+     * @return userTypeId
+     */
     public UserType getUserTypeId()
     {
         return userTypeId;
     }
 
+    /**
+     * Set table attribute userTypeId
+     * @param userTypeId table attribute
+     */
     public void setUserTypeId(UserType userTypeId)
     {
         this.userTypeId = userTypeId;
     }
 
+    /**
+     * Get table attribute student
+     * @return student
+     */
     public Student getStudent()
     {
         return student;
     }
 
+    /**
+     * Set table attribute student
+     * @param student table attribute
+     */
     public void setStudent(Student student)
     {
         this.student = student;
     }
-
+    
+    /**
+     * Get record location
+     * @return hash code 
+     */
     @Override
     public int hashCode()
     {
@@ -231,7 +344,12 @@ public class User implements Serializable
         hash += (username != null ? username.hashCode() : 0);
         return hash;
     }
-
+    
+    /**
+     * Comparator
+     * @param object object to be compared with
+     * @return true if two object equal to each other, otherwise return false
+     */ 
     @Override
     public boolean equals(Object object)
     {
@@ -248,6 +366,10 @@ public class User implements Serializable
         return true;
     }
 
+    /**
+     * print username
+     * @return username as a string
+     */
     @Override
     public String toString()
     {
