@@ -19,7 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 /**
- * FXML Controller class
+ * FXML Controller class for MainForm.fxml
  * <p/>
  * @author hsmaan
  */
@@ -52,12 +52,19 @@ public class MainFormController implements Initializable
         view.loadView("Login");
     }
 
+    /**
+     * Exit the platform
+     * @param event user action
+     */
     @FXML
     public void close(ActionEvent event)
     {
         Platform.exit();
     }
 
+    /**
+     * Initializes all components text by locality
+     */
     private void initializeComponentsByLocale()
     {
         menFile.setText(LocaleManager.get(28));
