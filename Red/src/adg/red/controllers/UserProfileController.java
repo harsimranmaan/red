@@ -1,9 +1,11 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.controllers;
 
+import adg.red.controls.CustomTextBox;
+import adg.red.controls.TextBoxType;
 import adg.red.models.Address;
 import adg.red.models.User;
 import adg.red.utils.Context;
@@ -14,14 +16,12 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -32,30 +32,24 @@ public class UserProfileController implements Initializable
 {
 
     @FXML
-    private TextField addrTxt1;
-    @FXML
-    private TextField addrTxt2;
-    @FXML
-    private TextField cityTxt;
-    @FXML
-    private TextField postalTxt;
-    @FXML
-    private TextField phoneTxt;
-    @FXML
-    private TextField emailTxt;
-    @FXML
-    private ChoiceBox provinceChoiceBox;
-    @FXML
-    private ChoiceBox countryChoiceBox;
-    @FXML
-    private Button contactCancelBtn;
-    @FXML
-    private Button contactSaveBtn;
-    @FXML
-    private Label errorLabel;
-    @FXML
     private Pane paneChangePassword;
     private User currentUser;
+    private CustomTextBox txtAddressFirst;
+    private CustomTextBox txtAddressSecond;
+    private CustomTextBox txtCity;
+    private CustomTextBox txtProvince;
+    private CustomTextBox txtPhone;
+    private CustomTextBox txtEmail;
+    private CustomTextBox txtCountry;
+    private CustomTextBox txtPostalCode;
+    @FXML
+    private Button btnSave;
+    @FXML
+    private Button btnCancel;
+    @FXML
+    private VBox vBoxHolder;
+    @FXML
+    private Label lblMessage;
 
     /**
      * Initializes the controller class.
@@ -68,96 +62,102 @@ public class UserProfileController implements Initializable
         BreadCrumbController.renderBreadCrumb(currentUser.getUserTypeId().getName().toLowerCase() + "/HomeView|UserProfile");
         ViewLoader view = new ViewLoader(paneChangePassword);
         view.loadView("ChangePassword");
+        txtAddressFirst = new CustomTextBox(TextBoxType.Any, "Addrees 1:", "");
+        txtAddressSecond = new CustomTextBox(TextBoxType.Any, "Addrees 2:", "");
+        txtCity = new CustomTextBox(TextBoxType.Alpha, "City:", "Please enter a valid City");
+        txtProvince = new CustomTextBox(TextBoxType.Alpha, "Province:", "Please enter a valid Province");
+        txtCountry = new CustomTextBox(TextBoxType.Alpha, "Country:", "Please enter a valid Country");
+        txtEmail = new CustomTextBox(TextBoxType.Email, "Email:", "Please enter a valid Email");
+        txtPhone = new CustomTextBox(TextBoxType.Phone, "Phone:", "Please enter a valid Phone");
+        txtPostalCode = new CustomTextBox(TextBoxType.PostalCode, "Postal Code:", "Please enter a valid Postal Code");
+        vBoxHolder.getChildren().addAll(txtAddressFirst, txtAddressSecond, txtCity, txtProvince, txtCountry, txtPostalCode, txtPhone, txtEmail);
         showUserProfile();
 
 
 
-        contactCancelBtn.setOnAction(new EventHandler<ActionEvent>()
+
+
+    }
+
+    @FXML
+    public void clear(ActionEvent event)
+    {
+        showUserProfile();
+        lblMessage.setVisible(true);
+    }
+
+    @FXML
+    public void save(ActionEvent event)
+    {
+        try
         {
-            @Override
-            public void handle(ActionEvent event)
+            // modify user profile
+            String errorMsg = "";
+            boolean isValid = true;
+            String addr1 = txtAddressFirst.getText();
+            if (addr1.isEmpty())
             {
-                showUserProfile();
-                errorLabel.setVisible(false);
+                isValid = false;
+                errorMsg += "Empty first address line! ";
             }
-        });
+            String addr2 = txtAddressSecond.getText();
+            if (addr2.isEmpty())
+            {
+                isValid = false;
+                errorMsg += "Empty second address line! ";
+            }
+            String city = txtCity.getText();
+            String postal = txtPostalCode.getText();
+            if (postal.isEmpty())
+            {
+                isValid = false;
+                errorMsg += "Empty postal code! ";
+            }
+            String phone = txtPhone.getText();
+            try
+            {
+                Integer.valueOf(phone);
+            }
+            catch (Exception e)
+            {
+                isValid = false;
+                errorMsg += "Invalid phone number! ";
+            }
+            String email = txtEmail.getText();
+            if (!email.contains("@"))
+            {
+                isValid = false;
+                errorMsg += "Invalid email!";
+            }
 
-        contactSaveBtn.setOnAction(new EventHandler<ActionEvent>()
+            String provinceChoice = txtProvince.getText();
+            String countryChoice = txtCountry.getText();
+
+            if (isValid)
+            {
+                Address addr = currentUser.getAddressId();
+                addr.setAddressLineFirst(addr1);
+                addr.setAddressLineSecond(addr2);
+                addr.setCity(city);
+                addr.setProvince(provinceChoice);
+                addr.setCountry(countryChoice);
+                currentUser.setAddressId(addr);
+                currentUser.setPhoneNumber(phone);
+                currentUser.setEmail(email);
+                currentUser.save();
+                lblMessage.setVisible(true);
+                lblMessage.setText("User profile updated!");
+            }
+            else
+            {
+                lblMessage.setVisible(true);
+                lblMessage.setText(errorMsg);
+            }
+        }
+        catch (Exception ex)
         {
-            @Override
-            public void handle(ActionEvent event)
-            {
-                try
-                {
-                    // modify user profile
-                    String errorMsg = "";
-                    boolean isValid = true;
-                    String addr1 = addrTxt1.getText();
-                    if (addr1.isEmpty())
-                    {
-                        isValid = false;
-                        errorMsg += "Empty first address line! ";
-                    }
-                    String addr2 = addrTxt2.getText();
-                    if (addr2.isEmpty())
-                    {
-                        isValid = false;
-                        errorMsg += "Empty second address line! ";
-                    }
-                    String city = cityTxt.getText();
-                    String postal = postalTxt.getText();
-                    if (postal.isEmpty())
-                    {
-                        isValid = false;
-                        errorMsg += "Empty postal code! ";
-                    }
-                    String phone = phoneTxt.getText();
-                    try
-                    {
-                        Integer.valueOf(phone);
-                    }
-                    catch (Exception e)
-                    {
-                        isValid = false;
-                        errorMsg += "Invalid phone number! ";
-                    }
-                    String email = emailTxt.getText();
-                    if (!email.contains("@"))
-                    {
-                        isValid = false;
-                        errorMsg += "Invalid email!";
-                    }
-
-                    String provinceChoice = provinceChoiceBox.getValue().toString();
-                    String countryChoice = countryChoiceBox.getValue().toString();
-
-                    if (isValid)
-                    {
-                        Address addr = currentUser.getAddressId();
-                        addr.setAddressLineFirst(addr1);
-                        addr.setAddressLineSecond(addr2);
-                        addr.setCity(city);
-                        addr.setProvince(provinceChoice);
-                        addr.setCountry(countryChoice);
-                        currentUser.setAddressId(addr);
-                        currentUser.setPhoneNumber(phone);
-                        currentUser.setEmail(email);
-                        currentUser.save();
-                        errorLabel.setVisible(true);
-                        errorLabel.setText("User profile updated!");
-                    }
-                    else
-                    {
-                        errorLabel.setVisible(true);
-                        errorLabel.setText(errorMsg);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
+            Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void showUserProfile()
@@ -167,13 +167,13 @@ public class UserProfileController implements Initializable
 
     private void displayUserProfile(User user)
     {
-        addrTxt1.setText(user.getAddressId().getAddressLineFirst());
-        addrTxt2.setText(user.getAddressId().getAddressLineSecond());
-        cityTxt.setText(user.getAddressId().getCity());
-        postalTxt.setText(user.getAddressId().getPostalCode());
-        phoneTxt.setText(user.getPhoneNumber());
-        emailTxt.setText(user.getEmail());
-        provinceChoiceBox.setValue(user.getAddressId().getProvince());
-        countryChoiceBox.setValue(user.getAddressId().getCountry());
+        txtAddressFirst.setText(user.getAddressId().getAddressLineFirst());
+        txtAddressSecond.setText(user.getAddressId().getAddressLineSecond());
+        txtCity.setText(user.getAddressId().getCity());
+        txtPostalCode.setText(user.getAddressId().getPostalCode());
+        txtPhone.setText(user.getPhoneNumber());
+        txtEmail.setText(user.getEmail());
+        txtProvince.setText(user.getAddressId().getProvince());
+        txtCountry.setText(user.getAddressId().getCountry());
     }
 }
