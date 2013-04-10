@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -36,10 +36,22 @@ public class SectionPK implements Serializable
     @Column(name = "sessionId")
     private int sessionId;
 
+    /**
+     *
+     */
     public SectionPK()
     {
     }
 
+    /**
+     *
+     * @param sectionId
+     * @param sectionTypeId
+     * @param courseNumber
+     * @param departmentId
+     * @param termYear
+     * @param sessionId
+     */
     public SectionPK(int sectionId, int sectionTypeId, int courseNumber, String departmentId, int termYear, int sessionId)
     {
         this.sectionId = sectionId;
@@ -50,61 +62,109 @@ public class SectionPK implements Serializable
         this.sessionId = sessionId;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSectionId()
     {
         return sectionId;
     }
 
+    /**
+     *
+     * @param sectionId
+     */
     public void setSectionId(int sectionId)
     {
         this.sectionId = sectionId;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSectionTypeId()
     {
         return sectionTypeId;
     }
 
+    /**
+     *
+     * @param sectionTypeId
+     */
     public void setSectionTypeId(int sectionTypeId)
     {
         this.sectionTypeId = sectionTypeId;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCourseNumber()
     {
         return courseNumber;
     }
 
+    /**
+     *
+     * @param courseNumber
+     */
     public void setCourseNumber(int courseNumber)
     {
         this.courseNumber = courseNumber;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDepartmentId()
     {
         return departmentId;
     }
 
+    /**
+     *
+     * @param departmentId
+     */
     public void setDepartmentId(String departmentId)
     {
         this.departmentId = departmentId;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getTermYear()
     {
         return termYear;
     }
 
+    /**
+     *
+     * @param termYear
+     */
     public void setTermYear(int termYear)
     {
         this.termYear = termYear;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSessionId()
     {
         return sessionId;
     }
 
+    /**
+     *
+     * @param sessionId
+     */
     public void setSessionId(int sessionId)
     {
         this.sessionId = sessionId;

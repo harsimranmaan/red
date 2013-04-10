@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -16,6 +16,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ResourceDictionaryPK implements Serializable
 {
+
     @Basic(optional = false)
     @Column(name = "resourceId")
     private int resourceId;
@@ -23,31 +24,55 @@ public class ResourceDictionaryPK implements Serializable
     @Column(name = "localeId")
     private int localeId;
 
+    /**
+     *
+     */
     public ResourceDictionaryPK()
     {
     }
 
+    /**
+     *
+     * @param resourceId
+     * @param localeId
+     */
     public ResourceDictionaryPK(int resourceId, int localeId)
     {
         this.resourceId = resourceId;
         this.localeId = localeId;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getResourceId()
     {
         return resourceId;
     }
 
+    /**
+     *
+     * @param resourceId
+     */
     public void setResourceId(int resourceId)
     {
         this.resourceId = resourceId;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getLocaleId()
     {
         return localeId;
     }
 
+    /**
+     *
+     * @param localeId
+     */
     public void setLocaleId(int localeId)
     {
         this.localeId = localeId;

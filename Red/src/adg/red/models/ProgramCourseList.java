@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "ProgramCourseList")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "ProgramCourseList.findAll", query = "SELECT p FROM ProgramCourseList p"),
     @NamedQuery(name = "ProgramCourseList.findByProgramName", query = "SELECT p FROM ProgramCourseList p WHERE p.programCourseListPK.programName = :programName"),
     @NamedQuery(name = "ProgramCourseList.findByProgramDepartmentId", query = "SELECT p FROM ProgramCourseList p WHERE p.programCourseListPK.programDepartmentId = :programDepartmentId"),
@@ -32,48 +32,87 @@ import javax.xml.bind.annotation.XmlRootElement;
 })
 public class ProgramCourseList implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
     @EmbeddedId
     protected ProgramCourseListPK programCourseListPK;
     @Basic(optional = false)
     @Column(name = "isActive")
     private boolean isActive;
 
+    /**
+     *
+     */
     public ProgramCourseList()
     {
     }
 
+    /**
+     *
+     * @param programCourseListPK
+     */
     public ProgramCourseList(ProgramCourseListPK programCourseListPK)
     {
         this.programCourseListPK = programCourseListPK;
     }
 
+    /**
+     *
+     * @param programCourseListPK
+     * @param isActive
+     */
     public ProgramCourseList(ProgramCourseListPK programCourseListPK, boolean isActive)
     {
         this.programCourseListPK = programCourseListPK;
         this.isActive = isActive;
     }
 
+    /**
+     *
+     * @param programName
+     * @param programDepartmentId
+     * @param courseNumber
+     * @param courseDepartmentId
+     */
     public ProgramCourseList(String programName, String programDepartmentId, int courseNumber, String courseDepartmentId)
     {
         this.programCourseListPK = new ProgramCourseListPK(programName, programDepartmentId, courseNumber, courseDepartmentId);
     }
 
+    /**
+     *
+     * @return
+     */
     public ProgramCourseListPK getProgramCourseListPK()
     {
         return programCourseListPK;
     }
 
+    /**
+     *
+     * @param programCourseListPK
+     */
     public void setProgramCourseListPK(ProgramCourseListPK programCourseListPK)
     {
         this.programCourseListPK = programCourseListPK;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean getIsActive()
     {
         return isActive;
     }
 
+    /**
+     *
+     * @param isActive
+     */
     public void setIsActive(boolean isActive)
     {
         this.isActive = isActive;
