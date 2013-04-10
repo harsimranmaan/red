@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -16,6 +16,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class PrerequisitePK implements Serializable
 {
+
     @Basic(optional = false)
     @Column(name = "courseNumber")
     private int courseNumber;
@@ -29,10 +30,20 @@ public class PrerequisitePK implements Serializable
     @Column(name = "preRequisiteDeptId")
     private String preRequisiteDeptId;
 
+    /**
+     *
+     */
     public PrerequisitePK()
     {
     }
 
+    /**
+     *
+     * @param courseNumber
+     * @param departmentId
+     * @param preRequisiteNumber
+     * @param preRequisiteDeptId
+     */
     public PrerequisitePK(int courseNumber, String departmentId, int preRequisiteNumber, String preRequisiteDeptId)
     {
         this.courseNumber = courseNumber;
@@ -41,41 +52,73 @@ public class PrerequisitePK implements Serializable
         this.preRequisiteDeptId = preRequisiteDeptId;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCourseNumber()
     {
         return courseNumber;
     }
 
+    /**
+     *
+     * @param courseNumber
+     */
     public void setCourseNumber(int courseNumber)
     {
         this.courseNumber = courseNumber;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDepartmentId()
     {
         return departmentId;
     }
 
+    /**
+     *
+     * @param departmentId
+     */
     public void setDepartmentId(String departmentId)
     {
         this.departmentId = departmentId;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPreRequisiteNumber()
     {
         return preRequisiteNumber;
     }
 
+    /**
+     *
+     * @param preRequisiteNumber
+     */
     public void setPreRequisiteNumber(int preRequisiteNumber)
     {
         this.preRequisiteNumber = preRequisiteNumber;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPreRequisiteDeptId()
     {
         return preRequisiteDeptId;
     }
 
+    /**
+     *
+     * @param preRequisiteDeptId
+     */
     public void setPreRequisiteDeptId(String preRequisiteDeptId)
     {
         this.preRequisiteDeptId = preRequisiteDeptId;

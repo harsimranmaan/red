@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -16,6 +16,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ProgramPK implements Serializable
 {
+
     @Basic(optional = false)
     @Column(name = "programName")
     private String programName;
@@ -23,31 +24,55 @@ public class ProgramPK implements Serializable
     @Column(name = "departmentId")
     private String departmentId;
 
+    /**
+     *
+     */
     public ProgramPK()
     {
     }
 
+    /**
+     *
+     * @param programName
+     * @param departmentId
+     */
     public ProgramPK(String programName, String departmentId)
     {
         this.programName = programName;
         this.departmentId = departmentId;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getProgramName()
     {
         return programName;
     }
 
+    /**
+     *
+     * @param programName
+     */
     public void setProgramName(String programName)
     {
         this.programName = programName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDepartmentId()
     {
         return departmentId;
     }
 
+    /**
+     *
+     * @param departmentId
+     */
     public void setDepartmentId(String departmentId)
     {
         this.departmentId = departmentId;
