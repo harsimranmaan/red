@@ -25,7 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 /**
  * FXML Controller class for ViewDegreeInfo.fxml.
  * <p/>
- * @author jayzt_000
+ * @author Jaspreet Thind
  */
 public class ViewDegreeInfoController implements Initializable
 {
