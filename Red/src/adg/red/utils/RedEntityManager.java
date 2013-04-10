@@ -1,5 +1,5 @@
 /*
- *
+ * The RedEntityManager class manages all the entity of the application.
  *
  */
 package adg.red.utils;
@@ -10,7 +10,8 @@ import javax.persistence.Persistence;
 import javax.persistence.metamodel.EntityType;
 
 /**
- *
+ * The RedEntityManager class manages all the entity of the application.
+ * <p/>
  * @author harsimran.maan
  */
 public class RedEntityManager
@@ -25,12 +26,21 @@ public class RedEntityManager
         em = emf.createEntityManager();
     }
 
+    /**
+     * The getter function for em.
+     * <p/>
+     * @return the em variable
+     */
     public static EntityManager getEntityManager()
     {
-
         return em;
     }
 
+    /**
+     * The function to save an input object to the database.
+     * <p/>
+     * @param obj the object to be saved
+     */
     public static void save(Object obj)
     {
         // begin transaction
@@ -54,6 +64,13 @@ public class RedEntityManager
         }
     }
 
+    /**
+     * The function to get an entity by inputing String name
+     * <p/>
+     * @param name the name of the entity
+     * <p/>
+     * @return the EntityType of an input String name
+     */
     public static EntityType<?> getEntityByName(String name)
     {
         for (EntityType<?> entity : em.getMetamodel().getEntities())
