@@ -1,11 +1,11 @@
  //*****************************************************
  /* (INCOMPLETE)
- Prerequisuite.java -- Model for Prerequisuite table
+ PrerequisuitePK.java -- Model for Prerequisuite table
 
  @Contributors:  Harsimran
 
  @Purpose:   Generates various quesries on PrerequisitePK
- *           tabel that is used in identifying the primary key of a
+ *           table that is used in identifying the primary key of a
  *           prereq course associated with a course
  *
  @Copyright ADG (2013) - Open License
@@ -172,12 +172,12 @@ public class PrerequisitePK implements Serializable
     /**
      * Public method overriding equals(Object object) method that returns true
      * if the given object is an instance of a PrerequisitePK object and is the
-     * same as currentPrerequisitePK
+     * same as current PrerequisitePK object
      * <p/>
      * @param object -- Pass any Object
      * <p/>
      * @return -- true if object is of type PrerequisitePK and the same as
-     *         currentPrerequisitePK, false otherwise
+     *         current PrerequisitePK object, false otherwise
      */
     @Override
     public boolean equals(Object object)
@@ -208,9 +208,8 @@ public class PrerequisitePK implements Serializable
 
     /**
      * Public method overriding method for converting object to string by
-     * attaching the following string to it:
-     * "adg.red.models.Prerequisite[prerequisitePK= courseNumber + departmentId
-     * + prerequisiteNumber + prerequisiteDeptId"
+     * attaching the following string to it: "adg.red.models.Prerequisite[
+     * courseNumber + departmentId + prerequisiteNumber + prerequisiteDeptId"
      * <p/>
      * @return - String literal
      */

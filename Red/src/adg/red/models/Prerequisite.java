@@ -5,7 +5,7 @@
  @Contributors:  Harsimran
 
  @Purpose:   Generates various quesries on Prerequisite
- *           tabel that is used in identifying a prereq
+ *           table that is used in identifying a prereq
  *           course associated with a course and any
  *           registration restrictions
  *
@@ -268,7 +268,7 @@ public class Prerequisite implements Serializable
     /**
      * Public method overriding method for converting object to string by
      * attaching the following string to the beginning:
-     * "adg.red.models.Prerequisite[prerequisitePK="
+     * "adg.red.models.Prerequisite[ prerequisitePK"
      * <p/>
      * @return - String literal
      */
