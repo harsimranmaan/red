@@ -18,7 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 /**
- * FXML Controller class
+ * FXML Controller class for the path names of each user interface
  * <p/>
  * @author harsimran.maan
  */
@@ -61,6 +61,11 @@ public class BreadCrumbController implements Initializable
         hBoxBreadCrumb.getChildren().add(link);
     }
 
+    /**
+     * initializes the name of views by locality.
+     * @param key the name displayed on each view
+     * @return name of each view
+     */
     private String getDisplayNameByKey(String key)
     {
         String name = "";
@@ -123,6 +128,10 @@ public class BreadCrumbController implements Initializable
         return name;
     }
 
+    /**
+     * get path name and load the view
+     * @param path path of the view name
+     */
     public static void renderBreadCrumb(String path)
     {
         paths = path.split("\\|");

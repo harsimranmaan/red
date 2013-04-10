@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ * The controller class for Faculty Reports.fxml.
+ *
  */
 package adg.red.controllers.faculty;
 
@@ -62,6 +62,12 @@ public class ReportsController implements Initializable
     private Section sec;
     private Student student;
 
+    /**
+     * Triggered on the mouse action event. Generates Reports for the viewing of
+     * Faculty. Allows the faculty to download a report.
+     * <p/>
+     * @param event The action event
+     */
     @FXML
     private void generateReport(ActionEvent event)
     {
@@ -94,6 +100,11 @@ public class ReportsController implements Initializable
         transitionEffect(lblnotification, "ON");
     }
 
+    /**
+     * Creates the Header for the template
+     * <p/>
+     * @return The Header
+     */
     private String createTemplateHeader()
     {
         String header = new String();
@@ -135,6 +146,9 @@ public class ReportsController implements Initializable
         initializeComponentsByLocale();
     }
 
+    /**
+     * The function initializes all the components text by locality.
+     */
     private void initializeComponentsByLocale()
     {
         btnEmail.setText(LocaleManager.get(86));
@@ -147,6 +161,9 @@ public class ReportsController implements Initializable
         selectSection();
     }
 
+    /**
+     * Fetches the data for the selected section and populates the report.
+     */
     public void selectSection()
     {
         sec = Context.getInstance().getSelectedSection();
@@ -155,6 +172,12 @@ public class ReportsController implements Initializable
         lblSession.setText(Session.getBySessionId(sec.getSectionPK().getSessionId()).getName());
     }
 
+    /**
+     * Operates and adds effect on the node depending on the action requested
+     * <p/>
+     * @param objectName is the node being updated
+     * @param action     is the requested action
+     */
     public void transitionEffect(Node objectName, String action)
     {
         FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), objectName);
