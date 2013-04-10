@@ -36,17 +36,12 @@ import javax.validation.constraints.Size;
 @XmlRootElement
 @NamedQueries(
         {
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
-    @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
-    @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
-    @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u WHERE u.firstName = :firstName"),
-    @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u WHERE u.lastName = :lastName"),
-    @NamedQuery(name = "User.findByIsOnline", query = "SELECT u FROM User u WHERE u.isOnline = :isOnline"),
-    @NamedQuery(name = "User.findByPhoneNumber", query = "SELECT u FROM User u WHERE u.phoneNumber = :phoneNumber"),
-    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email AND u.isActive = 1"),
-    @NamedQuery(name = "User.findByDateOfBirth", query = "SELECT u FROM User u WHERE u.dateOfBirth = :dateOfBirth"),
-    @NamedQuery(name = "User.findByIsActive", query = "SELECT u FROM User u WHERE u.isActive = :isActive"),
-    @NamedQuery(name = "User.login", query = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password AND u.isActive=1")
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u  LEFT JOIN FETCH u.student LEFT JOIN FETCH u.administrator LEFT JOIN FETCH u.facultyMember LEFT JOIN FETCH u.addressId LEFT JOIN FETCH u.userTypeId "),
+    @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u  LEFT JOIN FETCH u.student LEFT JOIN FETCH u.administrator LEFT JOIN FETCH u.facultyMember LEFT JOIN FETCH u.addressId LEFT JOIN FETCH u.userTypeId WHERE u.username = :username"),
+    @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u LEFT JOIN FETCH u.student LEFT JOIN FETCH u.administrator LEFT JOIN FETCH u.facultyMember LEFT JOIN FETCH u.addressId LEFT JOIN FETCH u.userTypeId  WHERE u.firstName = :firstName"),
+    @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u LEFT JOIN FETCH u.student LEFT JOIN FETCH u.administrator LEFT JOIN FETCH u.facultyMember LEFT JOIN FETCH u.addressId LEFT JOIN FETCH u.userTypeId  WHERE u.lastName = :lastName"),
+    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u  LEFT JOIN FETCH u.student LEFT JOIN FETCH u.administrator LEFT JOIN FETCH u.facultyMember LEFT JOIN FETCH u.addressId LEFT JOIN FETCH u.userTypeId WHERE u.email = :email AND u.isActive = 1"),
+    @NamedQuery(name = "User.login", query = "SELECT u FROM User u LEFT JOIN FETCH u.student LEFT JOIN FETCH u.administrator LEFT JOIN FETCH u.facultyMember LEFT JOIN FETCH u.addressId LEFT JOIN FETCH u.userTypeId  WHERE u.username = :username AND u.password = :password AND u.isActive=1")
 })
 public class User implements Serializable
 {
