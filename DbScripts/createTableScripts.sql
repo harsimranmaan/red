@@ -31,12 +31,11 @@ DROP TABLE IF EXISTS `Faculty`;
 CREATE TABLE `Faculty` (
   `facultyId` INT NOT NULL AUTO_INCREMENT,	/* Auto Increment */
   name VARCHAR(50) NOT NULL,
-  addressId INT,
-  `headOfFacultyId` INT DEFAULT NULL,/**FK - after FacultyMember**/
+/* removed addressId and Head */
   `phone` varchar(15) DEFAULT NULL,
   `website` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`facultyId`),
-  CONSTRAINT `FacultyFKaddressId` FOREIGN KEY (`addressId`) REFERENCES `Address` (`addressId`) ON UPDATE CASCADE ON DELETE RESTRICT,
+/*  CONSTRAINT `FacultyFKaddressId` FOREIGN KEY (`addressId`) REFERENCES `Address` (`addressId`) ON UPDATE CASCADE ON DELETE RESTRICT,*/
   UNIQUE KEY `FacultyUNIQname` (name),
   CONSTRAINT FacultyCHKfacultyId CHECK (facultyId > 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -147,13 +146,13 @@ CREATE TABLE `FacultyMember` (
 
 ALTER TABLE FacultyMember AUTO_INCREMENT = 100;
 
-
+/*
 ALTER TABLE `Faculty`
 ADD CONSTRAINT `FacultyFKheadId` 
 FOREIGN KEY (`facultyId`) 
 REFERENCES `FacultyMember` (`facultyMemberId`) 
 ON UPDATE CASCADE ON DELETE RESTRICT;
-
+*/
 
 DROP TABLE IF EXISTS `GradingScheme`;
 CREATE TABLE `GradingScheme` (

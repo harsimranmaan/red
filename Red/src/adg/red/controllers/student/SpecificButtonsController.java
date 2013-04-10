@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ * The controller class for SpecificButtons.fxml.
+ *
  */
 package adg.red.controllers.student;
 
@@ -16,7 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
 /**
- * FXML Controller class
+ * FXML Controller class for SpecificButtons.fxml.
  * <p/>
  * @author harsimran.maan
  */
@@ -39,6 +39,11 @@ public class SpecificButtonsController implements Initializable
         view.loadView("student/BrowseCourse");
     }
 
+    /**
+     * The function to handle viewTimeTable action event.
+     * <p/>
+     * @param event the action event
+     */
     @FXML
     private void viewTimeTable(ActionEvent event)
     {
@@ -47,6 +52,11 @@ public class SpecificButtonsController implements Initializable
         view.loadView("TimeTable");
     }
 
+    /**
+     * The function to handle viewEnrolment action event.
+     * <p/>
+     * @param event the action event
+     */
     @FXML
     private void viewEnrolment(ActionEvent event)
     {
@@ -54,6 +64,11 @@ public class SpecificButtonsController implements Initializable
         view.loadView("student/EnrollmentView");
     }
 
+    /**
+     * The function to handle viewDegreeInfo action event.
+     * <p/>
+     * @param event the action event
+     */
     @FXML
     private void viewDegreeInfo(ActionEvent event)
     {
@@ -61,6 +76,9 @@ public class SpecificButtonsController implements Initializable
         view.loadView("student/ViewDegreeInfo");
     }
 
+    /**
+     * The function initializes all components text by locality.
+     */
     private void initializeComponentsByLocale()
     {
         btnBrowseCourse.setText(LocaleManager.get(7));
@@ -71,6 +89,9 @@ public class SpecificButtonsController implements Initializable
 
     /**
      * Initializes the controller class.
+     * <p/>
+     * @param url the URL
+     * @param rb  the ResourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
