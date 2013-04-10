@@ -28,6 +28,7 @@ public class CustomTextBox extends HBox
         vBox = new VBox(3);
         lblHeader = new Label(labelText);
         lblHeader.setPrefWidth(120);
+        lblHeader.setAlignment(Pos.CENTER_RIGHT);
         lblError = new Label(errorMessage);
         lblError.setTextFill(Color.RED);
         lblError.setVisible(false);
