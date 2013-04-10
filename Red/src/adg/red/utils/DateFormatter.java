@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ * The DateFormatter class is responsible for date and time formatting.
+ *
  */
 package adg.red.utils;
 
@@ -8,7 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *
+ * The DateFormatter class is responsible for date and time formatting.
+ * <p/>
  * @author Witt
  */
 public class DateFormatter
@@ -25,6 +26,13 @@ public class DateFormatter
         dateFormater = new DateFormatter();
     }
 
+    /**
+     * The function to format input date to the specific date format.
+     * <p/>
+     * @param date the input date the be formatted
+     * <p/>
+     * @return the formatted String of input date
+     */
     public static String formatDate(Date date)
     {
         if (date != null)
@@ -38,6 +46,13 @@ public class DateFormatter
         }
     }
 
+    /**
+     * The function to format input date to the specific date and time format.
+     * <p/>
+     * @param date the input date the be formatted
+     * <p/>
+     * @return the formatted String of input date
+     */
     public static String formatDateTime(Date date)
     {
         if (date != null)
@@ -51,6 +66,13 @@ public class DateFormatter
         }
     }
 
+    /**
+     * The function to format input date to the specific time format.
+     * <p/>
+     * @param date the input date the be formatted
+     * <p/>
+     * @return the formatted String of input date
+     */
     public static String formatTime(Date date)
     {
         if (date != null)
@@ -64,6 +86,13 @@ public class DateFormatter
         }
     }
 
+    /**
+     * The function to format input date to the specific hour format.
+     * <p/>
+     * @param date the input date the be formatted
+     * <p/>
+     * @return the formatted String of input date
+     */
     public static String formatHour(Date date)
     {
         if (date != null)
@@ -77,6 +106,13 @@ public class DateFormatter
         }
     }
 
+    /**
+     * The function to format input date to the specific minute format.
+     * <p/>
+     * @param date the input date the be formatted
+     * <p/>
+     * @return the formatted String of input date
+     */
     public static String formatMins(Date date)
     {
         if (date != null)
@@ -90,6 +126,11 @@ public class DateFormatter
         }
     }
 
+    /**
+     * The function to get current day date in a specific format.
+     * <p/>
+     * @return the formatted String of the current date
+     */
     public static String getCurrentDayDate()
     {
         Date date = new Date();

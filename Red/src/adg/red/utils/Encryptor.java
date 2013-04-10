@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ * The Encryptor class is responsible for encrypt and decrypt input string.
+ *
  */
 package adg.red.utils;
 
@@ -17,7 +17,8 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
 /**
- *
+ * The Encryptor class is responsible for encrypt and decrypt input string.
+ * <p/>
  * @author harsimran.maan
  */
 public class Encryptor
@@ -41,6 +42,13 @@ public class Encryptor
         }
     }
 
+    /**
+     * The functions to convert input byte array to String.
+     * <p/>
+     * @param digest the input digest
+     * <p/>
+     * @return converted String
+     */
     private static String getString(byte[] digest)
     {
         StringBuilder hexString = new StringBuilder();
@@ -57,6 +65,13 @@ public class Encryptor
         return hexString.toString();
     }
 
+    /**
+     * The function encrypts SHA to the input String password.
+     * <p/>
+     * @param password the String password to be encrypted
+     * <p/>
+     * @return the SHA encrypted String
+     */
     public static String encryptSHA(String password)
     {
         String hash = password;
@@ -74,6 +89,13 @@ public class Encryptor
         return hash;
     }
 
+    /**
+     * The function encrypts AES to the input String literal.
+     * <p/>
+     * @param literal the String to be encrypted
+     * <p/>
+     * @return the AES encrypted String
+     */
     public static String encryptAES(String literal)
     {
         String cipherText = literal;
@@ -89,7 +111,6 @@ public class Encryptor
             base64OutputStream.close();
             cipherText = baos.toString();
             System.out.println("\n Plain Data : " + literal + " \n Cipher Data : " + cipherText);
-
         }
         catch (Exception ex)
         {
@@ -98,6 +119,13 @@ public class Encryptor
         return cipherText;
     }
 
+    /**
+     * The function decrypts AES from the input cipherText String.
+     * <p/>
+     * @param cipherText the String to be decrypted
+     * <p/>
+     * @return the AES decrypted String
+     */
     public static String decryptAES(String cipherText)
     {
         String decryptedText = cipherText;
@@ -108,7 +136,6 @@ public class Encryptor
             byte[] byteDecryptedText = aesCipher.doFinal(cipherText.getBytes());
             decryptedText = new String(byteDecryptedText);
             System.out.println("Cipher Data : " + cipherText + " \n Decrypted Data : " + decryptedText);
-
         }
         catch (Exception ex)
         {
