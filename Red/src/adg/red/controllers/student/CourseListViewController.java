@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ * The controller class for CourseListView.fxml.
+ *
  */
 package adg.red.controllers.student;
 
@@ -21,7 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 /**
- * FXML Controller class
+ * FXML Controller class for CourseListView.fxml.
  * <p/>
  * @author Witt
  */
@@ -35,6 +35,11 @@ public class CourseListViewController implements Initializable
     @FXML
     private TableView<Course> disTable;
 
+    /**
+     * The function to handle selectCourse mouse event.
+     * <p/>
+     * @param event the mouse event
+     */
     @FXML
     private void selectCourse(MouseEvent event)
     {
@@ -47,7 +52,19 @@ public class CourseListViewController implements Initializable
     }
 
     /**
+     * The function initializes all components text by locality.
+     */
+    private void initializeComponentsByLocale()
+    {
+        courseNumberColmn.setText(LocaleManager.get(50));
+        courseNameColmn.setText(LocaleManager.get(51));
+    }
+
+    /**
      * Initializes the controller class.
+     * <p/>
+     * @param url the URL
+     * @param rb  the ResourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -60,22 +77,26 @@ public class CourseListViewController implements Initializable
 
     }
 
+    /**
+     * The function to populate the course table by selected department.
+     * <p/>
+     * @param department the department to populate the courses for
+     */
     public void populateCourseTable(Department department)
     {
         List<Course> courses = Course.getByDepartment(department);
         populate(courses);
     }
 
+    /**
+     * The function populates the list of courses to the course table.
+     * <p/>
+     * @param courses the list of courses to be populated to the course table
+     */
     private void populate(List<Course> courses)
     {
         courseNumberColmn.setCellValueFactory(new PropertyValueFactory<Course, String>("departmentIdAndCourseNumber"));
         courseNameColmn.setCellValueFactory(new PropertyValueFactory<Course, String>("name"));
         disTable.getItems().setAll(courses);
-    }
-
-    private void initializeComponentsByLocale()
-    {
-        courseNumberColmn.setText(LocaleManager.get(50));
-        courseNameColmn.setText(LocaleManager.get(51));
     }
 }
