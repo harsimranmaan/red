@@ -43,41 +43,73 @@ public class Session implements Serializable
     @Column(name = "name")
     private String name;
 
+    /**
+     * Default constructor
+     */
     public Session()
     {
     }
 
+    /**
+     * Constructor
+     * @param sessionId table attribute sessionId
+     */
     public Session(Integer sessionId)
     {
         this.sessionId = sessionId;
     }
 
+    /**
+     * Constructor
+     * @param sessionId table attribute sessionId
+     * @param name table attribute name
+     */
     public Session(Integer sessionId, String name)
     {
         this.sessionId = sessionId;
         this.name = name;
     }
 
+    /**
+     * Get table attribute sessionId
+     * @return sessionId
+     */
     public Integer getSessionId()
     {
         return sessionId;
     }
 
+    /**
+     * Set table attribute sessionId
+     * @param sessionId table attribute sessionId
+     */
     public void setSessionId(Integer sessionId)
     {
         this.sessionId = sessionId;
     }
 
+    /**
+     * Get table attribute name
+     * @return name
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     * Set table attribute name
+     * @param name table attribute name
+     */
     public void setName(String name)
     {
         this.name = name;
     }
 
+    /**
+     * Get record location
+     * @return hash code 
+     */
     @Override
     public int hashCode()
     {
@@ -86,6 +118,11 @@ public class Session implements Serializable
         return hash;
     }
 
+    /**
+     * Comparator
+     * @param object object to be compared with
+     * @return true if two object equal to each other, otherwise return false
+     */   
     @Override
     public boolean equals(Object object)
     {
@@ -101,13 +138,22 @@ public class Session implements Serializable
         }
         return true;
     }
-
+    
+    /**
+     * print sectionTypeId
+     * @return sectionTypeId as a string
+     */
     @Override
     public String toString()
     {
         return "adg.red.models.Session[ sessionId=" + sessionId + " ]";
     }
 
+    /**
+     * get session list by sessionId
+     * @param id session id
+     * @return session list
+     */
     public static Session getBySessionId(int id)
     {
         return (Session) RedEntityManager.getEntityManager().createNamedQuery("Session.findBySessionId").setParameter("sessionId", id).getSingleResult();

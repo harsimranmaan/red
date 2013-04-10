@@ -43,56 +43,101 @@ public class Term implements Serializable
     @ManyToOne(optional = false)
     private Session session;
 
+    /**
+     * Default constructor
+     */
     public Term()
     {
     }
 
+    /**
+     * Constructor
+     * @param termPK primary keys of term table
+     */
     public Term(TermPK termPK)
     {
         this.termPK = termPK;
     }
 
+    /**
+     * Constructor
+     * @param termPK primary keys of term table
+     * @param isActive table attribute isActive
+     */
     public Term(TermPK termPK, boolean isActive)
     {
         this.termPK = termPK;
         this.isActive = isActive;
     }
 
+    /**
+     * Constructor
+     * @param termYear table attribute termYear
+     * @param sessionId table attribute sessionId
+     */
     public Term(int termYear, int sessionId)
     {
         this.termPK = new TermPK(termYear, sessionId);
     }
 
+    /**
+     * Get primary keys of term table
+     * @return primary keys
+     */
     public TermPK getTermPK()
     {
         return termPK;
     }
 
+    /**
+     * Set primary keys of term table
+     * @param termPK primary keys
+     */
     public void setTermPK(TermPK termPK)
     {
         this.termPK = termPK;
     }
 
+    /**
+     * Get table attributes isActive
+     * @return isActive
+     */
     public boolean getIsActive()
     {
         return isActive;
     }
 
+    /**
+     * Set table attribute isActive
+     * @param isActive table attributes
+     */
     public void setIsActive(boolean isActive)
     {
         this.isActive = isActive;
     }
 
+    /**
+     * Get table attribute session
+     * @return session
+     */
     public Session getSession()
     {
         return session;
     }
 
+    /**
+     * Set table attribute session
+     * @param session table attribute
+     */
     public void setSession(Session session)
     {
         this.session = session;
     }
-
+    
+    /**
+     * Get record location
+     * @return hash code 
+     */
     @Override
     public int hashCode()
     {
@@ -101,6 +146,11 @@ public class Term implements Serializable
         return hash;
     }
 
+     /**
+     * Comparator
+     * @param object object to be compared with
+     * @return true if two object equal to each other, otherwise return false
+     */  
     @Override
     public boolean equals(Object object)
     {
@@ -116,7 +166,11 @@ public class Term implements Serializable
         }
         return true;
     }
-
+    
+    /**
+     * print primary keys of term table
+     * @return termPK
+     */
     @Override
     public String toString()
     {
