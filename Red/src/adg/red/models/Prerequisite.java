@@ -1,9 +1,9 @@
 /*
  *
  *
-=======
-//*****************************************************
-/* (INCOMPLETE)
+ =======
+ //*****************************************************
+ /* (INCOMPLETE)
  Prerequisuite.java -- Model for Prerequisuite table
 
  @Contributors:  Harsimran
@@ -14,7 +14,7 @@
  *           registration restrictions
 
  @Copyright ADG (2013) - Open License
->>>>>>> add comment skeleton + comments for prereq
+ >>>>>>> add comment skeleton + comments for prereq
  */
 //*****************************************************
 package adg.red.models;
