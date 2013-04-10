@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ * The controller class for Faculty SectionView.fxml.
+ *
  */
 package adg.red.controllers.faculty;
 
@@ -48,6 +48,11 @@ public class SectionViewController implements Initializable
     @FXML
     private AnchorPane actionView;
 
+    /**
+     * The function to handle selectSection MouseEvent event.
+     * <p/>
+     * @param event
+     */
     @FXML
     private void selectSection(MouseEvent event)
     {
@@ -60,6 +65,10 @@ public class SectionViewController implements Initializable
         loadSection();
     }
 
+    /**
+     * The function initializes all the column names by locality.
+     * <p/>
+     */
     private void initializeByLocale()
     {
         colDept.setText(LocaleManager.get(38));
@@ -84,12 +93,18 @@ public class SectionViewController implements Initializable
         populateSectionTable();
     }
 
+    /**
+     * Function to load the view according to the action
+     */
     private void loadSection()
     {
         ViewLoader view = new ViewLoader(actionView);
         view.loadView("faculty/" + action.toString());
     }
 
+    /**
+     * Function to populate the section table
+     */
     public void populateSectionTable()
     {
         List<Section> sections = null;
@@ -107,6 +122,11 @@ public class SectionViewController implements Initializable
 
     }
 
+    /**
+     * Populate the section data in table columns
+     * <p/>
+     * @param sections is the list of all sections queried
+     */
     private void populate(List<Section> sections)
     {
         colDept.setCellValueFactory(new PropertyValueFactory<Section, String>("departmentIdAndCourseName"));

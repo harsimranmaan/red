@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ * The EmailSender class is to send an email.
+ *
  */
 package adg.red.utils;
 
@@ -14,7 +14,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- *
+ * The EmailSender class is to send an email.
+ * <p/>
  * @author harsimran.maan
  */
 public class EmailSender
@@ -28,6 +29,9 @@ public class EmailSender
     private Session session;
     private String password;
 
+    /**
+     * The default constructor.
+     */
     private EmailSender()
     {
         this.password = ConfigManager.getInstance().getPropertyValue("emailPassword");
@@ -48,6 +52,13 @@ public class EmailSender
         });
     }
 
+    /**
+     * The constructor.
+     * <p/>
+     * @param toAddress the address to send an email to
+     * @param subject   the subject of the email
+     * @param message   the message body of the email
+     */
     public EmailSender(String toAddress, String subject, String message)
     {
         this();
@@ -56,6 +67,9 @@ public class EmailSender
         this.message = message;
     }
 
+    /**
+     * The function to send an email.
+     */
     public void send()
     {
         try
