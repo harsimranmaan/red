@@ -1,7 +1,7 @@
 
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.controllers;
 
@@ -42,7 +42,6 @@ public class GlossaryController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
         populateGlossary("All");
         Context.getInstance().setTitle(LocaleManager.get(14));
         BreadCrumbController.renderBreadCrumb(Context.getInstance().getCurrentUser().getUserTypeId().getName().toLowerCase() + "/HomeView|Glossary");
