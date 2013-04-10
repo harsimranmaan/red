@@ -1,6 +1,5 @@
 /*
- * 
- * 
+ * The controller class for SectionView.fxml.
  */
 package adg.red.controllers.student;
 
@@ -35,7 +34,7 @@ import adg.red.utils.DateFormatter;
 import java.util.Date;
 
 /**
- * FXML Controller class
+ * FXML Controller class for SectionView.fxml
  * <p/>
  * @author Witt
  */
@@ -107,6 +106,10 @@ public class SectionViewController implements Initializable
     @FXML
     private Label lblDropDLResponse;
 
+    /**
+     * The function toggles the register and drop buttons according to the
+     * status of the enrolment of the student.
+     */
     private void toggleRegDropButtons()
     {
         //check to see if the student has already dropped the section
@@ -120,9 +123,13 @@ public class SectionViewController implements Initializable
             btnRegister.setDisable(true);
             btnDrop.setDisable(true);
         }
-
     }
 
+    /**
+     * The function to handle showPreReq mouseEvent event.
+     * <p/>
+     * @param event the mouse event
+     */
     @FXML
     private void showPreReq(MouseEvent event)
     {
@@ -134,6 +141,11 @@ public class SectionViewController implements Initializable
         }
     }
 
+    /**
+     * The function to handle showCoReq mouseEvent event.
+     * <p/>
+     * @param event the mouse event
+     */
     @FXML
     private void showCoReq(MouseEvent event)
     {
@@ -145,6 +157,11 @@ public class SectionViewController implements Initializable
         }
     }
 
+    /**
+     * The function to handle register action event.
+     * <p/>
+     * @param event the action event
+     */
     @FXML
     private void register(ActionEvent event)
     {
@@ -160,6 +177,11 @@ public class SectionViewController implements Initializable
         toggleRegDropButtons();
     }
 
+    /**
+     * The function to handle drop action event.
+     * <p/>
+     * @param event the action event
+     */
     @FXML
     private void drop(ActionEvent event)
     {
@@ -170,6 +192,9 @@ public class SectionViewController implements Initializable
         toggleRegDropButtons();
     }
 
+    /**
+     * The function initializes all the components text by locality.
+     */
     private void initializeComponentsByLocale()
     {
         lblCreditName.setText(LocaleManager.get(42) + ":");
@@ -186,6 +211,9 @@ public class SectionViewController implements Initializable
 
     /**
      * Initializes the controller class.
+     * <p/>
+     * @param url the url
+     * @param rb  the resource bundle
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -203,6 +231,7 @@ public class SectionViewController implements Initializable
                     section.getTerm().getTermPK().getSessionId(),
                     section.getSectionType().getSectionTypeId());
 
+            // first check if student has already has the enrolment
             if (checkStudentAlreadyEnrolled(enrolmentPk))
             {
                 toggleRegDropButtons();
@@ -210,12 +239,14 @@ public class SectionViewController implements Initializable
                 lblResponse.setVisible(true);
                 checkAllDeadlines();
             }
+            // check if the student still has not passed all the prerequisite courses
             else if (!checkStudentPrereq(section.getCourse()).isEmpty())
             {
                 btnRegister.setDisable(true);
                 lblResponse.setText(LocaleManager.get(35));
                 lblResponse.setVisible(true);
             }
+            // check for deadlines
             else
             {
                 checkAllDeadlines();
@@ -244,6 +275,13 @@ public class SectionViewController implements Initializable
         lblDropDLDate.setText(DateFormatter.formatDate(Context.getInstance().getSelectedSection().getDropDeadline()));
     }
 
+    /**
+     * The function compares the deadline date with the current date.
+     * <p/>
+     * @param deadline the deadline date to be checked
+     * <p/>
+     * @return true, if the deadline has already passed, false otherwise
+     */
     private boolean checkDeadLinePassed(Date deadline)
     {
         Date current = new Date();
@@ -258,6 +296,16 @@ public class SectionViewController implements Initializable
         }
     }
 
+    /**
+     * The function checks for the list of prerequisite courses that student has
+     * already enrolled and passed, then it will remove those courses out from
+     * the list.
+     * <p/>
+     * @param course the course to check for prerequisite course
+     * <p/>
+     * @return the list of remaining prerequisite courses that student has to
+     *         take
+     */
     private List<Prerequisite> checkStudentPrereq(Course course)
     {
         List<Prerequisite> prereqList = null;
@@ -266,6 +314,7 @@ public class SectionViewController implements Initializable
         {
             List<Enrolment> enrolList = Enrolment.getEnrolmentsByStudentId(Context.getInstance().getCurrentUser().getStudent().getStudentId());
             prereqList = Prerequisite.getByCourse(course);
+            // check if there is no prerequisite course
             if (prereqList.isEmpty())
             {
                 return prereqList;
@@ -302,6 +351,16 @@ public class SectionViewController implements Initializable
         return prereqList;
     }
 
+    /**
+     * The function checks for the list of corequisite courses that student has
+     * already enrolled and passed, then it will remove those courses out from
+     * the list.
+     * <p/>
+     * @param course the course to check for corequisite course
+     * <p/>
+     * @return the list of remaining corequisite courses that student has to
+     *         take
+     */
     private List<CoRequisite> checkStudentCoReq(Course course)
     {
         List<CoRequisite> coReqList = null;
@@ -310,6 +369,7 @@ public class SectionViewController implements Initializable
         {
             List<Enrolment> enrolList = Enrolment.getEnrolmentsByStudentId(Context.getInstance().getCurrentUser().getStudent().getStudentId());
             coReqList = CoRequisite.getByCourse(course);
+            // check if there is no corequisite course
             if (coReqList.isEmpty())
             {
                 return coReqList;
@@ -322,7 +382,6 @@ public class SectionViewController implements Initializable
                     {
                         if (enrol.getResultId() != null)
                         {
-
                             if (enrol.getResultId().getName().equalsIgnoreCase("pass"))
                             {
                                 coReqList.remove(i);
@@ -346,6 +405,13 @@ public class SectionViewController implements Initializable
         return coReqList;
     }
 
+    /**
+     * The function checks for register and drop deadlines, and sets the
+     * appropriate buttons and labels.
+     * <p/>
+     * @return true if both register and drop deadlines haven't passed, false if
+     *         either or both of the deadlines have passed
+     */
     private boolean checkAllDeadlines()
     {
         boolean result = true;
@@ -366,6 +432,14 @@ public class SectionViewController implements Initializable
         return result;
     }
 
+    /**
+     * The function check whether the student is already enrolled in the
+     * selected EnrolmentPK or not
+     * <p/>
+     * @param enrolPk the EnrolmentPK that will be checking
+     * <p/>
+     * @return true if the student is already enrolled, false otherwise
+     */
     private boolean checkStudentAlreadyEnrolled(EnrolmentPK enrolPk)
     {
         try
@@ -380,6 +454,12 @@ public class SectionViewController implements Initializable
         }
     }
 
+    /**
+     * The function to populate the list view of PreRequisite course.
+     * <p/>
+     * @param selectedCourse the selected course to display the prerequisite
+     *                       course for
+     */
     public void populatePrereqListView(Course selectedCourse)
     {
         final List<Prerequisite> prereq = checkStudentPrereq(selectedCourse);
@@ -407,6 +487,12 @@ public class SectionViewController implements Initializable
         lsvOutstandPrereq.getItems().setAll(prereq);
     }
 
+    /**
+     * The function to populate the list view of CoRequisite course.
+     * <p/>
+     * @param selectedCourse the selected course to display the corequisite
+     *                       course for
+     */
     public void populateCoReqListView(Course selectedCourse)
     {
         final List<CoRequisite> correq = checkStudentCoReq(selectedCourse);
