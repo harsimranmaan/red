@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Course")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "Course.findAll", query = "SELECT c FROM Course c"),
     @NamedQuery(name = "Course.findByDepartmentAndCourseNumber", query = "SELECT c FROM Course c WHERE c.coursePK.courseNumber = :courseNumber AND c.coursePK.departmentId = :departmentId"),
     @NamedQuery(name = "Course.findByCourseNumber", query = "SELECT c FROM Course c WHERE c.coursePK.courseNumber = :courseNumber"),
@@ -39,6 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 })
 public class Course implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CoursePK coursePK;
@@ -57,10 +58,9 @@ public class Course implements Serializable
     @Basic(optional = false)
     @Column(name = "isActive")
     private boolean isActive;
-   
-    @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Department department;
+//    @JoinColumn(name = "departmentId", referencedColumnName = "departmentId", insertable = false, updatable = false)
+//    @ManyToOne(optional = false)
+    //  private Department department;
     @JoinColumn(name = "gradingSchemeId", referencedColumnName = "gradingSchemeId")
     @ManyToOne(optional = false)
     private GradingScheme gradingSchemeId;
@@ -151,14 +151,13 @@ public class Course implements Serializable
 
     public Department getDepartment()
     {
-        return department;
+        return Department.getDepartmentById(this.coursePK.getDepartmentId());
     }
 
-    public void setDepartment(Department department)
-    {
-        this.department = department;
-    }
-
+//    public void setDepartment(Department department)
+//    {
+//        this.department = department;
+//    }
     public GradingScheme getGradingSchemeId()
     {
         return gradingSchemeId;
@@ -191,7 +190,9 @@ public class Course implements Serializable
             return false;
         }
         Course other = (Course) object;
-        if ((this.coursePK == null && other.coursePK != null) || (this.coursePK != null && !this.coursePK.equals(other.coursePK)))
+        if ((this.coursePK == null && other.coursePK != null)
+                || (this.coursePK != null
+                && !this.coursePK.equals(other.coursePK)))
         {
             return false;
         }
@@ -206,11 +207,17 @@ public class Course implements Serializable
 
     public static List<Course> getByDepartment(Department department)
     {
-        return RedEntityManager.getEntityManager().createNamedQuery("Course.findByDepartmentId").setParameter("departmentId", department.getDepartmentId()).getResultList();
+        return RedEntityManager.getEntityManager()
+                .createNamedQuery("Course.findByDepartmentId")
+                .setParameter("departmentId", department.getDepartmentId())
+                .getResultList();
     }
 
     public static Course getCourseByCourseNumer(int courseNumber)
     {
-        return ((List<Course>) RedEntityManager.getEntityManager().createNamedQuery("Course.findByCourseNumber").setParameter("courseNumber", courseNumber).getResultList()).get(0);
+        return (Course) RedEntityManager.getEntityManager()
+                .createNamedQuery("Course.findByCourseNumber")
+                .setParameter("courseNumber", courseNumber)
+                .getSingleResult();
     }
 }

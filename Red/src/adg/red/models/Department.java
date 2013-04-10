@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -47,9 +47,12 @@ public class Department implements Serializable
     @Basic(optional = false)
     @Column(name = "isActive")
     private boolean isActive;
-    @JoinColumn(name = "facultyId", referencedColumnName = "facultyId")
-    @ManyToOne(optional = false)
-    private Faculty facultyId;
+//    @JoinColumn(name = "facultyId", referencedColumnName = "facultyId")
+//    @ManyToOne(optional = false)
+//    private Faculty facultyId;
+    @Basic(optional = false)
+    @Column(name = "facultyId")
+    private Integer facultyId;
 
     public Department()
     {
@@ -99,12 +102,12 @@ public class Department implements Serializable
 
     public Faculty getFacultyId()
     {
-        return facultyId;
+        return Faculty.getByFacultyId(this.facultyId);
     }
 
     public void setFacultyId(Faculty facultyId)
     {
-        this.facultyId = facultyId;
+        this.facultyId = facultyId.getFacultyId();
     }
 
     @Override
@@ -149,6 +152,6 @@ public class Department implements Serializable
 
     public static Department getDepartmentById(String departmentId)
     {
-        return ((List<Department>) RedEntityManager.getEntityManager().createNamedQuery("Department.findByDepartmentId").setParameter("departmentId", departmentId).getResultList()).get(0);
+        return (Department) RedEntityManager.getEntityManager().createNamedQuery("Department.findByDepartmentId").setParameter("departmentId", departmentId).getSingleResult();
     }
 }
