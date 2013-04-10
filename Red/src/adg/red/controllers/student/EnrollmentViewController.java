@@ -1,20 +1,16 @@
 /*
- * 
- * 
+ * The controller class for EnrollmentView.fxml.
+ *
  */
 package adg.red.controllers.student;
 
 import adg.red.controllers.BreadCrumbController;
-import adg.red.models.Course;
 import adg.red.models.Enrolment;
-import adg.red.models.Registration;
 import adg.red.utils.Context;
 import adg.red.utils.LocaleManager;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -22,11 +18,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
- * FXML Controller class
- *
+ * FXML Controller class for EnrollmentView.fxml.
+ * <p/>
  * @author jingboyu
  */
-public class EnrollmentViewController implements Initializable {
+public class EnrollmentViewController implements Initializable
+{
 
     @FXML
     private TableColumn<Enrolment, String> colSection;
@@ -37,20 +34,29 @@ public class EnrollmentViewController implements Initializable {
     @FXML
     private TableColumn<Enrolment, String> colCredits;
     @FXML
-    private TableView<Enrolment> tabDisplay;    
-    
+    private TableView<Enrolment> tabDisplay;
+
     /**
      * Initializes the controller class.
+     * <p/>
+     * @param url the URL
+     * @param rb  the ResourceBundle
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) 
+    public void initialize(URL url, ResourceBundle rb)
     {
-        Context.getInstance().setTitle(LocaleManager.get(98)); 
-        BreadCrumbController.renderBreadCrumb("student/HomeView|student/EnrollmentView"); 
+        Context.getInstance().setTitle(LocaleManager.get(98));
+        BreadCrumbController.renderBreadCrumb("student/HomeView|student/EnrollmentView");
         List<Enrolment> enrolmentList = Enrolment.getEnrolmentsByStudentId(Context.getInstance().getCurrentUser().getStudent().getStudentId());
         populateEnrolmentTable(enrolmentList);
     }
-    
+
+    /**
+     * The function populate the enrolmentList to the enrolment table.
+     * <p/>
+     * @param enrolmentList the list of enrolments to populate to the enrolment
+     *                      table
+     */
     private void populateEnrolmentTable(List<Enrolment> enrolmentList)
     {
         colSection.setCellValueFactory(new PropertyValueFactory<Enrolment, String>("departmentAndCourseAndSection"));
@@ -60,4 +66,3 @@ public class EnrollmentViewController implements Initializable {
         tabDisplay.getItems().setAll(enrolmentList);
     }
 }
-

@@ -1,11 +1,10 @@
 /*
- * 
- * 
+ * The controller class for ViewDegreeInfo.fxml.
+ *
  */
 package adg.red.controllers.student;
 
 import adg.red.controllers.BreadCrumbController;
-import adg.red.models.Course;
 import adg.red.models.Enrolment;
 import adg.red.models.Program;
 import adg.red.models.Registration;
@@ -22,10 +21,9 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javax.swing.GroupLayout;
 
 /**
- * FXML Controller class
+ * FXML Controller class for ViewDegreeInfo.fxml.
  * <p/>
  * @author jayzt_000
  */
@@ -55,6 +53,9 @@ public class ViewDegreeInfoController implements Initializable
 
     /**
      * Initializes the controller class.
+     * <p/>
+     * @param url the URL
+     * @param rb  the ResourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -73,12 +74,23 @@ public class ViewDegreeInfoController implements Initializable
 
     }
 
+    /**
+     * The function gets the list of enrolments of the student and populates to
+     * the enrolment table.
+     * <p/>
+     * @param student the student to populate the enrolment table for
+     */
     public void populateEnrolmentTable(Student student)
     {
         List<Enrolment> enrolments = Enrolment.getActiveEnrolmentsByStudentId(student.getStudentId());
         populate(enrolments);
     }
 
+    /**
+     * The functions populate the list of enrolments to the enrolment table.
+     * <p/>
+     * @param enrolments the list of enrolments
+     */
     private void populate(List<Enrolment> enrolments)
     {
         colCourse.setCellValueFactory(new PropertyValueFactory<Enrolment, String>("departmentIdAndCourseNumber"));
@@ -90,6 +102,9 @@ public class ViewDegreeInfoController implements Initializable
         tabViewDegree.getItems().setAll(enrolments);
     }
 
+    /**
+     * The function initializes all components text by locality.
+     */
     private void initializeComponentsByLocale()
     {
         colCourse.setText(LocaleManager.get(93));
