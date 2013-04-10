@@ -1,46 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-  <persistence-unit name="RedPU" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>adg.red.models.Section</class>
-    <class>adg.red.models.Term</class>
-    <class>adg.red.models.GradingScheme</class>
-    <class>adg.red.models.CoRequisite</class>
-    <class>adg.red.models.Course</class>
-    <class>adg.red.models.SectionTimeTable</class>
-    <class>adg.red.models.Registration</class>
-    <class>adg.red.models.Department</class>
-    <class>adg.red.models.FacultyMember</class>
-    <class>adg.red.models.MessagePriority</class>
-    <class>adg.red.models.Address</class>
-    <class>adg.red.models.ResourceDictionary</class>
-    <class>adg.red.models.Administrator</class>
-    <class>adg.red.models.Enrolment</class>
-    <class>adg.red.models.SectionType</class>
-    <class>adg.red.models.Program</class>
-    <class>adg.red.models.Glossary</class>
-    <class>adg.red.models.Faq</class>
-    <class>adg.red.models.Faculty</class>
-    <class>adg.red.models.Locale</class>
-    <class>adg.red.models.UserType</class>
-    <class>adg.red.models.Day</class>
-    <class>adg.red.models.Message</class>
-    <class>adg.red.models.Student</class>
-    <class>adg.red.models.Session</class>
-    <class>adg.red.models.MessageStatus</class>
-    <class>adg.red.models.User</class>
-    <class>adg.red.models.MessageReceiver</class>
-    <class>adg.red.models.WeekDay</class>
-    <class>adg.red.models.Prerequisite</class>
-    <class>adg.red.models.Result</class>
-    <class>adg.red.models.Grade</class>
-    <class>adg.red.models.EmailCode</class>
-    <class>adg.red.models.ProgramCourseList</class>
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://ec2-50-18-66-213.us-west-1.compute.amazonaws.com:3306/AdgDevelopment?zeroDateTimeBehavior=convertToNull"/>
-      <property name="javax.persistence.jdbc.password" value="red"/>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.user" value="adgred"/>
-    </properties>
-  </persistence-unit>
+    <persistence-unit name="RedPU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>adg.red.models.Section</class>
+        <class>adg.red.models.Term</class>
+        <class>adg.red.models.GradingScheme</class>
+        <class>adg.red.models.CoRequisite</class>
+        <class>adg.red.models.Course</class>
+        <class>adg.red.models.SectionTimeTable</class>
+        <class>adg.red.models.Registration</class>
+        <class>adg.red.models.Department</class>
+        <class>adg.red.models.FacultyMember</class>
+        <class>adg.red.models.MessagePriority</class>
+        <class>adg.red.models.Address</class>
+        <class>adg.red.models.ResourceDictionary</class>
+        <class>adg.red.models.Administrator</class>
+        <class>adg.red.models.Enrolment</class>
+        <class>adg.red.models.SectionType</class>
+        <class>adg.red.models.Program</class>
+        <class>adg.red.models.Glossary</class>
+        <class>adg.red.models.Faq</class>
+        <class>adg.red.models.Faculty</class>
+        <class>adg.red.models.Locale</class>
+        <class>adg.red.models.UserType</class>
+        <class>adg.red.models.Day</class>
+        <class>adg.red.models.Message</class>
+        <class>adg.red.models.Student</class>
+        <class>adg.red.models.Session</class>
+        <class>adg.red.models.MessageStatus</class>
+        <class>adg.red.models.User</class>
+        <class>adg.red.models.MessageReceiver</class>
+        <class>adg.red.models.WeekDay</class>
+        <class>adg.red.models.Prerequisite</class>
+        <class>adg.red.models.Result</class>
+        <class>adg.red.models.Grade</class>
+        <class>adg.red.models.EmailCode</class>
+        <class>adg.red.models.ProgramCourseList</class>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://ec2-50-18-66-213.us-west-1.compute.amazonaws.com:3306/AdgDevelopment?zeroDateTimeBehavior=convertToNull"/>
+            <property name="javax.persistence.jdbc.password" value="red"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.user" value="adgred"/>
+            <property name="eclipselink.logging.level" value="FINE"/>
+        </properties>
+    </persistence-unit>
 </persistence>

@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -31,7 +31,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Faculty.findAll", query = "SELECT f FROM Faculty f"),
     @NamedQuery(name = "Faculty.findByFacultyId", query = "SELECT f FROM Faculty f WHERE f.facultyId = :facultyId"),
     @NamedQuery(name = "Faculty.findByName", query = "SELECT f FROM Faculty f WHERE f.name = :name"),
-    @NamedQuery(name = "Faculty.findByHeadOfFacultyId", query = "SELECT f FROM Faculty f WHERE f.headOfFacultyId = :headOfFacultyId"),
     @NamedQuery(name = "Faculty.findByPhone", query = "SELECT f FROM Faculty f WHERE f.phone = :phone"),
     @NamedQuery(name = "Faculty.findByWebsite", query = "SELECT f FROM Faculty f WHERE f.website = :website")
 })
@@ -47,18 +46,10 @@ public class Faculty implements Serializable
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
-    @Column(name = "headOfFacultyId")
-    private Integer headOfFacultyId;
     @Column(name = "phone")
     private String phone;
     @Column(name = "website")
     private String website;
-    @JoinColumn(name = "addressId", referencedColumnName = "addressId")
-    @ManyToOne
-    private Address addressId;
-    @JoinColumn(name = "facultyId", referencedColumnName = "facultyMemberId", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private FacultyMember facultyMember;
 
     public Faculty()
     {
@@ -95,16 +86,6 @@ public class Faculty implements Serializable
         this.name = name;
     }
 
-    public Integer getHeadOfFacultyId()
-    {
-        return headOfFacultyId;
-    }
-
-    public void setHeadOfFacultyId(Integer headOfFacultyId)
-    {
-        this.headOfFacultyId = headOfFacultyId;
-    }
-
     public String getPhone()
     {
         return phone;
@@ -123,26 +104,6 @@ public class Faculty implements Serializable
     public void setWebsite(String website)
     {
         this.website = website;
-    }
-
-    public Address getAddressId()
-    {
-        return addressId;
-    }
-
-    public void setAddressId(Address addressId)
-    {
-        this.addressId = addressId;
-    }
-
-    public FacultyMember getFacultyMember()
-    {
-        return facultyMember;
-    }
-
-    public void setFacultyMember(FacultyMember facultyMember)
-    {
-        this.facultyMember = facultyMember;
     }
 
     @Override
