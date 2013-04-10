@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -66,8 +66,6 @@ public class FacultyMember implements Serializable
     @JoinColumn(name = "departmentId", referencedColumnName = "departmentId")
     @ManyToOne(optional = false)
     private Department departmentId;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "facultyMember")
-    private Faculty faculty;
 
     public FacultyMember()
     {
@@ -154,16 +152,6 @@ public class FacultyMember implements Serializable
     public void setDepartmentId(Department departmentId)
     {
         this.departmentId = departmentId;
-    }
-
-    public Faculty getFaculty()
-    {
-        return faculty;
-    }
-
-    public void setFaculty(Faculty faculty)
-    {
-        this.faculty = faculty;
     }
 
     @Override
