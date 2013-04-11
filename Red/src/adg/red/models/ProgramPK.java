@@ -4,7 +4,7 @@
 
  @Contributors:  Harsimran
 
- @Purpose:   Generates various quesries on ProgramPK
+ @Purpose:   Generates various quesries on Program
  *           table that is used in identifying the primary key
  *           of a program associated with a course
  *

@@ -4,7 +4,7 @@
 
  @Contributors:  Harsimran
 
- @Purpose:   Generates various quesries on Prgram table
+ @Purpose:   Generates various quesries on Program table
  *
  @Copyright ADG (2013) - Open License
  */
