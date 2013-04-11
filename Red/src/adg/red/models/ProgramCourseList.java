@@ -182,7 +182,7 @@ public class ProgramCourseList implements Serializable
 
     /**
      * Public method overriding method for converting object to string by
-     * attaching the following string to it: "adg.red.models.Prerequisite[
+     * attaching the following string to it: "adg.red.models.ProgramCourseList[
      * programCourseListPK"
      * <p/>
      * @return - String literal

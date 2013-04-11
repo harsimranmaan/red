@@ -204,8 +204,7 @@ public class Program implements Serializable
 
     /**
      * Public method overriding method for converting object to string by
-     * attaching the following string to it: "adg.red.models.Prerequisite[
-     * programPK"
+     * attaching the following string to it: "adg.red.models.Program[ programPK"
      * <p/>
      * @return - String literal
      */
