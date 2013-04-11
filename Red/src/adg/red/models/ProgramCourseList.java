@@ -1,7 +1,14 @@
-/*
+ //*****************************************************
+ /* (INCOMPLETE)
+ ProgramCourseList.java -- Model for ProgramCourseList table
+
+ @Contributors:  Harsimran
+
+ @Purpose:   Generates various quesries on ProgramCourseList table
  *
- *
+ @Copyright ADG (2013) - Open License
  */
+//*****************************************************
 package adg.red.models;
 
 import java.io.Serializable;
@@ -15,8 +22,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author harsimran.maan
+ * Creating queries to be used in methods followed
  */
 @Entity
 @Table(name = "ProgramCourseList")
@@ -34,9 +40,6 @@ public class ProgramCourseList implements Serializable
 {
 
     private static final long serialVersionUID = 1L;
-    /**
-     *
-     */
     @EmbeddedId
     protected ProgramCourseListPK programCourseListPK;
     @Basic(optional = false)
@@ -44,15 +47,18 @@ public class ProgramCourseList implements Serializable
     private boolean isActive;
 
     /**
-     *
+     * Public default class constructor
      */
     public ProgramCourseList()
     {
     }
 
     /**
-     *
-     * @param programCourseListPK
+     * Public class constructor using programCourseListPK that contains the
+     * primary key attributes of ProgramCourseList (programName,
+     * programDepartmentid, courseNumber and courseDepartmentId)
+     * <p/>
+     * @param programCourseListPK -- Object type ProgramCourseListPk
      */
     public ProgramCourseList(ProgramCourseListPK programCourseListPK)
     {
@@ -60,9 +66,13 @@ public class ProgramCourseList implements Serializable
     }
 
     /**
-     *
-     * @param programCourseListPK
-     * @param isActive
+     * Public class constructor using programCourseListPK that contains the
+     * primary key attributes of ProgramCourseList (programName,
+     * programDepartmentid, courseNumber and courseDepartmentId) + isActive
+     * attribute
+     * <p/>
+     * @param programCourseListPK -- Object type ProgramCourseListPk
+     * @param isActive            -- Boolean containing isActive attribute value
      */
     public ProgramCourseList(ProgramCourseListPK programCourseListPK, boolean isActive)
     {
@@ -71,11 +81,15 @@ public class ProgramCourseList implements Serializable
     }
 
     /**
-     *
-     * @param programName
-     * @param programDepartmentId
-     * @param courseNumber
-     * @param courseDepartmentId
+     * Public class constructor using attributes of ProgramCourseList
+     * (programName, programDepartmentid, courseNumber and courseDepartmentId)
+     * <p/>
+     * @param programName         -- String containing programName attribute
+     * @param programDepartmentId -- String containing programDepartmentId
+     *                            attribute
+     * @param courseNumber        -- Integer containing courseNumber attribute
+     * @param courseDepartmentId  -- String containing the courseDepartmentId
+     *                            attribute
      */
     public ProgramCourseList(String programName, String programDepartmentId, int courseNumber, String courseDepartmentId)
     {
@@ -83,8 +97,11 @@ public class ProgramCourseList implements Serializable
     }
 
     /**
-     *
-     * @return
+     * Public getter method that returns the ProgramCourseListPK (which
+     * contains: programName, programDepartmentid, courseNumber and
+     * courseDepartmentId -attributes) of a ProgramCourseList object
+     * <p/>
+     * @return -- Object type programCourseListPK
      */
     public ProgramCourseListPK getProgramCourseListPK()
     {
@@ -92,8 +109,10 @@ public class ProgramCourseList implements Serializable
     }
 
     /**
-     *
-     * @param programCourseListPK
+     * Public setter method that sets the ProgramCourseListPK of a
+     * ProgramCourseList
+     * <p/>
+     * @param programCourseListPK -- Object type PrgramCourseListPK
      */
     public void setProgramCourseListPK(ProgramCourseListPK programCourseListPK)
     {
@@ -101,8 +120,10 @@ public class ProgramCourseList implements Serializable
     }
 
     /**
-     *
-     * @return
+     * Public method that gets the active/inactive value of a ProgramCourseList
+     * <p/>
+     * @return -- A boolean indicating ProgramCourseList is active = "true" /
+     *         inactive = "false"
      */
     public boolean getIsActive()
     {
@@ -110,14 +131,22 @@ public class ProgramCourseList implements Serializable
     }
 
     /**
-     *
-     * @param isActive
+     * Public method that sets the active/inactive value of a ProgramCourseList
+     * <p/>
+     * @param isActive -- A boolean indicating ProgramCourseList course is
+     *                 active = "true" / inactive = "false"
      */
     public void setIsActive(boolean isActive)
     {
         this.isActive = isActive;
     }
 
+    /**
+     * Public method overriding hasCode() using ProgramCourseList specific hash
+     * value. Adds programCourseListPK to make the index unique
+     * <p/>
+     * @return - Integer unique hashCode index value
+     */
     @Override
     public int hashCode()
     {
@@ -126,10 +155,19 @@ public class ProgramCourseList implements Serializable
         return hash;
     }
 
+    /**
+     * Public method overriding equals(Object object) method that returns true
+     * if the given object is an instance of a ProgramCourseList object and is
+     * the same as current ProgramCourseList object
+     * <p/>
+     * @param object -- Pass any Object
+     * <p/>
+     * @return -- true if object is of type ProgramCourseList and the same as
+     *         current ProgramCourseList object, false otherwise
+     */
     @Override
     public boolean equals(Object object)
     {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof ProgramCourseList))
         {
             return false;
@@ -142,6 +180,13 @@ public class ProgramCourseList implements Serializable
         return true;
     }
 
+    /**
+     * Public method overriding method for converting object to string by
+     * attaching the following string to it: "adg.red.models.Prerequisite[
+     * programCourseListPK"
+     * <p/>
+     * @return - String literal
+     */
     @Override
     public String toString()
     {
