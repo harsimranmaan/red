@@ -183,7 +183,7 @@ public class Registration implements Serializable
 
     /**
      * Public setter method that sets the graduationDate attribute of a
-     * Resgistration object
+     * Registration object
      * <p/>
      * @param graduationDate -- Date type object containing graduationDate
      *                       attribute
@@ -216,9 +216,9 @@ public class Registration implements Serializable
     }
 
     /**
-     *
+     * Public getter method that returns object typeS Student
      * <p/>
-     * @return
+     * @return -- Object type Student
      */
     public Student getStudent()
     {
@@ -226,8 +226,9 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @param student
+     * Public method that sets object type Student
+     * <p/>
+     * @param student -- Object type Student
      */
     public void setStudent(Student student)
     {
@@ -235,8 +236,9 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @return
+     * Public getter method that returns Object type Program
+     * <p/>
+     * @return -- Object type Program
      */
     public Program getProgram()
     {
@@ -244,14 +246,21 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @param program
+     * Public setter method that sets object type Program
+     * <p/>
+     * @param program -- Object type Program
      */
     public void setProgram(Program program)
     {
         this.program = program;
     }
 
+    /**
+     * Public method overriding hasCode() using Registration specific hash
+     * value. Adds RegistrationPK to make the index unique
+     * <p/>
+     * @return - Integer unique hashCode index value
+     */
     @Override
     public int hashCode()
     {
@@ -260,10 +269,19 @@ public class Registration implements Serializable
         return hash;
     }
 
+    /**
+     * Public method overriding equals(Object object) method that returns true
+     * if the given object is an instance of a Registration object and is the
+     * same as current Registration object
+     * <p/>
+     * @param object -- Pass any Object
+     * <p/>
+     * @return -- true if object is of type Registration and the same as current
+     *         Registration object, false otherwise
+     */
     @Override
     public boolean equals(Object object)
     {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Registration))
         {
             return false;
@@ -276,6 +294,13 @@ public class Registration implements Serializable
         return true;
     }
 
+    /**
+     * Public method overriding method for converting object to string by
+     * attaching the following string to it: "adg.red.models.Registration[
+     * RegistrationPK"
+     * <p/>
+     * @return - String literal
+     */
     @Override
     public String toString()
     {
@@ -283,9 +308,12 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @param student <p/>
-     * @return
+     * Public getter method that returns the Registration object for a given
+     * Student object
+     * <p/>
+     * @param student -- Student object
+     * <p/>
+     * @return -- Object type Registration
      */
     public static Registration getCurrentRegistration(Student student)
     {

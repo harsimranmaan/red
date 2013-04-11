@@ -209,8 +209,9 @@ public class ProgramCourseListPK implements Serializable
 
     /**
      * Public method overriding method for converting object to string by
-     * attaching the following string to it: "adg.red.models.Prerequisite[
-     * programName + programDepartmentId + courseNumber + courseDepartmentId"
+     * attaching the following string to it:
+     * "adg.red.models.ProgramCourseListPK[ programName + programDepartmentId +
+     * courseNumber + courseDepartmentId"
      * <p/>
      * @return - String literal
      */

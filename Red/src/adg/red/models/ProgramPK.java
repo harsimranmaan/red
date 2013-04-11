@@ -138,7 +138,7 @@ public class ProgramPK implements Serializable
 
     /**
      * Public method overriding method for converting object to string by
-     * attaching the following string to it: "adg.red.models.Prerequisite[
+     * attaching the following string to it: "adg.red.models.ProgramPK[
      * programName + departmentId"
      * <p/>
      * @return - String literal

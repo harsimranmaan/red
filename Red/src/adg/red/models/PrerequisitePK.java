@@ -208,7 +208,7 @@ public class PrerequisitePK implements Serializable
 
     /**
      * Public method overriding method for converting object to string by
-     * attaching the following string to it: "adg.red.models.Prerequisite[
+     * attaching the following string to it: "adg.red.models.PrerequisitePK[
      * courseNumber + departmentId + prerequisiteNumber + prerequisiteDeptId"
      * <p/>
      * @return - String literal
