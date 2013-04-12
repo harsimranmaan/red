@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.controllers;
 
@@ -33,7 +33,8 @@ public class ForgotPassword implements Initializable
     private TextField txtCode;
 
     /**
-     * Send validation code to user email address 
+     * Send validation code to user email address
+     * <p/>
      * @param event user action: click button
      */
     @FXML
@@ -43,7 +44,7 @@ public class ForgotPassword implements Initializable
         try
         {
             User user = User.getUserByEmailId(emailId);
-            EmailCode code = new EmailCode(user.getUsername());
+            EmailCode code = EmailCode.deleteIfExists(user.getUsername());
             code.save();
             new EmailSender(emailId, "Password Reset Code", "Please use the following code to reset the password: "
                     + code.getCode()).send();
@@ -56,6 +57,7 @@ public class ForgotPassword implements Initializable
 
     /**
      * Generate validation code and send to user's email address
+     * <p/>
      * @param event user action: click button
      */
     @FXML

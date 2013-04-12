@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -47,6 +47,16 @@ public class EmailCode implements Serializable
     {
         this.username = username;
         this.code = Integer.toString(100000 + (int) (Math.random() * 999999));
+    }
+
+    public static EmailCode deleteIfExists(String username)
+    {
+        EmailCode emailcode = EmailCode.findByUsername(username);
+        if (emailcode != null)
+        {
+            RedEntityManager.delete(emailcode);
+        }
+        return new EmailCode(username);
     }
 
     public String getUsername()
@@ -97,6 +107,12 @@ public class EmailCode implements Serializable
     public String toString()
     {
         return "adg.red.models.EmailCode[ username=" + username + " ]";
+    }
+
+    public static EmailCode findByUsername(String username)
+    {
+        EmailCode emailCode = (EmailCode) RedEntityManager.getEntityManager().createNamedQuery("EmailCode.findByUsername").setParameter("username", username).getSingleResult();
+        return emailCode;
     }
 
     public void save()

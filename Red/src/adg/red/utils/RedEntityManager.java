@@ -89,4 +89,20 @@ public class RedEntityManager
         }
         return null;
     }
+
+    public static void delete(Object obj)
+    {
+        em.getTransaction().begin();
+        try
+        {
+            em.remove(obj);
+
+            em.getTransaction().commit();
+        }
+        catch (Exception ex)
+        {
+            em.getTransaction().rollback();
+            throw (ex);
+        }
+    }
 }
