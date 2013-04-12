@@ -22,7 +22,7 @@
                                 <Button fx:id="btnSave" onAction="#save" mnemonicParsing="false"  text="Save" />
                                 <Button fx:id="btnCancel" onAction="#clear"  mnemonicParsing="false" text="Clear" />
                             </HBox>
-                            <Label fx:id="lblMessage" />
+                            <Label fx:id="lblMessage" styleClass="response-label" />
                         </VBox>
                     </content>
                 </Tab>

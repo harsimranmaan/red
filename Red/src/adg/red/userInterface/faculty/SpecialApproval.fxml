@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox id="VBox" alignment="CENTER" spacing="5.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.faculty.SpecialApprovalController">
+<VBox id="VBox" alignment="CENTER" spacing="12.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.faculty.SpecialApprovalController">
     <children>
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="30.0">
             <children>
@@ -31,9 +31,9 @@
                 <Button fx:id="btnSubmitNumber" mnemonicParsing="false" onAction="#pullStudentInfo" text="Submit" />
             </children>
         </HBox>
-        <HBox id="HBox" alignment="CENTER" spacing="30.0">
+        <HBox id="HBox" alignment="CENTER" spacing="5.0">
             <children>
-                <Label fx:id="lblErrMsg" alignment="CENTER" style="-fx-font-color: red;" />
+                <Label fx:id="lblErrMsg" alignment="CENTER" styleClass="response-label" />
             </children>
         </HBox>
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="30.0">
@@ -47,9 +47,9 @@
                 <Button fx:id="btnEnrol" mnemonicParsing="false" onAction="#approveRequest" text="Enrol" />
             </children>
         </HBox>
-        <HBox id="HBox" alignment="CENTER" spacing="30.0">
+        <HBox id="HBox" alignment="CENTER" spacing="5.0">
             <children>
-                <Label fx:id="lblnotification" alignment="CENTER" style="-fx-font-color: red;" />
+                <Label fx:id="lblnotification" alignment="CENTER" styleClass="response-label" />
             </children>
         </HBox>
     </children>

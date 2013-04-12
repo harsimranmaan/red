@@ -1,7 +1,14 @@
-/*
+ //*****************************************************
+ /* (INCOMPLETE)
+ Registration.java -- Model for Registration table
+
+ @Contributors:  Harsimran
+
+ @Purpose:   Generates various quesries on Registration table
  *
- *
+ @Copyright ADG (2013) - Open License
  */
+//*****************************************************
 package adg.red.models;
 
 import adg.red.utils.RedEntityManager;
@@ -22,8 +29,7 @@ import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author harsimran.maan
+ * Creating queries to be used in methods followed
  */
 @Entity
 @Table(name = "Registration")
@@ -40,11 +46,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 })
 public class Registration implements Serializable
 {
+// registrationPK, startDate, graduationDate, program and isActive are
+// attributes of Registration table - studentId is a join attribute from
+// the Student table, programName and departmentId are join attributes from
+// Department table
 
     private static final long serialVersionUID = 1L;
-    /**
-     *
-     */
     @EmbeddedId
     protected RegistrationPK registrationPK;
     @Basic(optional = false)
@@ -70,15 +77,18 @@ public class Registration implements Serializable
     private Program program;
 
     /**
-     *
+     * Public default constructor
      */
     public Registration()
     {
     }
 
     /**
-     *
-     * @param registrationPK
+     * Public constructor method using RegistrationPK (which includes studentId,
+     * programName and departmentId) and creates an instance of object
+     * Registration
+     * <p/>
+     * @param registrationPK -- Object type RegistrationPK
      */
     public Registration(RegistrationPK registrationPK)
     {
@@ -86,11 +96,14 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @param registrationPK
-     * @param startDate
-     * @param graduationDate
-     * @param isActive
+     * Public constructor method using registrationPK, startDate, graduationDate
+     * and isActive attributes, returns an instance of Object Registration
+     * <p/>
+     * @param registrationPK -- Object type RegistrationPK
+     * @param startDate      -- Date type object containing startDate attribute
+     * @param graduationDate -- Date type object containing graduationtDate
+     *                       attribute
+     * @param isActive       -- Boolean containing isActive attribute
      */
     public Registration(RegistrationPK registrationPK, Date startDate, Date graduationDate, boolean isActive)
     {
@@ -101,10 +114,12 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @param studentId
-     * @param programName
-     * @param departmentId
+     * Public constructor method using studentId, programName and departmentId
+     * attributes that returns an instance of object type Registration
+     * <p/>
+     * @param studentId    -- Integer containing studentId attribute
+     * @param programName  -- String containing programName attribute
+     * @param departmentId -- String containing programId attribute
      */
     public Registration(int studentId, String programName, String departmentId)
     {
@@ -112,8 +127,10 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @return
+     * Public getter method that returns an object type RegistrationPK of the
+     * current Registration object
+     * <p/>
+     * @return -- Object type RegistrationPK
      */
     public RegistrationPK getRegistrationPK()
     {
@@ -121,8 +138,10 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @param registrationPK
+     * Public setter method that sets the RegistrationPK set of attributes
+     * inside an object of type Registration
+     * <p/>
+     * @param registrationPK -- Object type RegistrationPK
      */
     public void setRegistrationPK(RegistrationPK registrationPK)
     {
@@ -130,8 +149,10 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @return
+     * Public getter method that returns the startDate attribute of a
+     * Registration object
+     * <p/>
+     * @return -- Date type object containing startDate attribute
      */
     public Date getStartDate()
     {
@@ -139,8 +160,10 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @param startDate
+     * Public setter method that sets the startDate attribute of a Registration
+     * object
+     * <p/>
+     * @param startDate -- Date type object containing the startDate attribute
      */
     public void setStartDate(Date startDate)
     {
@@ -148,8 +171,10 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @return
+     * Public getter method that returns the graduationDate attribute of a
+     * Registration object
+     * <p/>
+     * @return -- Date type object containing the graduationDate attribute
      */
     public Date getGraduationDate()
     {
@@ -157,8 +182,11 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @param graduationDate
+     * Public setter method that sets the graduationDate attribute of a
+     * Registration object
+     * <p/>
+     * @param graduationDate -- Date type object containing graduationDate
+     *                       attribute
      */
     public void setGraduationDate(Date graduationDate)
     {
@@ -166,8 +194,10 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @return
+     * Public method that gets the active/inactive value of a Registration
+     * <p/>
+     * @return -- A boolean indicating Registration is active = "true" /
+     *         inactive = "false"
      */
     public boolean getIsActive()
     {
@@ -175,8 +205,10 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @param isActive
+     * Public method that sets the active/inactive value of a Registration
+     * <p/>
+     * @param isActive -- A boolean indicating Registration course is active =
+     *                 "true" / inactive = "false"
      */
     public void setIsActive(boolean isActive)
     {
@@ -184,8 +216,9 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @return
+     * Public getter method that returns object typeS Student
+     * <p/>
+     * @return -- Object type Student
      */
     public Student getStudent()
     {
@@ -193,8 +226,9 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @param student
+     * Public method that sets object type Student
+     * <p/>
+     * @param student -- Object type Student
      */
     public void setStudent(Student student)
     {
@@ -202,8 +236,9 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @return
+     * Public getter method that returns Object type Program
+     * <p/>
+     * @return -- Object type Program
      */
     public Program getProgram()
     {
@@ -211,14 +246,21 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @param program
+     * Public setter method that sets object type Program
+     * <p/>
+     * @param program -- Object type Program
      */
     public void setProgram(Program program)
     {
         this.program = program;
     }
 
+    /**
+     * Public method overriding hasCode() using Registration specific hash
+     * value. Adds RegistrationPK to make the index unique
+     * <p/>
+     * @return - Integer unique hashCode index value
+     */
     @Override
     public int hashCode()
     {
@@ -227,10 +269,19 @@ public class Registration implements Serializable
         return hash;
     }
 
+    /**
+     * Public method overriding equals(Object object) method that returns true
+     * if the given object is an instance of a Registration object and is the
+     * same as current Registration object
+     * <p/>
+     * @param object -- Pass any Object
+     * <p/>
+     * @return -- true if object is of type Registration and the same as current
+     *         Registration object, false otherwise
+     */
     @Override
     public boolean equals(Object object)
     {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Registration))
         {
             return false;
@@ -243,6 +294,13 @@ public class Registration implements Serializable
         return true;
     }
 
+    /**
+     * Public method overriding method for converting object to string by
+     * attaching the following string to it: "adg.red.models.Registration[
+     * RegistrationPK"
+     * <p/>
+     * @return - String literal
+     */
     @Override
     public String toString()
     {
@@ -250,10 +308,12 @@ public class Registration implements Serializable
     }
 
     /**
-     *
-     * @param student
+     * Public getter method that returns the Registration object for a given
+     * Student object
      * <p/>
-     * @return
+     * @param student -- Student object
+     * <p/>
+     * @return -- Object type Registration
      */
     public static Registration getCurrentRegistration(Student student)
     {

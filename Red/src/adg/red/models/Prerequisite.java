@@ -1,20 +1,15 @@
-/*
- *
- *
-=======
-//*****************************************************
-/* (INCOMPLETE)
+ //*****************************************************
+ /* (INCOMPLETE)
  Prerequisuite.java -- Model for Prerequisuite table
 
  @Contributors:  Harsimran
 
  @Purpose:   Generates various quesries on Prerequisite
- *           tablel that is used in identifying a prereq
- *           course associated with a coutse and any
+ *           table that is used in identifying a prereq
+ *           course associated with a course and any
  *           registration restrictions
-
+ *
  @Copyright ADG (2013) - Open License
->>>>>>> add comment skeleton + comments for prereq
  */
 //*****************************************************
 package adg.red.models;
@@ -235,8 +230,9 @@ public class Prerequisite implements Serializable
     }
 
     /**
-     *
-     * @return
+     * Public method overriding hasCode() using Prerequisite specific hash value
+     * <p/>
+     * @return - Integer unique hashCode index value
      */
     @Override
     public int hashCode()
@@ -247,9 +243,12 @@ public class Prerequisite implements Serializable
     }
 
     /**
-     *
-     * @param object <p/>
-     * @return
+     * Public method overriding equals(Object object) method that returns true
+     * if the given object is an instance of a Prerequisite object
+     * <p/>
+     * @param object -- Pass any Object
+     * <p/>
+     * @return -- true if object is of type Prerequisite, false otherwise
      */
     @Override
     public boolean equals(Object object)
@@ -269,7 +268,7 @@ public class Prerequisite implements Serializable
     /**
      * Public method overriding method for converting object to string by
      * attaching the following string to the beginning:
-     * "adg.red.models.Prerequisite[prerequisitePK="
+     * "adg.red.models.Prerequisite[ prerequisitePK"
      * <p/>
      * @return - String literal
      */
