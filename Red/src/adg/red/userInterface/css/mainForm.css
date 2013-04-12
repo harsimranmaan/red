@@ -1,11 +1,21 @@
 /*
  * Empty Stylesheet file.
  */
+.root {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI";
 
+}
 .mainFxmlClass {
     /*-fx-background-color: #004400;*/
 }
-
+.login-label {
+    -fx-font: bold 14pt "Segoe UI";
+}
+.response-label {
+    -fx-text-fill: #be1d00;
+    -fx-font-weight: bold;
+}
 .menubar {
     -fx-background-color: linear-gradient(#ff5400, #be1d00);
     -fx-font-weight: bold;

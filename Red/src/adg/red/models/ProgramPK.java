@@ -1,7 +1,16 @@
-/*
+//*****************************************************
+ /* (INCOMPLETE)
+ ProgramPK.java -- Model for Program table
+
+ @Contributors:  Harsimran
+
+ @Purpose:   Generates various quesries on Program
+ *           table that is used in identifying the primary key
+ *           of a program associated with a course
  *
- *
+ @Copyright ADG (2013) - Open License
  */
+//*****************************************************
 package adg.red.models;
 
 import java.io.Serializable;
@@ -9,13 +18,10 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-/**
- *
- * @author harsimran.maan
- */
 @Embeddable
 public class ProgramPK implements Serializable
 {
+//programName and departmentId are attribute of ProgramPK(not-optional)
 
     @Basic(optional = false)
     @Column(name = "programName")
@@ -25,16 +31,17 @@ public class ProgramPK implements Serializable
     private String departmentId;
 
     /**
-     *
+     * Public default class constructor
      */
     public ProgramPK()
     {
     }
 
     /**
-     *
-     * @param programName
-     * @param departmentId
+     * Public class constructor using programName and departmentId attributes
+     * <p/>
+     * @param programName  -- String containing programName attribute value
+     * @param departmentId -- String containing departmentId attribute value
      */
     public ProgramPK(String programName, String departmentId)
     {
@@ -43,8 +50,9 @@ public class ProgramPK implements Serializable
     }
 
     /**
-     *
-     * @return
+     * Public getter method that returns the programName inside of a ProgramPK
+     * <p/>
+     * @return -- String programName attribute
      */
     public String getProgramName()
     {
@@ -52,8 +60,10 @@ public class ProgramPK implements Serializable
     }
 
     /**
-     *
-     * @param programName
+     * Public setter method that sets the programName attribute inside a
+     * ProgramPK
+     * <p/>
+     * @param programName -- String programName attribute
      */
     public void setProgramName(String programName)
     {
@@ -61,8 +71,10 @@ public class ProgramPK implements Serializable
     }
 
     /**
-     *
-     * @return
+     * Public getter method that returns the departmentId attribute inside a
+     * programPK
+     * <p/>
+     * @return -- String programId attribute
      */
     public String getDepartmentId()
     {
@@ -70,14 +82,22 @@ public class ProgramPK implements Serializable
     }
 
     /**
-     *
-     * @param departmentId
+     * Public setter method that sets the departmenrId attribute inside a
+     * programPK
+     * <p/>
+     * @param departmentId -- String programId attribute
      */
     public void setDepartmentId(String departmentId)
     {
         this.departmentId = departmentId;
     }
 
+    /**
+     * Public method overriding hasCode() using ProgramPK specific hash value.
+     * Adds programName and departmendId to make the index unique
+     * <p/>
+     * @return - Integer unique hashCode index value
+     */
     @Override
     public int hashCode()
     {
@@ -87,10 +107,19 @@ public class ProgramPK implements Serializable
         return hash;
     }
 
+    /**
+     * Public method overriding equals(Object object) method that returns true
+     * if the given object is an instance of a ProgramPK object and is the same
+     * as current ProgramPK object
+     * <p/>
+     * @param object -- Pass any Object
+     * <p/>
+     * @return -- true if object is of type ProgramPK and the same as current
+     *         ProgramPK object, false otherwise
+     */
     @Override
     public boolean equals(Object object)
     {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof ProgramPK))
         {
             return false;
@@ -107,6 +136,13 @@ public class ProgramPK implements Serializable
         return true;
     }
 
+    /**
+     * Public method overriding method for converting object to string by
+     * attaching the following string to it: "adg.red.models.ProgramPK[
+     * programName + departmentId"
+     * <p/>
+     * @return - String literal
+     */
     @Override
     public String toString()
     {
