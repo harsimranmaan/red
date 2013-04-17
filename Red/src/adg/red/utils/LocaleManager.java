@@ -26,10 +26,6 @@ public class LocaleManager
     {
         loc = Locale.findByName(ConfigManager.getInstance().getPropertyValue("locale"));
         resourceList = ResourceDictionary.getResourceByLocaleId(loc.getId());
-//        Encryptor.encryptAES(ConfigManager.getInstance().getPropertyValue("connection"));
-//        Encryptor.decryptAES(Encryptor.encryptAES(ConfigManager.getInstance().getPropertyValue("userId")));
-//        Encryptor.decryptAES(Encryptor.encryptAES(ConfigManager.getInstance().getPropertyValue("userToken")));
-//        Encryptor.decryptAES(Encryptor.encryptAES(ConfigManager.getInstance().getPropertyValue("connection")));
     }
 
     /**
