@@ -8,16 +8,12 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.StringReader;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.internet.MimeUtility;
 import javax.crypto.Cipher;
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
@@ -142,9 +138,9 @@ public class Encryptor
             int size = b64is.read(tmp);
             byte[] res = new byte[size];
             System.arraycopy(tmp, 0, res, 0, size);
-            //InputStream inStream = new ByteArrayInputStream();
+
             decryptedText = new String(aesCipher.doFinal(res));
-            // inStream.close();
+
             System.out.println("Cipher Data : " + cipherText + " \n Decrypted Data : " + decryptedText);
         }
         catch (Exception ex)
