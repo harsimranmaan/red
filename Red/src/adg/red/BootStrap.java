@@ -4,11 +4,11 @@
  */
 package adg.red;
 
-import adg.red.utils.Encryptor;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -25,6 +25,7 @@ public class BootStrap extends Application
         Scene scene = new Scene(root);
         stage.setMinHeight(600);
         stage.setMinWidth(800);
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("userInterface/images/redIcon.png")));
         stage.setScene(scene);
         stage.show();
     }
