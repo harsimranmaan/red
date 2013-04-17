@@ -4,8 +4,11 @@
  */
 package adg.red.utils;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.StringReader;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
@@ -15,6 +18,7 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  * The Encryptor class is responsible for encrypt and decrypt input string.
@@ -24,22 +28,22 @@ import javax.crypto.spec.DESKeySpec;
 public class Encryptor
 {
 
-    private static SecretKey key;
+    private final static SecretKeySpec secretKey;
+    private final static byte[] byteKey =
+    {
+        0x75, 0x68, 0x69, 0x73, 0x49, 0x73, 0x41, 0x53, 0x64, 0x63, 0x72, 0x65, 0x76, 0x4b, 0x65, 0x79
+    };
 
     static
     {
 
-        try
-        {
-            SecretKeyFactory factory = SecretKeyFactory.getInstance("DES");
-            String pass1 = "adgRedSecretKeyForEncryptionSOMEadgRedSecretKeyForEncryptionSOME";
-            byte[] pass = pass1.getBytes();
-            key = factory.generateSecret(new DESKeySpec(pass));
-        }
-        catch (Exception ex)
-        {
-            Logger.getLogger(Encryptor.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        // SecretKeyFactory factory = SecretKeyFactory.getInstance("AES");
+        secretKey = new SecretKeySpec(byteKey, "AES");
+        // String pass1 = "adgRedSecretKeyForEncryptionSOMEadgRedSecretKeyForEncryptionSOME";
+        // byte[] pass = pass1.getBytes();
+        //key = factory.generateSecret(new DESKeySpec(pass));
+
     }
 
     /**
@@ -101,8 +105,8 @@ public class Encryptor
         String cipherText = literal;
         try
         {
-            Cipher aesCipher = Cipher.getInstance("DES");
-            aesCipher.init(Cipher.ENCRYPT_MODE, key);
+            Cipher aesCipher = Cipher.getInstance("AES");
+            aesCipher.init(Cipher.ENCRYPT_MODE, secretKey);
             byte[] byteDataToEncrypt = literal.getBytes();
             byte[] byteCipherText = aesCipher.doFinal(byteDataToEncrypt);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -131,10 +135,16 @@ public class Encryptor
         String decryptedText = cipherText;
         try
         {
-            Cipher aesCipher = Cipher.getInstance("DES");
-            aesCipher.init(Cipher.DECRYPT_MODE, key, aesCipher.getParameters());
-            byte[] byteDecryptedText = aesCipher.doFinal(cipherText.getBytes());
-            decryptedText = new String(byteDecryptedText);
+            Cipher aesCipher = Cipher.getInstance("AES");
+            aesCipher.init(Cipher.DECRYPT_MODE, secretKey);
+            InputStream b64is = MimeUtility.decode(new ByteArrayInputStream(cipherText.getBytes()), "base64");
+            byte[] tmp = new byte[cipherText.getBytes().length];
+            int size = b64is.read(tmp);
+            byte[] res = new byte[size];
+            System.arraycopy(tmp, 0, res, 0, size);
+            //InputStream inStream = new ByteArrayInputStream();
+            decryptedText = new String(aesCipher.doFinal(res));
+            // inStream.close();
             System.out.println("Cipher Data : " + cipherText + " \n Decrypted Data : " + decryptedText);
         }
         catch (Exception ex)

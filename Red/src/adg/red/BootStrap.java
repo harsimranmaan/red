@@ -1,9 +1,10 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red;
 
+import adg.red.utils.Encryptor;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
