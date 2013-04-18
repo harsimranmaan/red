@@ -8,7 +8,7 @@ import adg.red.models.Message;
 import adg.red.models.MessageReceiver;
 import adg.red.models.MessageStatus;
 import adg.red.models.User;
-import adg.red.utils.Context;
+import adg.red.session.Context;
 import adg.red.utils.LocaleManager;
 import java.net.URL;
 import java.util.ArrayList;
@@ -119,7 +119,7 @@ public class MessageController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        currentUser = adg.red.utils.Context.getInstance().getCurrentUser();
+        currentUser = adg.red.session.Context.getInstance().getCurrentUser();
         Context.getInstance().setTitle(LocaleManager.get(22));
         BreadCrumbController.renderBreadCrumb(currentUser.getUserTypeId().getName().toLowerCase() + "/HomeView|Message");
         List<MessageStatus> statusList = MessageStatus.getAll();

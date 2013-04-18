@@ -5,7 +5,7 @@
 package adg.red.controllers;
 
 import adg.red.controllers.student.HomeViewController;
-import adg.red.utils.Context;
+import adg.red.session.Context;
 import adg.red.utils.LocaleManager;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
@@ -56,7 +56,7 @@ public class CommonButtonsController implements Initializable
     {
         try
         {
-            ViewLoader view = new ViewLoader(Context.getInstance().getHomeView());
+            ViewLoader view = new ViewLoader(Context.getInstance().getMainView());
             Context.getInstance().setWasLoggedIn(true);
             view.loadView("Login");
         }

@@ -2,7 +2,7 @@
  * The Context class is to store some of the objects so that they can be
  * accessed later.
  */
-package adg.red.utils;
+package adg.red.session;
 
 import adg.red.config.FacultyAction;
 import adg.red.models.Course;
@@ -175,7 +175,7 @@ public class Context
      * <p/>
      * @return the mainView variable
      */
-    public Pane getHomeView()
+    public Pane getMainView()
     {
         return mainView;
     }

@@ -6,7 +6,9 @@ package adg.red.controllers;
 
 import adg.red.models.EmailCode;
 import adg.red.models.User;
+import adg.red.session.Context;
 import adg.red.utils.EmailSender;
+import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -16,13 +18,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 /**
- * FXML Controller class for ForgotPassword.fxml
+ * FXML Controller class for ForgotPasswordController.fxml
  * <p/>
  * @author harsimran.maan
  */
-public class ForgotPassword implements Initializable
+public class ForgotPasswordController implements Initializable
 {
 
     @FXML
@@ -31,6 +34,10 @@ public class ForgotPassword implements Initializable
     private TextField txtEmailId;
     @FXML
     private TextField txtCode;
+    @FXML
+    private VBox vBoxEmail;
+    @FXML
+    private VBox vBoxCode;
 
     /**
      * Send validation code to user email address
@@ -48,10 +55,12 @@ public class ForgotPassword implements Initializable
             code.save();
             new EmailSender(emailId, "Password Reset Code", "Please use the following code to reset the password: "
                     + code.getCode()).send();
+            vBoxCode.setVisible(true);
+            vBoxEmail.setVisible(false);
         }
         catch (Exception ex)
         {
-            Logger.getLogger(ForgotPassword.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ForgotPasswordController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -65,11 +74,19 @@ public class ForgotPassword implements Initializable
     {
     }
 
+    @FXML
+    private void back(ActionEvent event)
+    {
+        ViewLoader view = new ViewLoader(Context.getInstance().getMainView());
+        view.loadView("Login");
+    }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        vBoxCode.setVisible(false);
     }
 }
