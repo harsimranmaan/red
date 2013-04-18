@@ -1,10 +1,10 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.controllers;
 
-import adg.red.utils.Context;
+import adg.red.session.Context;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import adg.red.models.User;
-import adg.red.utils.EmailSender;
 import adg.red.utils.LocaleManager;
 import javafx.application.Platform;
 import javafx.scene.control.Hyperlink;
@@ -24,6 +23,7 @@ import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class for Login.fxml
+ * <p/>
  * @author Witt
  */
 public class LoginController implements Initializable
@@ -52,7 +52,7 @@ public class LoginController implements Initializable
      * Initialize all the action events.
      * <p/>
      * @param url the URL
-     * @param rb the ResourceBundle
+     * @param rb  the ResourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -75,6 +75,7 @@ public class LoginController implements Initializable
 
     /**
      * Exit the platform
+     * <p/>
      * @param event user action
      */
     public void exit(ActionEvent event)
@@ -84,18 +85,19 @@ public class LoginController implements Initializable
 
     /**
      * Load ForgotPassword.fxml view
+     * <p/>
      * @param event user action: click button
      */
     public void forgotPassword(ActionEvent event)
     {
-        ViewLoader view = new ViewLoader(Context.getInstance().getHomeView());
+        ViewLoader view = new ViewLoader(Context.getInstance().getMainView());
         view.loadView("ForgotPassword");
     }
 
     /**
-     * Get the user account id and password to login
-     * Load Login.fxml view
-     * @param event 
+     * Get the user account id and password to login Load Login.fxml view
+     * <p/>
+     * @param event
      */
     public void login(ActionEvent event)
     {
@@ -109,7 +111,7 @@ public class LoginController implements Initializable
         {
             User user = User.login(uid, pwd);
             Context.getInstance().setCurrentUser(user);
-            ViewLoader view = new ViewLoader((AnchorPane) loginViewArea.getParent());
+            ViewLoader view = new ViewLoader(Context.getInstance().getMainView());
             view.loadView("HomeView");
         }
         catch (Exception ex)

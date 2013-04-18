@@ -10,7 +10,7 @@ import adg.red.utils.LocaleManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
-import adg.red.utils.Context;
+import adg.red.session.Context;
 import adg.red.utils.DateFormatter;
 import java.util.List;
 import javafx.fxml.FXML;

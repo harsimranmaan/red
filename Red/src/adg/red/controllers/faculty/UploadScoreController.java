@@ -10,7 +10,7 @@ import adg.red.models.EnrolmentPK;
 import adg.red.models.Grade;
 import adg.red.models.Section;
 import adg.red.models.Session;
-import adg.red.utils.Context;
+import adg.red.session.Context;
 import adg.red.utils.LocaleManager;
 import java.io.BufferedReader;
 import java.io.File;

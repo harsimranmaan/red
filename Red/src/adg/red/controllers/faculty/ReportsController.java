@@ -10,7 +10,7 @@ import adg.red.models.Enrolment;
 import adg.red.models.Section;
 import adg.red.models.Session;
 import adg.red.models.Student;
-import adg.red.utils.Context;
+import adg.red.session.Context;
 import adg.red.utils.LocaleManager;
 import java.net.URL;
 import java.util.List;

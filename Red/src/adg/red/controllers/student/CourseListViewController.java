@@ -5,7 +5,7 @@
 package adg.red.controllers.student;
 
 import adg.red.controllers.BreadCrumbController;
-import adg.red.utils.Context;
+import adg.red.session.Context;
 import adg.red.utils.ViewLoader;
 import adg.red.models.Course;
 import adg.red.models.Department;

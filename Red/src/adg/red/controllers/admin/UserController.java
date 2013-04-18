@@ -1,12 +1,9 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.controllers.admin;
 
-import adg.red.models.User;
-import adg.red.utils.Context;
-import adg.red.utils.EmailSender;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
