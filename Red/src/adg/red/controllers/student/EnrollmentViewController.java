@@ -47,7 +47,7 @@ public class EnrollmentViewController implements Initializable
     {
         Context.getInstance().setTitle(LocaleManager.get(106));
         BreadCrumbController.renderBreadCrumb("student/HomeView|student/EnrollmentView");
-        List<Enrolment> enrolmentList = Enrolment.getActiveEnrolmentsByStudentId(Context.getInstance().getCurrentUser().getStudent().getStudentId());
+        List<Enrolment> enrolmentList = Enrolment.getEnrolmentsByStudentId(Context.getInstance().getCurrentUser().getStudent().getStudentId());
 
         populateEnrolmentTable(enrolmentList);
     }

@@ -43,8 +43,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Enrolment.findByEnrolmentPK", query = "SELECT e FROM Enrolment e LEFT JOIN FETCH e.section LEFT JOIN FETCH e.student LEFT JOIN FETCH e.gradeId LEFT JOIN FETCH e.resultId WHERE e.enrolmentPK=:enrolmentPK"),
     @NamedQuery(name = "Enrolment.findBySectionPK", query = "SELECT e FROM Enrolment e LEFT JOIN FETCH e.section LEFT JOIN FETCH e.student LEFT JOIN FETCH e.gradeId LEFT JOIN FETCH e.resultId WHERE e.enrolmentPK.courseNumber = :courseNumber AND e.enrolmentPK.departmentId = :departmentId AND e.enrolmentPK.sectionId = :sectionId AND e.enrolmentPK.sectionTypeId = :sectionTypeId AND e.enrolmentPK.sessionId = :sessionId AND e.enrolmentPK.termYear = :termYear"),
     @NamedQuery(name = "Enrolment.findSumCreditsByStudentId", query = "SELECT CASE WHEN SUM(c.credits) IS NULL THEN 0 ELSE SUM(c.credits) END FROM Course c, Enrolment e LEFT JOIN FETCH e.section LEFT JOIN FETCH e.student LEFT JOIN FETCH e.gradeId LEFT JOIN FETCH e.resultId WHERE c.coursePK.courseNumber = e.enrolmentPK.courseNumber AND c.coursePK.departmentId = e.enrolmentPK.departmentId AND e.enrolmentPK.studentId = :studentId AND e.resultId.resultId = 100 AND e.enrolmentPK.sectionTypeId = 100 AND e.isActive = 1 "),
-    @NamedQuery(name = "Enrolment.findActiveEnrolmentsByStudentId", query = "SELECT e FROM Enrolment e LEFT JOIN FETCH e.section LEFT JOIN FETCH e.student LEFT JOIN FETCH e.gradeId LEFT JOIN FETCH e.resultId WHERE e.enrolmentPK.studentId = :studentId AND e.resultId.resultId IS NOT NULL AND e.enrolmentPK.sectionTypeId = 100 AND e.isActive = 1 ")
-})
+    @NamedQuery(name = "Enrolment.findActiveEnrolmentsByStudentId", query = "SELECT e FROM Enrolment e LEFT JOIN FETCH e.section LEFT JOIN FETCH e.student LEFT JOIN FETCH e.gradeId LEFT JOIN FETCH e.resultId WHERE e.enrolmentPK.studentId = :studentId AND e.resultId.resultId IS NOT NULL AND e.enrolmentPK.sectionTypeId = 100 AND e.isActive = 1 "),
+    @NamedQuery(name = "Enrolment.findEnrolmentsByStudentId", query = "SELECT e FROM Enrolment e LEFT JOIN FETCH e.section LEFT JOIN FETCH e.student LEFT JOIN FETCH e.gradeId LEFT JOIN FETCH e.resultId WHERE e.enrolmentPK.studentId = :studentId AND e.enrolmentPK.sectionTypeId = 100 AND e.isActive = 1 ")
+
+        })
 public class Enrolment implements Serializable
 {
 
@@ -203,7 +205,7 @@ public class Enrolment implements Serializable
     public static List<Enrolment> getEnrolmentsByStudentId(int studentId)
     {
         return RedEntityManager.getEntityManager()
-                .createNamedQuery("Enrolment.findByStudentId")
+                .createNamedQuery("Enrolment.findEnrolmentsByStudentId")
                 .setParameter("studentId", studentId)
                 .getResultList();
     }
