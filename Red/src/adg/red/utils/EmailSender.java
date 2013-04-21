@@ -6,6 +6,8 @@ package adg.red.utils;
 
 import adg.red.encryptor.Encryptor;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -69,26 +71,31 @@ public class EmailSender
     }
 
     /**
-     * The function to send an email.
+     * The function to send an email async.
      */
     public void send()
     {
-        try
+        new Thread(new Runnable()
         {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    final Message messageObj = new MimeMessage(session);
+                    messageObj.setFrom(new InternetAddress(fromAddress));
+                    messageObj.setRecipients(Message.RecipientType.TO,
+                            InternetAddress.parse(toAddress));
+                    messageObj.setSubject(subject);
+                    messageObj.setText(message);
+                    Transport.send(messageObj);
+                }
+                catch (MessagingException ex)
+                {
+                    Logger.getLogger(EmailSender.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }).start();
 
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(fromAddress));
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(toAddress));
-            message.setSubject(subject);
-            message.setText(this.message);
-
-            Transport.send(message);
-
-        }
-        catch (MessagingException e)
-        {
-            throw new RuntimeException(e);
-        }
     }
 }
