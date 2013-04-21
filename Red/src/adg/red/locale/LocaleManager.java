@@ -32,7 +32,7 @@ public class LocaleManager
     {
         loc = Locale.findByName(ConfigManager.getInstance().getPropertyValue("locale"));
         resourceList = ResourceDictionary.getResourceByLocaleId(loc.getId());
-        setLocale(loc.getName());
+        setLocale(ConfigManager.getInstance().getPropertyValue("locale"));
 
     }
 
@@ -60,7 +60,7 @@ public class LocaleManager
     public static String get(int resourceId)
     {
 
-        String text = "No transalation";
+        String text = "No translation";
 
         for (ResourceDictionary reDict : resourceList)
         {
