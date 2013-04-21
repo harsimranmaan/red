@@ -37,11 +37,8 @@
         <class>adg.red.models.EmailCode</class>
         <class>adg.red.models.ProgramCourseList</class>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://ec2-50-18-66-213.us-west-1.compute.amazonaws.com:3306/AdgDevelopment?zeroDateTimeBehavior=convertToNull"/>
-            <property name="javax.persistence.jdbc.password" value="red"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.user" value="adgred"/>
-            <property name="eclipselink.logging.level" value="SEVERE"/>
+            <property name="eclipselink.logging.level" value="FINER"/>
         </properties>
     </persistence-unit>
 </persistence>

@@ -4,6 +4,7 @@
  */
 package adg.red.utils;
 
+import adg.red.encryptor.Encryptor;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -24,7 +25,6 @@ public class EmailSender
     private String fromAddress;
     private String toAddress;
     private String message;
-    private String smtpServer;
     private String subject;
     private Session session;
     private String password;
@@ -34,13 +34,14 @@ public class EmailSender
      */
     private EmailSender()
     {
-        this.password = ConfigManager.getInstance().getPropertyValue("emailPassword");
-        this.fromAddress = ConfigManager.getInstance().getPropertyValue("emailSender");
+        final ConfigManager config = ConfigManager.getInstance();
+        this.fromAddress = config.getPropertyValue("emailSender");
+        this.password = Encryptor.decryptAES(config.getPropertyValue("emailToken"));
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", ConfigManager.getInstance().getPropertyValue("smtp"));
-        props.put("mail.smtp.port", ConfigManager.getInstance().getPropertyValue("port"));
+        props.put("mail.smtp.host", config.getPropertyValue("smtp"));
+        props.put("mail.smtp.port", config.getPropertyValue("port"));
 
         session = Session.getInstance(props,
                 new javax.mail.Authenticator()

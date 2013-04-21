@@ -4,6 +4,9 @@
  */
 package adg.red.utils;
 
+import adg.red.encryptor.Encryptor;
+import java.util.HashMap;
+import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -22,8 +25,14 @@ public class RedEntityManager
 
     static
     {
-        emf = Persistence.createEntityManagerFactory("RedPU");
+        Map<String, String> dbProperties = new HashMap<>();
+        final ConfigManager config = ConfigManager.getInstance();
+        dbProperties.put("javax.persistence.jdbc.url", config.getPropertyValue("dbConnection"));
+        dbProperties.put("javax.persistence.jdbc.user", config.getPropertyValue("dbUserId"));
+        dbProperties.put("javax.persistence.jdbc.password", Encryptor.decryptAES(config.getPropertyValue("dbUserToken")));
+        emf = Persistence.createEntityManagerFactory("RedPU", dbProperties);
         em = emf.createEntityManager();
+
     }
 
     /**
@@ -90,6 +99,11 @@ public class RedEntityManager
         return null;
     }
 
+    /**
+     * Removes an entry from the database
+     * <p/>
+     * @param obj The entity object to remove
+     */
     public static void delete(Object obj)
     {
         em.getTransaction().begin();
