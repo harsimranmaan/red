@@ -134,7 +134,7 @@ public class ViewDegreeInfoController implements Initializable
     private void populateCourseList(List<ProgramCourseList> courses)
     {
         colDegreeCourse.setCellValueFactory(new PropertyValueFactory<ProgramCourseList, String>("departmentIdAndCourseNumber"));
-        //colCourseCredit.setCellValueFactory(new PropertyValueFactory<Enrolment, Integer>("credits"));
+        colCredit.setCellValueFactory(new PropertyValueFactory<ProgramCourseList, Integer>("credits"));
         tabViewCourseList.getItems().setAll(courses);
     }
 

@@ -143,6 +143,11 @@ public class ProgramCourseList implements Serializable
         return isActive;
     }
 
+    public int getCredits()
+    {
+        return this.course.getCredits();
+    }
+
     /**
      * Public method that sets the active/inactive value of a ProgramCourseList
      * <p/>
