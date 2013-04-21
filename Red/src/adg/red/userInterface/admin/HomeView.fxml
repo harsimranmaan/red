@@ -11,5 +11,6 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane AnchorPane.bottomAnchor="0"   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.admin.HomeViewController">
-    <TextArea editable="false" text="Welcome Admin"></TextArea>
+  <Label fx:id="nameLabel" layoutX="14.0" layoutY="3.0" text="Label" />
+  <Label fx:id="msgLabel" layoutX="14.0" layoutY="31.0" text="Label" />
 </AnchorPane>

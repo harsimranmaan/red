@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 
 /**
  * FXML Controller class for HomeView.fxml.
@@ -40,10 +41,14 @@ public class HomeViewController implements Initializable
         Context.getInstance().setTitle(LocaleManager.get(24));
         BreadCrumbController.renderBreadCrumb("student/HomeView");
         nameLabel.setText("Hi " + currentUser.getFirstName() + ", welcome to the RED enrolment system.");
+        nameLabel.setFont(Font.font ("Arial", 20));
+        //nameLabel.setTextFill(Color.web("#FF0000"));
         int nUnread = MessageReceiver.getUnreadMessageByReceiverId(currentUser.getUsername());
         if (nUnread <= 1)
             msgLabel.setText("You have " + nUnread + " unread message.");
         else
             msgLabel.setText("You have " + nUnread + " unread messages.");
+        msgLabel.setFont(Font.font ("Arial", 20));
+        //msgLabel.setTextFill(Color.web("#000000"));
     }
 }
