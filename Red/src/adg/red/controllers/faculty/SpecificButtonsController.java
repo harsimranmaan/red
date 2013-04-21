@@ -4,10 +4,10 @@
  */
 package adg.red.controllers.faculty;
 
-import adg.red.config.FacultyAction;
+import adg.red.models.enums.FacultyAction;
 import adg.red.models.SectionTimeTable;
 import adg.red.session.Context;
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;

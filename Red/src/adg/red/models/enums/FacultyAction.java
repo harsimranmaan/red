@@ -2,7 +2,7 @@
  * The enum FacultyAction class represents all the possible actions.
  *
  */
-package adg.red.config;
+package adg.red.models.enums;
 
 /**
  * The enum FacultyAction class represents all the possible actions.

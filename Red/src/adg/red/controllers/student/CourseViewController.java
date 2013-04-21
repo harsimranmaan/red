@@ -10,7 +10,7 @@ import adg.red.utils.ViewLoader;
 import adg.red.models.Course;
 import adg.red.models.Prerequisite;
 import adg.red.models.Section;
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;

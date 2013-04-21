@@ -4,7 +4,7 @@
  */
 package adg.red.session;
 
-import adg.red.config.FacultyAction;
+import adg.red.models.enums.FacultyAction;
 import adg.red.models.Course;
 import adg.red.models.Department;
 import adg.red.models.Section;

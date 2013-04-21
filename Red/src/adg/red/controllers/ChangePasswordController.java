@@ -6,7 +6,7 @@ package adg.red.controllers;
 
 import adg.red.models.User;
 import adg.red.session.Context;
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;

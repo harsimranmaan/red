@@ -4,7 +4,7 @@
  */
 package adg.red.controllers;
 
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;

@@ -13,7 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import adg.red.models.User;
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import javafx.application.Platform;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.AnchorPane;
