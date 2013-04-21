@@ -6,15 +6,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="466.0" prefWidth="642.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.student.EnrollmentViewController">
-    <children>
-        <TableView fx:id="tabDisplay" layoutX="0.0" layoutY="0.0" prefHeight="466.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <columns>
-                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="169.0" text="Section" fx:id="colSection" />
-                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="153.0" text="Activity" fx:id="colActivity" />
-                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Term" fx:id="colTerm" />
-                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="206.0" text="Credits" fx:id="colCredits" />
-            </columns>
-        </TableView>
-    </children>
+<AnchorPane id="AnchorPane" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="10" AnchorPane.bottomAnchor="10" AnchorPane.rightAnchor="10" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.student.EnrollmentViewController">
+  <children>
+    <TableView fx:id="tabDisplay" layoutX="0.0" layoutY="0.0" prefHeight="466.0" prefWidth="642.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <columns>
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="169.0" text="Section" fx:id="colSection" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="153.0" text="Activity" fx:id="colActivity" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="112.0" text="Term" fx:id="colTerm" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="206.0" text="Credits" fx:id="colCredits" />
+      </columns>
+    </TableView>
+  </children>
 </AnchorPane>
