@@ -93,3 +93,11 @@
 .accordion .titled-pane:focused > .title > .arrow-button .arrow {
     -fx-background-color: black;
 }
+
+.timeTableView-label{
+    -fx-background-color: #006DCC;
+}
+
+.timeTableView-overlap-label{
+    -fx-background-color: #A94A48;
+}
