@@ -40,7 +40,6 @@ public class HomeViewController implements Initializable
        
         Context.getInstance().setTitle(LocaleManager.get(24));
         BreadCrumbController.renderBreadCrumb("student/HomeView");
-        
         currentUser = Context.getInstance().getCurrentUser();
         nameLabel.setText("Hi " + currentUser.getFirstName() + ", welcome to the RED enrolment system.");
         nameLabel.setFont(Font.font ("Arial", 20));
