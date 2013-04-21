@@ -5,8 +5,10 @@
 package adg.red.controllers.student;
 
 import adg.red.controllers.BreadCrumbController;
+import adg.red.models.Course;
 import adg.red.models.Enrolment;
 import adg.red.models.Program;
+import adg.red.models.ProgramCourseList;
 import adg.red.models.Registration;
 import adg.red.models.Student;
 import adg.red.session.Context;
@@ -33,6 +35,8 @@ public class ViewDegreeInfoController implements Initializable
     @FXML
     private TableColumn<Enrolment, String> colCourse;
     @FXML
+    private TableView<ProgramCourseList> tabViewCourseList;
+    @FXML
     private TableView<Enrolment> tabViewDegree;
     @FXML
     private TableColumn<Enrolment, String> colTerm;
@@ -45,11 +49,17 @@ public class ViewDegreeInfoController implements Initializable
     @FXML
     private Label lblProgramName;
     @FXML
+    private Label lblDeptName;
+    @FXML
     private ProgressBar pbCreditProgress;
     @FXML
     private Label lblCredits;
     @FXML
     private TableColumn<Enrolment, Integer> colCourseCredit;
+    @FXML
+    private TableColumn<ProgramCourseList, Integer> colCredit;
+    @FXML
+    private TableColumn<ProgramCourseList, String> colDegreeCourse;
 
     /**
      * Initializes the controller class.
@@ -68,6 +78,8 @@ public class ViewDegreeInfoController implements Initializable
         int sumCreditsByStudentId = Enrolment.getSumCreditsByStudentId(student.getStudentId());
         Program program = Registration.getCurrentRegistration(student).getProgram();
         lblProgramName.setText(program.getProgramPK().getProgramName());
+        lblDeptName.setText("Department of " + program.getDepartment().getName());
+        populateCourseListTable(program);
         lblCredits.setText(sumCreditsByStudentId + "/" + program.getCreditsRequired());
         pbCreditProgress.setProgress((1.0 * sumCreditsByStudentId) / program.getCreditsRequired());
         populateEnrolmentTable(student);
@@ -103,6 +115,30 @@ public class ViewDegreeInfoController implements Initializable
     }
 
     /**
+     * The function gets the course list of the program and populates to the
+     * course list table.
+     * <p/>
+     * @param student the student to populate the course list table for
+     */
+    public void populateCourseListTable(Program program)
+    {
+        List<ProgramCourseList> courses = ProgramCourseList.getProgramCourseList(program);
+        populateCourseList(courses);
+    }
+
+    /**
+     * The functions populate the list of courses to the course list table.
+     * <p/>
+     * @param courses the list of courses in program list
+     */
+    private void populateCourseList(List<ProgramCourseList> courses)
+    {
+        colDegreeCourse.setCellValueFactory(new PropertyValueFactory<ProgramCourseList, String>("departmentIdAndCourseNumber"));
+        //colCourseCredit.setCellValueFactory(new PropertyValueFactory<Enrolment, Integer>("credits"));
+        tabViewCourseList.getItems().setAll(courses);
+    }
+
+    /**
      * The function initializes all components text by locality.
      */
     private void initializeComponentsByLocale()
@@ -113,5 +149,7 @@ public class ViewDegreeInfoController implements Initializable
         colScore.setText(LocaleManager.get(95));
         colGrade.setText(LocaleManager.get(96));
         colResult.setText(LocaleManager.get(97));
+        colDegreeCourse.setText(LocaleManager.get(93));
+        colCredit.setText(LocaleManager.get(103));
     }
 }

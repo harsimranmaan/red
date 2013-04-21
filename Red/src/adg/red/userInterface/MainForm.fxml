@@ -24,16 +24,17 @@
                 </Menu>
             </menus>
         </MenuBar>
-        <Pane prefHeight="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+
+        <AnchorPane prefHeight="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
             <children>
                 <ImageView id="red-logo.png" fitHeight="30" fitWidth="275" layoutX="11.0" layoutY="2.0" preserveRatio="true">
                     <image>
                         <Image url="@images/red-logo.png" preserveRatio="true" smooth="true" />
                     </image>
                 </ImageView>
-                <Pane fx:id="searchPane" layoutX="470.0" layoutY="5.0" prefHeight="24.0" AnchorPane.rightAnchor="0.0" />
+                <Pane fx:id="searchPane" AnchorPane.topAnchor="7.0" prefHeight="24.0" AnchorPane.rightAnchor="20.0" />
             </children>
-        </Pane>
+        </AnchorPane>
         <AnchorPane fx:id="viewArea"  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="64"   />
     </children>
     <stylesheets>

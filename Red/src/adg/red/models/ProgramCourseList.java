@@ -11,7 +11,9 @@
 //*****************************************************
 package adg.red.models;
 
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -37,18 +39,19 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ProgramCourseList.findByProgramDepartmentId", query = "SELECT p FROM ProgramCourseList p WHERE p.programCourseListPK.programDepartmentId = :programDepartmentId"),
     @NamedQuery(name = "ProgramCourseList.findByCourseNumber", query = "SELECT p FROM ProgramCourseList p WHERE p.programCourseListPK.courseNumber = :courseNumber"),
     @NamedQuery(name = "ProgramCourseList.findByCourseDepartmentId", query = "SELECT p FROM ProgramCourseList p WHERE p.programCourseListPK.courseDepartmentId = :courseDepartmentId"),
-    @NamedQuery(name = "ProgramCourseList.findByIsActive", query = "SELECT p FROM ProgramCourseList p WHERE p.isActive = :isActive")
+    @NamedQuery(name = "ProgramCourseList.findByIsActive", query = "SELECT p FROM ProgramCourseList p WHERE p.isActive = :isActive"),
+    @NamedQuery(name = "ProgramCourseList.findByProgramNameAndDepartmentId", query = "SELECT p FROM ProgramCourseList p LEFT JOIN FETCH p.course WHERE p.programCourseListPK.programName = :programName AND p.programCourseListPK.programDepartmentId = :programDepartmentId")
 })
 public class ProgramCourseList implements Serializable
 {
+
     @JoinColumns(
-    {
+            {
         @JoinColumn(name = "courseNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false),
         @JoinColumn(name = "courseDepartmentId", referencedColumnName = "departmentId", insertable = false, updatable = false)
     })
     @ManyToOne(optional = false)
     private Course course;
-
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ProgramCourseListPK programCourseListPK;
@@ -151,6 +154,11 @@ public class ProgramCourseList implements Serializable
         this.isActive = isActive;
     }
 
+    public String getDepartmentIdAndCourseNumber()
+    {
+        return this.programCourseListPK.getProgramDepartmentId() + " " + this.programCourseListPK.getCourseNumber();
+    }
+
     /**
      * Public method overriding hasCode() using ProgramCourseList specific hash
      * value. Adds programCourseListPK to make the index unique
@@ -211,5 +219,14 @@ public class ProgramCourseList implements Serializable
     public void setCourse(Course course)
     {
         this.course = course;
+    }
+
+    public static List<ProgramCourseList> getProgramCourseList(Program program)
+    {
+        return RedEntityManager.getEntityManager()
+                .createNamedQuery("ProgramCourseList.findByProgramNameAndDepartmentId")
+                .setParameter("programName", program.getProgramPK().getProgramName())
+                .setParameter("programDepartmentId", program.getProgramPK().getDepartmentId())
+                .getResultList();
     }
 }
