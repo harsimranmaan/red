@@ -11,7 +11,9 @@
 //*****************************************************
 package adg.red.models;
 
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -34,7 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ProgramCourseList.findByProgramDepartmentId", query = "SELECT p FROM ProgramCourseList p WHERE p.programCourseListPK.programDepartmentId = :programDepartmentId"),
     @NamedQuery(name = "ProgramCourseList.findByCourseNumber", query = "SELECT p FROM ProgramCourseList p WHERE p.programCourseListPK.courseNumber = :courseNumber"),
     @NamedQuery(name = "ProgramCourseList.findByCourseDepartmentId", query = "SELECT p FROM ProgramCourseList p WHERE p.programCourseListPK.courseDepartmentId = :courseDepartmentId"),
-    @NamedQuery(name = "ProgramCourseList.findByIsActive", query = "SELECT p FROM ProgramCourseList p WHERE p.isActive = :isActive")
+    @NamedQuery(name = "ProgramCourseList.findByIsActive", query = "SELECT p FROM ProgramCourseList p WHERE p.isActive = :isActive"),
+    @NamedQuery(name = "ProgramCourseList.findByProgramNameAndDepartmentId", query = "SELECT p FROM ProgramCourseList p WHERE p.programCourseListPK.programName = :programName AND p.programCourseListPK.programDepartmentId = :programDepartmentId")
 })
 public class ProgramCourseList implements Serializable
 {
@@ -141,6 +144,11 @@ public class ProgramCourseList implements Serializable
         this.isActive = isActive;
     }
 
+    public String getDepartmentIdAndCourseNumber()
+    {
+        return this.programCourseListPK.getProgramDepartmentId() + " " + this.programCourseListPK.getCourseNumber();
+    }
+
     /**
      * Public method overriding hasCode() using ProgramCourseList specific hash
      * value. Adds programCourseListPK to make the index unique
@@ -191,5 +199,14 @@ public class ProgramCourseList implements Serializable
     public String toString()
     {
         return "adg.red.models.ProgramCourseList[ programCourseListPK=" + programCourseListPK + " ]";
+    }
+
+    public static List<ProgramCourseList> getProgramCourseList(Program program)
+    {
+        return RedEntityManager.getEntityManager()
+                .createNamedQuery("ProgramCourseList.findByProgramNameAndDepartmentId")
+                .setParameter("programName", program.getProgramPK().getProgramName())
+                .setParameter("programDepartmentId", program.getProgramPK().getDepartmentId())
+                .getResultList();
     }
 }
