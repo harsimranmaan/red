@@ -16,6 +16,9 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -38,6 +41,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 })
 public class ProgramCourseList implements Serializable
 {
+    @JoinColumns(
+    {
+        @JoinColumn(name = "courseNumber", referencedColumnName = "courseNumber", insertable = false, updatable = false),
+        @JoinColumn(name = "courseDepartmentId", referencedColumnName = "departmentId", insertable = false, updatable = false)
+    })
+    @ManyToOne(optional = false)
+    private Course course;
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
@@ -191,5 +201,15 @@ public class ProgramCourseList implements Serializable
     public String toString()
     {
         return "adg.red.models.ProgramCourseList[ programCourseListPK=" + programCourseListPK + " ]";
+    }
+
+    public Course getCourse()
+    {
+        return course;
+    }
+
+    public void setCourse(Course course)
+    {
+        this.course = course;
     }
 }
