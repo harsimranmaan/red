@@ -4,7 +4,7 @@
 
  @Contributors:  Harsimran
 
- @Purpose:   Generates various quesries on ProgramCourseList table
+ @Purpose:   Generates various queries on ProgramCourseList table
  *
  @Copyright ADG (2013) - Open License
  */
