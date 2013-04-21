@@ -5,7 +5,7 @@
 package adg.red.models;
 
 import adg.red.encryptor.Encryptor;
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 import java.util.Date;

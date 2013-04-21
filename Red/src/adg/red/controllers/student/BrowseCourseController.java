@@ -8,7 +8,7 @@ import adg.red.controllers.BreadCrumbController;
 import adg.red.session.Context;
 import adg.red.utils.ViewLoader;
 import adg.red.models.Department;
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;

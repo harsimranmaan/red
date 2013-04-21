@@ -13,7 +13,7 @@ import adg.red.models.FacultyMember;
 import adg.red.models.Student;
 import adg.red.models.User;
 import adg.red.session.Context;
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;

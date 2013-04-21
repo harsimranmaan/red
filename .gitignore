@@ -1,6 +1,8 @@
 *.class
 #Exceptions
 !/Red/lib/*.jar
+!/Installer/Installer.iss
+!/Installer/license.txt
 
 # Package Files #
 *.jar
@@ -12,6 +14,8 @@
 /Red/nbproject/private/
 /Red/dist/
 /Red/build/
+
+/Installer/
 
 /EnDec/nbproject/private/
 /EnDec/build/

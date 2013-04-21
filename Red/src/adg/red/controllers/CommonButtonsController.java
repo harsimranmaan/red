@@ -6,7 +6,7 @@ package adg.red.controllers;
 
 import adg.red.controllers.student.HomeViewController;
 import adg.red.session.Context;
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;

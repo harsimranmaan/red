@@ -4,7 +4,7 @@
  */
 package adg.red;
 
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

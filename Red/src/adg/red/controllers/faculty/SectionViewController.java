@@ -4,12 +4,12 @@
  */
 package adg.red.controllers.faculty;
 
-import adg.red.config.FacultyAction;
+import adg.red.models.enums.FacultyAction;
 import adg.red.controllers.BreadCrumbController;
 import adg.red.models.Section;
 import adg.red.models.Session;
 import adg.red.session.Context;
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.List;

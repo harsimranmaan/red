@@ -5,12 +5,11 @@
 package adg.red.controllers;
 
 import adg.red.models.Course;
-import adg.red.models.FacultyMember;
 import adg.red.models.Section;
 import adg.red.models.User;
 import adg.red.session.Context;
-import adg.red.utils.LocaleManager;
 import adg.red.utils.ViewLoader;
+import adg.red.locale.LocaleManager;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;

@@ -11,7 +11,7 @@ import adg.red.models.Grade;
 import adg.red.models.Section;
 import adg.red.models.Session;
 import adg.red.session.Context;
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
