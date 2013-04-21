@@ -106,16 +106,25 @@ public class LoginController implements Initializable
     {
         Context.getInstance().setWasLoggedIn(false);
         // get userid and password input from gui by J. Yu
-        String uid = usernameTxt.getText().toString();
-        String pwd = passwordTxt.getText().toString();
-
-        //LOGIN
+        String uid = usernameTxt.getText();
+        String pwd = passwordTxt.getText();
         try
         {
-            User user = User.login(uid, pwd);
-            Context.getInstance().setCurrentUser(user);
-            ViewLoader view = new ViewLoader(Context.getInstance().getMainView());
-            view.loadView("HomeView");
+            if (uid.trim().equals("") || pwd.equals(""))
+            {
+                throw new Exception(LocaleManager.get(110));
+            }
+            else
+            {
+                //LOGIN
+
+                User user = User.login(uid, pwd);
+                Context.getInstance().setCurrentUser(user);
+                ViewLoader view = new ViewLoader(Context.getInstance().getMainView());
+                view.loadView("HomeView");
+
+
+            }
         }
         catch (Exception ex)
         {
