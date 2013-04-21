@@ -6,6 +6,7 @@
 #define MyAppPublisher "ADG Development Group"
 #define MyAppExeName "Red.jar"
 
+
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
@@ -18,10 +19,10 @@ AppPublisher={#MyAppPublisher}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-LicenseFile=.\..\license.txt
+LicenseFile=license.txt
 OutputDir=.\..\Red Enrolment System
 OutputBaseFilename=RedInstaller
-SetupIconFile=.\..\Red\src\adg\red\userInterface\images\redIcon.png
+;SetupIconFile=redIcon.png
 Compression=lzma
 SolidCompression=yes
 
@@ -33,7 +34,6 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "D:\red\Red\dist\Red.jar"; DestDir: "{app}"; Flags: ignoreversion
 Source: "D:\red\Red\dist\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
