@@ -19,8 +19,17 @@
 .login-label {
     -fx-font: bold 14pt "Segoe UI";
 }
-.response-label {
+.info-label {
+    -fx-text-fill: #006dcc;
+    -fx-font-weight: bold;
+}
+.error-label{
     -fx-text-fill: #be1d00;
+    -fx-font-weight: bold;
+}
+.success-label
+{
+    -fx-text-fill: #4CBB17;
     -fx-font-weight: bold;
 }
 .menubar {

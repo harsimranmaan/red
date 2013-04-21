@@ -4,6 +4,7 @@
  */
 package adg.red.controllers;
 
+import adg.red.controls.MessageStyleManager;
 import adg.red.session.Context;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
@@ -34,7 +35,7 @@ public class LoginController implements Initializable
     @FXML
     private AnchorPane loginViewArea;
     @FXML
-    private Label loginErrLbl;
+    private Label lblError;
     @FXML
     private Button btnExit;
     @FXML
@@ -64,12 +65,13 @@ public class LoginController implements Initializable
         userLbl.setText(LocaleManager.get(3));
         passLbl.setText(LocaleManager.get(4));
         hpForgotPassword.setText(LocaleManager.get(2) + "?");
-        loginErrLbl.setVisible(false);
+        lblError.setVisible(false);
         Context.getInstance().getSearchView().setVisible(false);
         if (Context.getInstance().WasLoggedIn())
         {
-            loginErrLbl.setText(LocaleManager.get(9));
-            loginErrLbl.setVisible(true);
+            MessageStyleManager.setSuccess(lblError);
+            lblError.setText(LocaleManager.get(9));
+            lblError.setVisible(true);
         }
         Context.getInstance().setWasLoggedIn(false);
     }
@@ -117,8 +119,9 @@ public class LoginController implements Initializable
         }
         catch (Exception ex)
         {
-            loginErrLbl.setText(ex.getMessage());
-            loginErrLbl.setVisible(true);
+            MessageStyleManager.setError(lblError);
+            lblError.setText(ex.getMessage());
+            lblError.setVisible(true);
         }
     }
 }

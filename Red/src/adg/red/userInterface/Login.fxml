@@ -23,9 +23,9 @@
                 </children>
             </HBox>
             <HBox id="hBMsg" alignment="CENTER" layoutY="151.0" prefWidth="283.0000999999975" spacing="20.0">
-                <Label id="loginErrMsg" fx:id="loginErrLbl" alignment="CENTER" contentDisplay="CENTER" text="label" styleClass="response-label" visible="false" />
+                <Label fx:id="lblError" alignment="CENTER" contentDisplay="CENTER" text="label" styleClass="error-label" visible="false" />
             </HBox>
-            <Hyperlink id="forgotPasssword" fx:id="hpForgotPassword" layoutX="61.0" layoutY="121.0" onAction="#forgotPassword" text="Forgot Password?" />
+            <Hyperlink id="forgotPasssword" fx:id="hpForgotPassword" styleClass="info-label"  layoutX="61.0" layoutY="121.0" onAction="#forgotPassword" text="Forgot Password?" />
         </children>
         <stylesheets>
             <URL value="@css/mainForm.css" />
