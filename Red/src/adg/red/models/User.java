@@ -4,7 +4,7 @@
  */
 package adg.red.models;
 
-import adg.red.utils.Encryptor;
+import adg.red.encryptor.Encryptor;
 import adg.red.utils.LocaleManager;
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
@@ -98,6 +98,7 @@ public class User implements Serializable
 
     /**
      * Constructor
+     * <p/>
      * @param username table attribute username
      */
     public User(String username)
@@ -107,13 +108,14 @@ public class User implements Serializable
 
     /**
      * Constructor
-     * @param username table attribute
-     * @param password table attribute
+     * <p/>
+     * @param username  table attribute
+     * @param password  table attribute
      * @param firstName table attribute
-     * @param lastName table attribute
-     * @param isOnline table attribute
-     * @param email table attribute
-     * @param isActive table attribute
+     * @param lastName  table attribute
+     * @param isOnline  table attribute
+     * @param email     table attribute
+     * @param isActive  table attribute
      */
     public User(String username, String password, String firstName, String lastName, boolean isOnline, String email, boolean isActive)
     {
@@ -128,6 +130,7 @@ public class User implements Serializable
 
     /**
      * Get table attribute username
+     * <p/>
      * @return username
      */
     public String getUsername()
@@ -137,7 +140,8 @@ public class User implements Serializable
 
     /**
      * Set table attribute username
-     * @param username 
+     * <p/>
+     * @param username
      */
     public void setUsername(String username)
     {
@@ -146,6 +150,7 @@ public class User implements Serializable
 
     /**
      * Set table attribute password
+     * <p/>
      * @param password table attribute
      */
     public void setPassword(String password)
@@ -155,6 +160,7 @@ public class User implements Serializable
 
     /**
      * Get table attribute firstName
+     * <p/>
      * @return firstName
      */
     public String getFirstName()
@@ -164,6 +170,7 @@ public class User implements Serializable
 
     /**
      * Set table attribute firstName
+     * <p/>
      * @param firstName table attribute
      */
     public void setFirstName(String firstName)
@@ -173,6 +180,7 @@ public class User implements Serializable
 
     /**
      * Get table attribute lastName
+     * <p/>
      * @return lastName
      */
     public String getLastName()
@@ -182,6 +190,7 @@ public class User implements Serializable
 
     /**
      * Set table attribute lastName
+     * <p/>
      * @param lastName table attribute
      */
     public void setLastName(String lastName)
@@ -191,6 +200,7 @@ public class User implements Serializable
 
     /**
      * Get table attribute isOnline
+     * <p/>
      * @return isOnline
      */
     public boolean getIsOnline()
@@ -200,6 +210,7 @@ public class User implements Serializable
 
     /**
      * Set table attribute isOnline
+     * <p/>
      * @param isOnline table attribute
      */
     public void setIsOnline(boolean isOnline)
@@ -209,6 +220,7 @@ public class User implements Serializable
 
     /**
      * Get table attribute phoneNumber
+     * <p/>
      * @return phoneNumber
      */
     public String getPhoneNumber()
@@ -218,6 +230,7 @@ public class User implements Serializable
 
     /**
      * Set table attribute phoneNumber
+     * <p/>
      * @param phoneNumber table attribute
      */
     public void setPhoneNumber(String phoneNumber)
@@ -227,6 +240,7 @@ public class User implements Serializable
 
     /**
      * Get table attribute email
+     * <p/>
      * @return email
      */
     public String getEmail()
@@ -236,6 +250,7 @@ public class User implements Serializable
 
     /**
      * Set table attribute email
+     * <p/>
      * @param email table attribute
      */
     public void setEmail(String email)
@@ -245,6 +260,7 @@ public class User implements Serializable
 
     /**
      * Get table attribute dateOfBirth
+     * <p/>
      * @return dateOfBirth
      */
     public Date getDateOfBirth()
@@ -254,6 +270,7 @@ public class User implements Serializable
 
     /**
      * Set table attribute dateOfBirth
+     * <p/>
      * @param dateOfBirth table attribute
      */
     public void setDateOfBirth(Date dateOfBirth)
@@ -263,6 +280,7 @@ public class User implements Serializable
 
     /**
      * Get table attribute isActive
+     * <p/>
      * @return isActive
      */
     public boolean getIsActive()
@@ -272,6 +290,7 @@ public class User implements Serializable
 
     /**
      * Set table attribute isActive
+     * <p/>
      * @param isActive table attribute
      */
     public void setIsActive(boolean isActive)
@@ -281,6 +300,7 @@ public class User implements Serializable
 
     /**
      * Get table attribute addressId
+     * <p/>
      * @return addressId
      */
     public Address getAddressId()
@@ -290,6 +310,7 @@ public class User implements Serializable
 
     /**
      * Set table attribute addressId
+     * <p/>
      * @param addressId table attribute
      */
     public void setAddressId(Address addressId)
@@ -299,6 +320,7 @@ public class User implements Serializable
 
     /**
      * Get table attribute userTypeId
+     * <p/>
      * @return userTypeId
      */
     public UserType getUserTypeId()
@@ -308,6 +330,7 @@ public class User implements Serializable
 
     /**
      * Set table attribute userTypeId
+     * <p/>
      * @param userTypeId table attribute
      */
     public void setUserTypeId(UserType userTypeId)
@@ -317,6 +340,7 @@ public class User implements Serializable
 
     /**
      * Get table attribute student
+     * <p/>
      * @return student
      */
     public Student getStudent()
@@ -326,16 +350,18 @@ public class User implements Serializable
 
     /**
      * Set table attribute student
+     * <p/>
      * @param student table attribute
      */
     public void setStudent(Student student)
     {
         this.student = student;
     }
-    
+
     /**
      * Get record location
-     * @return hash code 
+     * <p/>
+     * @return hash code
      */
     @Override
     public int hashCode()
@@ -344,12 +370,14 @@ public class User implements Serializable
         hash += (username != null ? username.hashCode() : 0);
         return hash;
     }
-    
+
     /**
      * Comparator
+     * <p/>
      * @param object object to be compared with
+     * <p/>
      * @return true if two object equal to each other, otherwise return false
-     */ 
+     */
     @Override
     public boolean equals(Object object)
     {
@@ -368,6 +396,7 @@ public class User implements Serializable
 
     /**
      * print username
+     * <p/>
      * @return username as a string
      */
     @Override

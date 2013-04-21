@@ -9,6 +9,13 @@
 .mainFxmlClass {
     /*-fx-background-color: #004400;*/
 }
+
+
+.text-area,.text-area:focused {
+    -fx-background-color: transparent, transparent, -fx-control-inner-background;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 3, 2, 2;
+}
 .login-label {
     -fx-font: bold 14pt "Segoe UI";
 }

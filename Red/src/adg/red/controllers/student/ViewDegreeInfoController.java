@@ -5,6 +5,7 @@
 package adg.red.controllers.student;
 
 import adg.red.controllers.BreadCrumbController;
+import adg.red.models.Course;
 import adg.red.models.Enrolment;
 import adg.red.models.Program;
 import adg.red.models.Registration;
@@ -45,11 +46,17 @@ public class ViewDegreeInfoController implements Initializable
     @FXML
     private Label lblProgramName;
     @FXML
+    private Label lblDeptName;
+    @FXML
     private ProgressBar pbCreditProgress;
     @FXML
     private Label lblCredits;
     @FXML
     private TableColumn<Enrolment, Integer> colCourseCredit;
+    @FXML
+    private TableColumn<Course, Integer> colCredit;
+    @FXML
+    private TableColumn<Course, String> colDegreeCourse;
 
     /**
      * Initializes the controller class.
@@ -68,6 +75,7 @@ public class ViewDegreeInfoController implements Initializable
         int sumCreditsByStudentId = Enrolment.getSumCreditsByStudentId(student.getStudentId());
         Program program = Registration.getCurrentRegistration(student).getProgram();
         lblProgramName.setText(program.getProgramPK().getProgramName());
+        lblDeptName.setText("Department of " + program.getDepartment().getName());
         lblCredits.setText(sumCreditsByStudentId + "/" + program.getCreditsRequired());
         pbCreditProgress.setProgress((1.0 * sumCreditsByStudentId) / program.getCreditsRequired());
         populateEnrolmentTable(student);
@@ -113,5 +121,7 @@ public class ViewDegreeInfoController implements Initializable
         colScore.setText(LocaleManager.get(95));
         colGrade.setText(LocaleManager.get(96));
         colResult.setText(LocaleManager.get(97));
+        colDegreeCourse.setText(LocaleManager.get(93));
+        colCredit.setText(LocaleManager.get(103));
     }
 }

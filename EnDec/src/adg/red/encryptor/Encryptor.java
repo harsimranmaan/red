@@ -2,7 +2,7 @@
  * The Encryptor class is responsible for encrypt and decrypt input string.
  *
  */
-package adg.red.utils;
+package adg.red.encryptor;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -32,14 +32,7 @@ public class Encryptor
 
     static
     {
-
-
-        // SecretKeyFactory factory = SecretKeyFactory.getInstance("AES");
         secretKey = new SecretKeySpec(byteKey, "AES");
-        // String pass1 = "adgRedSecretKeyForEncryptionSOMEadgRedSecretKeyForEncryptionSOME";
-        // byte[] pass = pass1.getBytes();
-        //key = factory.generateSecret(new DESKeySpec(pass));
-
     }
 
     /**
@@ -110,7 +103,7 @@ public class Encryptor
             base64OutputStream.write(byteCipherText);
             base64OutputStream.close();
             cipherText = baos.toString();
-            System.out.println("\n Plain Data : " + literal + " \n Cipher Data : " + cipherText);
+
         }
         catch (Exception ex)
         {
@@ -138,10 +131,7 @@ public class Encryptor
             int size = b64is.read(tmp);
             byte[] res = new byte[size];
             System.arraycopy(tmp, 0, res, 0, size);
-
             decryptedText = new String(aesCipher.doFinal(res));
-
-            System.out.println("Cipher Data : " + cipherText + " \n Decrypted Data : " + decryptedText);
         }
         catch (Exception ex)
         {

@@ -11,8 +11,18 @@
 <AnchorPane id="AnchorPane" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="10" AnchorPane.bottomAnchor="10" AnchorPane.rightAnchor="10" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.student.ViewDegreeInfoController">
     <VBox spacing="5" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="10" AnchorPane.bottomAnchor="10" AnchorPane.rightAnchor="10" >
         <children>
-            <Label fx:id="lblProgramName" style="-fx-font-weight : bold;"  />
-            <Label text="Credits Earned :" />
+            <Label fx:id="lblProgramName" />
+            <Label fx:id="lblDeptName" />
+            <Label text="Course List :" style="-fx-font-weight : bold;" />
+
+            <TableView fx:id="tabViewCourseList" prefHeight="466.0" prefWidth="642.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <columns>
+                    <TableColumn minWidth="20.0" prefWidth="102" resizable="true" fx:id="colDegreeCourse" />
+                    <TableColumn minWidth="20.0" prefWidth="102" resizable="true" fx:id="colCredit" />
+                </columns>
+            </TableView>
+
+            <Label text="Credits Earned :" style="-fx-font-weight : bold;" />
             <HBox spacing="10"  AnchorPane.topAnchor="5" alignment="CENTER_LEFT" >
                 <ProgressBar fx:id="pbCreditProgress" prefWidth="200" />
                 <Label fx:id="lblCredits"  />

@@ -71,6 +71,7 @@ public class LoginController implements Initializable
             loginErrLbl.setText(LocaleManager.get(9));
             loginErrLbl.setVisible(true);
         }
+        Context.getInstance().setWasLoggedIn(false);
     }
 
     /**
