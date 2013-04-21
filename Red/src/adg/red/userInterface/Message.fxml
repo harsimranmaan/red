@@ -26,7 +26,7 @@
                 </AnchorPane>
                 <AnchorPane minHeight="200" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.bottomAnchor="0.0">
                     <children>
-                        <TextArea style="-fx-font-weight:bold;"  editable="false" wrapText="true" prefHeight="48"    id="txtMessageSubject" fx:id="txtSubject"  AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="40.0" >
+                        <TextArea style="-fx-font-weight:bold;"  editable="false" wrapText="true" prefHeight="48"   fx:id="txtSubject" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="40.0" >
                         </TextArea>
                         <TextArea editable="false" wrapText="true"  fx:id="txtMessageBody" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="88.0" />
 
