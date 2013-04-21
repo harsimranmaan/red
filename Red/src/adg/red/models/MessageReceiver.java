@@ -201,4 +201,16 @@ public class MessageReceiver implements Serializable
     {
         RedEntityManager.save(this);
     }
+    
+    public static int getUnreadMessageByReceiverId(String receiverId)
+    {
+        List<MessageReceiver> msgList = findMessagesReceivedByReceiverId(receiverId);
+        int nUnread = 0;
+        for (MessageReceiver m : msgList)
+        {
+            if (m.getStatusId().getStatusId() == 2)
+                nUnread++;
+        }
+        return nUnread;
+    }
 }
