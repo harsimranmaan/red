@@ -387,8 +387,7 @@ public class Section implements Serializable
 
     /**
      *
-     * @param fac
-     * <p/>
+     * @param fac <p/>
      * @return
      */
     public static List<Section> getByFacultyMemberId(FacultyMember fac)
@@ -398,8 +397,7 @@ public class Section implements Serializable
 
     /**
      *
-     * @param fac
-     * <p/>
+     * @param fac <p/>
      * @return
      */
     public static List<Section> getByFacultyMemberIdAndSectionTypeId100(FacultyMember fac)
@@ -409,8 +407,7 @@ public class Section implements Serializable
 
     /**
      *
-     * @param course
-     * <p/>
+     * @param course <p/>
      * @return
      */
     public static List<Section> getByCourse(Course course)
@@ -421,8 +418,7 @@ public class Section implements Serializable
 
     /**
      *
-     * @param course
-     * <p/>
+     * @param course <p/>
      * @return
      */
     public static List<Section> getByCourseAndTermYearAndMore(Course course)
@@ -497,5 +493,13 @@ public class Section implements Serializable
     public void setTotalSeats(int totalSeats)
     {
         this.totalSeats = totalSeats;
+    }
+
+    /**
+     * Save
+     */
+    public void save()
+    {
+        RedEntityManager.save(this);
     }
 }

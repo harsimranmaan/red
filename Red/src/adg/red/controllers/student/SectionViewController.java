@@ -100,6 +100,7 @@ public class SectionViewController implements Initializable
     @FXML
     private ListView<CoRequisite> lsvOutstandCoReq;
     private Enrolment enrolment = null;
+    private Section section = null;
     private EnrolmentPK enrolmentPk;
     @FXML
     private Label lblRegDLResponse;
@@ -175,6 +176,10 @@ public class SectionViewController implements Initializable
         lblResponse.setText(LocaleManager.get(10));
         lblResponse.setVisible(true);
         toggleRegDropButtons();
+
+        section.setTotalSeats(section.getTotalSeats() - 1);
+        section.save();
+
     }
 
     /**
@@ -222,7 +227,7 @@ public class SectionViewController implements Initializable
         BreadCrumbController.renderBreadCrumb("student/HomeView|student/BrowseCourse|student/CourseListView|student/CourseView|student/SectionView");
         try
         {
-            Section section = Context.getInstance().getSelectedSection();
+            section = Context.getInstance().getSelectedSection();
             enrolmentPk = new EnrolmentPK(Student.getStudentByUsername(Context.getInstance().getCurrentUser()).getStudentId(),
                     section.getSectionId(),
                     section.getCourse().getCoursePK().getCourseNumber(),
@@ -244,6 +249,13 @@ public class SectionViewController implements Initializable
             {
                 btnRegister.setDisable(true);
                 lblResponse.setText(LocaleManager.get(35));
+                lblResponse.setVisible(true);
+            }
+            // check if there is still a seat available
+            else if (!cheackSeats())
+            {
+                btnRegister.setDisable(true);
+                lblResponse.setText(LocaleManager.get(109));
                 lblResponse.setVisible(true);
             }
             // check for deadlines
@@ -406,6 +418,23 @@ public class SectionViewController implements Initializable
     }
 
     /**
+     * The function checks for seat available in the section.
+     * <p/>
+     * @return true if there is a seat available, false otherwise
+     */
+    private boolean cheackSeats()
+    {
+        if (Context.getInstance().getSelectedSection().getTotalSeats() > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
      * The function checks for register and drop deadlines, and sets the
      * appropriate buttons and labels.
      * <p/>
@@ -434,7 +463,8 @@ public class SectionViewController implements Initializable
 
     /**
      * The function check whether the student is already enrolled in the
-     * selected EnrolmentPK or not
+     * selected EnrolmentPK or not. Note that termYear, sessionId, SectionTypeId
+     * are also considered.
      * <p/>
      * @param enrolPk the EnrolmentPK that will be checking
      * <p/>
