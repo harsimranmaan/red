@@ -25,6 +25,7 @@ public class Context
 
     private final static Context instance;
     private boolean loggedIn;
+    private boolean searching;
     private Label lblTitle;
     private Course userSelectCourse;
     private Department userSelectDepartment;
@@ -36,6 +37,7 @@ public class Context
     private Pane breadCrumb;
     //Singleton
     private List<SectionTimeTable> sectionTimeTableList;
+    private List<Course> searchResultList;
     private FacultyAction facultyAction;
 
     private Context()
@@ -298,5 +300,25 @@ public class Context
     public FacultyAction getFacultyAction()
     {
         return this.facultyAction;
+    }
+
+    public boolean isSearching()
+    {
+        return searching;
+    }
+
+    public void setSearching(boolean isSearching)
+    {
+        this.searching = isSearching;
+    }
+
+    public List<Course> getSearchResultList()
+    {
+        return searchResultList;
+    }
+
+    public void setSearchResultList(List<Course> searchResultList)
+    {
+        this.searchResultList = searchResultList;
     }
 }

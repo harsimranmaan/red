@@ -213,11 +213,28 @@ public class Course implements Serializable
                 .getResultList();
     }
 
-    public static Course getCourseByCourseNumer(int courseNumber)
+    public static List<Course> getByDepartmentId(String deptId)
     {
-        return (Course) RedEntityManager.getEntityManager()
+        return RedEntityManager.getEntityManager()
+                .createNamedQuery("Course.findByDepartmentId")
+                .setParameter("departmentId", deptId)
+                .getResultList();
+    }
+
+    public static List<Course> getByDepartmentIdAndCourseNumber(String deptId, int courseNumber)
+    {
+        return RedEntityManager.getEntityManager()
+                .createNamedQuery("Course.findByDepartmentAndCourseNumber")
+                .setParameter("departmentId", deptId)
+                .setParameter("courseNumber", courseNumber)
+                .getResultList();
+    }
+
+    public static List<Course> getCourseByCourseNumer(int courseNumber)
+    {
+        return RedEntityManager.getEntityManager()
                 .createNamedQuery("Course.findByCourseNumber")
                 .setParameter("courseNumber", courseNumber)
-                .getSingleResult();
+                .getResultList();
     }
 }

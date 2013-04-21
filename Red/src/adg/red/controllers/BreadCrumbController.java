@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.controllers;
 
@@ -63,7 +63,9 @@ public class BreadCrumbController implements Initializable
 
     /**
      * initializes the name of views by locality.
+     * <p/>
      * @param key the name displayed on each view
+     * <p/>
      * @return name of each view
      */
     private String getDisplayNameByKey(String key)
@@ -121,6 +123,9 @@ public class BreadCrumbController implements Initializable
             case "student/ViewDegreeInfo":
                 name = LocaleManager.get(85);
                 break;
+            case "student/SearchResult":
+                name = LocaleManager.get(108);
+                break;
 
             default:
                 break;
@@ -130,6 +135,7 @@ public class BreadCrumbController implements Initializable
 
     /**
      * get path name and load the view
+     * <p/>
      * @param path path of the view name
      */
     public static void renderBreadCrumb(String path)

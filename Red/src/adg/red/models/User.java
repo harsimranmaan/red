@@ -446,6 +446,32 @@ public class User implements Serializable
         }
     }
 
+    public static List<User> getUserByFirstName(String firstName) throws Exception
+    {
+        List<User> userList = RedEntityManager.getEntityManager().createNamedQuery("User.findByFirstName").setParameter("firstName", firstName).getResultList();
+        if (userList.size() >= 1)
+        {
+            return userList;
+        }
+        else
+        {
+            throw new Exception(LocaleManager.get(5));
+        }
+    }
+
+    public static List<User> getUserByLastName(String lastName) throws Exception
+    {
+        List<User> userList = RedEntityManager.getEntityManager().createNamedQuery("User.findByLastName").setParameter("lastName", lastName).getResultList();
+        if (userList.size() >= 1)
+        {
+            return userList;
+        }
+        else
+        {
+            throw new Exception(LocaleManager.get(5));
+        }
+    }
+
     public FacultyMember getFacultyMember()
     {
         return facultyMember;
