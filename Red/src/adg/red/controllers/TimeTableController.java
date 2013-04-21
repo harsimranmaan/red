@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.controllers;
 
@@ -36,6 +36,7 @@ public class TimeTableController implements Initializable
 
     /**
      * Initialize grid pane
+     * <p/>
      * @param dayListSize size of the days
      */
     private void initGrid(int dayListSize)
@@ -67,24 +68,33 @@ public class TimeTableController implements Initializable
 
     /**
      * Position the time labels
+     * <p/>
      * @param length course durations
-     * @param table section timetable
-     * @param cols the column that the time label positioned
-     * @param row the row that the time label positioned
+     * @param table  section timetable
+     * @param cols   the column that the time label positioned
+     * @param row    the row that the time label positioned
      */
-    private void pasteLabels(int length, SectionTimeTable table, int cols, int row)
+    private void pasteLabels(int length, SectionTimeTable table, int cols, int row, boolean overlap)
     {
         for (int rowLength = 0; rowLength < length / 30; rowLength++)
         {
             Label label = new Label(table.getSectionTimeTablePK().getDepartmentId() + " " + table.getSectionTimeTablePK().getCourseNumber());
-            label.setTextFill(Color.RED);
-            label.setStyle("-fx-background-color: #FFE4E4;");
+            label.setTextFill(Color.WHITESMOKE);
+            if (overlap)
+            {
+                label.setStyle("-fx-background-color: #A94A48;");
+            }
+            else
+            {
+                label.setStyle("-fx-background-color: #006DCC;");
+            }
             gdpTimeTable.add(label, cols, row++);
         }
     }
 
     /**
      * Initialize the weekday headers of the timetable
+     * <p/>
      * @param dayList week days
      */
     private void initHeader(List<WeekDay> dayList)
@@ -113,17 +123,21 @@ public class TimeTableController implements Initializable
 
     /**
      * Populate section timetable with the input timetable list
-     * @param timeTableList the timetable list that initialized by the context 
-     * @throws NumberFormatException 
+     * <p/>
+     * @param timeTableList the timetable list that initialized by the context
+     * <p/>
+     * @throws NumberFormatException
      */
     private void populateTimeTable(List<SectionTimeTable> timeTableList) throws NumberFormatException
     {
         if (timeTableList != null)
         {
-            int cols;
-
+            int cols, lastCol = 1;
+            int toRow = 0;
             for (SectionTimeTable table : timeTableList)
             {
+                boolean overlap = false;
+
                 cols = table.getSectionTimeTablePK().getDayId() % 100 + 1;
                 int hour = Integer.parseInt(DateFormatter.formatHour(table.getSectionTimeTablePK().getStartTime()));
                 int mins = Integer.parseInt(DateFormatter.formatMins(table.getSectionTimeTablePK().getStartTime()));
@@ -134,7 +148,15 @@ public class TimeTableController implements Initializable
                 {
                     if (hour == baseHr && mins < 30)
                     {
-                        pasteLabels(length, table, cols, row);
+                        if (cols == lastCol && row <= toRow)
+                        {
+                            System.out.println("Match found");
+                            overlap = true;
+                        }
+                        lastCol = cols;
+
+                        pasteLabels(length, table, cols, row, overlap);
+                        toRow = row + (length / 30) - 1;
                         break;
                     }
                     else
@@ -144,7 +166,15 @@ public class TimeTableController implements Initializable
 
                     if (hour == baseHr && mins >= 30)
                     {
-                        pasteLabels(length, table, cols, row);
+                        if (cols == lastCol && row <= toRow)
+                        {
+                            overlap = true;
+                            System.out.println("Match found");
+                        }
+                        lastCol = cols;
+
+                        pasteLabels(length, table, cols, row, overlap);
+                        toRow = row + (length / 30) - 1;
                         break;
                     }
                     else
@@ -158,8 +188,9 @@ public class TimeTableController implements Initializable
 
     /**
      * Initializes the controller class.
+     * <p/>
      * @param url the URL
-     * @param rb the ResourceBundle
+     * @param rb  the ResourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
