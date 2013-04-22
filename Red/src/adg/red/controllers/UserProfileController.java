@@ -75,14 +75,14 @@ public class UserProfileController implements Initializable
         view.loadView("ChangePassword");   
         
         txtFullName = new Label("Full name: " + currentUser.getFirstName() + " " + currentUser.getLastName());
-        txtFullName.setText(LocaleManager.get(137) + currentUser.getFirstName() + " " + currentUser.getLastName());
+        txtFullName.setText(LocaleManager.get(137) + ": " + currentUser.getFirstName() + " " + currentUser.getLastName());
         
         if (currentUser.getUserTypeId().getName().equals("Student"))
         {
             try {
                 Student student = Student.getStudentByUsername(currentUser);
                 txtUserType = new Label("Student ID: " + student.getStudentId());
-                txtUserType.setText(LocaleManager.get(138) + student.getStudentId());
+                txtUserType.setText(LocaleManager.get(138) + ": " + student.getStudentId());
             } catch (Exception ex) {
                 Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -112,14 +112,14 @@ public class UserProfileController implements Initializable
             txtUserType = new Label("Wrong user name");
         }
         
-        txtAddressFirst = new CustomTextBox(TextBoxType.Any, "Addrees 1: ", 129, "Please enter a valid address", 130);
-        txtAddressSecond = new CustomTextBox(TextBoxType.Any, "Addrees 2: ", 131, "Please enter a valid address", 130);
-        txtCity = new CustomTextBox(TextBoxType.Alpha, "City: ", 122, "Please enter a valid City", 123);
-        txtProvince = new CustomTextBox(TextBoxType.Alpha, "Province: ", 132, "Please enter a valid Province", 133);
-        txtCountry = new CustomTextBox(TextBoxType.Alpha, "Country: ", 124, "Please enter a valid Country", 125);
-        txtEmail = new CustomTextBox(TextBoxType.Email, "Email: ", 126, "Please enter a valid Email", 127);
-        txtPhone = new CustomTextBox(TextBoxType.Phone, "Phone: ", 128, "Please enter a valid Phone", 134);
-        txtPostalCode = new CustomTextBox(TextBoxType.PostalCode, "Postal Code: ", 135, "Please enter a valid Postal Code", 136);
+        txtAddressFirst = new CustomTextBox(TextBoxType.Any, LocaleManager.get(129) + ":", LocaleManager.get(130));
+        txtAddressSecond = new CustomTextBox(TextBoxType.Any, LocaleManager.get(131) + ":", LocaleManager.get(130));
+        txtCity = new CustomTextBox(TextBoxType.Alpha, LocaleManager.get(122) + ":", LocaleManager.get(123));
+        txtProvince = new CustomTextBox(TextBoxType.Alpha, LocaleManager.get(132) + ":", LocaleManager.get(133));
+        txtCountry = new CustomTextBox(TextBoxType.Alpha, LocaleManager.get(124) + ":", LocaleManager.get(125));
+        txtEmail = new CustomTextBox(TextBoxType.Email, LocaleManager.get(126) + ":", LocaleManager.get(127));
+        txtPhone = new CustomTextBox(TextBoxType.Phone, LocaleManager.get(128) + ":", LocaleManager.get(134));
+        txtPostalCode = new CustomTextBox(TextBoxType.PostalCode, LocaleManager.get(135) + ":", LocaleManager.get(136));
         vBoxHolder.getChildren().addAll(txtFullName, txtUserType, txtAddressFirst, txtAddressSecond, txtCity, txtProvince, txtCountry, txtPostalCode, txtPhone, txtEmail);
         showUserProfile();
     }
