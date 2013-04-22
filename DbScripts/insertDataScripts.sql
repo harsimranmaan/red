@@ -22,7 +22,6 @@ VALUES ('Fall'),('Winter'),('Spring'),('Summer');
 UNLOCK TABLES;
 
 
-
 /* insert data into 'UserType' table */
 LOCK TABLES `UserType` WRITE;
 
@@ -40,7 +39,6 @@ INSERT INTO `GradingScheme` (`name`)
 VALUES ('Percentage'),('Pass/Fail'),('GPA');
 
 UNLOCK TABLES;
-
 
 
 /* insert data into 'SectionType' table */
@@ -154,7 +152,6 @@ UNLOCK TABLES;
 
 
 /* insert data into 'Faculty' table */
-/* SET foreign_key_checks = 0;*/
 LOCK TABLES `Faculty` WRITE;
 
 INSERT INTO `Faculty` (`name`, `phone`, `website`) 
@@ -163,7 +160,6 @@ VALUES
 ('Faculty of Medical Sciences', '23456', 'www.foms.com');
 
 UNLOCK TABLES;
-/* SET foreign_key_checks = 1; */
 
 
 /* insert data into 'Department' table */
@@ -233,18 +229,6 @@ VALUES
 
 UNLOCK TABLES;
 
-
-/*  
-update headOfFacultyId of Faculty table
-
-UPDATE Faculty
-SET headOfFacultyId = '100'
-where facultyId = '100';
-
-UPDATE Faculty
-SET headOfFacultyId = '101'
-where facultyId = '101';
-*/
 
 /* insert data into 'Administrator' table */
 LOCK TABLES `Administrator` WRITE;
@@ -622,20 +606,6 @@ VALUES
 UNLOCK TABLES;
 
 
-/* insert data into 'MessagePriority' table 
-LOCK TABLES `MessagePriority` WRITE;
-
-INSERT INTO `MessagePriority` 
-(`messagePriorityId`, `name`) 
-VALUES 
-('1', 'Normal'),
-('2', 'Important'),
-('3', 'Urgent');
-
-UNLOCK TABLES;
-*/
-
-
 /* insert data into 'MessageStatus' table */
 LOCK TABLES `MessageStatus` WRITE;
 
@@ -703,108 +673,6 @@ VALUES
 UNLOCK TABLES;
 
 
-/* insert data into 'Locale' table */
-LOCK TABLES `Locale` WRITE;
-
-INSERT INTO `Locale`
-(`id`,`name`)
-VALUES
-('5', 'chCH'),
-('1', 'enUS'),
-('2', 'hiIN'),
-('3', 'pbIN'),
-('4', 'thTH');
-
-UNLOCK TABLES;
-
-
-/* insert data into 'ResourceDictionary' table */
-LOCK TABLES `ResourceDictionary` WRITE;
-
-INSERT INTO `ResourceDictionary`
-(`resourceId`,`LocaleId`,`textString`)
-VALUES
-('1', '1', 'Login'),
-('1', '4', 'เข้าใช้งาน'),
-('1', '5', '登录'),
-('2', '1', 'Forgot Password'),
-('2', '4', 'ลืมรหัสผ่าน'),
-('2', '5', '忘记密码'),
-('3', '1', 'Username'),
-('3', '4', 'ชื่อผู้ใช้งาน'),
-('3', '5', '用户名'),
-('4', '1', 'Password'),
-('4', '4', 'รหัสผ่าน'),
-('4', '5', '密码'),
-('5', '1', 'Invalid Username/Password'),
-('5', '4', 'ชื่อผู้ใช้งาน/รหัสผ่าน ไม่ถูกต้อง'),
-('5', '5', '用户名/密码错误'),
-('6', '1', 'User is already logged in'),
-('6', '4', 'คุณได้เข้าสู่ระบบเป็นที่เรียบร้อยแล้ว'),
-('6', '5', '用户已登录'),
-('7', '1', 'Browse Course'),
-('7', '4', 'เลือกวิชาเรียน'),
-('7', '5', '课程导航'),
-('8', '1', 'Logout'),
-('8', '4', 'ออกจากระบบ'),
-('8', '5', '退出系统'),
-('9', '1', 'Your have been successfully logged out'),
-('9', '4', 'คุณได้ออกจากระบบเป็นที่เรียบร้อยแล้ว'),
-('9', '5', '你已成功退出系统'),
-('10', '1', 'You have been successfully enrolled to the section'),
-('10', '4', 'คุณได้ทำการลงทะเบียนเป็นที่เรียบร้อยแล้ว'),
-('10', '5', '你已经成功注册该课段'),
-('11', '1', 'Password has been sucessfully updated'),
-('11', '4', 'รหัสผ่านได้เปลี่ยนเป็นที่เรียบร้อยแล้ว'),
-('11', '5', '密码已更改成功'),
-('12', '1', 'New passwords dont match'),
-('12', '4', 'รหัสผ่านใหม่ไม่ตรงกัน'),
-('12', '5', '新密码输入错误'),
-('13', '1', 'Old Password doesnt match'),
-('13', '4', 'รหัสผ่านเก่าไม่ตรงกัน'),
-('13', '5', '旧密码输入错误'),
-('14', '1', 'Glossary'),
-('14', '4', 'อภิธานศัพท์'),
-('14', '5', '词汇表'),
-('15', '1', 'User Profile'),
-('15', '4', 'ข้อมูลส่วนตัวผู้ใช้'),
-('15', '5', '用户资料'),
-('16', '1', 'FAQ'),
-('16', '4', 'คำถามที่พบบ่อย'),
-('16', '5', 'FAQ'),
-('17', '1', 'Manage Course'),
-('17', '4', 'จัดการวิชาเรียน'),
-('18', '1', 'View Timetable'),
-('18', '4', 'ดูตารางเรียน'),
-('19', '1', 'View Enrolment'),
-('19', '4', 'ดูการลงทะเบียน'),
-('20', '1', 'View Degree Info'),
-('20', '4', 'ดูข้อมูลปริญญา'),
-('21', '1', 'Personal Info'),
-('21', '4', 'ข้อมูลส่วนตัวผู้ใช้'),
-('22', '1', 'Messages'),
-('22', '4', 'ข้อความ'),
-('23', '1', 'Student'),
-('23', '4', 'นักเรียน'),
-('24', '1', 'Home'),
-('24', '4', 'หน้าแรก'),
-('25', '1', 'Search'),
-('25', '4', 'ค้นหา'),
-('26', '1', 'Go'),
-('26', '4', 'ไปยัง'),
-('27', '1', 'Exit'),
-('27', '4', 'ออกจาก'),
-('28', '1', 'File'),
-('28', '4', 'ไฟล์'),
-('29', '1', 'Help'),
-('29', '4', 'ช่วยเหลือ'),
-('30', '1', 'Close'),
-('30', '4', 'ปิด'),
-('31', '1', 'About'),
-('31', '4', 'เกี่ยวกับ');
-
-UNLOCK TABLES;
-
 /* insert data into 'ProgramCourseList' table */
 LOCK TABLES `ProgramCourseList` WRITE;
 
@@ -816,14 +684,4 @@ VALUES
 ('Master of Software Systems', 'CICS', '520', 'CICS');
 
 UNLOCK TABLES;
-
-/* insert data into '' table 
-LOCK TABLES `` WRITE;
-
-
-UNLOCK TABLES;
-*/
-
-
-
 
