@@ -51,9 +51,18 @@
                         <Image url="@images/redLogo.png" preserveRatio="true" smooth="true" />
                     </image>
                 </ImageView>
-                <Pane fx:id="searchPane" AnchorPane.topAnchor="7.0" prefHeight="24.0" AnchorPane.rightAnchor="20.0" />
+
+                <Pane fx:id="searchPane" AnchorPane.topAnchor="7.0" prefHeight="24.0" AnchorPane.rightAnchor="120.0" />
+                <Label text="LFC" AnchorPane.topAnchor="2.0" AnchorPane.rightAnchor="50.0" styleClass="error-label" />
+                <Label text="University" AnchorPane.topAnchor="20.0" AnchorPane.rightAnchor="50.0" styleClass="error-label" />
+                <ImageView fitHeight="40" fitWidth="40" AnchorPane.rightAnchor="10.0" layoutY="0.0" preserveRatio="true">
+                    <image>
+                        <Image url="@images/university.jpg" preserveRatio="true" smooth="true" />
+                    </image>
+                </ImageView>
             </children>
         </AnchorPane>
+
         <AnchorPane fx:id="viewArea"  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="64"   />
     </children>
     <stylesheets>
