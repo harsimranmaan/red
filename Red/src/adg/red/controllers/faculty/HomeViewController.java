@@ -41,14 +41,12 @@ public class HomeViewController implements Initializable
         Context.getInstance().setTitle(LocaleManager.get(24));
         BreadCrumbController.renderBreadCrumb("faculty/HomeView");
         nameLabel.setText("Hi " + currentUser.getFirstName() + ", welcome to the RED enrolment system.");
-        nameLabel.setFont(Font.font ("Arial", 20));
-        //nameLabel.setTextFill(Color.web("#000000"));
+
         int nUnread = MessageReceiver.getUnreadMessageByReceiverId(currentUser.getUsername());
         if (nUnread <= 1)
             msgLabel.setText("You have " + nUnread + " unread message.");
         else
             msgLabel.setText("You have " + nUnread + " unread messages.");
-        msgLabel.setFont(Font.font ("Arial", 20));
-        //msgLabel.setTextFill(Color.web("#000000"));
+
     }
 }

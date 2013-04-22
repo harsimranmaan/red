@@ -33,6 +33,7 @@ public class TimeTableController implements Initializable
 
     @FXML
     private GridPane gdpTimeTable;
+    private String lastLabelText = "";
 
     /**
      * Initialize grid pane
@@ -74,22 +75,28 @@ public class TimeTableController implements Initializable
      * @param cols   the column that the time label positioned
      * @param row    the row that the time label positioned
      */
-    private void pasteLabels(int length, SectionTimeTable table, int cols, int row, boolean overlap)
+    private void pasteLabels(int length, SectionTimeTable table, int cols, int row, int overlap)
     {
+        String labelText = "";
+        System.out.println(overlap);
         for (int rowLength = 0; rowLength < length / 30; rowLength++)
         {
-            Label label = new Label(table.getSectionTimeTablePK().getDepartmentId() + " " + table.getSectionTimeTablePK().getCourseNumber());
-            label.setTextFill(Color.WHITESMOKE);
-            if (overlap)
+            labelText = table.getSectionTimeTablePK().getDepartmentId() + " " + table.getSectionTimeTablePK().getCourseNumber();
+            Label label = new Label();
+            if (overlap > rowLength)
             {
-                label.setStyle("-fx-background-color: #A94A48;");
+                label.setText(lastLabelText + " " + labelText);
+                label.getStyleClass().add("timeTableView-overlap-label");
             }
             else
             {
-                label.setStyle("-fx-background-color: #006DCC;");
+                label.setText(labelText);
+                label.getStyleClass().add("timeTableView-label");
             }
+            label.setTextFill(Color.WHITESMOKE);
             gdpTimeTable.add(label, cols, row++);
         }
+        lastLabelText = labelText;
     }
 
     /**
@@ -136,7 +143,7 @@ public class TimeTableController implements Initializable
             int toRow = 0;
             for (SectionTimeTable table : timeTableList)
             {
-                boolean overlap = false;
+                int overlap = 0;
 
                 cols = table.getSectionTimeTablePK().getDayId() % 100 + 1;
                 int hour = Integer.parseInt(DateFormatter.formatHour(table.getSectionTimeTablePK().getStartTime()));
@@ -150,8 +157,7 @@ public class TimeTableController implements Initializable
                     {
                         if (cols == lastCol && row <= toRow)
                         {
-                            System.out.println("Match found");
-                            overlap = true;
+                            overlap = toRow - row + 1;
                         }
                         lastCol = cols;
 
@@ -168,8 +174,7 @@ public class TimeTableController implements Initializable
                     {
                         if (cols == lastCol && row <= toRow)
                         {
-                            overlap = true;
-                            System.out.println("Match found");
+                            overlap = toRow - row + 1;
                         }
                         lastCol = cols;
 
