@@ -10,6 +10,7 @@ import adg.red.models.User;
 import adg.red.session.Context;
 import adg.red.utils.ViewLoader;
 import adg.red.locale.LocaleManager;
+import adg.red.models.skeleton.ILocalizable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ import javafx.scene.control.TextField;
  * <p/>
  * @author harsimran.maan
  */
-public class SearchBoxController implements Initializable
+public class SearchBoxController implements Initializable, ILocalizable
 {
 
     @FXML
@@ -36,14 +37,19 @@ public class SearchBoxController implements Initializable
     @FXML
     private TextField txtSearch;
 
+    public void localize()
+    {
+        lblSearch.setText(LocaleManager.get(25) + ":");
+        btnGo.setText(LocaleManager.get(26));
+    }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        lblSearch.setText(LocaleManager.get(25) + ":");
-        btnGo.setText(LocaleManager.get(26));
+        localize();
     }
 
     /**

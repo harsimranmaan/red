@@ -7,6 +7,7 @@ package adg.red.controllers;
 import adg.red.models.SectionTimeTable;
 import adg.red.models.WeekDay;
 import adg.red.locale.LocaleManager;
+import adg.red.models.skeleton.ILocalizable;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -28,7 +29,7 @@ import javafx.scene.paint.Color;
  * <p/>
  * @author Jaspreet Thind
  */
-public class TimeTableController implements Initializable
+public class TimeTableController implements Initializable, ILocalizable
 {
 
     @FXML
@@ -78,7 +79,6 @@ public class TimeTableController implements Initializable
     private void pasteLabels(int length, SectionTimeTable table, int cols, int row, int overlap)
     {
         String labelText = "";
-        System.out.println(overlap);
         for (int rowLength = 0; rowLength < length / 30; rowLength++)
         {
             labelText = table.getSectionTimeTablePK().getDepartmentId() + " " + table.getSectionTimeTablePK().getCourseNumber();
@@ -201,7 +201,7 @@ public class TimeTableController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         BreadCrumbController.renderBreadCrumb(Context.getInstance().getCurrentUser().getUserTypeId().getName().toLowerCase() + "/HomeView|TimeTable");
-        Context.getInstance().setTitle(LocaleManager.get(68));
+        localize();
         List<SectionTimeTable> timeTableList = Context.getInstance().getTimeTable();
 
         List<WeekDay> dayList = WeekDay.getAllWeekDay();
@@ -212,5 +212,11 @@ public class TimeTableController implements Initializable
         populateTimeTable(timeTableList);
 
 
+    }
+
+    @Override
+    public void localize()
+    {
+        Context.getInstance().setTitle(LocaleManager.get(68));
     }
 }

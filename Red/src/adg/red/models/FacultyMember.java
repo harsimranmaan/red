@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +18,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,12 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries(
         {
     @NamedQuery(name = "FacultyMember.findAll", query = "SELECT f FROM FacultyMember f"),
-    @NamedQuery(name = "FacultyMember.findByFacultyMemberId", query = "SELECT f FROM FacultyMember f WHERE f.facultyMemberId = :facultyMemberId"),
-    @NamedQuery(name = "FacultyMember.findByTitle", query = "SELECT f FROM FacultyMember f WHERE f.title = :title"),
-    @NamedQuery(name = "FacultyMember.findByDateOfJoining", query = "SELECT f FROM FacultyMember f WHERE f.dateOfJoining = :dateOfJoining"),
-    @NamedQuery(name = "FacultyMember.findByHighestDegree", query = "SELECT f FROM FacultyMember f WHERE f.highestDegree = :highestDegree"),
-    @NamedQuery(name = "FacultyMember.findByIsActive", query = "SELECT f FROM FacultyMember f WHERE f.isActive = :isActive"),
-    @NamedQuery(name = "FacultyMember.findByUserName", query = "SELECT f FROM FacultyMember f WHERE f.username = :username")
+    @NamedQuery(name = "FacultyMember.findByFacultyMemberId", query = "SELECT f FROM FacultyMember f WHERE f.facultyMemberId = :facultyMemberId")
 })
 public class FacultyMember implements Serializable
 {
@@ -185,19 +178,6 @@ public class FacultyMember implements Serializable
     public String toString()
     {
         return "adg.red.models.FacultyMember[ facultyMemberId=" + facultyMemberId + " ]";
-    }
-
-    public static FacultyMember getFacultMemberByUserName(User userName) throws Exception
-    {
-        List<FacultyMember> facultyMemberList = RedEntityManager.getEntityManager().createNamedQuery("FacultyMember.findByUserName").setParameter("username", userName).getResultList();
-        if (facultyMemberList.size() == 1)
-        {
-            return facultyMemberList.get(0);
-        }
-        else
-        {
-            throw new Exception("Invalid user name");
-        }
     }
 
     public static FacultyMember getFacultMemberByName(String userName)

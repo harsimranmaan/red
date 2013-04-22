@@ -224,12 +224,13 @@ public class SectionViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        Context.getInstance().setTitle(LocaleManager.get(62));
+        final Context context = Context.getInstance();
+        context.setTitle(LocaleManager.get(62));
         BreadCrumbController.renderBreadCrumb("student/HomeView|student/BrowseCourse|student/CourseListView|student/CourseView|student/SectionView");
         try
         {
-            section = Context.getInstance().getSelectedSection();
-            enrolmentPk = new EnrolmentPK(Student.getStudentByUsername(Context.getInstance().getCurrentUser()).getStudentId(),
+            section = context.getSelectedSection();
+            enrolmentPk = new EnrolmentPK(context.getCurrentUser().getStudent().getStudentId(),
                     section.getSectionId(),
                     section.getCourse().getCoursePK().getCourseNumber(),
                     section.getCourse().getCoursePK().getDepartmentId(),
@@ -276,22 +277,22 @@ public class SectionViewController implements Initializable
             Logger.getLogger(SectionViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         initializeComponentsByLocale();
-        secLbl.setText(LocaleManager.get(74) + " " + Context.getInstance().getSelectedSection().getSectionPK().getSectionId());
-        creditLbl.setText(Integer.toString(Context.getInstance().getSelectedCourse().getCredits()));
-        passRqLbl.setText(Context.getInstance().getSelectedCourse().getPassingRequirement());
-        courseDesTxt.setText(Context.getInstance().getSelectedCourse().getDescription());
-        courseNameLbl.setText(Context.getInstance().getSelectedCourse().getName());
-        deptIdAndCourseNoLbl.setText(Context.getInstance().getSelectedCourse().getDepartmentIdAndCourseNumber());
-        gradingSchmLbl.setText(Context.getInstance().getSelectedCourse().getGradingSchemeId().getName());
-        lblSecType.setText("(" + Context.getInstance().getSelectedSection().getSectionType().getName() + ")");
-        lblSession.setText(Session.getBySessionId(Context.getInstance().getSelectedSection().getSectionPK().getSessionId()).getName());
-        lblTermYear.setText(Integer.toString(Context.getInstance().getSelectedSection().getTerm().getTermPK().getTermYear()));
-        populatePrereqListView(Context.getInstance().getSelectedCourse());
-        populateCoReqListView(Context.getInstance().getSelectedCourse());
-        lblStartDate.setText(DateFormatter.formatDate(Context.getInstance().getSelectedSection().getStartDate()));
-        lblEndDate.setText(DateFormatter.formatDate(Context.getInstance().getSelectedSection().getEndDate()));
-        lblRegisDLDate.setText(DateFormatter.formatDate(Context.getInstance().getSelectedSection().getRegisterDeadline()));
-        lblDropDLDate.setText(DateFormatter.formatDate(Context.getInstance().getSelectedSection().getDropDeadline()));
+        secLbl.setText(LocaleManager.get(74) + " " + context.getSelectedSection().getSectionPK().getSectionId());
+        creditLbl.setText(Integer.toString(context.getSelectedCourse().getCredits()));
+        passRqLbl.setText(context.getSelectedCourse().getPassingRequirement());
+        courseDesTxt.setText(context.getSelectedCourse().getDescription());
+        courseNameLbl.setText(context.getSelectedCourse().getName());
+        deptIdAndCourseNoLbl.setText(context.getSelectedCourse().getDepartmentIdAndCourseNumber());
+        gradingSchmLbl.setText(context.getSelectedCourse().getGradingSchemeId().getName());
+        lblSecType.setText("(" + context.getSelectedSection().getSectionType().getName() + ")");
+        lblSession.setText(Session.getBySessionId(context.getSelectedSection().getSectionPK().getSessionId()).getName());
+        lblTermYear.setText(Integer.toString(context.getSelectedSection().getTerm().getTermPK().getTermYear()));
+        populatePrereqListView(context.getSelectedCourse());
+        populateCoReqListView(context.getSelectedCourse());
+        lblStartDate.setText(DateFormatter.formatDate(context.getSelectedSection().getStartDate()));
+        lblEndDate.setText(DateFormatter.formatDate(context.getSelectedSection().getEndDate()));
+        lblRegisDLDate.setText(DateFormatter.formatDate(context.getSelectedSection().getRegisterDeadline()));
+        lblDropDLDate.setText(DateFormatter.formatDate(context.getSelectedSection().getDropDeadline()));
     }
 
     /**

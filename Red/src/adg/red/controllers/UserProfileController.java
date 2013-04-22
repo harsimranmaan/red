@@ -8,12 +8,12 @@ import adg.red.controls.CustomTextBox;
 import adg.red.controls.TextBoxType;
 import adg.red.models.Address;
 import adg.red.models.Administrator;
-import adg.red.models.Faculty;
 import adg.red.models.FacultyMember;
 import adg.red.models.Student;
 import adg.red.models.User;
 import adg.red.session.Context;
 import adg.red.locale.LocaleManager;
+import adg.red.models.skeleton.ILocalizable;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,10 +22,9 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -34,14 +33,14 @@ import javafx.scene.layout.VBox;
  * <p/>
  * @author jingboyu
  */
-public class UserProfileController implements Initializable
+public class UserProfileController implements Initializable, ILocalizable
 {
 
     @FXML
     private Pane paneChangePassword;
     private User currentUser;
-    private Label txtFullName;
-    private Label txtUserType;
+    private CustomTextBox txtFullName;
+    private CustomTextBox txtUserType;
     private CustomTextBox txtAddressFirst;
     private CustomTextBox txtAddressSecond;
     private CustomTextBox txtCity;
@@ -58,6 +57,10 @@ public class UserProfileController implements Initializable
     private VBox vBoxHolder;
     @FXML
     private Label lblMessage;
+    @FXML
+    private Tab tabContact;
+    @FXML
+    private Tab tabChangePwd;
 
     /**
      * Initializes the controller class.
@@ -65,53 +68,31 @@ public class UserProfileController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        btnSave.setText(LocaleManager.get(54));
-        btnCancel.setText(LocaleManager.get(55));
-        
-        currentUser = Context.getInstance().getCurrentUser();
-        Context.getInstance().setTitle(LocaleManager.get(15));
+        localize();
         BreadCrumbController.renderBreadCrumb(currentUser.getUserTypeId().getName().toLowerCase() + "/HomeView|UserProfile");
         ViewLoader view = new ViewLoader(paneChangePassword);
-        view.loadView("ChangePassword");   
-        
-        txtFullName = new Label("Full name: " + currentUser.getFirstName() + " " + currentUser.getLastName());
-        txtFullName.setText(LocaleManager.get(137) + ": " + currentUser.getFirstName() + " " + currentUser.getLastName());
-        
+        view.loadView("ChangePassword");
+
+        txtFullName = new CustomTextBox(TextBoxType.Any, LocaleManager.get(137) + ":", "");
+        txtFullName.setText(currentUser.getFullName());
+        txtFullName.setDisable(true);
         if (currentUser.getUserTypeId().getName().equals("Student"))
         {
-            try {
-                Student student = Student.getStudentByUsername(currentUser);
-                txtUserType = new Label("Student ID: " + student.getStudentId());
-                txtUserType.setText(LocaleManager.get(138) + ": " + student.getStudentId());
-            } catch (Exception ex) {
-                Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            txtUserType = new CustomTextBox(TextBoxType.Any, LocaleManager.get(138) + ": ", "");
+            txtUserType.setText(Integer.toString(currentUser.getStudent().getStudentId()));
         }
         else if (currentUser.getUserTypeId().getName().equals("Faculty"))
         {
-            try {
-                FacultyMember facultyMember = FacultyMember.getFacultMemberByUserName(currentUser);
-                txtUserType = new Label("Faculty ID: " + facultyMember.getFacultyMemberId());
-                txtUserType.setText(LocaleManager.get(139) + facultyMember.getFacultyMemberId());
-            } catch (Exception ex) {
-                Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            txtUserType = new CustomTextBox(TextBoxType.Any, LocaleManager.get(139) + ": ", "");
+            txtUserType.setText(Integer.toString(currentUser.getFacultyMember().getFacultyMemberId()));
         }
         else if (currentUser.getUserTypeId().getName().equals("Admin"))
         {
-            try {
-                Administrator admin = Administrator.getAdministratorByUserName(currentUser);
-                txtUserType = new Label("Admin ID: " + admin.getAdminId());
-                txtUserType.setText(LocaleManager.get(140) + admin.getAdminId());
-            } catch (Exception ex) {
-                Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            txtUserType = new CustomTextBox(TextBoxType.Any, LocaleManager.get(140) + ": ", "");
+            txtUserType.setText(Integer.toString(currentUser.getAdministrator().getAdminId()));
         }
-        else
-        {
-            txtUserType = new Label("Wrong user name");
-        }
-        
+        txtUserType.setDisable(true);
+
         txtAddressFirst = new CustomTextBox(TextBoxType.Any, LocaleManager.get(129) + ":", LocaleManager.get(130));
         txtAddressSecond = new CustomTextBox(TextBoxType.Any, LocaleManager.get(131) + ":", LocaleManager.get(130));
         txtCity = new CustomTextBox(TextBoxType.Alpha, LocaleManager.get(122) + ":", LocaleManager.get(123));
@@ -126,6 +107,7 @@ public class UserProfileController implements Initializable
 
     /**
      * Implement CLEAR button to clear user inputs
+     * <p/>
      * @param event user action: click button
      */
     @FXML
@@ -133,17 +115,19 @@ public class UserProfileController implements Initializable
     {
         showUserProfile();
         lblMessage.setVisible(true);
-        
+
     }
 
     /**
-     * Validate user inputs and implement SAVE button to commit user inputs into database
+     * Validate user inputs and implement SAVE button to commit user inputs into
+     * database
+     * <p/>
      * @param event user action: click button
      */
     @FXML
     public void save(ActionEvent event)
     {
-        
+
         try
         {
             // modify user profile
@@ -231,6 +215,7 @@ public class UserProfileController implements Initializable
 
     /**
      * Display current user's profile
+     * <p/>
      * @param user current user
      */
     private void displayUserProfile(User user)
@@ -243,5 +228,16 @@ public class UserProfileController implements Initializable
         txtEmail.setText(user.getEmail());
         txtProvince.setText(user.getAddressId().getProvince());
         txtCountry.setText(user.getAddressId().getCountry());
+    }
+
+    @Override
+    public void localize()
+    {
+        btnSave.setText(LocaleManager.get(54));
+        btnCancel.setText(LocaleManager.get(150));
+        tabChangePwd.setText(LocaleManager.get(147));
+        tabContact.setText(LocaleManager.get(148));
+        currentUser = Context.getInstance().getCurrentUser();
+        Context.getInstance().setTitle(LocaleManager.get(15));
     }
 }

@@ -8,6 +8,7 @@ import adg.red.controls.MessageStyleManager;
 import adg.red.models.User;
 import adg.red.session.Context;
 import adg.red.locale.LocaleManager;
+import adg.red.models.skeleton.ILocalizable;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,7 +25,7 @@ import javafx.scene.control.PasswordField;
  * <p/>
  * @author harsimran.maan
  */
-public class ChangePasswordController implements Initializable
+public class ChangePasswordController implements Initializable, ILocalizable
 {
 
     @FXML
@@ -140,6 +141,12 @@ public class ChangePasswordController implements Initializable
         {
             txtOldPassword.setDisable(true);
         }
+        localize();
+    }
+
+    @Override
+    public void localize()
+    {
         lblOldPwd.setText(LocaleManager.get(119));
         lblNewPwd.setText(LocaleManager.get(120));
         lblReNew.setText(LocaleManager.get(121));

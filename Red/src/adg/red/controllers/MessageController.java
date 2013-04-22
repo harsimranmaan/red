@@ -10,6 +10,7 @@ import adg.red.models.MessageStatus;
 import adg.red.models.User;
 import adg.red.session.Context;
 import adg.red.locale.LocaleManager;
+import adg.red.models.skeleton.ILocalizable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,7 +35,7 @@ import javafx.scene.input.MouseEvent;
  * <p/>
  * @author Bahman
  */
-public class MessageController implements Initializable
+public class MessageController implements Initializable, ILocalizable
 {
 
     @FXML
@@ -125,7 +126,8 @@ public class MessageController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         currentUser = adg.red.session.Context.getInstance().getCurrentUser();
-        Context.getInstance().setTitle(LocaleManager.get(22));
+        localize();
+
         BreadCrumbController.renderBreadCrumb(currentUser.getUserTypeId().getName().toLowerCase() + "/HomeView|Message");
         List<MessageStatus> statusList = MessageStatus.getAll();
         List<MenuItem> menuItems = new ArrayList<>();
@@ -142,9 +144,7 @@ public class MessageController implements Initializable
             });
             menuItems.add(item);
         }
-        btnMessageAction.setText(LocaleManager.get(53));
         btnMessageAction.getItems().setAll(menuItems);
-
         initTable();
     }
 
@@ -170,5 +170,13 @@ public class MessageController implements Initializable
         {
             btnMessageAction.setDisable(true);
         }
+    }
+
+    @Override
+    public void localize()
+    {
+        Context.getInstance().setTitle(LocaleManager.get(22));
+        btnMessageAction.setText(LocaleManager.get(53));
+
     }
 }

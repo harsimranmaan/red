@@ -14,7 +14,7 @@
     <children>
         <TabPane AnchorPane.bottomAnchor="0"   AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab text="Contact Info">
+                <Tab fx:id="tabContact" text="Contact Info">
                     <content>
                         <VBox spacing="5" alignment="CENTER"  AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0" >
                             <VBox fx:id="vBoxHolder"  />
@@ -26,7 +26,7 @@
                         </VBox>
                     </content>
                 </Tab>
-                <Tab text="Change Password"  >
+                <Tab text="Change Password" fx:id="tabChangePwd"  >
                     <content>
                         <Pane fx:id="paneChangePassword"></Pane>
                     </content>

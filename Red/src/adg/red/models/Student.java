@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -34,11 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries(
         {
     @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s"),
-    @NamedQuery(name = "Student.findByStudentId", query = "SELECT s FROM Student s WHERE s.studentId = :studentId"),
-    @NamedQuery(name = "Student.findByDateOfRegistration", query = "SELECT s FROM Student s WHERE s.dateOfRegistration = :dateOfRegistration"),
-    @NamedQuery(name = "Student.findByHighestDegree", query = "SELECT s FROM Student s WHERE s.highestDegree = :highestDegree"),
-    @NamedQuery(name = "Student.findByIsActive", query = "SELECT s FROM Student s WHERE s.isActive = :isActive"),
-    @NamedQuery(name = "Student.findByUsername", query = "SELECT s FROM Student s WHERE s.username = :username")
+    @NamedQuery(name = "Student.findByStudentId", query = "SELECT s FROM Student s WHERE s.studentId = :studentId")
 })
 public class Student implements Serializable
 {
@@ -70,6 +66,7 @@ public class Student implements Serializable
 
     /**
      * Constructor
+     * <p/>
      * @param studentId table attribute studentId
      */
     public Student(Integer studentId)
@@ -79,8 +76,9 @@ public class Student implements Serializable
 
     /**
      * Constructor
+     * <p/>
      * @param studentId table attribute studentId
-     * @param isActive table attribute isActive
+     * @param isActive  table attribute isActive
      */
     public Student(Integer studentId, boolean isActive)
     {
@@ -90,6 +88,7 @@ public class Student implements Serializable
 
     /**
      * Get table attribute studentId
+     * <p/>
      * @return studentId
      */
     public Integer getStudentId()
@@ -99,6 +98,7 @@ public class Student implements Serializable
 
     /**
      * Set table attribute studentId
+     * <p/>
      * @param studentId table attribute studentId
      */
     public void setStudentId(Integer studentId)
@@ -108,6 +108,7 @@ public class Student implements Serializable
 
     /**
      * Get table attribute dataOfRegistration
+     * <p/>
      * @return dataOfRegistration
      */
     public Date getDateOfRegistration()
@@ -116,7 +117,8 @@ public class Student implements Serializable
     }
 
     /**
-     * Set table attribute dataOfRegistration 
+     * Set table attribute dataOfRegistration
+     * <p/>
      * @param dateOfRegistration table attribute
      */
     public void setDateOfRegistration(Date dateOfRegistration)
@@ -126,6 +128,7 @@ public class Student implements Serializable
 
     /**
      * Get table attribute highestDegree
+     * <p/>
      * @return highestDegree
      */
     public String getHighestDegree()
@@ -135,6 +138,7 @@ public class Student implements Serializable
 
     /**
      * Set table attribute highestDegree
+     * <p/>
      * @param highestDegree table attribute
      */
     public void setHighestDegree(String highestDegree)
@@ -144,6 +148,7 @@ public class Student implements Serializable
 
     /**
      * Get table attribute isActive
+     * <p/>
      * @return isActive
      */
     public boolean getIsActive()
@@ -153,7 +158,8 @@ public class Student implements Serializable
 
     /**
      * Set table attribute isActive
-     * @param isActive 
+     * <p/>
+     * @param isActive
      */
     public void setIsActive(boolean isActive)
     {
@@ -162,6 +168,7 @@ public class Student implements Serializable
 
     /**
      * Get table attribute username
+     * <p/>
      * @return username
      */
     public User getUsername()
@@ -171,16 +178,18 @@ public class Student implements Serializable
 
     /**
      * Set table attribute username
+     * <p/>
      * @param username table attribute username
      */
     public void setUsername(User username)
     {
         this.username = username;
     }
-    
+
     /**
      * Get record location
-     * @return hash code 
+     * <p/>
+     * @return hash code
      */
     @Override
     public int hashCode()
@@ -190,9 +199,11 @@ public class Student implements Serializable
         return hash;
     }
 
-     /**
+    /**
      * Comparator
+     * <p/>
      * @param object object to be compared with
+     * <p/>
      * @return true if two object equal to each other, otherwise return false
      */
     @Override
@@ -210,9 +221,10 @@ public class Student implements Serializable
         }
         return true;
     }
-    
+
     /**
      * print studentId
+     * <p/>
      * @return studentId as a string
      */
     @Override
@@ -223,23 +235,13 @@ public class Student implements Serializable
 
     /**
      * Get student list by username
+     * <p/>
      * @param username table attribute username
+     * <p/>
      * @return student list
-     * @throws Exception 
+     * <p/>
+     * @throws Exception
      */
-    public static Student getStudentByUsername(User username) throws Exception
-    {
-        List<Student> studentList = RedEntityManager.getEntityManager().createNamedQuery("Student.findByUsername").setParameter("username", username).getResultList();
-        if (studentList.size() == 1)
-        {
-            return studentList.get(0);
-        }
-        else
-        {
-            throw new Exception(LocaleManager.get(34));
-        }
-    }
-
     public static Student getStudentByStudentId(int studentId) throws Exception
     {
         List<Student> studentList = RedEntityManager.getEntityManager().createNamedQuery("Student.findByStudentId").setParameter("studentId", studentId).getResultList();

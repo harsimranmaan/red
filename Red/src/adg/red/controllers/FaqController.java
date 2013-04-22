@@ -1,12 +1,13 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.controllers;
 
 import adg.red.models.Faq;
 import adg.red.session.Context;
 import adg.red.locale.LocaleManager;
+import adg.red.models.skeleton.ILocalizable;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -23,7 +24,7 @@ import javafx.scene.control.TitledPane;
  * <p/>
  * @author Witt
  */
-public class FaqController implements Initializable
+public class FaqController implements Initializable, ILocalizable
 {
 
     @FXML
@@ -36,13 +37,13 @@ public class FaqController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        Context.getInstance().setTitle(LocaleManager.get(16));
+        localize();
         BreadCrumbController.renderBreadCrumb(Context.getInstance().getCurrentUser().getUserTypeId().getName().toLowerCase() + "/HomeView|FaqView");
         populateListView();
     }
 
     /**
-     *  Gets the faq list and populate the faq table with the list.
+     * Gets the faq list and populate the faq table with the list.
      */
     public void populateListView()
     {
@@ -55,5 +56,11 @@ public class FaqController implements Initializable
             text.setWrapText(true);
             accordion.getPanes().add(new TitledPane(faq.getQuestion(), text));
         }
+    }
+
+    @Override
+    public void localize()
+    {
+        Context.getInstance().setTitle(LocaleManager.get(16));
     }
 }
