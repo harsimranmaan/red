@@ -103,7 +103,7 @@ public class BreadCrumbController implements Initializable
                 name = "Section " + Integer.toString(Context.getInstance().getSelectedSection().getSectionId());
                 break;
             case "student/EnrollmentView":
-                name = LocaleManager.get(98);
+                name = LocaleManager.get(19);
                 break;
             case "faculty/SectionView":
                 name = LocaleManager.get(69);
