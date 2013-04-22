@@ -109,14 +109,14 @@ public class UserProfileController implements Initializable
             txtUserType = new Label("Wrong user name");
         }
         
-        txtAddressFirst = new CustomTextBox(TextBoxType.Any, "Addrees 1:", 129, "Please enter a valid address", 130);
-        txtAddressSecond = new CustomTextBox(TextBoxType.Any, "Addrees 2:", 131, "Please enter a valid address", 130);
-        txtCity = new CustomTextBox(TextBoxType.Alpha, "City:", 122, "Please enter a valid City", 123);
-        txtProvince = new CustomTextBox(TextBoxType.Alpha, "Province:", 132, "Please enter a valid Province", 133);
-        txtCountry = new CustomTextBox(TextBoxType.Alpha, "Country:", 124, "Please enter a valid Country", 125);
-        txtEmail = new CustomTextBox(TextBoxType.Email, "Email:", 126, "Please enter a valid Email", 127);
-        txtPhone = new CustomTextBox(TextBoxType.Phone, "Phone:", 128, "Please enter a valid Phone", 134);
-        txtPostalCode = new CustomTextBox(TextBoxType.PostalCode, "Postal Code:", 135, "Please enter a valid Postal Code", 136);
+        txtAddressFirst = new CustomTextBox(TextBoxType.Any, "Addrees 1: ", 129, "Please enter a valid address", 130);
+        txtAddressSecond = new CustomTextBox(TextBoxType.Any, "Addrees 2: ", 131, "Please enter a valid address", 130);
+        txtCity = new CustomTextBox(TextBoxType.Alpha, "City: ", 122, "Please enter a valid City", 123);
+        txtProvince = new CustomTextBox(TextBoxType.Alpha, "Province: ", 132, "Please enter a valid Province", 133);
+        txtCountry = new CustomTextBox(TextBoxType.Alpha, "Country: ", 124, "Please enter a valid Country", 125);
+        txtEmail = new CustomTextBox(TextBoxType.Email, "Email: ", 126, "Please enter a valid Email", 127);
+        txtPhone = new CustomTextBox(TextBoxType.Phone, "Phone: ", 128, "Please enter a valid Phone", 134);
+        txtPostalCode = new CustomTextBox(TextBoxType.PostalCode, "Postal Code: ", 135, "Please enter a valid Postal Code", 136);
         vBoxHolder.getChildren().addAll(txtFullName, txtUserType, txtAddressFirst, txtAddressSecond, txtCity, txtProvince, txtCountry, txtPostalCode, txtPhone, txtEmail);
         showUserProfile();
     }
