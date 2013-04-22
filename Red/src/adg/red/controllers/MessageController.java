@@ -11,6 +11,7 @@ import adg.red.models.User;
 import adg.red.session.Context;
 import adg.red.locale.LocaleManager;
 import adg.red.models.skeleton.ILocalizable;
+import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,7 +67,14 @@ public class MessageController implements Initializable, ILocalizable
         MessageReceiver receiver = tblMessages.getSelectionModel().getSelectedItem();
         receiver.setStatusId(MessageStatus.getByStatusName(((MenuItem) event.getSource()).getText()));
         receiver.save();
-        initTable();
+        ViewLoader view = new ViewLoader(Context.getInstance().getDisplayView());
+        view.loadView("Message");
+    }
+
+    private void clear()
+    {
+        txtMessageBody.setText("");
+        txtSubject.setText("");
     }
 
     /**
@@ -91,17 +99,8 @@ public class MessageController implements Initializable, ILocalizable
      */
     private void displayMessageText(Message message)
     {
-        if (tblMessages.getSelectionModel().getSelectedItem() == null)
-        {
-
-            txtMessageBody.setText("");
-            txtSubject.setText("");
-        }
-        else
-        {
-            txtMessageBody.setText(message.getMessageBody());
-            txtSubject.setText(message.getSubject());
-        }
+        txtMessageBody.setText(message.getMessageBody());
+        txtSubject.setText(message.getSubject());
     }
 
     /**
@@ -127,7 +126,6 @@ public class MessageController implements Initializable, ILocalizable
     {
         currentUser = adg.red.session.Context.getInstance().getCurrentUser();
         localize();
-
         BreadCrumbController.renderBreadCrumb(currentUser.getUserTypeId().getName().toLowerCase() + "/HomeView|Message");
         List<MessageStatus> statusList = MessageStatus.getAll();
         List<MenuItem> menuItems = new ArrayList<>();
@@ -155,21 +153,22 @@ public class MessageController implements Initializable, ILocalizable
      */
     public void populateMessageList(List<MessageReceiver> messages)
     {
+
         colSubject.setCellValueFactory(new PropertyValueFactory<MessageReceiver, String>("subject"));
         colDate.setCellValueFactory(new PropertyValueFactory<MessageReceiver, Date>("dateTime"));
         colSender.setCellValueFactory(new PropertyValueFactory<MessageReceiver, String>("senderName"));
         colStatus.setCellValueFactory(new PropertyValueFactory<MessageReceiver, String>("statusName"));
-        tblMessages.getItems().setAll(messages);
-        if (messages.size() > 0)
-        {
 
-            tblMessages.getSelectionModel().selectFirst();
-            btnMessageAction.setDisable(false);
-        }
-        else
+        tblMessages.getItems().setAll(messages);
+        if (messages.size() == 0)
         {
             btnMessageAction.setDisable(true);
         }
+        else
+        {
+            btnMessageAction.setDisable(false);
+        }
+        clear();
     }
 
     @Override
@@ -177,6 +176,5 @@ public class MessageController implements Initializable, ILocalizable
     {
         Context.getInstance().setTitle(LocaleManager.get(22));
         btnMessageAction.setText(LocaleManager.get(53));
-
     }
 }

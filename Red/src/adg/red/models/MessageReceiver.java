@@ -21,8 +21,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.eclipse.persistence.annotations.Cache;
-import org.eclipse.persistence.annotations.CacheType;
 import org.eclipse.persistence.config.CacheUsage;
 import org.eclipse.persistence.config.QueryHints;
 
@@ -162,7 +160,11 @@ public class MessageReceiver implements Serializable
 
     public static List<MessageReceiver> findMessagesReceivedByReceiverId(String receiverId)
     {
-        List<MessageReceiver> messagesReceived = RedEntityManager.getEntityManager().createNamedQuery("MessageReceiver.findByReceiverId").setParameter("receiverId", receiverId).setHint(QueryHints.CACHE_USAGE, CacheUsage.DoNotCheckCache).getResultList();
+        List<MessageReceiver> messagesReceived = RedEntityManager.getEntityManager()
+                .createNamedQuery("MessageReceiver.findByReceiverId")
+                .setParameter("receiverId", receiverId)
+                .setHint(QueryHints.CACHE_USAGE, CacheUsage.NoCache)
+                .getResultList();
 
         return messagesReceived;
     }
@@ -201,7 +203,7 @@ public class MessageReceiver implements Serializable
     {
         RedEntityManager.save(this);
     }
-    
+
     public static int getUnreadMessageByReceiverId(String receiverId)
     {
         List<MessageReceiver> msgList = findMessagesReceivedByReceiverId(receiverId);
@@ -209,7 +211,9 @@ public class MessageReceiver implements Serializable
         for (MessageReceiver m : msgList)
         {
             if (m.getStatusId().getStatusId() == 2)
+            {
                 nUnread++;
+            }
         }
         return nUnread;
     }
