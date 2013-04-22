@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.controllers;
 
@@ -10,6 +10,7 @@ import adg.red.models.MessageStatus;
 import adg.red.models.User;
 import adg.red.session.Context;
 import adg.red.locale.LocaleManager;
+import adg.red.models.skeleton.ILocalizable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +26,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -32,7 +35,7 @@ import javafx.scene.input.MouseEvent;
  * <p/>
  * @author Bahman
  */
-public class MessageController implements Initializable
+public class MessageController implements Initializable, ILocalizable
 {
 
     @FXML
@@ -55,6 +58,7 @@ public class MessageController implements Initializable
 
     /**
      * Handle user selected actions
+     * <p/>
      * @param event handle actions that user selected
      */
     private void handleActionButton(ActionEvent event)
@@ -67,6 +71,7 @@ public class MessageController implements Initializable
 
     /**
      * Get user selected message items
+     * <p/>
      * @param event user action
      */
     @FXML
@@ -81,7 +86,8 @@ public class MessageController implements Initializable
 
     /**
      * Display messages selected by the user
-     * @param message 
+     * <p/>
+     * @param message
      */
     private void displayMessageText(Message message)
     {
@@ -120,13 +126,14 @@ public class MessageController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         currentUser = adg.red.session.Context.getInstance().getCurrentUser();
-        Context.getInstance().setTitle(LocaleManager.get(22));
+        localize();
+
         BreadCrumbController.renderBreadCrumb(currentUser.getUserTypeId().getName().toLowerCase() + "/HomeView|Message");
         List<MessageStatus> statusList = MessageStatus.getAll();
         List<MenuItem> menuItems = new ArrayList<>();
         for (MessageStatus status : statusList)
         {
-            MenuItem item = new MenuItem(status.getName());
+            MenuItem item = new MenuItem(status.getName(), new ImageView(new Image("/adg/red/userInterface/images/" + status.getName().toLowerCase() + ".png")));
             item.setOnAction(new EventHandler<ActionEvent>()
             {
                 @Override
@@ -137,15 +144,14 @@ public class MessageController implements Initializable
             });
             menuItems.add(item);
         }
-        btnMessageAction.setText(LocaleManager.get(53));
         btnMessageAction.getItems().setAll(menuItems);
-
         initTable();
     }
 
     /**
      * Populate message lists with the message items that current user received.
-     * @param messages 
+     * <p/>
+     * @param messages
      */
     public void populateMessageList(List<MessageReceiver> messages)
     {
@@ -164,5 +170,13 @@ public class MessageController implements Initializable
         {
             btnMessageAction.setDisable(true);
         }
+    }
+
+    @Override
+    public void localize()
+    {
+        Context.getInstance().setTitle(LocaleManager.get(22));
+        btnMessageAction.setText(LocaleManager.get(53));
+
     }
 }

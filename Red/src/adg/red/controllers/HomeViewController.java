@@ -1,12 +1,13 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.controllers;
 
 import adg.red.session.Context;
 import adg.red.utils.DateFormatter;
 import adg.red.locale.LocaleManager;
+import adg.red.models.skeleton.ILocalizable;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,7 +21,7 @@ import javafx.scene.layout.AnchorPane;
  * <p/>
  * @author harsimran.maan
  */
-public class HomeViewController implements Initializable
+public class HomeViewController implements Initializable, ILocalizable
 {
 
     @FXML
@@ -42,6 +43,7 @@ public class HomeViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+
         ViewLoader view = new ViewLoader(commonButtonArea);
         view.loadView("CommonButtons");
         view = new ViewLoader(Context.getInstance().getSearchView());
@@ -53,9 +55,15 @@ public class HomeViewController implements Initializable
         Context.getInstance().setDisplayView(paneMain);
         Context.getInstance().setBreadCrumb(breadCrumbArea);
         Context.getInstance().setTitleLabel(lblPageTitle);
-        Context.getInstance().setTitle(LocaleManager.get(24));
+        localize();
         view = new ViewLoader(paneMain);
         view.loadView(userType + "/HomeView");
         lblDay.setText(DateFormatter.getCurrentDayDate());
+    }
+
+    @Override
+    public void localize()
+    {
+        Context.getInstance().setTitle(LocaleManager.get(24));
     }
 }

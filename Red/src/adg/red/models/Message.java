@@ -56,9 +56,6 @@ public class Message implements Serializable
     @JoinColumn(name = "senderId", referencedColumnName = "username")
     @ManyToOne(optional = false)
     private User senderId;
-    @JoinColumn(name = "priorityId", referencedColumnName = "messagePriorityId")
-    @ManyToOne(optional = false)
-    private MessagePriority priorityId;
 
     public Message()
     {
@@ -123,16 +120,6 @@ public class Message implements Serializable
     public void setSenderId(User senderId)
     {
         this.senderId = senderId;
-    }
-
-    public MessagePriority getPriorityId()
-    {
-        return priorityId;
-    }
-
-    public void setPriorityId(MessagePriority priorityId)
-    {
-        this.priorityId = priorityId;
     }
 
     @Override

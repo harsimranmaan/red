@@ -8,6 +8,7 @@ package adg.red.controllers;
 import adg.red.models.Glossary;
 import adg.red.session.Context;
 import adg.red.locale.LocaleManager;
+import adg.red.models.skeleton.ILocalizable;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
@@ -28,7 +29,7 @@ import javafx.scene.layout.HBox;
  * <p/>
  * @author jingboyu
  */
-public class GlossaryController implements Initializable
+public class GlossaryController implements Initializable, ILocalizable
 {
 
     @FXML
@@ -43,7 +44,7 @@ public class GlossaryController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         populateGlossary("All");
-        Context.getInstance().setTitle(LocaleManager.get(14));
+        localize();
         BreadCrumbController.renderBreadCrumb(Context.getInstance().getCurrentUser().getUserTypeId().getName().toLowerCase() + "/HomeView|Glossary");
         Iterator<Node> nodes = alphabetHbox.getChildren().iterator();
         while (nodes.hasNext())
@@ -62,7 +63,8 @@ public class GlossaryController implements Initializable
 
     /**
      * Get list of glossary that begins with the input character
-     * @param beginsWith the input character that a glossary term begins with  
+     * <p/>
+     * @param beginsWith the input character that a glossary term begins with
      */
     private void populateGlossary(String beginsWith)
     {
@@ -80,7 +82,9 @@ public class GlossaryController implements Initializable
 
     /**
      * Populate the glossary table
-     * @param glossaryList the list that begins with a specified character or list all
+     * <p/>
+     * @param glossaryList the list that begins with a specified character or
+     *                     list all
      */
     public void populate(List<Glossary> glossaryList)
     {
@@ -93,5 +97,11 @@ public class GlossaryController implements Initializable
             text.setWrapText(true);
             glossaryAccordion.getPanes().add(new TitledPane(glossary.getTerm(), text));
         }
+    }
+
+    @Override
+    public void localize()
+    {
+        Context.getInstance().setTitle(LocaleManager.get(14));
     }
 }

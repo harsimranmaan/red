@@ -16,6 +16,11 @@
     -fx-background-insets: 0, 1, 2;
     -fx-background-radius: 3, 2, 2;
 }
+
+.menu:hover, .menu:selected, .menu:pressed {
+    -fx-background-color: linear-gradient(#ff5400,#800000);
+}
+
 .login-label {
     -fx-font: bold 14pt "Segoe UI";
 }

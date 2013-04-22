@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import adg.red.models.User;
 import adg.red.locale.LocaleManager;
+import adg.red.models.skeleton.ILocalizable;
 import javafx.application.Platform;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.AnchorPane;
@@ -27,7 +28,7 @@ import javafx.scene.control.TextField;
  * <p/>
  * @author Witt
  */
-public class LoginController implements Initializable
+public class LoginController implements Initializable, ILocalizable
 {
 
     @FXML
@@ -60,20 +61,30 @@ public class LoginController implements Initializable
     {
 
         // bind resourceDictionary
-        btnLogin.setText(LocaleManager.get(1));
-        btnExit.setText(LocaleManager.get(27));
-        userLbl.setText(LocaleManager.get(3));
-        passLbl.setText(LocaleManager.get(4));
-        hpForgotPassword.setText(LocaleManager.get(2) + "?");
+        localize();
         lblError.setVisible(false);
-        Context.getInstance().getSearchView().setVisible(false);
-        if (Context.getInstance().WasLoggedIn())
+        final Context context = Context.getInstance();
+        context.getSearchView().setVisible(false);
+        // set at login screen to true
+        context.setAtLoginScreen(true);
+        //from logout
+        if (context.WasLoggedIn())
         {
             MessageStyleManager.setSuccess(lblError);
             lblError.setText(LocaleManager.get(9));
             lblError.setVisible(true);
         }
-        Context.getInstance().setWasLoggedIn(false);
+        //from password reset flow
+        if (context.isInvalidReset())
+        {
+            MessageStyleManager.setError(lblError);
+            lblError.setText(context.getInvalidMessage());
+            lblError.setVisible(true);
+        }
+        //reset context
+        context.setWasLoggedIn(false);
+        context.setInvalidReset(false);
+        context.setIsReset(false);
     }
 
     /**
@@ -104,7 +115,8 @@ public class LoginController implements Initializable
      */
     public void login(ActionEvent event)
     {
-        Context.getInstance().setWasLoggedIn(false);
+        final Context context = Context.getInstance();
+        context.setWasLoggedIn(false);
         // get userid and password input from gui by J. Yu
         String uid = usernameTxt.getText();
         String pwd = passwordTxt.getText();
@@ -119,11 +131,10 @@ public class LoginController implements Initializable
                 //LOGIN
 
                 User user = User.login(uid, pwd);
-                Context.getInstance().setCurrentUser(user);
+                context.setCurrentUser(user);
+                context.setAtLoginScreen(false);
                 ViewLoader view = new ViewLoader(Context.getInstance().getMainView());
                 view.loadView("HomeView");
-
-
             }
         }
         catch (Exception ex)
@@ -132,5 +143,15 @@ public class LoginController implements Initializable
             lblError.setText(ex.getMessage());
             lblError.setVisible(true);
         }
+    }
+
+    @Override
+    public void localize()
+    {
+        btnLogin.setText(LocaleManager.get(1));
+        btnExit.setText(LocaleManager.get(27));
+        userLbl.setText(LocaleManager.get(3));
+        passLbl.setText(LocaleManager.get(4));
+        hpForgotPassword.setText(LocaleManager.get(2) + "?");
     }
 }
