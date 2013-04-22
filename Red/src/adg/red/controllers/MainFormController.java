@@ -7,14 +7,13 @@ package adg.red.controllers;
 import adg.red.session.Context;
 import adg.red.locale.LocaleManager;
 import adg.red.models.Locale;
-import adg.red.utils.ConfigManager;
+
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -114,13 +113,6 @@ public class MainFormController implements Initializable
                 public void handle(ActionEvent e)
                 {
                     changeLang(e);
-                }
-            });
-            menu.selectedProperty().addListener(new ChangeListener<Boolean>()
-            {
-                public void changed(ObservableValue ov, Boolean old_val, Boolean new_val)
-                {
-                    menu.setSelected(new_val);
                 }
             });
             if (menu.getText().equalsIgnoreCase(LocaleManager.getLoc().getName()))
