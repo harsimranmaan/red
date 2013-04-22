@@ -12,7 +12,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="464.0" prefWidth="642.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.student.SectionViewController">
     <children>
-        <Label id="loginErrMsg" fx:id="lblResponse" styleClass="response-label" alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="359.0" text="You have successfully enrolled to the section" visible="false">
+        <Label id="loginErrMsg" fx:id="lblResponse" styleClass="error-label" alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="359.0" text="You have successfully enrolled to the section" visible="false">
         </Label>
         <HBox id="HBox" alignment="CENTER" layoutX="15.0" layoutY="7.0" spacing="5.0">
             <children>
@@ -93,14 +93,14 @@
                                         <children>
                                             <Label fx:id="lblRegisDL" text="Register Deadline:" />
                                             <Label fx:id="lblRegisDLDate" text="Label" />
-                                            <Label id="lblRegisDLDate" fx:id="lblRegDLResponse"  text="Label" styleClass="response-label" visible="false" />
+                                            <Label id="lblRegisDLDate" fx:id="lblRegDLResponse"  text="Label" styleClass="error-label" visible="false" />
                                         </children>
                                     </HBox>
                                     <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
                                         <children>
                                             <Label fx:id="lblDropDL" text="Drop Deadline:" />
                                             <Label fx:id="lblDropDLDate" text="Label" />
-                                            <Label id="lblDropDLDate" fx:id="lblDropDLResponse" text="Label" styleClass="response-label" visible="false" />
+                                            <Label id="lblDropDLDate" fx:id="lblDropDLResponse" text="Label" styleClass="error-label" visible="false" />
                                         </children>
                                     </HBox>
                                 </VBox>

@@ -44,7 +44,7 @@
         </HBox>
         <HBox id="HBox" alignment="CENTER" spacing="30.0">
             <children>
-                <Label fx:id="lblnotification" alignment="CENTER" styleClass="response-label" />
+                <Label fx:id="lblnotification" alignment="CENTER" styleClass="error-label" />
             </children>
         </HBox>
     </children>

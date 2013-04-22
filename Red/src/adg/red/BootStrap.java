@@ -30,6 +30,7 @@ public class BootStrap extends Application
         stage.getIcons().add(new Image(getClass().getResourceAsStream("userInterface/images/redIcon.png")));
         stage.setScene(scene);
         stage.show();
+
     }
 
     /**
