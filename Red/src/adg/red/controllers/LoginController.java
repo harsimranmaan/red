@@ -66,14 +66,28 @@ public class LoginController implements Initializable
         passLbl.setText(LocaleManager.get(4));
         hpForgotPassword.setText(LocaleManager.get(2) + "?");
         lblError.setVisible(false);
-        Context.getInstance().getSearchView().setVisible(false);
-        if (Context.getInstance().WasLoggedIn())
+        final Context context = Context.getInstance();
+        context.getSearchView().setVisible(false);
+        // set at login screen to true
+        context.setAtLoginScreen(true);
+        //from logout
+        if (context.WasLoggedIn())
         {
             MessageStyleManager.setSuccess(lblError);
             lblError.setText(LocaleManager.get(9));
             lblError.setVisible(true);
         }
-        Context.getInstance().setWasLoggedIn(false);
+        //from password reset flow
+        if (context.isInvalidReset())
+        {
+            MessageStyleManager.setError(lblError);
+            lblError.setText(context.getInvalidMessage());
+            lblError.setVisible(true);
+        }
+        //reset context
+        context.setWasLoggedIn(false);
+        context.setInvalidReset(false);
+        context.setIsReset(false);
     }
 
     /**
@@ -104,7 +118,8 @@ public class LoginController implements Initializable
      */
     public void login(ActionEvent event)
     {
-        Context.getInstance().setWasLoggedIn(false);
+        final Context context = Context.getInstance();
+        context.setWasLoggedIn(false);
         // get userid and password input from gui by J. Yu
         String uid = usernameTxt.getText();
         String pwd = passwordTxt.getText();
@@ -119,11 +134,10 @@ public class LoginController implements Initializable
                 //LOGIN
 
                 User user = User.login(uid, pwd);
-                Context.getInstance().setCurrentUser(user);
+                context.setCurrentUser(user);
+                context.setAtLoginScreen(false);
                 ViewLoader view = new ViewLoader(Context.getInstance().getMainView());
                 view.loadView("HomeView");
-
-
             }
         }
         catch (Exception ex)

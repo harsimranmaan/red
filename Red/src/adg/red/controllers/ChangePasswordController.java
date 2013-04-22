@@ -8,9 +8,11 @@ import adg.red.controls.MessageStyleManager;
 import adg.red.models.User;
 import adg.red.session.Context;
 import adg.red.locale.LocaleManager;
+import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -38,6 +40,12 @@ public class ChangePasswordController implements Initializable
     @FXML
     private Label lblError;
     private User currentUser;
+    @FXML
+    private Label lblOldPwd;
+    @FXML
+    private Label lblNewPwd;
+    @FXML
+    private Label lblReNew;
 
     @FXML
     private void changePassword(ActionEvent event)
@@ -48,13 +56,35 @@ public class ChangePasswordController implements Initializable
         String pwdErrorMsg;
         try
         {
+
+
             if (newPwd.equals(pwdRe))
             {
+                final boolean isReset = Context.getInstance().isReset();
                 //check if old password is valid
-                User.login(currentUser.getUsername(), oldPwd);
+                if (!isReset)
+                {
+
+                    User.login(currentUser.getUsername(), oldPwd);
+                }
                 currentUser.setPassword(newPwd);
                 currentUser.save();
                 MessageStyleManager.setSuccess(lblError);
+                if (isReset)
+                {
+                    btnSavePassword.setDisable(true);
+                    btnClear.setText(LocaleManager.get(1));
+                    btnClear.setOnAction(new EventHandler<ActionEvent>()
+                    {
+                        @Override
+                        public void handle(ActionEvent t)
+                        {
+                            ViewLoader view = new ViewLoader(Context.getInstance().getMainView());
+                            view.loadView("Login");
+                        }
+                    });
+                }
+
                 pwdErrorMsg = LocaleManager.get(11);
             }
             else
@@ -104,6 +134,16 @@ public class ChangePasswordController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        currentUser = Context.getInstance().getCurrentUser();
+        final Context context = Context.getInstance();
+        currentUser = context.getCurrentUser();
+        if (context.isReset())
+        {
+            txtOldPassword.setDisable(true);
+        }
+        lblOldPwd.setText(LocaleManager.get(119));
+        lblNewPwd.setText(LocaleManager.get(120));
+        lblReNew.setText(LocaleManager.get(121));
+        btnSavePassword.setText(LocaleManager.get(54));
+        btnClear.setText(LocaleManager.get(55));
     }
 }

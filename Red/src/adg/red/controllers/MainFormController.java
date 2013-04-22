@@ -1,22 +1,32 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.controllers;
 
+import adg.red.BootStrap;
 import adg.red.session.Context;
 import adg.red.locale.LocaleManager;
+import adg.red.models.Locale;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class for MainForm.fxml
@@ -37,7 +47,11 @@ public class MainFormController implements Initializable
     @FXML
     private MenuItem mniAbout;
     @FXML
+    private Menu menLang;
+    @FXML
     private Pane searchPane;
+    @FXML
+    private AnchorPane mainForm;
 
     /**
      * Initializes the controller class.
@@ -46,20 +60,90 @@ public class MainFormController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         initializeComponentsByLocale();
+        Context.getInstance().setMainForm(mainForm);
         Context.getInstance().setMainView(viewArea);
         Context.getInstance().setSearchView(searchPane);
-        ViewLoader view = new ViewLoader(viewArea);
-        view.loadView("Login");
+        if (Context.getInstance().isAtLoginScreen())
+        {
+            ViewLoader view = new ViewLoader(viewArea);
+            view.loadView("Login");
+        }
+        createLanguageMenuItems();
     }
 
     /**
      * Exit the platform
+     * <p/>
      * @param event user action
      */
     @FXML
     public void close(ActionEvent event)
     {
         Platform.exit();
+    }
+
+    /**
+     * Open about window
+     * <p/>
+     * @param event user action
+     */
+    @FXML
+    public void about(ActionEvent event) throws Exception
+    {
+        Stage stage = new Stage();
+        BootStrap boot = new BootStrap();
+        Parent root = FXMLLoader.load(getClass().getResource(boot.getUserInterfaceUrl("About")));
+        Scene scene = new Scene(root);
+        stage.setResizable(false);
+        stage.setTitle(LocaleManager.get(31));
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/adg/red/userInterface/images/redIcon.png")));
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    /**
+     * Change language
+     * <p/>
+     * @param event user action
+     */
+    @FXML
+    public void changeLang(ActionEvent event)
+    {
+        CheckMenuItem item = ((CheckMenuItem) event.getSource());
+        LocaleManager.changeLocale(item.getText());
+        //item.setSelected(true);
+
+
+        ViewLoader view = new ViewLoader(Context.getInstance().getMainForm());
+        view.loadView("MainForm");
+        if (!Context.getInstance().isAtLoginScreen())
+        {
+            ViewLoader view1 = new ViewLoader(Context.getInstance().getMainView());
+            view1.loadView("HomeView");
+        }
+    }
+
+    private void createLanguageMenuItems()
+    {
+        List<Locale> locs = Locale.findAllLocale();
+        for (Locale loc : locs)
+        {
+            final CheckMenuItem menu = new CheckMenuItem();
+            menu.setText(loc.getName());
+            menu.setOnAction(new EventHandler<ActionEvent>()
+            {
+                @Override
+                public void handle(ActionEvent e)
+                {
+                    changeLang(e);
+                }
+            });
+            if (menu.getText().equalsIgnoreCase(LocaleManager.getLoc().getName()))
+            {
+                menu.setSelected(true);
+            }
+            menLang.getItems().add(menu);
+        }
     }
 
     /**
@@ -71,5 +155,6 @@ public class MainFormController implements Initializable
         menHelp.setText(LocaleManager.get(29));
         mniClose.setText(LocaleManager.get(30));
         mniAbout.setText(LocaleManager.get(31));
+        menLang.setText(LocaleManager.get(118));
     }
 }

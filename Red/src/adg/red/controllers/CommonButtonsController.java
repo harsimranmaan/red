@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.controllers;
 
@@ -50,6 +50,7 @@ public class CommonButtonsController implements Initializable
 
     /**
      * Implement logout button
+     * <p/>
      * @param event user action: click button
      */
     public void logout(ActionEvent event)
@@ -58,6 +59,7 @@ public class CommonButtonsController implements Initializable
         {
             ViewLoader view = new ViewLoader(Context.getInstance().getMainView());
             Context.getInstance().setWasLoggedIn(true);
+            Context.getInstance().setAtLoginScreen(true);
             view.loadView("Login");
         }
         catch (Exception ex)
@@ -68,6 +70,7 @@ public class CommonButtonsController implements Initializable
 
     /**
      * Implement messages button
+     * <p/>
      * @param event user action: click button
      */
     public void message(ActionEvent event)
@@ -87,6 +90,7 @@ public class CommonButtonsController implements Initializable
 
     /**
      * Implement user profile button
+     * <p/>
      * @param event user action: click button
      */
     public void userProfile(ActionEvent event)
@@ -105,6 +109,7 @@ public class CommonButtonsController implements Initializable
 
     /**
      * Implement Glossary button
+     * <p/>
      * @param event user action: click button
      */
     public void glossary(ActionEvent event)
@@ -123,6 +128,7 @@ public class CommonButtonsController implements Initializable
 
     /**
      * Implement FAQ button
+     * <p/>
      * @param event user action: click button
      */
     public void faq(ActionEvent event)
