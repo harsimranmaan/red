@@ -61,7 +61,7 @@ CREATE TABLE `User` (
   `lastName` varchar(15) NOT NULL,
   `isOnline` bit(1) NOT NULL DEFAULT b'0',
   `userTypeId` INT NOT NULL,
-   addressId INT,
+   addressId INT NOT NULL,
   `phoneNumber` varchar(15) DEFAULT NULL,
   `email` varchar(45) NOT NULL,
   `dateOfBirth` date DEFAULT NULL,
