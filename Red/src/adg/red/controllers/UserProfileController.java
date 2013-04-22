@@ -96,7 +96,7 @@ public class UserProfileController implements Initializable, ILocalizable
         txtProvince = new CustomTextBox(TextBoxType.Alpha, LocaleManager.get(132) + ":", LocaleManager.get(133));
         txtCountry = new CustomTextBox(TextBoxType.Alpha, LocaleManager.get(124) + ":", LocaleManager.get(125));
         txtEmail = new CustomTextBox(TextBoxType.Email, LocaleManager.get(126) + ":", LocaleManager.get(127));
-        txtPhone = new CustomTextBox(TextBoxType.Phone, LocaleManager.get(128) + ":", LocaleManager.get(134));
+        txtPhone = new CustomTextBox(TextBoxType.Any, LocaleManager.get(128) + ":", LocaleManager.get(134));
         txtPostalCode = new CustomTextBox(TextBoxType.PostalCode, LocaleManager.get(135) + ":", LocaleManager.get(136));
         vBoxHolder.getChildren().addAll(txtFullName, txtUserType, txtAddressFirst, txtAddressSecond, txtCity, txtProvince, txtCountry, txtPostalCode, txtPhone, txtEmail);
         showUserProfile();
@@ -179,6 +179,7 @@ public class UserProfileController implements Initializable, ILocalizable
                 addr.setAddressLineFirst(addr1);
                 addr.setAddressLineSecond(addr2);
                 addr.setCity(city);
+                addr.setPostalCode(postal);
                 addr.setProvince(provinceChoice);
                 addr.setCountry(countryChoice);
                 addr.save();
