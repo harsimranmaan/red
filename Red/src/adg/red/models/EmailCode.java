@@ -6,6 +6,7 @@ package adg.red.models;
 
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -46,7 +47,7 @@ public class EmailCode implements Serializable
     public EmailCode(String username)
     {
         this.username = username;
-        this.code = Integer.toString(100000 + (int) (Math.random() * 999999));
+        this.code = Integer.toString(Math.min(999999, 100000 + (int) (Math.random() * 999999)));
     }
 
     public static EmailCode deleteIfExists(String username)
@@ -111,8 +112,12 @@ public class EmailCode implements Serializable
 
     public static EmailCode findByUsername(String username)
     {
-        EmailCode emailCode = (EmailCode) RedEntityManager.getEntityManager().createNamedQuery("EmailCode.findByUsername").setParameter("username", username).getSingleResult();
-        return emailCode;
+        List<EmailCode> emailCode = RedEntityManager.getEntityManager().createNamedQuery("EmailCode.findByUsername").setParameter("username", username).getResultList();
+        if (emailCode.size() == 1)
+        {
+            return emailCode.get(0);
+        }
+        return null;
     }
 
     public void save()

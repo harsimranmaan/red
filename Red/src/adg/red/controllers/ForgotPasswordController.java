@@ -4,6 +4,7 @@
  */
 package adg.red.controllers;
 
+import adg.red.locale.LocaleManager;
 import adg.red.models.EmailCode;
 import adg.red.models.User;
 import adg.red.session.Context;
@@ -11,13 +12,13 @@ import adg.red.utils.EmailSender;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -38,6 +39,18 @@ public class ForgotPasswordController implements Initializable
     private VBox vBoxEmail;
     @FXML
     private VBox vBoxCode;
+    @FXML
+    private Button btnSend;
+    @FXML
+    private Button btnBackUpper;
+    @FXML
+    private Label lblCode;
+    @FXML
+    private Button btnValidate;
+    @FXML
+    private Button btnBackLower;
+    @FXML
+    private AnchorPane ancMain;
 
     /**
      * Send validation code to user email address
@@ -60,7 +73,10 @@ public class ForgotPasswordController implements Initializable
         }
         catch (Exception ex)
         {
-            Logger.getLogger(ForgotPasswordController.class.getName()).log(Level.SEVERE, null, ex);
+            final Context context = Context.getInstance();
+            context.setInvalidReset(true);
+            context.setInvalidMessage(LocaleManager.get(116));
+            back();
         }
     }
 
@@ -72,10 +88,33 @@ public class ForgotPasswordController implements Initializable
     @FXML
     private void validateCode(ActionEvent event)
     {
+
+        final Context context = Context.getInstance();
+
+        try
+        {
+            User user = User.validate(txtEmailId.getText(), txtCode.getText());
+            context.setIsReset(true);
+            context.setCurrentUser(user);
+            ViewLoader view = new ViewLoader(ancMain);
+            view.loadView("ChangePassword");
+        }
+        catch (Exception ex)
+        {
+            context.setInvalidReset(true);
+            context.setInvalidMessage(LocaleManager.get(117));
+            back();
+        }
+
     }
 
     @FXML
     private void back(ActionEvent event)
+    {
+        back();
+    }
+
+    private void back()
     {
         ViewLoader view = new ViewLoader(Context.getInstance().getMainView());
         view.loadView("Login");
@@ -87,6 +126,12 @@ public class ForgotPasswordController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        lblEmailAddress.setText(LocaleManager.get(111));
+        lblCode.setText(LocaleManager.get(113));
+        btnBackLower.setText(LocaleManager.get(115));
+        btnBackUpper.setText(LocaleManager.get(115));
+        btnSend.setText(LocaleManager.get(112));
+        btnValidate.setText(LocaleManager.get(114));
         vBoxCode.setVisible(false);
     }
 }

@@ -66,14 +66,23 @@ public class LoginController implements Initializable
         passLbl.setText(LocaleManager.get(4));
         hpForgotPassword.setText(LocaleManager.get(2) + "?");
         lblError.setVisible(false);
-        Context.getInstance().getSearchView().setVisible(false);
-        if (Context.getInstance().WasLoggedIn())
+        final Context context = Context.getInstance();
+        context.getSearchView().setVisible(false);
+        if (context.WasLoggedIn())
         {
             MessageStyleManager.setSuccess(lblError);
             lblError.setText(LocaleManager.get(9));
             lblError.setVisible(true);
         }
-        Context.getInstance().setWasLoggedIn(false);
+        if (context.isInvalidReset())
+        {
+            MessageStyleManager.setError(lblError);
+            lblError.setText(context.getInvalidMessage());
+            lblError.setVisible(true);
+        }
+        context.setWasLoggedIn(false);
+        context.setInvalidReset(false);
+        context.setIsReset(false);
     }
 
     /**

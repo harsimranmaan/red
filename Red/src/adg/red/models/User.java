@@ -41,7 +41,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u LEFT JOIN FETCH u.student LEFT JOIN FETCH u.administrator LEFT JOIN FETCH u.facultyMember LEFT JOIN FETCH u.addressId LEFT JOIN FETCH u.userTypeId  WHERE u.firstName = :firstName"),
     @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u LEFT JOIN FETCH u.student LEFT JOIN FETCH u.administrator LEFT JOIN FETCH u.facultyMember LEFT JOIN FETCH u.addressId LEFT JOIN FETCH u.userTypeId  WHERE u.lastName = :lastName"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u  LEFT JOIN FETCH u.student LEFT JOIN FETCH u.administrator LEFT JOIN FETCH u.facultyMember LEFT JOIN FETCH u.addressId LEFT JOIN FETCH u.userTypeId WHERE u.email = :email AND u.isActive = 1"),
-    @NamedQuery(name = "User.login", query = "SELECT u FROM User u LEFT JOIN FETCH u.student LEFT JOIN FETCH u.administrator LEFT JOIN FETCH u.facultyMember LEFT JOIN FETCH u.addressId LEFT JOIN FETCH u.userTypeId  WHERE u.username = :username AND u.password = :password AND u.isActive=1")
+    @NamedQuery(name = "User.login", query = "SELECT u FROM User u LEFT JOIN FETCH u.student LEFT JOIN FETCH u.administrator LEFT JOIN FETCH u.facultyMember LEFT JOIN FETCH u.addressId LEFT JOIN FETCH u.userTypeId  WHERE u.username = :username AND u.password = :password AND u.isActive=1"),
+    @NamedQuery(name = "User.validate", query = "SELECT u FROM User u , EmailCode e LEFT JOIN FETCH u.student LEFT JOIN FETCH u.administrator LEFT JOIN FETCH u.facultyMember LEFT JOIN FETCH u.addressId LEFT JOIN FETCH u.userTypeId  WHERE u.email = :email AND e.code = :code AND e.username=u.username AND u.isActive=1")
 })
 public class User implements Serializable
 {
@@ -501,7 +502,23 @@ public class User implements Serializable
         }
         else
         {
-            throw new Exception("Invalid email Id");
+            throw new Exception();
+        }
+    }
+
+    public static User validate(String email, String code) throws Exception
+    {
+        List<User> userList = RedEntityManager.getEntityManager().createNamedQuery("User.validate")
+                .setParameter("email", email)
+                .setParameter("code", code)
+                .getResultList();
+        if (userList.size() == 1)
+        {
+            return userList.get(0);
+        }
+        else
+        {
+            throw new Exception();
         }
     }
 }
