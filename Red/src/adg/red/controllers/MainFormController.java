@@ -4,25 +4,29 @@
  */
 package adg.red.controllers;
 
+import adg.red.BootStrap;
 import adg.red.session.Context;
 import adg.red.locale.LocaleManager;
 import adg.red.models.Locale;
-
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class for MainForm.fxml
@@ -76,6 +80,25 @@ public class MainFormController implements Initializable
     public void close(ActionEvent event)
     {
         Platform.exit();
+    }
+
+    /**
+     * Open about window
+     * <p/>
+     * @param event user action
+     */
+    @FXML
+    public void about(ActionEvent event) throws Exception
+    {
+        Stage stage = new Stage();
+        BootStrap boot = new BootStrap();
+        Parent root = FXMLLoader.load(getClass().getResource(boot.getUserInterfaceUrl("About")));
+        Scene scene = new Scene(root);
+        stage.setResizable(false);
+        stage.setTitle(LocaleManager.get(31));
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/adg/red/userInterface/images/redIcon.png")));
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**
