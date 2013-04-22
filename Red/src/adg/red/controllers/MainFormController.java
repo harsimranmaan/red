@@ -7,6 +7,7 @@ package adg.red.controllers;
 import adg.red.BootStrap;
 import adg.red.session.Context;
 import adg.red.locale.LocaleManager;
+import adg.red.models.skeleton.ILocalizable;
 import adg.red.utils.ConfigManager;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
@@ -33,7 +34,7 @@ import javafx.stage.Stage;
  * <p/>
  * @author hsmaan
  */
-public class MainFormController implements Initializable
+public class MainFormController implements Initializable, ILocalizable
 {
 
     @FXML
@@ -59,7 +60,7 @@ public class MainFormController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        initializeComponentsByLocale();
+        localize();
         Context.getInstance().setMainForm(mainForm);
         Context.getInstance().setMainView(viewArea);
         Context.getInstance().setSearchView(searchPane);
@@ -125,7 +126,6 @@ public class MainFormController implements Initializable
 
     private void createLanguageMenuItems()
     {
-        //List<Locale> locs = Locale.findAllLocale();
         String langs[] = ConfigManager.getInstance().getPropertyValue("languageSupported").split(",");
         String path = "/adg/red/userInterface/images/";
         for (int counter = 0; counter < langs.length; counter++)
@@ -151,7 +151,7 @@ public class MainFormController implements Initializable
     /**
      * Initializes all components text by locality
      */
-    private void initializeComponentsByLocale()
+    public void localize()
     {
         menFile.setText(LocaleManager.get(28));
         menHelp.setText(LocaleManager.get(29));

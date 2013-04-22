@@ -7,6 +7,7 @@ package adg.red.controllers;
 import adg.red.locale.LocaleManager;
 import adg.red.models.EmailCode;
 import adg.red.models.User;
+import adg.red.models.skeleton.ILocalizable;
 import adg.red.session.Context;
 import adg.red.utils.EmailSender;
 import adg.red.utils.ViewLoader;
@@ -26,7 +27,7 @@ import javafx.scene.layout.VBox;
  * <p/>
  * @author harsimran.maan
  */
-public class ForgotPasswordController implements Initializable
+public class ForgotPasswordController implements Initializable, ILocalizable
 {
 
     @FXML
@@ -126,12 +127,18 @@ public class ForgotPasswordController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        localize();
+        vBoxCode.setVisible(false);
+    }
+
+    @Override
+    public void localize()
+    {
         lblEmailAddress.setText(LocaleManager.get(111));
         lblCode.setText(LocaleManager.get(113));
         btnBackLower.setText(LocaleManager.get(115));
         btnBackUpper.setText(LocaleManager.get(115));
         btnSend.setText(LocaleManager.get(112));
         btnValidate.setText(LocaleManager.get(114));
-        vBoxCode.setVisible(false);
     }
 }

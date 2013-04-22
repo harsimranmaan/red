@@ -7,6 +7,7 @@ package adg.red.controllers;
 import adg.red.controllers.student.HomeViewController;
 import adg.red.session.Context;
 import adg.red.locale.LocaleManager;
+import adg.red.models.skeleton.ILocalizable;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,7 +23,7 @@ import javafx.scene.control.Button;
  * <p/>
  * @author harsimran.maan
  */
-public class CommonButtonsController implements Initializable
+public class CommonButtonsController implements Initializable, ILocalizable
 {
 
     @FXML
@@ -35,18 +36,6 @@ public class CommonButtonsController implements Initializable
     private Button btnGlossary;
     @FXML
     private Button btnMessage;
-
-    /**
-     * Initializes the controller class
-     */
-    private void initializeComponentsByLocale()
-    {
-        btnUserProfile.setText(LocaleManager.get(21));
-        btnMessage.setText(LocaleManager.get(22));
-        btnGlossary.setText(LocaleManager.get(14));
-        btnFaq.setText(LocaleManager.get(16));
-        btnLogout.setText(LocaleManager.get(8));
-    }
 
     /**
      * Implement logout button
@@ -151,6 +140,16 @@ public class CommonButtonsController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        initializeComponentsByLocale();
+        localize();
+    }
+
+    @Override
+    public void localize()
+    {
+        btnUserProfile.setText(LocaleManager.get(21));
+        btnMessage.setText(LocaleManager.get(22));
+        btnGlossary.setText(LocaleManager.get(14));
+        btnFaq.setText(LocaleManager.get(16));
+        btnLogout.setText(LocaleManager.get(8));
     }
 }
