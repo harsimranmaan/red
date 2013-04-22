@@ -232,8 +232,8 @@ public class UserProfileController implements Initializable, ILocalizable
     {
         btnSave.setText(LocaleManager.get(54));
         btnCancel.setText(LocaleManager.get(150));
-        tabChangePwd.setText(LocaleManager.get(147));
-        tabContact.setText(LocaleManager.get(148));
+        tabChangePwd.setText(LocaleManager.get(148));
+        tabContact.setText(LocaleManager.get(147));
         currentUser = Context.getInstance().getCurrentUser();
         Context.getInstance().setTitle(LocaleManager.get(15));
     }

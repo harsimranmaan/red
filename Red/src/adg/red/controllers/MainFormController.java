@@ -140,7 +140,7 @@ public class MainFormController implements Initializable, ILocalizable
                     changeLang(e);
                 }
             });
-            if (menu.getText().equalsIgnoreCase(LocaleManager.getLoc().getName()))
+            if (menu.getText().equalsIgnoreCase(LocaleManager.getLoc()))
             {
                 menu.setSelected(true);
             }

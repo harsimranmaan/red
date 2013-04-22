@@ -24,20 +24,17 @@ import java.util.logging.Logger;
 public class LocaleManager
 {
 
-    private static List<ResourceDictionary> resourceList;
     private static Properties properties;
-    private static Locale loc;
+    private static String locale;
 
     static
     {
-        loc = Locale.findByName(ConfigManager.getInstance().getPropertyValue("locale"));
-        resourceList = ResourceDictionary.getResourceByLocaleId(loc.getId());
         setLocale(ConfigManager.getInstance().getPropertyValue("locale"));
-
     }
 
     private static void setLocale(String locale)
     {
+        LocaleManager.locale = locale;
         properties = new Properties();
         try
         {
@@ -51,8 +48,6 @@ public class LocaleManager
 
     public static void changeLocale(String locale)
     {
-        loc = Locale.findByName(locale);
-        resourceList = ResourceDictionary.getResourceByLocaleId(loc.getId());
         setLocale(locale);
     }
 
@@ -66,22 +61,13 @@ public class LocaleManager
      */
     public static String get(int resourceId)
     {
-
         String text = "No translation";
-
-        for (ResourceDictionary reDict : resourceList)
-        {
-            if (reDict.getResourceDictionaryPK().getResourceId() == resourceId)
-            {
-                text = reDict.getTextString();
-            }
-        }
-        //return properties.getProperty(Integer.toString(resourceId));
-        return text;
+        String result = properties.getProperty(Integer.toString(resourceId));
+        return (result == null || result.equals("")) ? text : result;
     }
 
-    public static Locale getLoc()
+    public static String getLoc()
     {
-        return loc;
+        return locale;
     }
 }
