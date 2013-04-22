@@ -97,7 +97,7 @@ public class UserProfileController implements Initializable, ILocalizable
         txtCountry = new CustomTextBox(TextBoxType.Alpha, LocaleManager.get(124) + ":", LocaleManager.get(125));
         txtEmail = new CustomTextBox(TextBoxType.Email, LocaleManager.get(126) + ":", LocaleManager.get(127));
         txtPhone = new CustomTextBox(TextBoxType.Any, LocaleManager.get(128) + ":", LocaleManager.get(134));
-        txtPostalCode = new CustomTextBox(TextBoxType.PostalCode, LocaleManager.get(135) + ":", LocaleManager.get(136));
+        txtPostalCode = new CustomTextBox(TextBoxType.Any, LocaleManager.get(135) + ":", LocaleManager.get(136));
         vBoxHolder.getChildren().addAll(txtFullName, txtUserType, txtAddressFirst, txtAddressSecond, txtCity, txtProvince, txtCountry, txtPostalCode, txtPhone, txtEmail);
         showUserProfile();
     }
@@ -110,6 +110,7 @@ public class UserProfileController implements Initializable, ILocalizable
     @FXML
     public void clear(ActionEvent event)
     {
+        lblMessage.setVisible(false);
         showUserProfile();
     }
 
@@ -122,51 +123,41 @@ public class UserProfileController implements Initializable, ILocalizable
     @FXML
     public void save(ActionEvent event)
     {
+            lblMessage.setVisible(false);
 
-        try
-        {
             // modify user profile
-            String errorMsg = "";
             int localityCode = -1;
             boolean isValid = true;
             String addr1 = txtAddressFirst.getText();
             if (addr1.isEmpty())
             {
                 isValid = false;
-                errorMsg += "Empty first address line! ";
                 localityCode = 142;
             }
             String addr2 = txtAddressSecond.getText();
             if (addr2.isEmpty())
             {
                 isValid = false;
-                errorMsg += "Empty second address line! ";
                 localityCode = 144;
             }
             String city = txtCity.getText();
-            String postal = txtPostalCode.getText();
-            if (postal.isEmpty())
-            {
-                isValid = false;
-                errorMsg += "Empty postal code! ";
-                localityCode = 143;
-            }
             String phone = txtPhone.getText();
-            try
-            {
-                Integer.valueOf(phone);
-            }
-            catch (Exception e)
+            if(!phone.matches(TextBoxType.Phone.getPattern()))
             {
                 isValid = false;
-                errorMsg += "Invalid phone number! ";
                 localityCode = 145;
             }
+            String postal = txtPostalCode.getText();
+            if(!postal.matches(TextBoxType.PostalCode.getPattern()))
+            {
+                isValid = false;
+                localityCode = 143;
+            }
+
             String email = txtEmail.getText();
             if (!email.contains("@"))
             {
                 isValid = false;
-                errorMsg += "Invalid email!";
                 localityCode = 146;
             }
 
@@ -194,11 +185,8 @@ public class UserProfileController implements Initializable, ILocalizable
                 lblMessage.setVisible(true);
                 lblMessage.setText(LocaleManager.get(localityCode));
             }
-        }
-        catch (Exception ex)
-        {
-            Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+
     }
 
     /**
