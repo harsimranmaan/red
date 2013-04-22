@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.controllers;
 
@@ -25,6 +25,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -55,6 +57,7 @@ public class MessageController implements Initializable
 
     /**
      * Handle user selected actions
+     * <p/>
      * @param event handle actions that user selected
      */
     private void handleActionButton(ActionEvent event)
@@ -67,6 +70,7 @@ public class MessageController implements Initializable
 
     /**
      * Get user selected message items
+     * <p/>
      * @param event user action
      */
     @FXML
@@ -81,7 +85,8 @@ public class MessageController implements Initializable
 
     /**
      * Display messages selected by the user
-     * @param message 
+     * <p/>
+     * @param message
      */
     private void displayMessageText(Message message)
     {
@@ -126,7 +131,7 @@ public class MessageController implements Initializable
         List<MenuItem> menuItems = new ArrayList<>();
         for (MessageStatus status : statusList)
         {
-            MenuItem item = new MenuItem(status.getName());
+            MenuItem item = new MenuItem(status.getName(), new ImageView(new Image("/adg/red/userInterface/images/" + status.getName().toLowerCase() + ".png")));
             item.setOnAction(new EventHandler<ActionEvent>()
             {
                 @Override
@@ -145,7 +150,8 @@ public class MessageController implements Initializable
 
     /**
      * Populate message lists with the message items that current user received.
-     * @param messages 
+     * <p/>
+     * @param messages
      */
     public void populateMessageList(List<MessageReceiver> messages)
     {

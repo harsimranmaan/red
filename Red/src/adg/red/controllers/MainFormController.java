@@ -118,8 +118,8 @@ public class MainFormController implements Initializable
         view.loadView("MainForm");
         if (!Context.getInstance().isAtLoginScreen())
         {
-            ViewLoader view1 = new ViewLoader(Context.getInstance().getMainView());
-            view1.loadView("HomeView");
+            view = new ViewLoader(Context.getInstance().getMainView());
+            view.loadView("HomeView");
         }
     }
 
