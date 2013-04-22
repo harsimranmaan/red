@@ -4,6 +4,7 @@
  */
 package adg.red.controllers;
 
+import adg.red.controls.MessageStyleManager;
 import adg.red.session.Context;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
@@ -13,7 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import adg.red.models.User;
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import javafx.application.Platform;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.AnchorPane;
@@ -34,7 +35,7 @@ public class LoginController implements Initializable
     @FXML
     private AnchorPane loginViewArea;
     @FXML
-    private Label loginErrLbl;
+    private Label lblError;
     @FXML
     private Button btnExit;
     @FXML
@@ -64,12 +65,13 @@ public class LoginController implements Initializable
         userLbl.setText(LocaleManager.get(3));
         passLbl.setText(LocaleManager.get(4));
         hpForgotPassword.setText(LocaleManager.get(2) + "?");
-        loginErrLbl.setVisible(false);
+        lblError.setVisible(false);
         Context.getInstance().getSearchView().setVisible(false);
         if (Context.getInstance().WasLoggedIn())
         {
-            loginErrLbl.setText(LocaleManager.get(9));
-            loginErrLbl.setVisible(true);
+            MessageStyleManager.setSuccess(lblError);
+            lblError.setText(LocaleManager.get(9));
+            lblError.setVisible(true);
         }
         Context.getInstance().setWasLoggedIn(false);
     }
@@ -104,21 +106,31 @@ public class LoginController implements Initializable
     {
         Context.getInstance().setWasLoggedIn(false);
         // get userid and password input from gui by J. Yu
-        String uid = usernameTxt.getText().toString();
-        String pwd = passwordTxt.getText().toString();
-
-        //LOGIN
+        String uid = usernameTxt.getText();
+        String pwd = passwordTxt.getText();
         try
         {
-            User user = User.login(uid, pwd);
-            Context.getInstance().setCurrentUser(user);
-            ViewLoader view = new ViewLoader(Context.getInstance().getMainView());
-            view.loadView("HomeView");
+            if (uid.trim().equals("") || pwd.equals(""))
+            {
+                throw new Exception(LocaleManager.get(110));
+            }
+            else
+            {
+                //LOGIN
+
+                User user = User.login(uid, pwd);
+                Context.getInstance().setCurrentUser(user);
+                ViewLoader view = new ViewLoader(Context.getInstance().getMainView());
+                view.loadView("HomeView");
+
+
+            }
         }
         catch (Exception ex)
         {
-            loginErrLbl.setText(ex.getMessage());
-            loginErrLbl.setVisible(true);
+            MessageStyleManager.setError(lblError);
+            lblError.setText(ex.getMessage());
+            lblError.setVisible(true);
         }
     }
 }

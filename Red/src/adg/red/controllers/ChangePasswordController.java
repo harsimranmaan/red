@@ -1,12 +1,13 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.controllers;
 
+import adg.red.controls.MessageStyleManager;
 import adg.red.models.User;
 import adg.red.session.Context;
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -45,34 +46,36 @@ public class ChangePasswordController implements Initializable
         String newPwd = txtNewPassword.getText();
         String pwdRe = txtReNewPwd.getText();
         String pwdErrorMsg;
-        //User user;
         try
         {
-            //check if old password is valid
-            User.login(currentUser.getUsername(), oldPwd);
-
             if (newPwd.equals(pwdRe))
             {
+                //check if old password is valid
+                User.login(currentUser.getUsername(), oldPwd);
                 currentUser.setPassword(newPwd);
                 currentUser.save();
+                MessageStyleManager.setSuccess(lblError);
                 pwdErrorMsg = LocaleManager.get(11);
             }
             else
             {
+                MessageStyleManager.setError(lblError);
                 pwdErrorMsg = LocaleManager.get(12);
+
             }
             showPasswordMessage(pwdErrorMsg);
         }
         catch (Exception ex)
         {
             pwdErrorMsg = LocaleManager.get(13);
+            MessageStyleManager.setError(lblError);
             showPasswordMessage(pwdErrorMsg);
-            // Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     /**
      * display password error messages
+     * <p/>
      * @param pwdErrorMsg error message
      */
     private void showPasswordMessage(String pwdErrorMsg)
@@ -83,6 +86,7 @@ public class ChangePasswordController implements Initializable
 
     /**
      * Clear old password, new password, re-enter password fields
+     * <p/>
      * @param event user action
      */
     @FXML

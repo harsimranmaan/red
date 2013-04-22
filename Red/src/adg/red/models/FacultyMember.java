@@ -186,7 +186,7 @@ public class FacultyMember implements Serializable
     {
         return "adg.red.models.FacultyMember[ facultyMemberId=" + facultyMemberId + " ]";
     }
-    
+
     public static FacultyMember getFacultMemberByUserName(User userName) throws Exception
     {
         List<FacultyMember> facultyMemberList = RedEntityManager.getEntityManager().createNamedQuery("FacultyMember.findByUserName").setParameter("username", userName).getResultList();
@@ -197,6 +197,19 @@ public class FacultyMember implements Serializable
         else
         {
             throw new Exception("Invalid user name");
+        }
+    }
+
+    public static FacultyMember getFacultMemberByName(String userName)
+    {
+        List<FacultyMember> facultyMemberList = RedEntityManager.getEntityManager().createNamedQuery("FacultyMember.findByUserName").setParameter("username", userName).getResultList();
+        if (facultyMemberList.size() == 1)
+        {
+            return facultyMemberList.get(0);
+        }
+        else
+        {
+            return null;
         }
     }
 }

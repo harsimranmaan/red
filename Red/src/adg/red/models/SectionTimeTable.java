@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "SectionTimeTable.findByDayId", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.dayId = :dayId"),
     @NamedQuery(name = "SectionTimeTable.findByStartTime", query = "SELECT s FROM SectionTimeTable s WHERE s.sectionTimeTablePK.startTime = :startTime"),
     @NamedQuery(name = "SectionTimeTable.findByLengthInMinutes", query = "SELECT s FROM SectionTimeTable s WHERE s.lengthInMinutes = :lengthInMinutes"),
-    @NamedQuery(name = "SectionTimeTable.findByStudentId", query = "SELECT s FROM SectionTimeTable s, Enrolment e WHERE e.enrolmentPK.studentId = :studentId AND s.sectionTimeTablePK.sectionId = e.enrolmentPK.sectionId AND s.sectionTimeTablePK.courseNumber = e.enrolmentPK.courseNumber AND s.sectionTimeTablePK.departmentId = e.enrolmentPK.departmentId AND s.sectionTimeTablePK.termYear = e.enrolmentPK.termYear AND s.sectionTimeTablePK.sessionId = e.enrolmentPK.sessionId AND s.sectionTimeTablePK.sectionTypeId = e.enrolmentPK.sectionTypeId AND e.isActive = 1 ORDER BY s.sectionTimeTablePK.dayId, s.sectionTimeTablePK.startTime ASC"),
+    @NamedQuery(name = "SectionTimeTable.findByStudentId", query = "SELECT s FROM SectionTimeTable s, Enrolment e WHERE e.enrolmentPK.studentId = :studentId AND s.sectionTimeTablePK.sectionId = e.enrolmentPK.sectionId AND s.sectionTimeTablePK.courseNumber = e.enrolmentPK.courseNumber AND s.sectionTimeTablePK.departmentId = e.enrolmentPK.departmentId AND s.sectionTimeTablePK.termYear = e.enrolmentPK.termYear AND s.sectionTimeTablePK.sessionId = e.enrolmentPK.sessionId AND s.sectionTimeTablePK.sectionTypeId = e.enrolmentPK.sectionTypeId AND e.resultId IS NULL AND e.isActive = 1 ORDER BY s.sectionTimeTablePK.dayId, s.sectionTimeTablePK.startTime ASC"),
     @NamedQuery(name = "SectionTimeTable.findByFacultyId", query = "SELECT s FROM SectionTimeTable s, Section sc WHERE sc.facultyMemberId = :facultyMemberId AND s.sectionTimeTablePK.sectionId = sc.sectionPK.sectionId AND s.sectionTimeTablePK.courseNumber = sc.sectionPK.courseNumber AND s.sectionTimeTablePK.departmentId = sc.sectionPK.departmentId AND s.sectionTimeTablePK.termYear = sc.sectionPK.termYear AND s.sectionTimeTablePK.sessionId = sc.sectionPK.sessionId AND s.sectionTimeTablePK.sectionTypeId = sc.sectionPK.sectionTypeId AND sc.isActive = 1 ORDER BY s.sectionTimeTablePK.dayId, s.sectionTimeTablePK.startTime ASC")
 })
 public class SectionTimeTable implements Serializable
@@ -216,8 +216,7 @@ public class SectionTimeTable implements Serializable
 
     /**
      *
-     * @param student
-     * <p/>
+     * @param student <p/>
      * @return
      */
     public static List<SectionTimeTable> getByStudent(Student student)
@@ -229,8 +228,7 @@ public class SectionTimeTable implements Serializable
 
     /**
      *
-     * @param faculty
-     * <p/>
+     * @param faculty <p/>
      * @return
      */
     public static List<SectionTimeTable> getByFacultyMember(FacultyMember faculty)

@@ -6,7 +6,7 @@ package adg.red.controllers;
 
 import adg.red.models.Faq;
 import adg.red.session.Context;
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;

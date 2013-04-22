@@ -5,7 +5,7 @@
 package adg.red.models;
 
 import adg.red.encryptor.Encryptor;
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 import java.util.Date;
@@ -439,6 +439,32 @@ public class User implements Serializable
         if (userList.size() == 1)
         {
             return userList.get(0);
+        }
+        else
+        {
+            throw new Exception(LocaleManager.get(5));
+        }
+    }
+
+    public static List<User> getUserByFirstName(String firstName) throws Exception
+    {
+        List<User> userList = RedEntityManager.getEntityManager().createNamedQuery("User.findByFirstName").setParameter("firstName", firstName).getResultList();
+        if (userList.size() >= 1)
+        {
+            return userList;
+        }
+        else
+        {
+            throw new Exception(LocaleManager.get(5));
+        }
+    }
+
+    public static List<User> getUserByLastName(String lastName) throws Exception
+    {
+        List<User> userList = RedEntityManager.getEntityManager().createNamedQuery("User.findByLastName").setParameter("lastName", lastName).getResultList();
+        if (userList.size() >= 1)
+        {
+            return userList;
         }
         else
         {

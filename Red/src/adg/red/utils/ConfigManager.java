@@ -5,7 +5,8 @@
  */
 package adg.red.utils;
 
-import adg.red.config.Config;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -31,7 +32,7 @@ public class ConfigManager
         properties = new Properties();
         try
         {
-            properties.load(Config.getPropFileStream("config.properties"));
+            properties.load(new FileInputStream(new File("config.properties")));
         }
         catch (IOException ex)
         {

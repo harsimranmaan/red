@@ -9,8 +9,9 @@ import adg.red.session.Context;
 import adg.red.utils.ViewLoader;
 import adg.red.models.Course;
 import adg.red.models.Department;
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -69,10 +70,23 @@ public class CourseListViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        Context.getInstance().setTitle(LocaleManager.get(60));
-        BreadCrumbController.renderBreadCrumb("student/HomeView|student/BrowseCourse|student/CourseListView");
-        initializeComponentsByLocale();
-        populateCourseTable(Context.getInstance().getSelectedDepartment());
+        if (Context.getInstance().isSearching())
+        {
+            Context.getInstance().setTitle(LocaleManager.get(108));
+            BreadCrumbController.renderBreadCrumb("student/HomeView|student/SearchResult");
+            initializeComponentsByLocale();
+            populate(Context.getInstance().getSearchResultList());
+            Context.getInstance().setSearching(false);
+            Context.getInstance().setSearchResultList(new ArrayList());
+        }
+        else
+        {
+            Context.getInstance().setTitle(LocaleManager.get(60));
+            BreadCrumbController.renderBreadCrumb("student/HomeView|student/BrowseCourse|student/CourseListView");
+            initializeComponentsByLocale();
+            populateCourseTable(Context.getInstance().getSelectedDepartment());
+        }
+
 
 
     }

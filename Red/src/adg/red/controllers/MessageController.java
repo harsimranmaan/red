@@ -9,7 +9,7 @@ import adg.red.models.MessageReceiver;
 import adg.red.models.MessageStatus;
 import adg.red.models.User;
 import adg.red.session.Context;
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;

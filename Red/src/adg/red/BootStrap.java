@@ -4,7 +4,7 @@
  */
 package adg.red;
 
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,6 +30,7 @@ public class BootStrap extends Application
         stage.getIcons().add(new Image(getClass().getResourceAsStream("userInterface/images/redIcon.png")));
         stage.setScene(scene);
         stage.show();
+
     }
 
     /**

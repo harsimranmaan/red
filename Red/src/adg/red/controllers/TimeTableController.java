@@ -1,12 +1,12 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.controllers;
 
 import adg.red.models.SectionTimeTable;
 import adg.red.models.WeekDay;
-import adg.red.utils.LocaleManager;
+import adg.red.locale.LocaleManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -33,9 +33,11 @@ public class TimeTableController implements Initializable
 
     @FXML
     private GridPane gdpTimeTable;
+    private String lastLabelText = "";
 
     /**
      * Initialize grid pane
+     * <p/>
      * @param dayListSize size of the days
      */
     private void initGrid(int dayListSize)
@@ -67,24 +69,39 @@ public class TimeTableController implements Initializable
 
     /**
      * Position the time labels
+     * <p/>
      * @param length course durations
-     * @param table section timetable
-     * @param cols the column that the time label positioned
-     * @param row the row that the time label positioned
+     * @param table  section timetable
+     * @param cols   the column that the time label positioned
+     * @param row    the row that the time label positioned
      */
-    private void pasteLabels(int length, SectionTimeTable table, int cols, int row)
+    private void pasteLabels(int length, SectionTimeTable table, int cols, int row, int overlap)
     {
+        String labelText = "";
+        System.out.println(overlap);
         for (int rowLength = 0; rowLength < length / 30; rowLength++)
         {
-            Label label = new Label(table.getSectionTimeTablePK().getDepartmentId() + " " + table.getSectionTimeTablePK().getCourseNumber());
-            label.setTextFill(Color.RED);
-            label.setStyle("-fx-background-color: #FFE4E4;");
+            labelText = table.getSectionTimeTablePK().getDepartmentId() + " " + table.getSectionTimeTablePK().getCourseNumber();
+            Label label = new Label();
+            if (overlap > rowLength)
+            {
+                label.setText(lastLabelText + " " + labelText);
+                label.getStyleClass().add("timeTableView-overlap-label");
+            }
+            else
+            {
+                label.setText(labelText);
+                label.getStyleClass().add("timeTableView-label");
+            }
+            label.setTextFill(Color.WHITESMOKE);
             gdpTimeTable.add(label, cols, row++);
         }
+        lastLabelText = labelText;
     }
 
     /**
      * Initialize the weekday headers of the timetable
+     * <p/>
      * @param dayList week days
      */
     private void initHeader(List<WeekDay> dayList)
@@ -113,17 +130,21 @@ public class TimeTableController implements Initializable
 
     /**
      * Populate section timetable with the input timetable list
-     * @param timeTableList the timetable list that initialized by the context 
-     * @throws NumberFormatException 
+     * <p/>
+     * @param timeTableList the timetable list that initialized by the context
+     * <p/>
+     * @throws NumberFormatException
      */
     private void populateTimeTable(List<SectionTimeTable> timeTableList) throws NumberFormatException
     {
         if (timeTableList != null)
         {
-            int cols;
-
+            int cols, lastCol = 1;
+            int toRow = 0;
             for (SectionTimeTable table : timeTableList)
             {
+                int overlap = 0;
+
                 cols = table.getSectionTimeTablePK().getDayId() % 100 + 1;
                 int hour = Integer.parseInt(DateFormatter.formatHour(table.getSectionTimeTablePK().getStartTime()));
                 int mins = Integer.parseInt(DateFormatter.formatMins(table.getSectionTimeTablePK().getStartTime()));
@@ -134,7 +155,14 @@ public class TimeTableController implements Initializable
                 {
                     if (hour == baseHr && mins < 30)
                     {
-                        pasteLabels(length, table, cols, row);
+                        if (cols == lastCol && row <= toRow)
+                        {
+                            overlap = toRow - row + 1;
+                        }
+                        lastCol = cols;
+
+                        pasteLabels(length, table, cols, row, overlap);
+                        toRow = row + (length / 30) - 1;
                         break;
                     }
                     else
@@ -144,7 +172,14 @@ public class TimeTableController implements Initializable
 
                     if (hour == baseHr && mins >= 30)
                     {
-                        pasteLabels(length, table, cols, row);
+                        if (cols == lastCol && row <= toRow)
+                        {
+                            overlap = toRow - row + 1;
+                        }
+                        lastCol = cols;
+
+                        pasteLabels(length, table, cols, row, overlap);
+                        toRow = row + (length / 30) - 1;
                         break;
                     }
                     else
@@ -158,8 +193,9 @@ public class TimeTableController implements Initializable
 
     /**
      * Initializes the controller class.
+     * <p/>
      * @param url the URL
-     * @param rb the ResourceBundle
+     * @param rb  the ResourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
