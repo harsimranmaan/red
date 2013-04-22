@@ -65,6 +65,9 @@ public class UserProfileController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        btnSave.setText(LocaleManager.get(54));
+        btnCancel.setText(LocaleManager.get(55));
+        
         currentUser = Context.getInstance().getCurrentUser();
         Context.getInstance().setTitle(LocaleManager.get(15));
         BreadCrumbController.renderBreadCrumb(currentUser.getUserTypeId().getName().toLowerCase() + "/HomeView|UserProfile");
@@ -130,6 +133,7 @@ public class UserProfileController implements Initializable
     {
         showUserProfile();
         lblMessage.setVisible(true);
+        
     }
 
     /**
@@ -139,22 +143,26 @@ public class UserProfileController implements Initializable
     @FXML
     public void save(ActionEvent event)
     {
+        
         try
         {
             // modify user profile
             String errorMsg = "";
+            int localityCode = -1;
             boolean isValid = true;
             String addr1 = txtAddressFirst.getText();
             if (addr1.isEmpty())
             {
                 isValid = false;
                 errorMsg += "Empty first address line! ";
+                localityCode = 142;
             }
             String addr2 = txtAddressSecond.getText();
             if (addr2.isEmpty())
             {
                 isValid = false;
                 errorMsg += "Empty second address line! ";
+                localityCode = 144;
             }
             String city = txtCity.getText();
             String postal = txtPostalCode.getText();
@@ -162,6 +170,7 @@ public class UserProfileController implements Initializable
             {
                 isValid = false;
                 errorMsg += "Empty postal code! ";
+                localityCode = 143;
             }
             String phone = txtPhone.getText();
             try
@@ -172,12 +181,14 @@ public class UserProfileController implements Initializable
             {
                 isValid = false;
                 errorMsg += "Invalid phone number! ";
+                localityCode = 145;
             }
             String email = txtEmail.getText();
             if (!email.contains("@"))
             {
                 isValid = false;
                 errorMsg += "Invalid email!";
+                localityCode = 146;
             }
 
             String provinceChoice = txtProvince.getText();
@@ -196,12 +207,12 @@ public class UserProfileController implements Initializable
                 currentUser.setEmail(email);
                 currentUser.save();
                 lblMessage.setVisible(true);
-                lblMessage.setText("User profile updated!");
+                lblMessage.setText(LocaleManager.get(141));
             }
             else
             {
                 lblMessage.setVisible(true);
-                lblMessage.setText(errorMsg);
+                lblMessage.setText(LocaleManager.get(localityCode));
             }
         }
         catch (Exception ex)
