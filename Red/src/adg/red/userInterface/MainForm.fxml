@@ -14,14 +14,23 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File" fx:id="menFile">
                     <items>
-                        <MenuItem accelerator="Ctrl+q"  mnemonicParsing="false" onAction="#close" styleClass="menuitem" text="Close" fx:id="mniClose" />
+                        <MenuItem accelerator="Ctrl+q"  mnemonicParsing="false" onAction="#close" styleClass="menuitem" text="Close" fx:id="mniClose" >
+                            <graphic>
+                                <ImageView fitHeight="16" fitWidth="16" preserveRatio="true"    >
+                                    <image>
+                                        <Image url="@images/close.png" preserveRatio="true" smooth="true" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+
+                        </MenuItem>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Languages" fx:id="menLang">
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help" fx:id="menHelp">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About" fx:id="mniAbout" onAction="#about"/>
+                        <MenuItem accelerator="Ctrl+u" mnemonicParsing="false" text="About" fx:id="mniAbout" onAction="#about"/>
                     </items>
                 </Menu>
             </menus>
