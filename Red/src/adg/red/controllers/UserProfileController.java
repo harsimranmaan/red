@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -64,17 +65,24 @@ public class UserProfileController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        btnSave.setText(LocaleManager.get(54));
+        btnCancel.setText(LocaleManager.get(55));
+        
         currentUser = Context.getInstance().getCurrentUser();
         Context.getInstance().setTitle(LocaleManager.get(15));
         BreadCrumbController.renderBreadCrumb(currentUser.getUserTypeId().getName().toLowerCase() + "/HomeView|UserProfile");
         ViewLoader view = new ViewLoader(paneChangePassword);
-        view.loadView("ChangePassword");
+        view.loadView("ChangePassword");   
+        
         txtFullName = new Label("Full name: " + currentUser.getFirstName() + " " + currentUser.getLastName());
+        txtFullName.setText(LocaleManager.get(137) + ": " + currentUser.getFirstName() + " " + currentUser.getLastName());
+        
         if (currentUser.getUserTypeId().getName().equals("Student"))
         {
             try {
                 Student student = Student.getStudentByUsername(currentUser);
                 txtUserType = new Label("Student ID: " + student.getStudentId());
+                txtUserType.setText(LocaleManager.get(138) + ": " + student.getStudentId());
             } catch (Exception ex) {
                 Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -84,6 +92,7 @@ public class UserProfileController implements Initializable
             try {
                 FacultyMember facultyMember = FacultyMember.getFacultMemberByUserName(currentUser);
                 txtUserType = new Label("Faculty ID: " + facultyMember.getFacultyMemberId());
+                txtUserType.setText(LocaleManager.get(139) + facultyMember.getFacultyMemberId());
             } catch (Exception ex) {
                 Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -93,6 +102,7 @@ public class UserProfileController implements Initializable
             try {
                 Administrator admin = Administrator.getAdministratorByUserName(currentUser);
                 txtUserType = new Label("Admin ID: " + admin.getAdminId());
+                txtUserType.setText(LocaleManager.get(140) + admin.getAdminId());
             } catch (Exception ex) {
                 Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -101,14 +111,15 @@ public class UserProfileController implements Initializable
         {
             txtUserType = new Label("Wrong user name");
         }
-        txtAddressFirst = new CustomTextBox(TextBoxType.Any, "Addrees 1:", "");
-        txtAddressSecond = new CustomTextBox(TextBoxType.Any, "Addrees 2:", "");
-        txtCity = new CustomTextBox(TextBoxType.Alpha, "City:", "Please enter a valid City");
-        txtProvince = new CustomTextBox(TextBoxType.Alpha, "Province:", "Please enter a valid Province");
-        txtCountry = new CustomTextBox(TextBoxType.Alpha, "Country:", "Please enter a valid Country");
-        txtEmail = new CustomTextBox(TextBoxType.Email, "Email:", "Please enter a valid Email");
-        txtPhone = new CustomTextBox(TextBoxType.Phone, "Phone:", "Please enter a valid Phone");
-        txtPostalCode = new CustomTextBox(TextBoxType.PostalCode, "Postal Code:", "Please enter a valid Postal Code");
+        
+        txtAddressFirst = new CustomTextBox(TextBoxType.Any, LocaleManager.get(129) + ":", LocaleManager.get(130));
+        txtAddressSecond = new CustomTextBox(TextBoxType.Any, LocaleManager.get(131) + ":", LocaleManager.get(130));
+        txtCity = new CustomTextBox(TextBoxType.Alpha, LocaleManager.get(122) + ":", LocaleManager.get(123));
+        txtProvince = new CustomTextBox(TextBoxType.Alpha, LocaleManager.get(132) + ":", LocaleManager.get(133));
+        txtCountry = new CustomTextBox(TextBoxType.Alpha, LocaleManager.get(124) + ":", LocaleManager.get(125));
+        txtEmail = new CustomTextBox(TextBoxType.Email, LocaleManager.get(126) + ":", LocaleManager.get(127));
+        txtPhone = new CustomTextBox(TextBoxType.Phone, LocaleManager.get(128) + ":", LocaleManager.get(134));
+        txtPostalCode = new CustomTextBox(TextBoxType.PostalCode, LocaleManager.get(135) + ":", LocaleManager.get(136));
         vBoxHolder.getChildren().addAll(txtFullName, txtUserType, txtAddressFirst, txtAddressSecond, txtCity, txtProvince, txtCountry, txtPostalCode, txtPhone, txtEmail);
         showUserProfile();
     }
@@ -122,6 +133,7 @@ public class UserProfileController implements Initializable
     {
         showUserProfile();
         lblMessage.setVisible(true);
+        
     }
 
     /**
@@ -131,22 +143,26 @@ public class UserProfileController implements Initializable
     @FXML
     public void save(ActionEvent event)
     {
+        
         try
         {
             // modify user profile
             String errorMsg = "";
+            int localityCode = -1;
             boolean isValid = true;
             String addr1 = txtAddressFirst.getText();
             if (addr1.isEmpty())
             {
                 isValid = false;
                 errorMsg += "Empty first address line! ";
+                localityCode = 142;
             }
             String addr2 = txtAddressSecond.getText();
             if (addr2.isEmpty())
             {
                 isValid = false;
                 errorMsg += "Empty second address line! ";
+                localityCode = 144;
             }
             String city = txtCity.getText();
             String postal = txtPostalCode.getText();
@@ -154,6 +170,7 @@ public class UserProfileController implements Initializable
             {
                 isValid = false;
                 errorMsg += "Empty postal code! ";
+                localityCode = 143;
             }
             String phone = txtPhone.getText();
             try
@@ -164,12 +181,14 @@ public class UserProfileController implements Initializable
             {
                 isValid = false;
                 errorMsg += "Invalid phone number! ";
+                localityCode = 145;
             }
             String email = txtEmail.getText();
             if (!email.contains("@"))
             {
                 isValid = false;
                 errorMsg += "Invalid email!";
+                localityCode = 146;
             }
 
             String provinceChoice = txtProvince.getText();
@@ -188,12 +207,12 @@ public class UserProfileController implements Initializable
                 currentUser.setEmail(email);
                 currentUser.save();
                 lblMessage.setVisible(true);
-                lblMessage.setText("User profile updated!");
+                lblMessage.setText(LocaleManager.get(141));
             }
             else
             {
                 lblMessage.setVisible(true);
-                lblMessage.setText(errorMsg);
+                lblMessage.setText(LocaleManager.get(localityCode));
             }
         }
         catch (Exception ex)
