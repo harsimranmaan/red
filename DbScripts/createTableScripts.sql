@@ -308,29 +308,29 @@ CREATE  TABLE `Registration` (
 /*  CONSTRAINT `RegistrationFKdepartmentId` FOREIGN KEY (`departmentId` ) REFERENCES `Program` (`departmentId` ) ON DELETE RESTRICT ON UPDATE CASCADE */
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
+/*
 DROP TABLE IF EXISTS `MessagePriority`;
 CREATE  TABLE `MessagePriority` (
   `messagePriorityId` INT NOT NULL ,
   `name` VARCHAR(10) NOT NULL ,
   PRIMARY KEY (`messagePriorityId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+*/
 
 DROP TABLE IF EXISTS `Message`;
 CREATE  TABLE `Message` (
   `messageId` INT NOT NULL AUTO_INCREMENT,	/* Auto Increment */
   `subject` VARCHAR(250) NULL ,
   `messageBody` VARCHAR(5000) NULL ,
-  `priorityId` INT NOT NULL ,
+/*  `priorityId` INT NOT NULL , */
   `senderId` VARCHAR(15) NOT NULL ,
   `dateTime` DATETIME NOT NULL ,
   PRIMARY KEY (`messageId`) ,
-  CONSTRAINT `MessageFKpriorityId`
+/*  CONSTRAINT `MessageFKpriorityId`
     FOREIGN KEY (`priorityId` )
-    REFERENCES `MessagePriority` (`messagePriorityId` )
+    REFERENCES `MessagePriority` (`message	` )
     ON DELETE RESTRICT
-    ON UPDATE CASCADE,
+    ON UPDATE CASCADE,*/
   CONSTRAINT `MessageFKsenderId`
     FOREIGN KEY (`senderId` )
     REFERENCES `User` (`username` )
