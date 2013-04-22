@@ -111,8 +111,6 @@ public class UserProfileController implements Initializable, ILocalizable
     public void clear(ActionEvent event)
     {
         showUserProfile();
-        lblMessage.setVisible(true);
-
     }
 
     /**
@@ -183,7 +181,7 @@ public class UserProfileController implements Initializable, ILocalizable
                 addr.setCity(city);
                 addr.setProvince(provinceChoice);
                 addr.setCountry(countryChoice);
-                currentUser.setAddressId(addr);
+                addr.save();
                 currentUser.setPhoneNumber(phone);
                 currentUser.setEmail(email);
                 currentUser.save();

@@ -1,6 +1,5 @@
 package adg.red.controls;
 
-import adg.red.locale.LocaleManager;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -30,9 +29,9 @@ public class CustomTextBox extends HBox
         lblHeader = new Label(labelText);
         lblHeader.setPrefWidth(120);
         lblHeader.setAlignment(Pos.CENTER_RIGHT);
-        lblHeader.setText(labelText); 
-       
-        
+        lblHeader.setText(labelText);
+
+
         lblError = new Label(errorMessage);
         lblError.setTextFill(Color.RED);
         lblError.setVisible(false);
