@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -68,13 +69,17 @@ public class UserProfileController implements Initializable
         Context.getInstance().setTitle(LocaleManager.get(15));
         BreadCrumbController.renderBreadCrumb(currentUser.getUserTypeId().getName().toLowerCase() + "/HomeView|UserProfile");
         ViewLoader view = new ViewLoader(paneChangePassword);
-        view.loadView("ChangePassword");
+        view.loadView("ChangePassword");   
+        
         txtFullName = new Label("Full name: " + currentUser.getFirstName() + " " + currentUser.getLastName());
+        txtFullName.setText(LocaleManager.get(137) + currentUser.getFirstName() + " " + currentUser.getLastName());
+        
         if (currentUser.getUserTypeId().getName().equals("Student"))
         {
             try {
                 Student student = Student.getStudentByUsername(currentUser);
                 txtUserType = new Label("Student ID: " + student.getStudentId());
+                txtUserType.setText(LocaleManager.get(138) + student.getStudentId());
             } catch (Exception ex) {
                 Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -84,6 +89,7 @@ public class UserProfileController implements Initializable
             try {
                 FacultyMember facultyMember = FacultyMember.getFacultMemberByUserName(currentUser);
                 txtUserType = new Label("Faculty ID: " + facultyMember.getFacultyMemberId());
+                txtUserType.setText(LocaleManager.get(139) + facultyMember.getFacultyMemberId());
             } catch (Exception ex) {
                 Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -93,6 +99,7 @@ public class UserProfileController implements Initializable
             try {
                 Administrator admin = Administrator.getAdministratorByUserName(currentUser);
                 txtUserType = new Label("Admin ID: " + admin.getAdminId());
+                txtUserType.setText(LocaleManager.get(140) + admin.getAdminId());
             } catch (Exception ex) {
                 Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -101,14 +108,15 @@ public class UserProfileController implements Initializable
         {
             txtUserType = new Label("Wrong user name");
         }
-        txtAddressFirst = new CustomTextBox(TextBoxType.Any, "Addrees 1:", "");
-        txtAddressSecond = new CustomTextBox(TextBoxType.Any, "Addrees 2:", "");
-        txtCity = new CustomTextBox(TextBoxType.Alpha, "City:", "Please enter a valid City");
-        txtProvince = new CustomTextBox(TextBoxType.Alpha, "Province:", "Please enter a valid Province");
-        txtCountry = new CustomTextBox(TextBoxType.Alpha, "Country:", "Please enter a valid Country");
-        txtEmail = new CustomTextBox(TextBoxType.Email, "Email:", "Please enter a valid Email");
-        txtPhone = new CustomTextBox(TextBoxType.Phone, "Phone:", "Please enter a valid Phone");
-        txtPostalCode = new CustomTextBox(TextBoxType.PostalCode, "Postal Code:", "Please enter a valid Postal Code");
+        
+        txtAddressFirst = new CustomTextBox(TextBoxType.Any, "Addrees 1:", 129, "Please enter a valid address", 130);
+        txtAddressSecond = new CustomTextBox(TextBoxType.Any, "Addrees 2:", 131, "Please enter a valid address", 130);
+        txtCity = new CustomTextBox(TextBoxType.Alpha, "City:", 122, "Please enter a valid City", 123);
+        txtProvince = new CustomTextBox(TextBoxType.Alpha, "Province:", 132, "Please enter a valid Province", 133);
+        txtCountry = new CustomTextBox(TextBoxType.Alpha, "Country:", 124, "Please enter a valid Country", 125);
+        txtEmail = new CustomTextBox(TextBoxType.Email, "Email:", 126, "Please enter a valid Email", 127);
+        txtPhone = new CustomTextBox(TextBoxType.Phone, "Phone:", 128, "Please enter a valid Phone", 134);
+        txtPostalCode = new CustomTextBox(TextBoxType.PostalCode, "Postal Code:", 135, "Please enter a valid Postal Code", 136);
         vBoxHolder.getChildren().addAll(txtFullName, txtUserType, txtAddressFirst, txtAddressSecond, txtCity, txtProvince, txtCountry, txtPostalCode, txtPhone, txtEmail);
         showUserProfile();
     }

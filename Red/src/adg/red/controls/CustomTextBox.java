@@ -1,5 +1,6 @@
 package adg.red.controls;
 
+import adg.red.locale.LocaleManager;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -20,7 +21,7 @@ public class CustomTextBox extends HBox
     final Label lblError;
     final VBox vBox;
 
-    public CustomTextBox(TextBoxType type, String labelText, String errorMessage)
+    public CustomTextBox(TextBoxType type, String labelText, int textLocality, String errorMessage, int errorMsgLocality)
     {
         super(3);
         super.setAlignment(Pos.TOP_CENTER);
@@ -29,9 +30,21 @@ public class CustomTextBox extends HBox
         lblHeader = new Label(labelText);
         lblHeader.setPrefWidth(120);
         lblHeader.setAlignment(Pos.CENTER_RIGHT);
+        
+        if(textLocality != -1)
+        {
+            lblHeader.setText(LocaleManager.get(textLocality)); 
+        }
+        
         lblError = new Label(errorMessage);
         lblError.setTextFill(Color.RED);
         lblError.setVisible(false);
+        
+        if(errorMsgLocality != -1)
+        {
+            lblError.setText(LocaleManager.get(errorMsgLocality));
+        }
+        
         field = new TextField()
         {
             @Override
