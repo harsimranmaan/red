@@ -66,6 +66,8 @@ public class LoginController implements Initializable
         hpForgotPassword.setText(LocaleManager.get(2) + "?");
         loginErrLbl.setVisible(false);
         Context.getInstance().getSearchView().setVisible(false);
+        // set at login screen to true
+        Context.getInstance().setAtLoginScreen(true);
         if (Context.getInstance().WasLoggedIn())
         {
             loginErrLbl.setText(LocaleManager.get(9));
@@ -112,6 +114,7 @@ public class LoginController implements Initializable
         {
             User user = User.login(uid, pwd);
             Context.getInstance().setCurrentUser(user);
+            Context.getInstance().setAtLoginScreen(false);
             ViewLoader view = new ViewLoader(Context.getInstance().getMainView());
             view.loadView("HomeView");
         }

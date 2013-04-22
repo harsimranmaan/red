@@ -12,6 +12,7 @@ import adg.red.models.SectionTimeTable;
 import adg.red.models.User;
 import java.util.List;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 /**
@@ -26,6 +27,7 @@ public class Context
     private final static Context instance;
     private boolean loggedIn;
     private boolean searching;
+    private boolean atLoginScreen = true;
     private Label lblTitle;
     private Course userSelectCourse;
     private Department userSelectDepartment;
@@ -35,6 +37,7 @@ public class Context
     private Pane displayView;
     private Pane searchView;
     private Pane breadCrumb;
+    private AnchorPane mainForm;
     //Singleton
     private List<SectionTimeTable> sectionTimeTableList;
     private List<Course> searchResultList;
@@ -320,5 +323,25 @@ public class Context
     public void setSearchResultList(List<Course> searchResultList)
     {
         this.searchResultList = searchResultList;
+    }
+
+    public AnchorPane getMainForm()
+    {
+        return mainForm;
+    }
+
+    public void setMainForm(AnchorPane mainForm)
+    {
+        this.mainForm = mainForm;
+    }
+
+    public boolean isAtLoginScreen()
+    {
+        return atLoginScreen;
+    }
+
+    public void setAtLoginScreen(boolean atLoginScreen)
+    {
+        this.atLoginScreen = atLoginScreen;
     }
 }

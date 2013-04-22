@@ -8,7 +8,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" minHeight="600.0" minWidth="800.0"   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0"  styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.MainFormController">
+<AnchorPane fx:id="mainForm" minHeight="600.0" minWidth="800.0"   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0"  styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.MainFormController">
     <children>
         <MenuBar prefWidth="600.0" styleClass="menubar" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <menus>
@@ -16,6 +16,8 @@
                     <items>
                         <MenuItem accelerator="Ctrl+q"  mnemonicParsing="false" onAction="#close" styleClass="menuitem" text="Close" fx:id="mniClose" />
                     </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Languages" fx:id="menLang">
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help" fx:id="menHelp">
                     <items>

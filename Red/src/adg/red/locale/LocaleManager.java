@@ -24,9 +24,9 @@ import java.util.logging.Logger;
 public class LocaleManager
 {
 
-    private static final List<ResourceDictionary> resourceList;
+    private static List<ResourceDictionary> resourceList;
     private static Properties properties;
-    private static final Locale loc;
+    private static Locale loc;
 
     static
     {
@@ -47,6 +47,13 @@ public class LocaleManager
         {
             Logger.getLogger(ConfigManager.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public static void changeLocale(String locale)
+    {
+        loc = Locale.findByName(locale);
+        resourceList = ResourceDictionary.getResourceByLocaleId(loc.getId());
+        setLocale(locale);
     }
 
     /**
@@ -71,5 +78,10 @@ public class LocaleManager
         }
         //return properties.getProperty(Integer.toString(resourceId));
         return text;
+    }
+
+    public static Locale getLoc()
+    {
+        return loc;
     }
 }

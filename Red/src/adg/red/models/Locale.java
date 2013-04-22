@@ -1,6 +1,6 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
@@ -110,5 +110,10 @@ public class Locale implements Serializable
     {
         List<Locale> localeList = RedEntityManager.getEntityManager().createNamedQuery("Locale.findByName").setParameter("name", localeName).getResultList();
         return localeList.get(0);
+    }
+
+    public static List<Locale> findAllLocale()
+    {
+        return RedEntityManager.getEntityManager().createNamedQuery("Locale.findAll").getResultList();
     }
 }
