@@ -521,4 +521,9 @@ public class User implements Serializable
             throw new Exception();
         }
     }
+
+    public String getFullName()
+    {
+        return this.firstName + " " + this.lastName;
+    }
 }
