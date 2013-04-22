@@ -15,6 +15,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -62,6 +64,7 @@ public class SearchBoxController implements Initializable, ILocalizable
     private void search(ActionEvent event) throws Exception
     {
         Context.getInstance().setSearching(true);
+        Context.getInstance().setSearchResultList(new ArrayList());
         String keywords[] = txtSearch.getText().trim().split(" ");
         int courseNumber = 0;
         String deptId = "";
@@ -129,21 +132,12 @@ public class SearchBoxController implements Initializable, ILocalizable
                                 }
                             }
                             Context.getInstance().setSearchResultList(courseList);
-
-                        }
-                        else
-                        {
-                            Context.getInstance().setSearchResultList(new ArrayList());
                         }
                     }
                     catch (Exception ex)
                     {
-                        Context.getInstance().setSearchResultList(new ArrayList());
+                        Logger.getLogger(SearchBoxController.class.getName()).log(Level.WARNING, null, ex);
                     }
-                }
-                else
-                {
-                    Context.getInstance().setSearchResultList(new ArrayList());
                 }
             }
         }
