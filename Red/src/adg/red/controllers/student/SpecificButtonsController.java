@@ -47,7 +47,6 @@ public class SpecificButtonsController implements Initializable
     @FXML
     private void viewTimeTable(ActionEvent event)
     {
-        Context.getInstance().setTimeTable(SectionTimeTable.getByStudent(Context.getInstance().getCurrentUser().getStudent()));
         ViewLoader view = new ViewLoader(Context.getInstance().getDisplayView());
         view.loadView("TimeTable");
     }
@@ -96,6 +95,7 @@ public class SpecificButtonsController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        Context.getInstance().setTimeTable(SectionTimeTable.getByStudent(Context.getInstance().getCurrentUser().getStudent()));
         initializeComponentsByLocale();
     }
 }
