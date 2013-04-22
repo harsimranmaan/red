@@ -14,6 +14,7 @@ import adg.red.models.Session;
 import adg.red.models.Student;
 import adg.red.session.Context;
 import adg.red.locale.LocaleManager;
+import adg.red.models.SectionTimeTable;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.List;
@@ -260,9 +261,15 @@ public class SectionViewController implements Initializable
                 lblResponse.setVisible(true);
             }
             // check for deadlines
-            else
+            else if (checkAllDeadlines())
             {
-                checkAllDeadlines();
+                // check for time confict
+                if (!checkTimeConflict())
+                {
+                    btnRegister.setDisable(true);
+                    lblResponse.setText(LocaleManager.get(149));
+                    lblResponse.setVisible(true);
+                }
             }
         }
         catch (Exception ex)
@@ -307,6 +314,67 @@ public class SectionViewController implements Initializable
         {
             return false;
         }
+    }
+
+    /**
+     * The function to check time conflict between the section about to enrol
+     * and current time table.
+     * <p/>
+     * @return true if there is no conflict, false otherwise
+     */
+    private boolean checkTimeConflict()
+    {
+        List<SectionTimeTable> currentTab = Context.getInstance().getTimeTable();
+        List<SectionTimeTable> secTabs = SectionTimeTable.getBySection(section);
+        for (SectionTimeTable secTab : secTabs)
+        {
+            for (SectionTimeTable curTab : currentTab)
+            {
+                // check day id
+                if (secTab.getSectionTimeTablePK().getDayId() == curTab.getSectionTimeTablePK().getDayId())
+                {
+                    int startHour = Integer.parseInt(DateFormatter.formatHour(curTab.getSectionTimeTablePK().getStartTime()));
+                    int startMin = Integer.parseInt(DateFormatter.formatMins(curTab.getSectionTimeTablePK().getStartTime()));
+                    int endHour = startHour + curTab.getLengthInMinutes() / 60;
+                    int endMin = startMin + curTab.getLengthInMinutes() % 60;
+
+                    int startHourSec = Integer.parseInt(DateFormatter.formatHour(secTab.getSectionTimeTablePK().getStartTime()));
+                    int startMinSec = Integer.parseInt(DateFormatter.formatMins(secTab.getSectionTimeTablePK().getStartTime()));
+                    int endHourSec = startHour + secTab.getLengthInMinutes() / 60;
+                    int endMinSec = startMin + secTab.getLengthInMinutes() % 60;
+
+                    if (startHourSec >= startHour && startHourSec <= endHour)
+                    {
+                        if (startHourSec == endHour)
+                        {
+                            if (startMinSec < endMinSec)
+                            {
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    if (endHourSec >= startHour && endHourSec <= endHour)
+                    {
+                        if (endHourSec == startHour)
+                        {
+                            if (endMinSec > endMin)
+                            {
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     /**

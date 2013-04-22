@@ -79,7 +79,6 @@ public class TimeTableController implements Initializable, ILocalizable
     private void pasteLabels(int length, SectionTimeTable table, int cols, int row, int overlap)
     {
         String labelText = "";
-        System.out.println(overlap);
         for (int rowLength = 0; rowLength < length / 30; rowLength++)
         {
             labelText = table.getSectionTimeTablePK().getDepartmentId() + " " + table.getSectionTimeTablePK().getCourseNumber();
