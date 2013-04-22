@@ -8,6 +8,7 @@ import adg.red.BootStrap;
 import adg.red.session.Context;
 import adg.red.locale.LocaleManager;
 import adg.red.models.Locale;
+import adg.red.utils.ConfigManager;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
 import java.util.List;
@@ -24,6 +25,7 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -125,11 +127,26 @@ public class MainFormController implements Initializable
 
     private void createLanguageMenuItems()
     {
-        List<Locale> locs = Locale.findAllLocale();
-        for (Locale loc : locs)
+        //List<Locale> locs = Locale.findAllLocale();
+        String langs[] = ConfigManager.getInstance().getPropertyValue("languageSupported").split(",");
+
+        for (int i = 0; i < langs.length; i++)
         {
-            final CheckMenuItem menu = new CheckMenuItem();
-            menu.setText(loc.getName());
+            String path = "/adg/red/userInterface/images/";
+            switch (langs[i])
+            {
+                case "enUS":
+                    path += "usIcon.png";
+                    break;
+                case "thTH":
+                    path += "thIcon.png";
+                    break;
+                case "chCH":
+                    path += "chIcon.png";
+                    break;
+            }
+            final CheckMenuItem menu = new CheckMenuItem(langs[i], new ImageView(new Image(path)));
+
             menu.setOnAction(new EventHandler<ActionEvent>()
             {
                 @Override
