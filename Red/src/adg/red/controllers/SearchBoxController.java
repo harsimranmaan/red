@@ -52,6 +52,10 @@ public class SearchBoxController implements Initializable, ILocalizable
     public void initialize(URL url, ResourceBundle rb)
     {
         localize();
+        if (Context.getInstance().getCurrentUser().getStudent() == null)
+        {
+            btnGo.setDisable(true);
+        }
     }
 
     /**

@@ -11,7 +11,7 @@ public enum TextBoxType
     Decimal("[0-9]*.[0-9]{2}"),
     Alpha("[A-Za-z ]+"),
     Email("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"),
-    PostalCode("\\w{6,7}"),
+    PostalCode("\\w{6}"),
     Phone("[0-9]{10}"),
     AplhaNumeric(""), Any(".*");
     private final String pattern;
