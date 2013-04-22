@@ -18,7 +18,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses(
         {
-    test.controllers.ControllersTest.class,
+
     test.models.ModelsTest.class, test.userInterface.UserInterfaceTest.class,
     BootStrapTest.class
 })
