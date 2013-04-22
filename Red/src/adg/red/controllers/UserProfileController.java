@@ -7,9 +7,6 @@ package adg.red.controllers;
 import adg.red.controls.CustomTextBox;
 import adg.red.controls.TextBoxType;
 import adg.red.models.Address;
-import adg.red.models.Administrator;
-import adg.red.models.FacultyMember;
-import adg.red.models.Student;
 import adg.red.models.User;
 import adg.red.session.Context;
 import adg.red.locale.LocaleManager;
@@ -39,8 +36,8 @@ public class UserProfileController implements Initializable, ILocalizable
     @FXML
     private Pane paneChangePassword;
     private User currentUser;
-    private Label txtFullName;
-    private Label txtUserType;
+    private CustomTextBox txtFullName;
+    private CustomTextBox txtUserType;
     private CustomTextBox txtAddressFirst;
     private CustomTextBox txtAddressSecond;
     private CustomTextBox txtCity;
@@ -73,52 +70,25 @@ public class UserProfileController implements Initializable, ILocalizable
         ViewLoader view = new ViewLoader(paneChangePassword);
         view.loadView("ChangePassword");
 
-        txtFullName = new Label("Full name: " + currentUser.getFirstName() + " " + currentUser.getLastName());
-        txtFullName.setText(LocaleManager.get(137) + ": " + currentUser.getFirstName() + " " + currentUser.getLastName());
-
+        txtFullName = new CustomTextBox(TextBoxType.Any, LocaleManager.get(137) + ":", "");
+        txtFullName.setText(currentUser.getFullName());
+        txtFullName.setDisable(true);
         if (currentUser.getUserTypeId().getName().equals("Student"))
         {
-            try
-            {
-                Student student = Student.getStudentByUsername(currentUser);
-                txtUserType = new Label("Student ID: " + student.getStudentId());
-                txtUserType.setText(LocaleManager.get(138) + ": " + student.getStudentId());
-            }
-            catch (Exception ex)
-            {
-                Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            txtUserType = new CustomTextBox(TextBoxType.Any, LocaleManager.get(138) + ": ", "");
+            txtUserType.setText(Integer.toString(currentUser.getStudent().getStudentId()));
         }
         else if (currentUser.getUserTypeId().getName().equals("Faculty"))
         {
-            try
-            {
-                FacultyMember facultyMember = FacultyMember.getFacultMemberByUserName(currentUser);
-                txtUserType = new Label("Faculty ID: " + facultyMember.getFacultyMemberId());
-                txtUserType.setText(LocaleManager.get(139) + facultyMember.getFacultyMemberId());
-            }
-            catch (Exception ex)
-            {
-                Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            txtUserType = new CustomTextBox(TextBoxType.Any, LocaleManager.get(139) + ": ", "");
+            txtUserType.setText(Integer.toString(currentUser.getFacultyMember().getFacultyMemberId()));
         }
         else if (currentUser.getUserTypeId().getName().equals("Admin"))
         {
-            try
-            {
-                Administrator admin = Administrator.getAdministratorByUserName(currentUser);
-                txtUserType = new Label("Admin ID: " + admin.getAdminId());
-                txtUserType.setText(LocaleManager.get(140) + admin.getAdminId());
-            }
-            catch (Exception ex)
-            {
-                Logger.getLogger(UserProfileController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            txtUserType = new CustomTextBox(TextBoxType.Any, LocaleManager.get(140) + ": ", "");
+            txtUserType.setText(Integer.toString(currentUser.getAdministrator().getAdminId()));
         }
-        else
-        {
-            txtUserType = new Label("Wrong user name");
-        }
+        txtUserType.setDisable(true);
 
         txtAddressFirst = new CustomTextBox(TextBoxType.Any, LocaleManager.get(129) + ":", LocaleManager.get(130));
         txtAddressSecond = new CustomTextBox(TextBoxType.Any, LocaleManager.get(131) + ":", LocaleManager.get(130));
@@ -261,7 +231,7 @@ public class UserProfileController implements Initializable, ILocalizable
     public void localize()
     {
         btnSave.setText(LocaleManager.get(54));
-        btnCancel.setText(LocaleManager.get(55));
+        btnCancel.setText(LocaleManager.get(150));
         tabChangePwd.setText(LocaleManager.get(147));
         tabContact.setText(LocaleManager.get(148));
         currentUser = Context.getInstance().getCurrentUser();

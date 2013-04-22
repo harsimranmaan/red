@@ -147,9 +147,9 @@ public class ChangePasswordController implements Initializable, ILocalizable
     @Override
     public void localize()
     {
-        lblOldPwd.setText(LocaleManager.get(119));
-        lblNewPwd.setText(LocaleManager.get(120));
-        lblReNew.setText(LocaleManager.get(121));
+        lblOldPwd.setText(LocaleManager.get(119) + ":");
+        lblNewPwd.setText(LocaleManager.get(120) + ":");
+        lblReNew.setText(LocaleManager.get(121) + ":");
         btnSavePassword.setText(LocaleManager.get(54));
         btnClear.setText(LocaleManager.get(55));
     }
