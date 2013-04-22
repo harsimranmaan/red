@@ -7,11 +7,9 @@ package adg.red.controllers;
 import adg.red.BootStrap;
 import adg.red.session.Context;
 import adg.red.locale.LocaleManager;
-import adg.red.models.Locale;
 import adg.red.utils.ConfigManager;
 import adg.red.utils.ViewLoader;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -129,24 +127,11 @@ public class MainFormController implements Initializable
     {
         //List<Locale> locs = Locale.findAllLocale();
         String langs[] = ConfigManager.getInstance().getPropertyValue("languageSupported").split(",");
-
-        for (int i = 0; i < langs.length; i++)
+        String path = "/adg/red/userInterface/images/";
+        for (int counter = 0; counter < langs.length; counter++)
         {
-            String path = "/adg/red/userInterface/images/";
-            switch (langs[i])
-            {
-                case "enUS":
-                    path += "usIcon.png";
-                    break;
-                case "thTH":
-                    path += "thIcon.png";
-                    break;
-                case "chCH":
-                    path += "chIcon.png";
-                    break;
-            }
-            final CheckMenuItem menu = new CheckMenuItem(langs[i], new ImageView(new Image(path)));
-
+            String lang[] = langs[counter].split("\\|");
+            final CheckMenuItem menu = new CheckMenuItem(lang[0], new ImageView(new Image(path + lang[1])));
             menu.setOnAction(new EventHandler<ActionEvent>()
             {
                 @Override
