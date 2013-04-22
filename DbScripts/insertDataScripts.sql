@@ -622,7 +622,7 @@ VALUES
 UNLOCK TABLES;
 
 
-/* insert data into 'MessagePriority' table */
+/* insert data into 'MessagePriority' table 
 LOCK TABLES `MessagePriority` WRITE;
 
 INSERT INTO `MessagePriority` 
@@ -633,6 +633,8 @@ VALUES
 ('3', 'Urgent');
 
 UNLOCK TABLES;
+*/
+
 
 /* insert data into 'MessageStatus' table */
 LOCK TABLES `MessageStatus` WRITE;
@@ -651,9 +653,9 @@ UNLOCK TABLES;
 LOCK TABLES `Message` WRITE;
 
 INSERT INTO `Message` 
-(`subject`,`messageBody`,`priorityId`,`senderId`,`dateTime`) 
+(`subject`,`messageBody`,`senderId`,`dateTime`) 
 VALUES 
-('Welcome to RED','Welcome to become a  member in RED. If you have any questions, please first browse  FAQ and Glossary.','1','harsimran','2013-04-02 00:00:00');
+('Welcome to RED','Welcome to become a  member in RED. If you have any questions, please first browse  FAQ and Glossary.','harsimran','2013-04-02 00:00:00');
 
 UNLOCK TABLES;
 
