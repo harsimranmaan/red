@@ -8,41 +8,41 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml">
-  <children>
-    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="200.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-        <Image url="@images/ADG-Logo3.jpg" preserveRatio="false" smooth="false" />
-      </image>
-    </ImageView>
-    <VBox id="VBox" alignment="CENTER" layoutX="198.0" layoutY="138.0" spacing="30.0">
-      <children>
-        <HBox id="HBox" spacing="5.0">
-          <children>
-            <Label alignment="CENTER" styleClass="info-label" text="Developers:" />
-            <VBox id="VBox" alignment="CENTER_LEFT" spacing="5.0">
-              <children>
-                <Label text="Bahman Razmpa" />
-                <Label text="Harsimran Singh Maan" />
-                <Label text="Jaspreet Singh Thind" />
-                <Label text="Jingbo Yu" />
-                <Label text="Mengmeng Jiang" />
-                <Label text="Wittawas Chotwanwirach" />
-              </children>
-            </VBox>
-          </children>
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.userInterface.AboutController">
+    <children>
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="200.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/ADG-Logo3.jpg" preserveRatio="false" smooth="false" />
+            </image>
+        </ImageView>
+        <VBox id="VBox" alignment="CENTER" layoutX="198.0" layoutY="138.0" spacing="30.0">
+            <children>
+                <HBox id="HBox" spacing="5.0">
+                    <children>
+                        <Label alignment="CENTER" styleClass="info-label" text="Developers:" />
+                        <VBox id="VBox" alignment="CENTER_LEFT" spacing="5.0">
+                            <children>
+                                <Hyperlink onAction="#linkGithub" id="https://github.com/razmpa" text="Bahman Razmpa" />
+                                <Hyperlink onAction="#linkGithub" id="https://github.com/harsimranmaan" text="Harsimran Singh Maan" />
+                                <Hyperlink onAction="#linkGithub" id="https://github.com/jasthind" text="Jaspreet Singh Thind" />
+                                <Hyperlink onAction="#linkGithub" id="https://github.com/nicoleyu2003" text="Jingbo Yu" />
+                                <Hyperlink onAction="#linkGithub" id="https://github.com/mengmengmm" text="Mengmeng Jiang" />
+                                <Hyperlink onAction="#linkGithub" id="https://github.com/WittyChot" text="Wittawas Chotwanwirach" />
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+                <Label text="*Red logo is designed by Jeremy Wallace." />
+            </children>
+        </VBox>
+        <HBox id="HBox" alignment="CENTER" layoutX="525.0" layoutY="370.0" spacing="5.0">
+            <children>
+                <Label text="Version" />
+                <Label text="1.0" />
+            </children>
         </HBox>
-        <Label text="*Red logo is designed by Jeremy Wallace." />
-      </children>
-    </VBox>
-    <HBox id="HBox" alignment="CENTER" layoutX="525.0" layoutY="370.0" spacing="5.0">
-      <children>
-        <Label text="Version" />
-        <Label text="1.0" />
-      </children>
-    </HBox>
-  </children>
-  <stylesheets>
-    <URL value="@css/mainForm.css" />
-  </stylesheets>
+    </children>
+    <stylesheets>
+        <URL value="@css/mainForm.css" />
+    </stylesheets>
 </AnchorPane>
