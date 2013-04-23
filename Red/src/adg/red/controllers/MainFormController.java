@@ -10,6 +10,8 @@ import adg.red.locale.LocaleManager;
 import adg.red.models.skeleton.ILocalizable;
 import adg.red.utils.ConfigManager;
 import adg.red.utils.ViewLoader;
+import java.awt.Desktop;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -53,6 +55,22 @@ public class MainFormController implements Initializable, ILocalizable
     private Pane searchPane;
     @FXML
     private AnchorPane mainForm;
+    @FXML
+    private MenuItem mniUserManual;
+
+    @FXML
+    private void openManual(ActionEvent event)
+    {
+        try
+        {
+            File myFile = new File("RedUserManual.pdf");
+            Desktop.getDesktop().open(myFile);
+        }
+        catch (Exception ex)
+        {
+            // no application registered for PDFs
+        }
+    }
 
     /**
      * Initializes the controller class.
@@ -107,7 +125,6 @@ public class MainFormController implements Initializable, ILocalizable
      * <p/>
      * @param event user action
      */
-    @FXML
     public void changeLang(ActionEvent event)
     {
         CheckMenuItem item = ((CheckMenuItem) event.getSource());
@@ -158,5 +175,6 @@ public class MainFormController implements Initializable, ILocalizable
         mniClose.setText(LocaleManager.get(30));
         mniAbout.setText(LocaleManager.get(31));
         menLang.setText(LocaleManager.get(118));
+        mniUserManual.setText(LocaleManager.get(153));
     }
 }

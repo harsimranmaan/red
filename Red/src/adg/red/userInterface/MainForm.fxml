@@ -30,6 +30,15 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help" fx:id="menHelp">
                     <items>
+                        <MenuItem accelerator="Ctrl+m" mnemonicParsing="false" text="User Manual" fx:id="mniUserManual" onAction="#openManual">
+                            <graphic>
+                                <ImageView fitHeight="16" fitWidth="16" preserveRatio="true"    >
+                                    <image>
+                                        <Image url="@images/userManual.png" preserveRatio="true" smooth="true" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </MenuItem>
                         <MenuItem accelerator="Ctrl+u" mnemonicParsing="false" text="About" fx:id="mniAbout" onAction="#about">
                             <graphic>
                                 <ImageView fitHeight="16" fitWidth="16" preserveRatio="true"    >
@@ -39,6 +48,7 @@
                                 </ImageView>
                             </graphic>
                         </MenuItem>
+
                     </items>
                 </Menu>
             </menus>
