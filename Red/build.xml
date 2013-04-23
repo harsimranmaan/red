@@ -3,13 +3,14 @@
     <import file="nbproject/build-impl.xml"/>
 	<target name="-post-jfx-deploy">
             <copy file="config.properties" flatten="true" todir="${jfx.deployment.dir}"/>
-            <copy todir="./../Installer" includeEmptyDirs="false">
+            <copy todir="./../Installer/Red" includeEmptyDirs="false">
                 <fileset dir="${jfx.deployment.dir}">
                     <exclude name="Red.html"/>
                         <exclude name="**/web-files/**"/>
+						<exclude name="**/run*/**"/>
                                   </fileset>
             </copy>
-             <copy file="${src.dir}/adg/red/userInterface/images/redIcon.png" flatten="true" todir="./../Installer"/>
+            
         </target>
 
     <!--

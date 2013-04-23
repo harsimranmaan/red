@@ -22,7 +22,7 @@ AllowNoIcons=yes
 LicenseFile=license.txt
 OutputDir=.\..\Red Enrolment System
 OutputBaseFilename=RedInstaller
-;SetupIconFile=redIcon.png
+SetupIconFile=redIcon.ico
 Compression=lzma
 SolidCompression=yes
 
@@ -34,7 +34,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Red\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
