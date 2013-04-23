@@ -5,11 +5,8 @@
  */
 package adg.red.locale;
 
-import adg.red.models.Locale;
-import adg.red.models.ResourceDictionary;
 import adg.red.utils.ConfigManager;
 import java.io.IOException;
-import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;

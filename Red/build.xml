@@ -3,6 +3,7 @@
     <import file="nbproject/build-impl.xml"/>
 	<target name="-post-jfx-deploy">
             <copy file="config.properties" flatten="true" todir="${jfx.deployment.dir}"/>
+			 <copy file="./../UserManual/RedUserManual.pdf" flatten="true" todir="${jfx.deployment.dir}"/>
             <copy todir="./../Installer/Red" includeEmptyDirs="false">
                 <fileset dir="${jfx.deployment.dir}">
                     <exclude name="Red.html"/>
