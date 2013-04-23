@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="Red.jnlp">
+  <information>
+    <title>Red</title>
+    <vendor>hsmaan</vendor>
+    <description>Sample JavaFX 2.0 application.</description>
+    <icon href="" />
+    <offline-allowed/>
+  </information>
+  <resources>
+    <jfx:javafx-runtime version="2.2+" href="http://javadl.sun.com/webapps/download/GetFile/javafx-latest/windows-i586/javafx2.jnlp"/>
+  </resources>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Red.jar" size="327825" download="eager" />
+    <jar href="lib/EnDec.jar" size="5804" download="eager" />
+    <jar href="lib/eclipselink-2.3.2.jar" size="6412430" download="eager" />
+    <jar href="lib/javax.persistence-2.0.3.jar" size="122717" download="eager" />
+    <jar href="lib/mail.jar" size="521000" download="eager" />
+    <jar href="lib/mysql-connector-java-5.1.18-bin.jar" size="775587" download="eager" />
+    <jar href="lib/org.eclipse.persistence.jpa.jpql_1.0.1.jar" size="704059" download="eager" />
+    <jar href="lib/validation-api-1.1.0.CR3.jar" size="63901" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Red" >
+    <param name="requiredFXVersion" value="2.2+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="adg.red.BootStrap"  name="Red" />
+  <update check="always"/>
+</jnlp>
