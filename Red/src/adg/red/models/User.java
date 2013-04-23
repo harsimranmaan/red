@@ -24,8 +24,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
@@ -51,8 +49,6 @@ public class User implements Serializable
     @Id
     @Basic(optional = false)
     @Column(name = "username")
-    @NotNull
-    @Size(min = 3, max = 15)
     private String username;
     @Basic(optional = false)
     @Column(name = "password")
