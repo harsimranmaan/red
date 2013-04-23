@@ -22,8 +22,7 @@ import javafx.scene.layout.HBox;
  * <p/>
  * @author harsimran.maan
  */
-public class BreadCrumbController implements Initializable
-{
+public class BreadCrumbController implements Initializable {
 
     private static String[] paths;
     @FXML
@@ -33,22 +32,18 @@ public class BreadCrumbController implements Initializable
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
+    public void initialize(URL url, ResourceBundle rb) {
         int length = paths.length;
         int looper = 0;
         hBoxBreadCrumb.getChildren().clear();
-        for (; looper < length - 1; looper++)
-        {
+        for (; looper < length - 1; looper++) {
             String filePath = paths[looper];
             Hyperlink link = new Hyperlink();
             link.setId(filePath);
             link.setText(getDisplayNameByKey(filePath));
-            link.setOnAction(new EventHandler<ActionEvent>()
-            {
+            link.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
-                public void handle(ActionEvent event)
-                {
+                public void handle(ActionEvent event) {
                     ViewLoader view = new ViewLoader(Context.getInstance().getDisplayView());
                     view.loadView(((Hyperlink) event.getSource()).getId());
                 }
@@ -68,11 +63,9 @@ public class BreadCrumbController implements Initializable
      * <p/>
      * @return name of each view
      */
-    private String getDisplayNameByKey(String key)
-    {
+    private String getDisplayNameByKey(String key) {
         String name = "";
-        switch (key)
-        {
+        switch (key) {
             case "student/HomeView":
             case "admin/HomeView":
             case "faculty/HomeView":
@@ -141,8 +134,7 @@ public class BreadCrumbController implements Initializable
      * <p/>
      * @param path path of the view name
      */
-    public static void renderBreadCrumb(String path)
-    {
+    public static void renderBreadCrumb(String path) {
         paths = path.split("\\|");
 
         ViewLoader view = new ViewLoader(Context.getInstance().getBreadCrumb());
