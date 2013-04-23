@@ -83,6 +83,8 @@ public class SpecificButtonsController implements Initializable
     @FXML
     private void uploadUsers(ActionEvent event)
     {
+        ViewLoader view = new ViewLoader(Context.getInstance().getDisplayView());
+        view.loadView("admin/CreateUser");
     }
 
     /**

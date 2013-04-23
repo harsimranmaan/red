@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox id="VBox" alignment="CENTER" spacing="5.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.admin.CreateUserController">
+    <children>
+        <HBox id="HBox" alignment="CENTER" spacing="30.0">
+            <children>
+                <Label fx:id="lblHeading2" text="Download template for craeting new user:" />
+                <Button fx:id="btnDownloadTemp" mnemonicParsing="false" onAction="#downloadTemplate" text="Download Template" />
+            </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER_LEFT" spacing="30.0">
+            <children>
+                <Label fx:id="lblFile" text="File:" />
+                <Label fx:id="lblFilePath" text="FilePath" />
+            </children>
+        </HBox>
+        <ListView fx:id="lsvResult" prefHeight="380.0" />
+        <HBox id="HBox" alignment="CENTER" spacing="5.0">
+            <children>
+                <Button fx:id="btnBrowseFile" mnemonicParsing="false" onAction="#browseFile" text="Browse File" />
+                <Button fx:id="btnUpload" mnemonicParsing="false" onAction="#createUser" text="Upload User" />
+            </children>
+        </HBox>
+    </children>
+</VBox>
