@@ -38,7 +38,7 @@
         <class>adg.red.models.ProgramCourseList</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="eclipselink.logging.level" value="FINER"/>
+            <property name="eclipselink.logging.level" value="SEVERE"/>
         </properties>
     </persistence-unit>
 </persistence>
