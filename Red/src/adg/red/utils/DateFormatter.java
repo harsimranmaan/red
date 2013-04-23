@@ -47,6 +47,29 @@ public class DateFormatter
     }
 
     /**
+     * The function to format input date to the specific date format.
+     * <p/>
+     * @param date the input date the be formatted
+     * <p/>
+     * @return the formatted String of input date
+     */
+    public static Date formatDate(String dateString)
+    {
+        Date date = null;
+        try
+        {
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
+        }
+        catch (Exception ex)
+        {
+            return date;
+        }
+
+        return date;
+
+    }
+
+    /**
      * The function to format input date to the specific date and time format.
      * <p/>
      * @param date the input date the be formatted

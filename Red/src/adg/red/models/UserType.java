@@ -1,9 +1,11 @@
 /*
- * 
- * 
+ *
+ *
  */
 package adg.red.models;
 
+import adg.red.locale.LocaleManager;
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -51,6 +53,7 @@ public class UserType implements Serializable
 
     /**
      * Constructor
+     * <p/>
      * @param userTypeId table attribute
      */
     public UserType(Integer userTypeId)
@@ -60,8 +63,9 @@ public class UserType implements Serializable
 
     /**
      * Constructor
+     * <p/>
      * @param userTypeId table attribute
-     * @param name table attribute
+     * @param name       table attribute
      */
     public UserType(Integer userTypeId, String name)
     {
@@ -71,6 +75,7 @@ public class UserType implements Serializable
 
     /**
      * Get table attribute userTypeId
+     * <p/>
      * @return userTypeId
      */
     public Integer getUserTypeId()
@@ -80,6 +85,7 @@ public class UserType implements Serializable
 
     /**
      * Set table attribute userTypeId
+     * <p/>
      * @param userTypeId table attribute
      */
     public void setUserTypeId(Integer userTypeId)
@@ -89,6 +95,7 @@ public class UserType implements Serializable
 
     /**
      * Get table attribute name
+     * <p/>
      * @return name
      */
     public String getName()
@@ -98,16 +105,18 @@ public class UserType implements Serializable
 
     /**
      * Set table attribute name
+     * <p/>
      * @param name table attribute
      */
     public void setName(String name)
     {
         this.name = name;
     }
-    
+
     /**
      * Get record location
-     * @return hash code 
+     * <p/>
+     * @return hash code
      */
     @Override
     public int hashCode()
@@ -117,11 +126,13 @@ public class UserType implements Serializable
         return hash;
     }
 
-     /**
+    /**
      * Comparator
+     * <p/>
      * @param object object to be compared with
+     * <p/>
      * @return true if two object equal to each other, otherwise return false
-     */ 
+     */
     @Override
     public boolean equals(Object object)
     {
@@ -140,11 +151,33 @@ public class UserType implements Serializable
 
     /**
      * print userTypeId
+     * <p/>
      * @return userTypeId as a string
      */
     @Override
     public String toString()
     {
         return "adg.red.models.UserType[ userTypeId=" + userTypeId + " ]";
+    }
+
+    /**
+     * Get UserType by userType id
+     * <p/>
+     * @param userTypeId <p/>
+     * @return UserType of the input userType id
+     * <p/>
+     * @throws Exception
+     */
+    public static UserType getByUserTypeId(int userTypeId) throws Exception
+    {
+        UserType temp = (UserType) RedEntityManager.getEntityManager().createNamedQuery("UserType.findByUserTypeId").setParameter("userTypeId", userTypeId).getSingleResult();
+        if (temp != null)
+        {
+            return temp;
+        }
+        else
+        {
+            throw new Exception("");
+        }
     }
 }

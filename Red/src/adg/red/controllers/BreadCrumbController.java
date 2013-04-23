@@ -126,6 +126,9 @@ public class BreadCrumbController implements Initializable
             case "student/SearchResult":
                 name = LocaleManager.get(108);
                 break;
+            case "admin/CreateUser":
+                name = LocaleManager.get(151);
+                break;
 
             default:
                 break;
