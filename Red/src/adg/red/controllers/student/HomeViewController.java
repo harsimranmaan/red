@@ -43,11 +43,15 @@ public class HomeViewController implements Initializable
         BreadCrumbController.renderBreadCrumb("student/HomeView");
         currentUser = Context.getInstance().getCurrentUser();
         nameLabel.setText("Hi " + currentUser.getFirstName() + ", welcome to the RED enrolment system.");
-//        int nUnread = MessageReceiver.getUnreadMessageByReceiverId(currentUser.getUsername());
-//        if (nUnread <= 1)
-//            msgLabel.setText("You have " + nUnread + " unread message.");
-//        else
-//            msgLabel.setText("You have " + nUnread + " unread messages.");
+        int nUnread = MessageReceiver.getUnreadMessageByReceiverId(currentUser.getUsername());
+        if (nUnread <= 1)
+        {
+            msgLabel.setText("You have " + nUnread + " unread message.");
+        }
+        else
+        {
+            msgLabel.setText("You have " + nUnread + " unread messages.");
+        }
 
     }
 }
