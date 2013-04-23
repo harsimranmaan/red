@@ -11,17 +11,16 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane AnchorPane.bottomAnchor="0"   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns:fx="http://javafx.com/fxml" fx:controller="adg.red.controllers.faculty.HomeViewController">
-  <children>
-    <Label fx:id="nameLabel" layoutX="14.0" layoutY="3.0" text="Label">
-      <font>
-        <Font name="Arial" size="20.0" fx:id="x1" />
-      </font>
-    </Label>
-    <Label fx:id="msgLabel" font="$x1" layoutX="14.0" layoutY="31.0" text="Label" />
-    <ImageView fitHeight="183.80547327053725" fitWidth="642.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-5.0" AnchorPane.leftAnchor="0.0">
-      <image>
-        <Image url="@../images/emotionheader.jpg" />
-      </image>
-    </ImageView>
-  </children>
+    <children>
+        <Label fx:id="nameLabel" layoutX="14.0" layoutY="3.0" text="Label">
+        </Label>
+        <Label fx:id="msgLabel"  layoutX="14.0" layoutY="31.0" text="Label" />
+        <HBox styleClass="image-hbox"  alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" >
+            <ImageView  preserveRatio="true" >
+                <image>
+                    <Image url="@../images/emotionheader.jpg" />
+                </image>
+            </ImageView>
+        </HBox>
+    </children>
 </AnchorPane>

@@ -113,3 +113,8 @@
 .timeTableView-overlap-label{
     -fx-background-color: #A94A48;
 }
+.image-hbox{
+    -fx-background-image: url("../images/strip.png");
+    -fx-background-repeat: repeat-x;
+    -fx-background-position: center center;
+}
