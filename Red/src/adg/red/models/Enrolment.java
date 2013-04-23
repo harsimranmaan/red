@@ -45,8 +45,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Enrolment.findSumCreditsByStudentId", query = "SELECT CASE WHEN SUM(c.credits) IS NULL THEN 0 ELSE SUM(c.credits) END FROM Course c, Enrolment e LEFT JOIN FETCH e.section LEFT JOIN FETCH e.student LEFT JOIN FETCH e.gradeId LEFT JOIN FETCH e.resultId WHERE c.coursePK.courseNumber = e.enrolmentPK.courseNumber AND c.coursePK.departmentId = e.enrolmentPK.departmentId AND e.enrolmentPK.studentId = :studentId AND e.resultId.resultId = 100 AND e.enrolmentPK.sectionTypeId = 100 AND e.isActive = 1 "),
     @NamedQuery(name = "Enrolment.findActiveEnrolmentsByStudentId", query = "SELECT e FROM Enrolment e LEFT JOIN FETCH e.section LEFT JOIN FETCH e.student LEFT JOIN FETCH e.gradeId LEFT JOIN FETCH e.resultId WHERE e.enrolmentPK.studentId = :studentId AND e.resultId.resultId IS NOT NULL AND e.enrolmentPK.sectionTypeId = 100 AND e.isActive = 1 "),
     @NamedQuery(name = "Enrolment.findEnrolmentsByStudentId", query = "SELECT e FROM Enrolment e LEFT JOIN FETCH e.section LEFT JOIN FETCH e.student LEFT JOIN FETCH e.gradeId LEFT JOIN FETCH e.resultId WHERE e.enrolmentPK.studentId = :studentId AND e.isActive = 1 ")
-
-        })
+})
 public class Enrolment implements Serializable
 {
 
@@ -172,6 +171,11 @@ public class Enrolment implements Serializable
     public void save()
     {
         RedEntityManager.save(this);
+    }
+
+    public static List<Enrolment> getAllEnrolment()
+    {
+        return RedEntityManager.getEntityManager().createNamedQuery("Enrolment.findAll").getResultList();
     }
 
     public static List<Enrolment> getEnrolmentBySectionPK(SectionPK sec)

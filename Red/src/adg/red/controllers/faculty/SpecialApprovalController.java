@@ -114,6 +114,8 @@ public class SpecialApprovalController implements Initializable
         {
             transitionEffect(lblnotification, "OFF");
             Enrolment enrolment = new Enrolment(student.getStudentId(), sec.getSectionId(), sec.getSectionPK().getCourseNumber(), sec.getSectionPK().getDepartmentId(), sec.getSectionPK().getTermYear(), sec.getSectionPK().getSessionId(), sec.getSectionPK().getSectionTypeId());
+           
+            enrolment.setIsActive(true);
             enrolment.save();
             lblnotification.setText(LocaleManager.get(79));
             transitionEffect(lblnotification, "ON");
