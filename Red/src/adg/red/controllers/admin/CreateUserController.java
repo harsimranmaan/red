@@ -9,7 +9,10 @@ import adg.red.controllers.DownloadFileController;
 import adg.red.controllers.faculty.UploadScoreController;
 import adg.red.locale.LocaleManager;
 import adg.red.models.Address;
+import adg.red.models.Department;
 import adg.red.models.Enrolment;
+import adg.red.models.FacultyMember;
+import adg.red.models.Student;
 import adg.red.models.User;
 import adg.red.models.UserType;
 import adg.red.session.Context;
@@ -20,6 +23,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -58,6 +62,9 @@ public class CreateUserController implements Initializable
     private File file;
     private User newUser;
     private Address address;
+    private Student student;
+    private FacultyMember facMember;
+    private Department dept;
     private final int numberOfFields = 14;
 
     /**
@@ -162,6 +169,31 @@ public class CreateUserController implements Initializable
                             newUser.save();
                             result += " <Succesfully created>";
                             resultList.add(result);
+
+                            if (Integer.parseInt(tempData[4]) == 100)
+                            {
+                                //create student
+                                student = new Student();
+                                student.setUsername(newUser);
+                                student.setDateOfRegistration(new Date());
+                                student.setHighestDegree("M.Eng.");
+                                student.setIsActive(true);
+                                student.save();
+                            }
+                            else if (Integer.parseInt(tempData[4]) == 101)
+                            {
+                                // create faculty member
+                                facMember = new FacultyMember();
+                                facMember.setUsername(newUser);
+                                dept = Department.getDepartmentById("CICS");
+                                facMember.setDepartmentId(dept);
+                                facMember.setDateOfJoining(new Date());
+                                facMember.setTitle("Prof");
+                                facMember.setHighestDegree("Phd");
+                                facMember.setIsActive(true);
+                                facMember.save();
+
+                            }
                         }
                         catch (Exception ex)
                         {

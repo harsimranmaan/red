@@ -180,6 +180,14 @@ public class FacultyMember implements Serializable
         return "adg.red.models.FacultyMember[ facultyMemberId=" + facultyMemberId + " ]";
     }
 
+    /**
+     * Save
+     */
+    public void save()
+    {
+        RedEntityManager.save(this);
+    }
+
     public static FacultyMember getFacultMemberByName(String userName)
     {
         List<FacultyMember> facultyMemberList = RedEntityManager.getEntityManager().createNamedQuery("FacultyMember.findByUserName").setParameter("username", userName).getResultList();

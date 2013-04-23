@@ -234,6 +234,14 @@ public class Student implements Serializable
     }
 
     /**
+     * Save entity
+     */
+    public void save()
+    {
+        RedEntityManager.save(this);
+    }
+
+    /**
      * Get student list by username
      * <p/>
      * @param username table attribute username
