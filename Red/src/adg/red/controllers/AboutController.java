@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package adg.red.userInterface;
+package adg.red.controllers;
 
 import java.net.URI;
 import java.net.URISyntaxException;
