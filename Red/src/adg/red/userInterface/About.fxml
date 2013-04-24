@@ -32,6 +32,7 @@
                         </VBox>
                     </children>
                 </HBox>
+                <Label text="Contact Email: adgredinfo@gmail.com" />
                 <Label text="*RED logo is designed by Jeremy Wallace." />
             </children>
         </VBox>
