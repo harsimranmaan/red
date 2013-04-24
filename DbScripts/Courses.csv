@@ -1,0 +1,183 @@
+courseNumber,departmentId,name,description,credits,gradingSchemeId,passingRequirement,isActive
+230,EECE,"Selected Topics in Biomedical Engineering","Description of Selected Topics in Biomedical Engineering",3,101,Pass,1
+251,EECE,"Circuit Analysis I","Description of Circuit Analysis I",3,101,Pass,1
+253,EECE,"Circuit Analysis II","Description of Circuit Analysis II",6,101,Pass,1
+259,EECE,"Introduction to Microcomputers","Description of Introduction to Microcomputers",3,101,Pass,1
+500,CICS,"Software Systems Internship","Mandatory Software Systems 4 months Internship",0,101,Pass,1
+505,CICS,"Introduction to Software Systems","Introductory overview: programming (data structures and low-level design); programming in the large (introduction to operating systems, concurrency); introduction to software engineering (system design and analysis, documentation).",6,102,"68 percent",1
+511,CICS,"Computational Structures","This course covers the main theoretical foundations of computer science and design and analysis of algorithms with applications in many areas of computer science and engineering. These topics include lgoic, sets, functions, algorithms and their complexity, graph theory, trees, and models of computation.",2,102,"68 percent",1
+514,CICS,"Computer Networks and Cloud Computing","Concept, design and implementation of computer communication protocols and networks. Fundamentals of computer networking, internet protocols and technologies, and cloud computing. ",2,102,"68 percent",1
+516,CICS,"Web Technologies","Computer network protocols, web application developement technologies and software engineering.",3,102,"68 percent",1
+518,CICS,"Computer and Information System Security","Technical, operational, and managerial issues of computer system security, computer security threats, techniques for detecting and preventing security violations, instituting safeguards, and applying appropriate level of security for the preceived risk.",2,102,"68 percent",1
+520,CICS,"Database Systems","Relational database design, table design, formal and commercial relational database languages, storage structures, query optimization, data mining, and other applications.",3,102,"68 percent",1
+525,CICS,"Real-time and Distributed Systems","Analysis, analysis design, and programming.",2,102,"68 percent",1
+530,CICS,"Advanced Software Engineering Project","Design implementation and test of a large software system in an operational environment with emphasis on a team approach.",3,101,Pass,1
+530,FEBC,"FEBC Level 1","Description of FEBC Level 1",3,102,"68 percent",1
+530,MATH,"MATH Level 4","Description of MATH Level 4",3,102,"68 percent",1
+530,RADI,"RADI Level 1","Description of RADI Level 1",3,101,Pass,1
+530,WRIT,"WRIT Level 2","Description of WRIT Level 2",3,101,Pass,1
+532,FEBC,"FEBC Level 2","Description of FEBC Level 2",3,101,Pass,1
+532,MATH,"MATH Level 5","Description of MATH Level 5",3,101,Pass,1
+532,RADI,"RADI Level 2","Description of RADI Level 2",3,100,"B Grade",1
+532,WRIT,"WRIT Level 3","Description of WRIT Level 3",6,102,"68 percent",1
+534,ARCS,"ARCS Level 1","Description of ARCS Level 1",3,100,"B Grade",1
+534,FEBC,"FEBC Level 3","Description of FEBC Level 3",3,100,"B Grade",1
+534,MATH,"MATH Level 6","Description of MATH Level 6",3,100,"B Grade",1
+534,RADI,"RADI Level 3","Description of RADI Level 3",3,101,Pass,1
+534,WOOD,"WOOD Level 1","Description of WOOD Level 1",2,100,"B Grade",1
+536,ARCS,"ARCS Level 2","Description of ARCS Level 2",3,101,Pass,1
+536,FEBC,"FEBC Level 4","Description of FEBC Level 4",3,101,Pass,1
+536,MATH,"MATH Level 7","Description of MATH Level 7",3,101,Pass,1
+536,RADI,"RADI Level 4","Description of RADI Level 4",6,102,Percent,1
+536,WOOD,"WOOD Level 2","Description of WOOD Level 2",3,102,"68 percent",1
+538,ARCS,"ARCS Level 3","Description of ARCS Level 3",6,102,Percent,1
+538,FMED,"FMED Level 1","Description of FMED Level 1",6,102,Percent,1
+538,MATH,"MATH Level 8","Description of MATH Level 8",6,102,Percent,1
+538,SATS,"SATS Level 1","Description of SATS Level 1",3,101,Pass,1
+538,WOOD,"WOOD Level 3","Description of WOOD Level 3",3,101,Pass,1
+540,ARCS,"ARCS Level 4","Description of ARCS Level 4",3,101,Pass,1
+540,FMED,"FMED Level 2","Description of FMED Level 2",3,101,Pass,1
+540,MEDG,"MEDG Level 1","Description of MEDG Level 1",3,101,Pass,1
+540,SATS,"SATS Level 2","Description of SATS Level 2",3,101,Pass,1
+540,WOOD,"WOOD Level 4","Description of WOOD Level 4",6,102,"68 percent",1
+542,ARCS,"ARCS Level 5","Description of ARCS Level 5",3,101,Pass,1
+542,COGS,"COGS Level 1","Description of COGS Level 1",2,100,"B Grade",1
+542,FMED,"FMED Level 3","Description of FMED Level 3",3,101,Pass,1
+542,MEDG,"MEDG Level 2","Description of MEDG Level 2",3,101,Pass,1
+542,SATS,"SATS Level 3","Description of SATS Level 3",6,102,"68 percent",1
+544,ARCS,"ARCS Level 6","Description of ARCS Level 6",6,102,"68 percent",1
+544,COGS,"COGS Level 2","Description of COGS Level 2",3,102,"68 percent",1
+544,FMED,"FMED Level 4","Description of FMED Level 4",6,102,"68 percent",1
+544,MEDG,"MEDG Level 3","Description of MEDG Level 3",6,102,"68 percent",1
+544,SATS,"SATS Level 4","Description of SATS Level 4",2,100,"B Grade",1
+546,ANAT,"ANAT Level 1","Description of ANAT Level 1",2,100,"B Grade",1
+546,COGS,"COGS Level 3","Description of COGS Level 3",3,101,Pass,1
+546,GSAT,"GSAT Level 1","Description of GSAT Level 1",2,100,"B Grade",1
+546,NRSC,"NRSC Level 1","Description of NRSC Level 1",2,100,"B Grade",1
+546,SATS,"SATS Level 5","Description of SATS Level 5",3,102,"68 percent",1
+548,ANAT,"ANAT Level 2","Description of ANAT Level 2",3,102,"68 percent",1
+548,COGS,"COGS Level 4","Description of COGS Level 4",3,100,"B Grade",1
+548,GSAT,"GSAT Level 2","Description of GSAT Level 2",3,102,"68 percent",1
+548,NRSC,"NRSC Level 2","Description of NRSC Level 2",3,102,"68 percent",1
+548,SATS,"SATS Level 6","Description of SATS Level 6",3,101,Pass,1
+550,ANAT,"ANAT Level 3","Description of ANAT Level 3",3,101,Pass,1
+550,COGS,"COGS Level 5","Description of COGS Level 5",3,101,Pass,1
+550,GSAT,"GSAT Level 3","Description of GSAT Level 3",3,101,Pass,1
+550,NRSC,"NRSC Level 3","Description of NRSC Level 3",3,101,Pass,1
+550,SURG,"SURG Level 1","Description of SURG Level 1",3,100,"B Grade",1
+552,ANAT,"ANAT Level 4","Description of ANAT Level 4",3,100,"B Grade",1
+552,COGS,"COGS Level 6","Description of COGS Level 6",6,102,Percent,1
+552,GSAT,"GSAT Level 4","Description of GSAT Level 4",3,100,"B Grade",1
+552,NRSC,"NRSC Level 4","Description of NRSC Level 4",6,102,"68 percent",1
+552,SURG,"SURG Level 2","Description of SURG Level 2",3,101,Pass,1
+554,BIOF,"BIOF Level 1","Description of BIOF Level 1",3,101,Pass,1
+554,COGS,"COGS Level 7","Description of COGS Level 7",3,101,Pass,1
+554,HXPH,"HXPH Level 1","Description of HXPH Level 1",3,101,Pass,1
+554,NRSC,"NRSC Level 5","Description of NRSC Level 5",2,100,"B Grade",1
+554,SURG,"SURG Level 3","Description of SURG Level 3",6,102,Percent,1
+556,BIOF,"BIOF Level 2","Description of BIOF Level 2",6,102,Percent,1
+556,COGS,"COGS Level 8","Description of COGS Level 8",3,101,Pass,1
+556,HXPH,"HXPH Level 2","Description of HXPH Level 2",6,102,Percent,1
+556,NRSC,"NRSC Level 6","Description of NRSC Level 6",3,102,"68 percent",1
+556,SURG,"SURG Level 4","Description of SURG Level 4",3,101,Pass,1
+558,BIOF,"BIOF Level 3","Description of BIOF Level 3",3,101,Pass,1
+558,HXPH,"HXPH Level 3","Description of HXPH Level 3",3,101,Pass,1
+558,NURS,"NURS Level 1","Description of NURS Level 1",3,101,Pass,1
+558,SURG,"SURG Level 5","Description of SURG Level 5",3,101,Pass,1
+558,ZOOL,"ZOOL Level 1","Description of ZOOL Level 1",6,102,"68 percent",1
+560,BIOF,"BIOF Level 4","Description of BIOF Level 4",3,101,Pass,1
+560,HXPH,"HXPH Level 4","Description of HXPH Level 4",3,101,Pass,1
+560,NURS,"NURS Level 2","Description of NURS Level 2",3,100,"B Grade",1
+560,SURG,"SURG Level 6","Description of SURG Level 6",6,102,"68 percent",1
+560,ZOOL,"ZOOL Level 2","Description of ZOOL Level 2",2,100,"B Grade",1
+562,BIOC,"BIOC Level 1","Description of BIOC Level 1",6,102,"68 percent",1
+562,HUNU,"HUNU Level 1","Description of HUNU Level 1",6,102,"68 percent",1
+562,ONCO,"ONCO Level 1","Description of ONCO Level 1",3,101,Pass,1
+562,TECS,"TECS Level 1","Description of TECS Level 1",2,100,"B Grade",1
+562,ZOOL,"ZOOL Level 3","Description of ZOOL Level 3",3,102,"68 percent",1
+564,BIOC,"BIOC Level 2","Description of BIOC Level 2",2,100,"B Grade",1
+564,HUNU,"HUNU Level 2","Description of HUNU Level 2",2,100,"B Grade",1
+564,ONCO,"ONCO Level 2","Description of ONCO Level 2",6,102,Percent,1
+564,TECS,"TECS Level 2","Description of TECS Level 2",3,102,"68 percent",1
+564,ZOOL,"ZOOL Level 4","Description of ZOOL Level 4",3,101,Pass,1
+566,BIOC,"BIOC Level 3","Description of BIOC Level 3",3,102,"68 percent",1
+566,CPSC,"CPSC Level 1","Description of CPSC Level 1",3,100,"B Grade",1
+566,HUNU,"HUNU Level 3","Description of HUNU Level 3",3,102,"68 percent",1
+566,ONCO,"ONCO Level 3","Description of ONCO Level 3",3,101,Pass,1
+566,TIBT,"TIBT Level 1","Description of TIBT Level 1",3,101,Pass,1
+568,BIOC,"BIOC Level 4","Description of BIOC Level 4",3,101,Pass,1
+568,CPSC,"CPSC Level 2","Description of CPSC Level 2",3,101,Pass,1
+568,HUNU,"HUNU Level 4","Description of HUNU Level 4",3,101,Pass,1
+568,ONCO,"ONCO Level 4","Description of ONCO Level 4",3,101,Pass,1
+568,UROL,"UROL Level 1","Description of UROL Level 1",6,102,"68 percent",1
+570,CELL,"CELL Level 1","Description of CELL Level 1",3,100,"B Grade",1
+570,CPSC,"CPSC Level 3","Description of CPSC Level 3",6,102,Percent,1
+570,INDS,"INDS Level 1","Description of INDS Level 1",3,100,"B Grade",1
+570,ONCO,"ONCO Level 5","Description of ONCO Level 5",6,102,"68 percent",1
+570,UROL,"UROL Level 2","Description of UROL Level 2",2,100,"B Grade",1
+572,CELL,"CELL Level 2","Description of CELL Level 2",3,101,Pass,1
+572,CPSC,"CPSC Level 4","Description of CPSC Level 4",3,101,Pass,1
+572,INDS,"INDS Level 2","Description of INDS Level 2",3,101,Pass,1
+572,OPTH,"OPTH Level 1","Description of OPTH Level 1",2,100,"B Grade",1
+572,UROL,"UROL Level 3","Description of UROL Level 3",3,102,"68 percent",1
+574,CELL,"CELL Level 3","Description of CELL Level 3",6,102,Percent,1
+574,CPSC,"CPSC Level 5","Description of CPSC Level 5",3,101,Pass,1
+574,INDS,"INDS Level 3","Description of INDS Level 3",6,102,Percent,1
+574,OPTH,"OPTH Level 2","Description of OPTH Level 2",3,102,"68 percent",1
+574,UROL,"UROL Level 4","Description of UROL Level 4",3,101,Pass,1
+576,CELL,"CELL Level 4","Description of CELL Level 4",3,101,Pass,1
+576,CPSC,"CPSC Level 6","Description of CPSC Level 6",6,102,"68 percent",1
+576,ISCI,"ISCI Level 1","Description of ISCI Level 1",3,101,Pass,1
+576,OPTH,"OPTH Level 3","Description of OPTH Level 3",3,101,Pass,1
+576,UROL,"UROL Level 5","Description of UROL Level 5",3,100,"B Grade",1
+578,CPSC,"CPSC Level 7","Description of CPSC Level 7",2,100,"B Grade",1
+578,DMED,"DMED Level 1","Description of DMED Level 1",3,101,Pass,1
+578,ISCI,"ISCI Level 2","Description of ISCI Level 2",3,101,Pass,1
+578,OPTH,"OPTH Level 4","Description of OPTH Level 4",3,100,"B Grade",1
+578,UROL,"UROL Level 6","Description of UROL Level 6",3,101,Pass,1
+580,CPSC,"CPSC Level 8","Description of CPSC Level 8",3,102,"68 percent",1
+580,DMED,"DMED Level 2","Description of DMED Level 2",6,102,"68 percent",1
+580,ISCI,"ISCI Level 3","Description of ISCI Level 3",6,102,"68 percent",1
+580,PAED,"PAED Level 1","Description of PAED Level 1",3,101,Pass,1
+580,UROL,"UROL Level 7","Description of UROL Level 7",6,102,Percent,1
+582,CPSC,"CPSC Level 9","Description of CPSC Level 9",3,101,Pass,1
+582,DMED,"DMED Level 3","Description of DMED Level 3",2,100,"B Grade",1
+582,ISCI,"ISCI Level 4","Description of ISCI Level 4",2,100,"B Grade",1
+582,PAED,"PAED Level 2","Description of PAED Level 2",6,102,Percent,1
+582,URBN,"URBN Level 1","Description of URBN Level 1",3,101,Pass,1
+584,DMED,"DMED Level 4","Description of DMED Level 4",3,102,"68 percent",1
+584,JAPN,"JAPN Level 1","Description of JAPN Level 1",3,102,"68 percent",1
+584,PAED,"PAED Level 3","Description of PAED Level 3",3,101,Pass,1
+584,URBN,"URBN Level 2","Description of URBN Level 2",3,101,Pass,1
+586,DERM,"DERM Level 1","Description of DERM Level 1",3,101,Pass,1
+586,JRNL,"JRNL Level 1","Description of JRNL Level 1",3,101,Pass,1
+586,PAED,"PAED Level 4","Description of PAED Level 4",3,101,Pass,1
+586,URBN,"URBN Level 3","Description of URBN Level 3",6,102,"68 percent",1
+588,DERM,"DERM Level 2","Description of DERM Level 2",3,100,"B Grade",1
+588,KORN,"KORN Level 1","Description of KORN Level 1",3,100,"B Grade",1
+588,PAED,"PAED Level 5","Description of PAED Level 5",6,102,"68 percent",1
+588,URBN,"URBN Level 4","Description of URBN Level 4",2,100,"B Grade",1
+590,DERM,"DERM Level 3","Description of DERM Level 3",3,101,Pass,1
+590,KNSL,"KNSL Level 1","Description of KNSL Level 1",3,101,Pass,1
+590,PLNT,"PLNT Level 1","Description of PLNT Level 1",2,100,"B Grade",1
+590,URBN,"URBN Level 5","Description of URBN Level 5",3,102,"68 percent",1
+592,DERM,"DERM Level 4","Description of DERM Level 4",6,102,Percent,1
+592,LLED,"LLED Level 1","Description of LLED Level 1",6,102,Percent,1
+592,PLNT,"PLNT Level 2","Description of PLNT Level 2",3,102,"68 percent",1
+592,VRHS,"VRHS Level 1","Description of VRHS Level 1",3,101,Pass,1
+594,EMER,"Emergency Medicine Level 1","Description of Emergency Medicine Level 1",3,101,Pass,1
+594,LAFS,"LAFS Level 1","Description of LAFS Level 1",3,101,Pass,1
+594,RMES,"RMES Level 1","Description of RMES Level 1",3,101,Pass,1
+594,VRHS,"VRHS Level 2","Description of VRHS Level 2",3,100,"B Grade",1
+596,EMER,"Emergency Medicine Level 2","Description of Emergency Medicine Level 2",3,101,Pass,1
+596,MATH,"MATH Level 1","Description of MATH Level 1",3,101,Pass,1
+596,RMES,"RMES Level 2","Description of RMES Level 2",6,102,"68 percent",1
+596,VISA,"VISA Level 1","Description of VISA Level 1",3,101,Pass,1
+598,EMER,"Emergency Medicine Level 3","Description of Emergency Medicine Level 3",6,102,"68 percent",1
+598,MATH,"MATH Level 2","Description of MATH Level 2",6,102,"68 percent",1
+598,RMES,"RMES Level 3","Description of RMES Level 3",2,100,"B Grade",1
+598,VISA,"VISA Level 2","Description of VISA Level 2",6,102,Percent,1
+600,EMER,"Emergency Medicine Level 4","Description of Emergency Medicine Level 4",2,100,"B Grade",1
+600,MATH,"MATH Level 3","Description of MATH Level 3",2,100,"B Grade",1
+600,RMES,"RMES Level 4","Description of RMES Level 4",3,102,"68 percent",1
+600,WRIT,"WRIT Level 1","Description of WRIT Level 1",3,101,Pass,1
