@@ -12,7 +12,7 @@
     <children>
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="30.0">
             <children>
-                <Label fx:id="lblHeading2" text="Section you are approving a rquest for:" />
+                <Label fx:id="lblHeading2" text="Section you are approving a request for:" />
                 <HBox id="HBox" alignment="CENTER" spacing="5.0">
                     <children>
                         <Label fx:id="lblDeptCoureNumber" text="CICS 520" />

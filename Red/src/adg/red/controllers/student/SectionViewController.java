@@ -122,7 +122,7 @@ public class SectionViewController implements Initializable
         }
         else
         {
-            btnRegister.setDisable(true);
+            btnRegister.setDisable(false);
             btnDrop.setDisable(true);
         }
     }
@@ -332,8 +332,8 @@ public class SectionViewController implements Initializable
         {
             for (SectionTimeTable curTab : currentTab)
             {
-                // check day id
-                if (secTab.getSectionTimeTablePK().getDayId() == curTab.getSectionTimeTablePK().getDayId())
+                // check term and day id
+                if (secTab.getSection().getTerm().equals(curTab.getSection().getTerm()) && secTab.getSectionTimeTablePK().getDayId() == curTab.getSectionTimeTablePK().getDayId())
                 {
                     int startHour = Integer.parseInt(DateFormatter.formatHour(curTab.getSectionTimeTablePK().getStartTime()));
                     int startMin = Integer.parseInt(DateFormatter.formatMins(curTab.getSectionTimeTablePK().getStartTime()));
@@ -541,16 +541,22 @@ public class SectionViewController implements Initializable
      */
     private boolean checkStudentAlreadyEnrolled(EnrolmentPK enrolPk)
     {
+        boolean isAlready = false;
         try
         {
             enrolment = Enrolment.getEnrolmentByEnrolmentPK(enrolPk);
-            return true;
+            if (enrolment.getIsActive())
+            {
+                isAlready = true;
+            }
+
         }
         catch (Exception ex)
         {
             enrolment = null;
             return false;
         }
+        return isAlready;
     }
 
     /**

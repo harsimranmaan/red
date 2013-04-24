@@ -18,3 +18,6 @@ The project documentation can be found at "Project Documentation/Red Enrollment 
 Note for Administrator
 The config.properties deploys in the Installation folder can be used to set up the database connection and smtp details.
 The utility called EnDec.jar in the lib folder in the installation directory can be used for password encryption.
+
+Note for db admins
+The database scripts are in the folder DbScripts. Setup instructions are also in there.
