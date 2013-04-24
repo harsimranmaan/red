@@ -1,0 +1,20 @@
+
+Please follow these steps to setup the database:
+
+1>	Execute createTableScripts
+
+2>	Execute createIndicesScript
+
+3>	Execute insertDataScript 1
+
+4>	Now Upload courses.csv via mysql workbench
+
+5>	Insert around 9 students and 10 faculty members from the 	frontend. Login as 'admin' password 'maan'.
+
+6>	Execute insertDataScript 2
+
+7>	Upload score report for section 511
+
+8>	Execute Glossary Queries sql file
+
+9>	Execute FAQ Queries sql file
