@@ -227,7 +227,7 @@ public class SectionViewController implements Initializable
         final Context context = Context.getInstance();
         context.setTitle(LocaleManager.get(62));
 
-        
+
         BreadCrumbController.renderBreadCrumb("student/HomeView|student/BrowseCourse|student/CourseListView|student/CourseView|student/SectionView");
         try
         {
@@ -342,8 +342,8 @@ public class SectionViewController implements Initializable
 
                     int startHourSec = Integer.parseInt(DateFormatter.formatHour(secTab.getSectionTimeTablePK().getStartTime()));
                     int startMinSec = Integer.parseInt(DateFormatter.formatMins(secTab.getSectionTimeTablePK().getStartTime()));
-                    int endHourSec = startHour + secTab.getLengthInMinutes() / 60;
-                    int endMinSec = startMin + secTab.getLengthInMinutes() % 60;
+                    int endHourSec = startHourSec + secTab.getLengthInMinutes() / 60;
+                    int endMinSec = startMinSec + secTab.getLengthInMinutes() % 60;
 
                     if (startHourSec >= startHour && startHourSec <= endHour)
                     {
@@ -395,7 +395,7 @@ public class SectionViewController implements Initializable
 
         try
         {
-            List<Enrolment> enrolList = Enrolment.getEnrolmentsByStudentId(Context.getInstance().getCurrentUser().getStudent().getStudentId());
+            List<Enrolment> enrolList = Enrolment.getPassedEnrolmentsByStudentId(Context.getInstance().getCurrentUser().getStudent().getStudentId());
             prereqList = Prerequisite.getByCourse(course);
             // check if there is no prerequisite course
             if (prereqList.isEmpty())
@@ -409,19 +409,18 @@ public class SectionViewController implements Initializable
                 {
                     if (prereqList.get(i).getCourse().equals(enrol.getSection().getCourse()))
                     {
-                        if (enrol.getResultId() != null)
+                        if ((enrol.getResultId() != null && enrol.getResultId().getName().equalsIgnoreCase("pass")) || (enrol.getResultId() == null && enrol.getIsActive()))
                         {
-                            if (enrol.getResultId().getName().equalsIgnoreCase("pass"))
+
+                            prereqList.remove(i);
+                            i--;
+                            if (prereqList.isEmpty())
                             {
-                                prereqList.remove(i);
-                                i--;
-                                if (prereqList.isEmpty())
-                                {
-                                    return prereqList;
-                                }
-                                break;
+                                return prereqList;
                             }
+                            break;
                         }
+
                     }
                 }
             }
@@ -450,7 +449,7 @@ public class SectionViewController implements Initializable
 
         try
         {
-            List<Enrolment> enrolList = Enrolment.getEnrolmentsByStudentId(Context.getInstance().getCurrentUser().getStudent().getStudentId());
+            List<Enrolment> enrolList = Enrolment.getPassedEnrolmentsByStudentId(Context.getInstance().getCurrentUser().getStudent().getStudentId());
             coReqList = CoRequisite.getByCourse(course);
             // check if there is no corequisite course
             if (coReqList.isEmpty())
@@ -463,18 +462,17 @@ public class SectionViewController implements Initializable
                 {
                     if (coReqList.get(i).getCourse().equals(enrol.getSection().getCourse()))
                     {
-                        if (enrol.getResultId() != null)
+                        if ((enrol.getResultId() != null && enrol.getResultId().getName().equalsIgnoreCase("pass")) || (enrol.getResultId() == null && enrol.getIsActive()))
                         {
-                            if (enrol.getResultId().getName().equalsIgnoreCase("pass"))
+
+                            coReqList.remove(i);
+                            i--;
+                            if (coReqList.isEmpty())
                             {
-                                coReqList.remove(i);
-                                i--;
-                                if (coReqList.isEmpty())
-                                {
-                                    return coReqList;
-                                }
-                                break;
+                                return coReqList;
                             }
+                            break;
+
                         }
                     }
                 }
