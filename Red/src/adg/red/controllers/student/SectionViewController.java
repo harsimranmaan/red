@@ -226,6 +226,8 @@ public class SectionViewController implements Initializable
     {
         final Context context = Context.getInstance();
         context.setTitle(LocaleManager.get(62));
+
+        
         BreadCrumbController.renderBreadCrumb("student/HomeView|student/BrowseCourse|student/CourseListView|student/CourseView|student/SectionView");
         try
         {
@@ -324,7 +326,7 @@ public class SectionViewController implements Initializable
      */
     private boolean checkTimeConflict()
     {
-        List<SectionTimeTable> currentTab = Context.getInstance().getTimeTable();
+        List<SectionTimeTable> currentTab = SectionTimeTable.getByStudent(Context.getInstance().getCurrentUser().getStudent());
         List<SectionTimeTable> secTabs = SectionTimeTable.getBySection(section);
         for (SectionTimeTable secTab : secTabs)
         {
