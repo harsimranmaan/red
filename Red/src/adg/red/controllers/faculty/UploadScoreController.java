@@ -12,6 +12,7 @@ import adg.red.models.Section;
 import adg.red.models.Session;
 import adg.red.session.Context;
 import adg.red.locale.LocaleManager;
+import adg.red.models.Result;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -97,7 +98,8 @@ public class UploadScoreController implements Initializable
         content += "Section " + Context.getInstance().getSelectedSection().getSectionId() + " ";
         content += Context.getInstance().getSelectedSection().getTerm().getSession().getName();
         content += Integer.toString(Context.getInstance().getSelectedSection().getTerm().getTermPK().getTermYear()) + "\r\n";
-        content += "#Student id, Score, Grade\r\n";
+        content += "#Note: Enter result as Pass or Fail\r\n";
+        content += "#Student id, Score, Grade, Result\r\n";
         return content;
     }
 
@@ -196,6 +198,7 @@ public class UploadScoreController implements Initializable
         ArrayList<String> studentList = new ArrayList();
         ArrayList<String> scoreList = new ArrayList();
         ArrayList<String> gradeList = new ArrayList();
+        ArrayList<String> passList = new ArrayList();
         boolean hasThird = true;
         try (BufferedReader reader = new BufferedReader(new FileReader(file)))
         {
@@ -208,8 +211,8 @@ public class UploadScoreController implements Initializable
                 {
                     text = text.trim();
                     String tempData[] = text.split(",");
-                    // check that there are three values in a line
-                    if (tempData.length < 3)
+                    // check that there are four values in a line
+                    if (tempData.length < 4)
                     {
                         hasThird = false;
                     }
@@ -231,6 +234,9 @@ public class UploadScoreController implements Initializable
                             case 2:
                                 gradeList.add(tempData[i].trim());
                                 break;
+                            case 3:
+                                passList.add(tempData[i].trim());
+                                break;
                         }
                     }
                 }
@@ -240,8 +246,8 @@ public class UploadScoreController implements Initializable
                 String studentId = studentList.get(i).trim();
                 String score = scoreList.get(i).trim();
                 String grade = gradeList.get(i).trim();
-
-                String result = "Student Id: " + studentId + " Score: " + score + " Grade: " + grade;
+                String result = passList.get(i);
+                String message = "Student Id: " + studentId + " Score: " + score + " Grade: " + grade + " Result: " + result;
 
 
                 EnrolmentPK enPK = new EnrolmentPK(Integer.parseInt(studentId),
@@ -259,21 +265,21 @@ public class UploadScoreController implements Initializable
                         throw new Exception(LocaleManager.get(77));
                     }
                     enrol.setScore(Integer.parseInt(score));
-                    if (hasThird)
-                    {
-                        enrol.setGradeId(Grade.getByName(grade));
-                    }
+                    enrol.setGradeId(Grade.getByName(grade));
+
+                    enrol.setResultId(Result.getResultByName(result));
+
                     // get enrolment to not active
                     enrol.setIsActive(false);
                     enrol.save();
-                    result += " <uploaded>";
-                    resultList.add(result);
+                    message += " <uploaded>";
+                    resultList.add(message);
 
                 }
                 catch (Exception ex)
                 {
-                    result += " <failed: " + ex.getLocalizedMessage() + ">";
-                    resultList.add(result);
+                    message += " <failed: " + ex.getLocalizedMessage() + ">";
+                    resultList.add(message);
                 }
             }
             lsvResult.getItems().setAll(resultList);

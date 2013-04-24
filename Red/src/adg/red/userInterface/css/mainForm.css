@@ -11,6 +11,7 @@
 }
 
 
+
 .text-area,.text-area:focused {
     -fx-background-color: transparent, transparent, -fx-control-inner-background;
     -fx-background-insets: 0, 1, 2;

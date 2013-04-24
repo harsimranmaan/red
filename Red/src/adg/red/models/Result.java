@@ -4,6 +4,7 @@
  */
 package adg.red.models;
 
+import adg.red.utils.RedEntityManager;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -24,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "Result")
 @XmlRootElement
 @NamedQueries(
-{
+        {
     @NamedQuery(name = "Result.findAll", query = "SELECT r FROM Result r"),
     @NamedQuery(name = "Result.findByResultId", query = "SELECT r FROM Result r WHERE r.resultId = :resultId"),
     @NamedQuery(name = "Result.findByName", query = "SELECT r FROM Result r WHERE r.name = :name")
@@ -67,6 +68,11 @@ public class Result implements Serializable
     {
         this.resultId = resultId;
         this.name = name;
+    }
+
+    public static Result getResultByName(String result)
+    {
+        return (Result) RedEntityManager.getEntityManager().createNamedQuery("Result.findByName").setParameter("name", result).getSingleResult();
     }
 
     /**
